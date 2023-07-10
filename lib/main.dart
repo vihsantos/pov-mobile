@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pov/presentation/views/home/home_page.dart';
+import 'presentation/views/home/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,8 +12,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Para Onde Vou?',
       theme: ThemeData(
+        fontFamily: "Poppins",
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
