@@ -14,29 +14,31 @@ class BottomNavigation extends StatelessWidget {
       decoration: BoxDecoration(
           color: const Color(0xFFF8F8F8),
           borderRadius: BorderRadius.circular(10)),
-      child: const Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        ItemBottom(
-          icon: Icons.dashboard,
-          text: 'Home',
-          selecionado: true,
-        ),
-        ItemBottom(
-          icon: Icons.person_search,
-          text: 'Guias',
-          selecionado: false,
-        ),
-        ItemBottom(icon: Icons.add, text: "Novo Post", selecionado: false),
-        ItemBottom(
-          icon: Icons.groups,
-          text: 'Grupos',
-          selecionado: false,
-        ),
-        ItemBottom(
-          icon: Icons.account_circle,
-          text: 'Perfil',
-          selecionado: false,
-        )
-      ]),
+      child: const Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            ItemBottom(
+              icon: Icons.dashboard,
+              text: 'Home',
+              selecionado: true,
+            ),
+            ItemBottom(
+              icon: Icons.person_search,
+              text: 'Guias',
+              selecionado: false,
+            ),
+            ItemBottom(icon: Icons.add, text: "Novo Post", selecionado: false),
+            ItemBottom(
+              icon: Icons.groups,
+              text: 'Grupos',
+              selecionado: false,
+            ),
+            ItemBottom(
+              icon: Icons.account_circle,
+              text: 'Perfil',
+              selecionado: false,
+            )
+          ]),
     ));
   }
 }
@@ -56,7 +58,7 @@ class ItemBottom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 15, right: 15, top: 5, bottom: 5),
+      padding: const EdgeInsets.only(top: 5, bottom: 5),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
