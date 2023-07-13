@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
-class BottomNavigation extends StatelessWidget {
+class BottomNavigation extends StatefulWidget {
   const BottomNavigation({super.key});
+
+  @override
+  State<BottomNavigation> createState() => _BottomNavigationState();
+}
+
+class _BottomNavigationState extends State<BottomNavigation> {
+  var itemSelecionado = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -14,33 +21,50 @@ class BottomNavigation extends StatelessWidget {
       decoration: BoxDecoration(
           color: const Color(0xFFF8F8F8),
           borderRadius: BorderRadius.circular(10)),
-      child: const Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            ItemBottom(
-              icon: Icons.dashboard,
-              text: 'Home',
-              selecionado: true,
-            ),
-            ItemBottom(
-              icon: Icons.person_search,
-              text: 'Guias',
-              selecionado: false,
-            ),
-            ItemBottom(icon: Icons.add, text: "Novo Post", selecionado: false),
-            ItemBottom(
-              icon: Icons.groups,
-              text: 'Grupos',
-              selecionado: false,
-            ),
-            ItemBottom(
-              icon: Icons.account_circle,
-              text: 'Perfil',
-              selecionado: false,
-            )
-          ]),
+      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+        ...List.generate(
+            itensButtons.length,
+            (index) => GestureDetector(
+                onTap: () {
+                  setState(() {
+                    itemSelecionado = index;
+                  });
+                },
+                child: ItemBottom(
+                  icon: itensButtons[index].icon,
+                  text: itensButtons[index].text,
+                  selecionado: itemSelecionado == index,
+                )))
+      ]),
     ));
   }
+
+  List<ItemDataButton> itensButtons = [
+    ItemDataButton(
+      icon: Icons.dashboard,
+      text: 'Home',
+    ),
+    ItemDataButton(
+      icon: Icons.person_search,
+      text: 'Guias',
+    ),
+    ItemDataButton(icon: Icons.add, text: "Novo Post"),
+    ItemDataButton(
+      icon: Icons.groups,
+      text: 'Grupos',
+    ),
+    ItemDataButton(
+      icon: Icons.account_circle,
+      text: 'Perfil',
+    )
+  ];
+}
+
+class ItemDataButton {
+  final String text;
+  final IconData icon;
+
+  ItemDataButton({required this.text, required this.icon});
 }
 
 class ItemBottom extends StatelessWidget {
