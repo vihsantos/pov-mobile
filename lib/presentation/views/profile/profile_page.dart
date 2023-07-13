@@ -92,7 +92,37 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             Container(
               height: 510,
-              color: Color.fromARGB(255, 238, 237, 237),
+              color: const Color(0xFFF8F8F8),
+              child: GridView.count(
+                padding: EdgeInsets.all(10),
+                crossAxisCount: 2,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Container(color: Colors.red),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Container(color: Colors.blue),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Container(color: Colors.greenAccent),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Container(color: Colors.red),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Container(color: Colors.blue),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Container(color: Colors.greenAccent),
+                  ),
+                ],
+              ),
             )
           ],
         ),
