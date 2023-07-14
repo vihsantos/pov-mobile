@@ -15,6 +15,7 @@ class _LoginPageState extends State<LoginPage> {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -51,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                 InkWell(
                   onTap: null,
                   child: Container(
-                    margin: EdgeInsets.all(15),
+                    margin: const EdgeInsets.all(15),
                     width: size.width,
                     height: 60,
                     decoration: const BoxDecoration(
