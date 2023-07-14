@@ -14,6 +14,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -35,10 +36,10 @@ class _ProfilePageState extends State<ProfilePage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
+                  const SizedBox(
                     width: 100,
                     height: 110,
-                    child: const Column(
+                    child: Column(
                       children: [
                         Text(
                           "120",
@@ -69,10 +70,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       )
                     ],
                   ),
-                  Container(
-                    width: 100,
-                    height: 110,
-                    child: const Column(
+                  const SizedBox(
+                    child: Column(
                       children: [
                         Text(
                           "240",
@@ -90,43 +89,78 @@ class _ProfilePageState extends State<ProfilePage> {
             const SizedBox(
               height: 20,
             ),
-            Container(
+            SizedBox(
               height: 510,
-              color: const Color(0xFFF8F8F8),
               child: GridView.count(
-                padding: EdgeInsets.all(10),
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                padding: const EdgeInsets.all(10),
                 crossAxisCount: 2,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Container(color: Colors.red),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Container(color: Colors.blue),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Container(color: Colors.greenAccent),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Container(color: Colors.red),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Container(color: Colors.blue),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Container(color: Colors.greenAccent),
-                  ),
+                children: const [
+                  CardPostProfile(),
+                  CardPostProfile(),
+                  CardPostProfile(),
+                  CardPostProfile(),
+                  CardPostProfile()
                 ],
               ),
             )
           ],
         ),
       ),
+    );
+  }
+}
+
+class CardPostProfile extends StatelessWidget {
+  const CardPostProfile({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Stack(children: [
+        Container(
+          decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 255, 227, 225),
+              borderRadius: BorderRadius.circular(10)),
+        ),
+        Positioned(
+          top: 10,
+          right: 10,
+          child: Container(
+            width: 60,
+            height: 30,
+            decoration: BoxDecoration(boxShadow: const [
+              BoxShadow(
+                  offset: Offset(0, 4),
+                  blurRadius: 4,
+                  color: Color.fromARGB(33, 0, 0, 0))
+            ], color: Colors.white, borderRadius: BorderRadius.circular(10)),
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "5",
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.pink),
+                ),
+                SizedBox(width: 5),
+                Icon(
+                  Icons.star,
+                  size: 18,
+                  color: Colors.pink,
+                )
+              ],
+            ),
+          ),
+        )
+      ]),
     );
   }
 }
