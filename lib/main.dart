@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'presentation/views/home/home_page.dart';
+
+import 'presentation/views/login/login_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,10 +17,10 @@ class MyApp extends StatelessWidget {
       title: 'Para Onde Vou?',
       theme: ThemeData(
         fontFamily: "Poppins",
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      home: const LoginPage(),
     );
   }
 }
