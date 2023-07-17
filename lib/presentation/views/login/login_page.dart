@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pov/presentation/views/home/home_page.dart';
 
 import '../../widgets/input_field.dart';
 
@@ -50,7 +51,12 @@ class _LoginPageState extends State<LoginPage> {
                           hintText: "Digite sua senha"),
                     )),
                 InkWell(
-                  onTap: null,
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomePage()));
+                  },
                   child: Container(
                     margin: const EdgeInsets.all(15),
                     width: size.width,
