@@ -16,16 +16,19 @@ class _IntroductionPageState extends State<IntroductionPage> {
     return SafeArea(
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.all(15),
+          padding: const EdgeInsets.all(10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 450),
-              const Text(
-                "Bem vindos ao \n'Para Onde Vou?'",
-                style: TextStyle(fontSize: 30),
-                textAlign: TextAlign.start,
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                child: Text(
+                  "Bem vindos ao \n'Para Onde Vou?'",
+                  style: TextStyle(fontSize: 30),
+                  textAlign: TextAlign.start,
+                ),
               ),
               const SizedBox(height: 60),
               InkWell(
@@ -36,6 +39,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
                           builder: (context) => const LoginPage()));
                 },
                 child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 15),
                   width: size.width,
                   height: 60,
                   decoration: BoxDecoration(
@@ -64,6 +68,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
                           builder: (context) => const RegisterPage()));
                 },
                 child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 15),
                   width: size.width,
                   height: 60,
                   decoration: BoxDecoration(
