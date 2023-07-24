@@ -23,7 +23,7 @@ class InputField extends StatelessWidget {
             style: const TextStyle(
                 color: Color(0xFF393434),
                 fontSize: 18,
-                fontWeight: FontWeight.w800),
+                fontWeight: FontWeight.w500),
           ),
           Container(
             width: size.width,
@@ -32,10 +32,7 @@ class InputField extends StatelessWidget {
                 color: const Color(0xFFF6F6FC),
                 borderRadius: BorderRadius.circular(10)),
             child: Center(
-              child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: child,
-              ),
+              child: child,
             ),
           ),
         ],

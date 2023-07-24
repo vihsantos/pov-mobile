@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pov/presentation/views/groups/groups_page.dart';
+
+import '../views/guides/guides_page.dart';
+import '../views/home/home_page.dart';
+import '../views/post/newpost_page.dart';
+import '../views/profile/profile_page.dart';
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({super.key});
@@ -8,7 +14,7 @@ class BottomNavigation extends StatefulWidget {
 }
 
 class _BottomNavigationState extends State<BottomNavigation> {
-  var itemSelecionado = 0;
+  int itemSelecionado = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +34,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
                 onTap: () {
                   setState(() {
                     itemSelecionado = index;
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => pages[itemSelecionado]));
                   });
                 },
                 child: ItemBottom(
@@ -38,6 +48,14 @@ class _BottomNavigationState extends State<BottomNavigation> {
       ]),
     ));
   }
+
+  List pages = [
+    const HomePage(),
+    const GuidesPage(),
+    const NewPostPage(),
+    const GroupsPage(),
+    const ProfilePage()
+  ];
 
   List<ItemDataButton> itensButtons = [
     ItemDataButton(
