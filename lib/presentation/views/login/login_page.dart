@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pov/presentation/views/home/home_page.dart';
 
+import '../../../models/login/login_model.dart';
+import '../../../repository/login_repository.dart';
+import '../../controllers/loginpage_controller.dart';
 import '../../widgets/input_field.dart';
 
 class LoginPage extends StatefulWidget {
@@ -11,9 +14,17 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  LoginPageController controller = LoginPageController(
+    loginRepository: LoginRepository(),
+  );
+
+  var txtUser = new TextEditingController();
+  var txtSenha = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -26,32 +37,45 @@ class _LoginPageState extends State<LoginPage> {
                   height: 120,
                 ),
                 Image.asset(
-                  "asset/img/logo__pov.png",
+                  "asset/img/testelogo.png",
                   width: 250,
                 ),
                 const SizedBox(
                   height: 40,
                 ),
-                const InputField(
+                InputField(
                     label: 'Email',
-                    child: TextField(
-                      decoration: InputDecoration(
-                          hintStyle: TextStyle(fontStyle: FontStyle.italic),
-                          enabledBorder: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          hintText: "Digite seu email"),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 15),
+                      child: TextField(
+                        controller: txtUser,
+                        decoration: const InputDecoration(
+                            hintStyle: TextStyle(fontStyle: FontStyle.italic),
+                            enabledBorder: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            hintText: "Digite seu email"),
+                      ),
                     )),
-                const InputField(
+                InputField(
                     label: 'Senha',
-                    child: TextField(
-                      decoration: InputDecoration(
-                          hintStyle: TextStyle(fontStyle: FontStyle.italic),
-                          enabledBorder: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          hintText: "Digite sua senha"),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 15),
+                      child: TextField(
+                        controller: txtSenha,
+                        obscureText: true,
+                        decoration: const InputDecoration(
+                            hintStyle: TextStyle(fontStyle: FontStyle.italic),
+                            enabledBorder: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            hintText: "Digite sua senha"),
+                      ),
                     )),
                 InkWell(
                   onTap: () {
+                    LoginModel model = LoginModel();
+                    model.username = txtUser.text;
+                    model.password = txtSenha.text;
+                    controller.logar(model);
                     Navigator.push(
                         context,
                         MaterialPageRoute(

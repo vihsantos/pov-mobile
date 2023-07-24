@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class GuidesPage extends StatefulWidget {
-  const GuidesPage({super.key});
+class NewPostPage extends StatefulWidget {
+  const NewPostPage({super.key});
 
   @override
-  State<GuidesPage> createState() => _GuidesPageState();
+  State<NewPostPage> createState() => _NewPostPageState();
 }
 
-class _GuidesPageState extends State<GuidesPage> {
+class _NewPostPageState extends State<NewPostPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(

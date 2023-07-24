@@ -25,8 +25,8 @@ class _IntroductionPageState extends State<IntroductionPage> {
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15),
                 child: Text(
-                  "Bem vindos ao \n'Para Onde Vou?'",
-                  style: TextStyle(fontSize: 30),
+                  "Um lugar para você encontrar locais, compartilhar experiências e achar guias turísticos!",
+                  style: TextStyle(fontSize: 22),
                   textAlign: TextAlign.start,
                 ),
               ),
@@ -59,7 +59,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               InkWell(
                 onTap: () {
                   Navigator.push(

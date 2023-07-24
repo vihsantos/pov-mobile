@@ -3,7 +3,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:pov/presentation/widgets/bottom_navigation.dart';
 import 'package:latlong2/latlong.dart';
 
-import '../../widgets/card_destaque.dart';
+import 'components/card_destaque.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
