@@ -1,6 +1,6 @@
 class UserVoosModel {
-  // ignore: non_constant_identifier_names
   final int id;
+  // ignore: non_constant_identifier_names
   final int post_id;
   final String username;
 
