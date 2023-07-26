@@ -18,8 +18,8 @@ class _LoginPageState extends State<LoginPage> {
     loginRepository: LoginRepository(),
   );
 
-  var txtUser = new TextEditingController();
-  var txtSenha = new TextEditingController();
+  var txtUser = TextEditingController();
+  var txtSenha = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

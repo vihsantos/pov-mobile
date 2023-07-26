@@ -75,7 +75,46 @@ class _HomePageState extends State<HomePage> {
                         CardDestaque(),
                       ],
                     )),
-              )
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                child: Text(
+                  "Pacotes:",
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF393434)),
+                ),
+              ),
+               Padding(
+                padding: const EdgeInsets.all(15),
+                child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(right: 10),
+                          width: 220,
+                          height: 150,
+                          
+                          decoration: BoxDecoration(
+                            color: Colors.teal,
+                            borderRadius: BorderRadius.circular(10)
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(right: 10),
+                          width: 220,
+                          height: 150,
+                          decoration: BoxDecoration(
+                            color: Colors.teal,
+                            borderRadius: BorderRadius.circular(10)
+                          ),
+                        )
+                      ],
+                    )),
+              ),
             ]),
           )),
     );

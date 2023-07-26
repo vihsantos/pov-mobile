@@ -22,7 +22,7 @@ class CardComment extends StatelessWidget {
           children: [
             Text("vitoria", 
             style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500)),
-            const SizedBox(
+            SizedBox(
                 height: 5,
               ),
             Text("data data data data data data data data data data data data data data data data data data data data data", maxLines: 3,)
