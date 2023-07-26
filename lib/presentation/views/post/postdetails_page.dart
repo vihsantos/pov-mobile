@@ -47,7 +47,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                   const SizedBox(
                     width: 20,
                   ),
-                   Column(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
@@ -56,8 +56,10 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                             fontSize: 22, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
-                        width: size.width * 0.718,
-                        child: const Text("localização localização localização localização localização", maxLines: 2))
+                          width: size.width * 0.718,
+                          child: const Text(
+                              "localização localização localização localização localização",
+                              maxLines: 2))
                     ],
                   )
                 ],
@@ -66,21 +68,36 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                 height: 15,
               ),
               Container(
-                color: Colors.blue,
-                child: const Text("data data data data data data data data data data data data data data data data data data data data",
-                style: TextStyle(fontSize: 17),
-                )),
+                  color: Colors.blue,
+                  child: const Text(
+                    "data data data data data data data data data data data data data data data data data data data data",
+                    style: TextStyle(fontSize: 17),
+                  )),
               const SizedBox(
                 height: 15,
               ),
-              Container(
-                width: 60,
-                height: 60,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.grey[300]
-                ),
-                child: Icon(Icons.comment),
+              Row(
+                children: [
+                  Container(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.grey[300]),
+                    child: Icon(Icons.comment),
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Container(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.grey[300]),
+                    child: Icon(Icons.flight_sharp),
+                  ),
+                ],
               )
               //CardComment()
             ],
