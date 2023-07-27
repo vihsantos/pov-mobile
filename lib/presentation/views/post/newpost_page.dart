@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pov/presentation/widgets/input_field.dart';
 
 class NewPostPage extends StatefulWidget {
   const NewPostPage({super.key});
@@ -8,16 +9,18 @@ class NewPostPage extends StatefulWidget {
 }
 
 class _NewPostPageState extends State<NewPostPage> {
+  int value = 0;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    
     return SafeArea(
       child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(15),
-          child: Column(
-            children: [
-              Container(
+        body: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(15),
+              child: Container(
                 width: size.width,
                 height: 450,
                 decoration: BoxDecoration(
@@ -44,12 +47,43 @@ class _NewPostPageState extends State<NewPostPage> {
                   ],
                 ),
               ),
-              TextField(
-                keyboardType: TextInputType.number,
+            ),
+            InputField(label: "Avaliação:", 
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                const Icon(
+                        Icons.star,
+                        size: 24,
+                        color: Colors.pink,
+                      ),
+                InkWell(
+                onTap: () {
+                  setState(() {
+                    if(value<=0){
+                      return;
+                    }
+                    value = value - 1;
+                  });
+                },
+                child: const Icon(Icons.remove),
               ),
-              Container(),
-            ],
-          ),
+                
+                Text(value.toString()),
+                InkWell(
+                onTap: () {
+                  setState(() {
+                    if(value>4){
+                      return;
+                    }
+                    value = value + 1;
+                  });
+                },
+                child: const Icon(Icons.add),
+              ),
+              ],
+            )),
+          ],
         ),
       ),
     );
