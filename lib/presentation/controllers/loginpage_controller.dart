@@ -10,8 +10,14 @@ class LoginPageController {
     required this.loginRepository,
   });
 
-  Future logar(LoginModel login) async {
-    var user = loginRepository.logar(login);
-    log(user.toString());
+  LoginModel model = LoginModel();
+
+  Future logar() async {
+    try {
+      var user = await loginRepository.logar(model);
+      log(user.toString());
+    } catch (e) {
+      throw Exception();
+    }
   }
 }
