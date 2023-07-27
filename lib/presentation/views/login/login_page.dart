@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pov/presentation/views/home/home_page.dart';
-
-import '../../../models/login/login_model.dart';
 import '../../../repository/login_repository.dart';
 import '../../controllers/loginpage_controller.dart';
 import '../../widgets/input_field.dart';
@@ -17,9 +15,6 @@ class _LoginPageState extends State<LoginPage> {
   LoginPageController controller = LoginPageController(
     loginRepository: LoginRepository(),
   );
-
-  var txtUser = TextEditingController();
-  var txtSenha = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -44,16 +39,16 @@ class _LoginPageState extends State<LoginPage> {
                   height: 40,
                 ),
                 InputField(
-                    label: 'Email',
+                    label: 'Nome de Usuário',
                     child: Padding(
                       padding: const EdgeInsets.only(left: 15),
                       child: TextField(
-                        controller: txtUser,
+                        onChanged: (value) => controller.model.username = value,
                         decoration: const InputDecoration(
                             hintStyle: TextStyle(fontStyle: FontStyle.italic),
                             enabledBorder: InputBorder.none,
                             focusedBorder: InputBorder.none,
-                            hintText: "Digite seu email"),
+                            hintText: "Digite seu nome de usuário"),
                       ),
                     )),
                 InputField(
@@ -61,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 15),
                       child: TextField(
-                        controller: txtSenha,
+                        onChanged: (value) => controller.model.password = value,
                         obscureText: true,
                         decoration: const InputDecoration(
                             hintStyle: TextStyle(fontStyle: FontStyle.italic),
@@ -72,10 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                     )),
                 InkWell(
                   onTap: () {
-                    LoginModel model = LoginModel();
-                    model.username = txtUser.text;
-                    model.password = txtSenha.text;
-                    controller.logar(model);
+                    controller.logar();
                     Navigator.push(
                         context,
                         MaterialPageRoute(
