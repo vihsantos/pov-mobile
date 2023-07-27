@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                       color: Color(0xFF393434)),
                 ),
               ),
-               Padding(
+              Padding(
                 padding: const EdgeInsets.all(15),
                 child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
@@ -96,21 +96,18 @@ class _HomePageState extends State<HomePage> {
                         Container(
                           margin: const EdgeInsets.only(right: 10),
                           width: 220,
-                          height: 150,
-                          
+                          height: 170,
                           decoration: BoxDecoration(
-                            color: Colors.teal,
-                            borderRadius: BorderRadius.circular(10)
-                          ),
+                              color: Colors.teal,
+                              borderRadius: BorderRadius.circular(10)),
                         ),
                         Container(
                           margin: const EdgeInsets.only(right: 10),
                           width: 220,
-                          height: 150,
+                          height: 170,
                           decoration: BoxDecoration(
-                            color: Colors.teal,
-                            borderRadius: BorderRadius.circular(10)
-                          ),
+                              color: Colors.teal,
+                              borderRadius: BorderRadius.circular(10)),
                         )
                       ],
                     )),
