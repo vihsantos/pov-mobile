@@ -13,7 +13,7 @@ class _NewPostPageState extends State<NewPostPage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    
+
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -48,41 +48,45 @@ class _NewPostPageState extends State<NewPostPage> {
                 ),
               ),
             ),
-            InputField(label: "Avaliação:", 
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                const Icon(
-                        Icons.star,
-                        size: 24,
-                        color: Colors.pink,
-                      ),
-                InkWell(
-                onTap: () {
-                  setState(() {
-                    if(value<=0){
-                      return;
-                    }
-                    value = value - 1;
-                  });
-                },
-                child: const Icon(Icons.remove),
-              ),
-                
-                Text(value.toString()),
-                InkWell(
-                onTap: () {
-                  setState(() {
-                    if(value>4){
-                      return;
-                    }
-                    value = value + 1;
-                  });
-                },
-                child: const Icon(Icons.add),
-              ),
-              ],
-            )),
+            InputField(label: "Localização: ", child: Container()),
+            InputField(
+                label: "Avaliação:",
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    const Icon(
+                      Icons.star,
+                      size: 24,
+                      color: Colors.pink,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          if (value <= 0) {
+                            return;
+                          }
+                          value = value - 1;
+                        });
+                      },
+                      child: const Icon(Icons.remove),
+                    ),
+                    Text(
+                      value.toString(),
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          if (value > 4) {
+                            return;
+                          }
+                          value = value + 1;
+                        });
+                      },
+                      child: const Icon(Icons.add),
+                    ),
+                  ],
+                )),
           ],
         ),
       ),
