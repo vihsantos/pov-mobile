@@ -1,25 +1,28 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-// ignore_for_file: non_constant_identifier_names
-
 class AcessModel {
   final String? token;
-  final int? user_id;
+  final DateTime? acessoem;
 
-  AcessModel(this.token, this.user_id);
+  AcessModel({
+    this.token,
+    this.acessoem,
+  });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'token': token,
-      'user_id': user_id,
+      'acessoem': acessoem?.millisecondsSinceEpoch,
     };
   }
 
   factory AcessModel.fromMap(Map<String, dynamic> map) {
     return AcessModel(
-      map['token'] != null ? map['token'] as String : null,
-      map['user_id'] != null ? map['user_id'] as int : null,
+      token: map['token'] != null ? map['token'] as String : null,
+      acessoem: map['acessoem'] != null
+          ? DateTime.tryParse(map['acessoem'] as String)
+          : null,
     );
   }
 
