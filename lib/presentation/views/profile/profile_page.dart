@@ -16,18 +16,19 @@ class _ProfilePageState extends State<ProfilePage> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          centerTitle: true,
-          title: const Text(
-            "Perfil",
-            style: TextStyle(fontSize: 28, fontWeight: FontWeight.w600),
-          ),
-        ),
+        // appBar: AppBar(
+        //   backgroundColor: Colors.transparent,
+        //   elevation: 0,
+        //   centerTitle: true,
+        //   title: const Text(
+        //     "Perfil",
+        //     style: TextStyle(fontSize: 28, fontWeight: FontWeight.w600),
+        //   ),
+        // ),
         bottomNavigationBar: const BottomNavigation(),
         body: Column(
           children: [
+            SizedBox(height: 15),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Row(
@@ -41,7 +42,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       children: [
                         Text(
                           "120",
-                          style: TextStyle(fontSize: 26),
+                          style: TextStyle(fontSize: 22),
                         ),
                         Text("Seguindo",
                             style: TextStyle(
@@ -52,8 +53,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   Column(
                     children: [
                       Container(
-                        width: 150,
-                        height: 150,
+                        width: 120,
+                        height: 120,
                         decoration: BoxDecoration(
                             color: Colors.black12,
                             borderRadius: BorderRadius.circular(75)),
@@ -65,6 +66,30 @@ class _ProfilePageState extends State<ProfilePage> {
                             color: Color(0xFF393434),
                             fontSize: 20,
                             fontWeight: FontWeight.bold),
+                      ),
+                      Visibility(
+                        visible: false,
+                        child: Container(
+                          width: 180,
+                          height: 50,
+                          decoration: BoxDecoration(
+                              gradient: const LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [
+                                    Color(0xFFE8C261),
+                                    Color(0xFFE86161)
+                                  ]),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: const Center(
+                              child: Text(
+                            "Seguir",
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.white),
+                          )),
+                        ),
                       )
                     ],
                   ),
@@ -75,7 +100,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       children: [
                         Text(
                           "240",
-                          style: TextStyle(fontSize: 26),
+                          style: TextStyle(fontSize: 22),
                         ),
                         Text("Seguidores",
                             style: TextStyle(
@@ -89,11 +114,10 @@ class _ProfilePageState extends State<ProfilePage> {
             const SizedBox(
               height: 20,
             ),
-            SizedBox(
-              height: 510,
+            Expanded(
               child: GridView.count(
                 scrollDirection: Axis.vertical,
-                shrinkWrap: true,
+                shrinkWrap: false,
                 padding: const EdgeInsets.all(10),
                 crossAxisCount: 2,
                 children: const [
