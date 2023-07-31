@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pov/presentation/views/home/home_page.dart';
+import 'package:pov/services/singleton/auth_singleton.dart';
 import '../../../repository/login_repository.dart';
 import '../../controllers/loginpage_controller.dart';
 import '../../widgets/input_field.dart';
@@ -13,7 +14,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   LoginPageController controller = LoginPageController(
-    loginRepository: LoginRepository(),
+    authSingleton: AuthSingleton(LoginRepository()),
   );
 
   @override
@@ -41,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
                 InputField(
                     label: 'Nome de Usuário',
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 15),
+                      padding: const EdgeInsets.only(left: 15, right: 15),
                       child: TextField(
                         onChanged: (value) => controller.model.username = value,
                         decoration: const InputDecoration(
@@ -54,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
                 InputField(
                     label: 'Senha',
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 15),
+                      padding: const EdgeInsets.only(left: 15, right: 15),
                       child: TextField(
                         onChanged: (value) => controller.model.password = value,
                         obscureText: true,
@@ -66,12 +67,36 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     )),
                 InkWell(
-                  onTap: () {
-                    controller.logar();
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const HomePage()));
+                  onTap: () async {
+                    var dado = await controller.logar();
+                    if (!mounted) return;
+
+                    if (controller.error != null) {
+                      return showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: const Text("Poxa!"),
+                              content: const Text(
+                                  "Ocorreu um erro ao tentar realizar o login, por favor tente novamente!"),
+                              actions: <Widget>[
+                                TextButton(
+                                  child: const Text("Ok"),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                              ],
+                            );
+                          });
+                    }
+
+                    if (dado != null) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HomePage()));
+                    }
                   },
                   child: Container(
                     margin: const EdgeInsets.all(15),
