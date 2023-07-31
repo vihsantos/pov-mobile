@@ -28,7 +28,7 @@ class _ProfilePageState extends State<ProfilePage> {
         bottomNavigationBar: const BottomNavigation(),
         body: Column(
           children: [
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Row(
