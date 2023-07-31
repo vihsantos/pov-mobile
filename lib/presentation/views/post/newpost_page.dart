@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pov/presentation/widgets/input_field.dart';
+import 'package:pov/presentation/controllers/newpostpage_controller.dart';
+import 'package:pov/repository/post_repository.dart';
+
+import '../../widgets/input_field.dart';
 
 class NewPostPage extends StatefulWidget {
   const NewPostPage({super.key});
@@ -9,6 +12,8 @@ class NewPostPage extends StatefulWidget {
 }
 
 class _NewPostPageState extends State<NewPostPage> {
+  NewPostPageController controller =
+      NewPostPageController(repository: PostRepository());
   int value = 0;
   @override
   Widget build(BuildContext context) {
@@ -16,48 +21,101 @@ class _NewPostPageState extends State<NewPostPage> {
 
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(15),
-              child: Container(
-                width: size.width,
-                height: 450,
-                decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 223, 222, 222),
-                    borderRadius: BorderRadius.circular(10)),
-                child: const Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.panorama,
-                      size: 128,
-                      color: Colors.grey,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(15),
-                      child: Text(
-                        "Toque aqui para selecionar a foto do seu post",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontStyle: FontStyle.italic, fontSize: 18),
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 15, right: 15, top: 15, bottom: 10),
+                child: Container(
+                  width: size.width,
+                  height: 450,
+                  decoration: BoxDecoration(
+                      color: const Color(0xFFF6F6FC),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: const Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.panorama,
+                        size: 128,
+                        color: Colors.grey,
                       ),
-                    )
+                      Padding(
+                        padding: EdgeInsets.all(15),
+                        child: Text(
+                          "Toque aqui para selecionar a foto do seu post",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontStyle: FontStyle.italic, fontSize: 18),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              InputField(
+                label: 'Localização',
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 15, right: 15),
+                  child: TextFormField(
+                    onChanged: (value) =>
+                        controller.novoPost.localizacao = value,
+                    decoration: const InputDecoration(
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        hintText: "Informe a localização"),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15, bottom: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Legenda: ",
+                      style: TextStyle(
+                          color: Color(0xFF393434),
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    Container(
+                      width: 400,
+                      height: 120,
+                      decoration: BoxDecoration(
+                          color: const Color(0xFFF6F6FC),
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 15, right: 15),
+                        child: TextFormField(
+                          onChanged: (value) =>
+                              controller.novoPost.description = value,
+                          maxLines: 5,
+                          decoration: const InputDecoration(
+                              enabledBorder: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                              hintText:
+                                  "Descreva a sua experiência com este lugar"),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
-            ),
-            InputField(label: "Localização: ", child: Container()),
-            InputField(
-                label: "Avaliação:",
+              Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15, bottom: 10),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Icon(
-                      Icons.star,
-                      size: 24,
-                      color: Colors.pink,
+                    const Text(
+                      "Avaliação: ",
+                      style: TextStyle(
+                          color: Color(0xFF393434),
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500),
                     ),
                     InkWell(
                       onTap: () {
@@ -68,11 +126,31 @@ class _NewPostPageState extends State<NewPostPage> {
                           value = value - 1;
                         });
                       },
-                      child: const Icon(Icons.remove),
+                      child: Container(
+                          width: 55,
+                          height: 55,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: const Color(0xFFF6F6FC)),
+                          child: const Icon(Icons.remove)),
+                    ),
+                    const SizedBox(
+                      width: 10,
                     ),
                     Text(
                       value.toString(),
-                      style: TextStyle(fontSize: 16),
+                      style: const TextStyle(fontSize: 18),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    const Icon(
+                      Icons.star,
+                      size: 26,
+                      color: Colors.pink,
+                    ),
+                    const SizedBox(
+                      width: 5,
                     ),
                     InkWell(
                       onTap: () {
@@ -83,11 +161,50 @@ class _NewPostPageState extends State<NewPostPage> {
                           value = value + 1;
                         });
                       },
-                      child: const Icon(Icons.add),
+                      child: Container(
+                          width: 55,
+                          height: 55,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: const Color(0xFFF6F6FC)),
+                          child: const Icon(Icons.add)),
                     ),
                   ],
-                )),
-          ],
+                ),
+              ),
+              InkWell(
+                onTap: () {
+                  controller.novoPost.stars = value;
+                  controller.criarPost();
+                },
+                child: Container(
+                  margin: const EdgeInsets.all(15),
+                  width: size.width,
+                  height: 60,
+                  decoration: const BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                            offset: Offset(0, 4),
+                            blurRadius: 4,
+                            color: Color.fromARGB(55, 116, 116, 116))
+                      ],
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [Color(0xFFE86060), Color(0xFFE86192)])),
+                  child: const Center(
+                      child: Text(
+                    "Salvar",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600),
+                  )),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
