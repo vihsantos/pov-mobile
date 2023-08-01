@@ -17,7 +17,6 @@ class NewPostPageController {
   Future criarPost() async {
     try {
       novoPost.user_id = 0;
-      novoPost.data_criacao = DateTime.now();
       repository.criarPost(novoPost);
     } on ApplicationError catch (e) {
       _error = e;
