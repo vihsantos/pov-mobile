@@ -1,3 +1,7 @@
+import 'dart:developer';
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:pov/presentation/controllers/newpostpage_controller.dart';
 import 'package:pov/repository/post_repository.dart';
@@ -28,31 +32,50 @@ class _NewPostPageState extends State<NewPostPage> {
               Padding(
                 padding: const EdgeInsets.only(
                     left: 15, right: 15, top: 15, bottom: 10),
-                child: Container(
-                  width: size.width,
-                  height: 450,
-                  decoration: BoxDecoration(
-                      color: const Color(0xFFF6F6FC),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: const Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.panorama,
-                        size: 128,
-                        color: Colors.grey,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(15),
-                        child: Text(
-                          "Toque aqui para selecionar a foto do seu post",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontStyle: FontStyle.italic, fontSize: 18),
+                child: InkWell(
+                  onTap: () async {
+                    final filePickerResult = await FilePicker.platform
+                        .pickFiles(
+                            allowMultiple: false,
+                            type: FileType.custom,
+                            allowedExtensions: [
+                          'png',
+                          'jpeg',
+                        ]);
+
+                    if (filePickerResult == null) return;
+
+                    var files = filePickerResult.paths
+                        .map((path) => File(path!))
+                        .toList();
+                    log(files[0].path);
+                  },
+                  child: Container(
+                    width: size.width,
+                    height: 450,
+                    decoration: BoxDecoration(
+                        color: const Color(0xFFF6F6FC),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: const Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.panorama,
+                          size: 128,
+                          color: Colors.grey,
                         ),
-                      )
-                    ],
+                        Padding(
+                          padding: EdgeInsets.all(15),
+                          child: Text(
+                            "Toque aqui para selecionar a foto do seu post",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontStyle: FontStyle.italic, fontSize: 18),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
