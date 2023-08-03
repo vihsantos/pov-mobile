@@ -1,6 +1,4 @@
-import 'dart:developer';
 import 'dart:io';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:pov/presentation/controllers/newpostpage_controller.dart';
@@ -19,6 +17,8 @@ class _NewPostPageState extends State<NewPostPage> {
   NewPostPageController controller =
       NewPostPageController(repository: PostRepository());
   int value = 0;
+
+  List<File> files = [];
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -45,38 +45,47 @@ class _NewPostPageState extends State<NewPostPage> {
 
                     if (filePickerResult == null) return;
 
-                    var files = filePickerResult.paths
-                        .map((path) => File(path!))
-                        .toList();
-                    log(files[0].path);
+                    setState(() {
+                      files = filePickerResult.paths
+                          .map((path) => File(path!))
+                          .toList();
+                    });
                   },
                   child: Container(
-                    width: size.width,
-                    height: 450,
-                    decoration: BoxDecoration(
-                        color: const Color(0xFFF6F6FC),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: const Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.panorama,
-                          size: 128,
-                          color: Colors.grey,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(15),
-                          child: Text(
-                            "Toque aqui para selecionar a foto do seu post",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontStyle: FontStyle.italic, fontSize: 18),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
+                      width: size.width,
+                      height: 450,
+                      decoration: BoxDecoration(
+                          color: const Color(0xFFF6F6FC),
+                          borderRadius: BorderRadius.circular(10)),
+                      child: files.isEmpty
+                          ? const Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.panorama,
+                                  size: 128,
+                                  color: Colors.grey,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(15),
+                                  child: Text(
+                                    "Toque aqui para selecionar a foto do seu post",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                        fontSize: 18),
+                                  ),
+                                )
+                              ],
+                            )
+                          : ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.file(
+                                files[0],
+                                fit: BoxFit.cover,
+                              ),
+                            )),
                 ),
               ),
               InputField(
@@ -198,7 +207,8 @@ class _NewPostPageState extends State<NewPostPage> {
               InkWell(
                 onTap: () {
                   controller.novoPost.stars = value;
-                  controller.criarPost();
+                  controller.enviarImagem(files[0]);
+                  //controller.criarPost();
                 },
                 child: Container(
                   margin: const EdgeInsets.all(15),
