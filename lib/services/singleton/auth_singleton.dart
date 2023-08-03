@@ -24,7 +24,7 @@ class AuthSingleton {
     try {
       return _acess = await _repository.logar(login);
     } catch (e) {
-      return null;
+      rethrow;
     }
   }
 }
