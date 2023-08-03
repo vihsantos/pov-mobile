@@ -34,7 +34,7 @@ class PostRepository {
   }
 
   Future enviarPostFile(MultipartFile pic) async {
-    final uri = Uri.parse("http://192.168.2.104:8000/newpost");
+    final uri = Uri.parse("http://192.168.2.104:8000/teste");
     String? token = AuthSingleton(LoginRepository()).getToken();
 
     var request = MultipartRequest("POST", uri);
@@ -44,6 +44,8 @@ class PostRepository {
       "accept": "application/json",
       'Authorization': 'Bearer $token',
     });
+
+  
 
     request.files.add(pic);
 
