@@ -17,6 +17,7 @@ class LoginPageController {
   LoginModel model = LoginModel();
 
   Future logar() async {
+    _error = null;
     try {
       var user = await authSingleton.authenticate(model);
       return user;
