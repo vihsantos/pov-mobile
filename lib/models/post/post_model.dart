@@ -9,43 +9,54 @@ class PostModel {
   final String id;
   final String descricao;
   final String imageUrl;
+  final String localizacao;
   final int stars;
   final List<CommentModel> comments;
   final List<UserVoosModel> voos;
   final UserPostModel user;
 
-  PostModel(this.id, this.descricao, this.imageUrl, this.stars, this.comments,
-      this.voos, this.user);
+  PostModel({
+    required this.id,
+    required this.descricao,
+    required this.imageUrl,
+    required this.localizacao,
+    required this.stars,
+    required this.comments,
+    required this.voos,
+    required this.user,
+  });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
       'descricao': descricao,
       'imageUrl': imageUrl,
+      'localizacao': localizacao,
       'stars': stars,
       'comments': comments.map((x) => x.toMap()).toList(),
       'voos': voos.map((x) => x.toMap()).toList(),
-      'user': user.toMap(),
+      'user': user.toJson(),
     };
   }
 
   factory PostModel.fromMap(Map<String, dynamic> map) {
     return PostModel(
-      map['id'] as String,
-      map['descricao'] as String,
-      map['imageUrl'] as String,
-      map['stars'] as int,
-      List<CommentModel>.from(
+      id: map['id'] as String,
+      descricao: map['descricao'] as String,
+      imageUrl: map['imageUrl'] as String,
+      localizacao: map['localizacao'] as String,
+      stars: map['stars'] as int,
+      comments: List<CommentModel>.from(
         (map['comments'] as List<int>).map<CommentModel>(
           (x) => CommentModel.fromMap(x as Map<String, dynamic>),
         ),
       ),
-      List<UserVoosModel>.from(
+      voos: List<UserVoosModel>.from(
         (map['voos'] as List<int>).map<UserVoosModel>(
           (x) => UserVoosModel.fromMap(x as Map<String, dynamic>),
         ),
       ),
-      UserPostModel.fromMap(map['user'] as Map<String, dynamic>),
+      user: UserPostModel.fromJson(map['user'] as Map<String, dynamic>),
     );
   }
 
