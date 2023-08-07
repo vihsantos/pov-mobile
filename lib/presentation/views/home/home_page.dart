@@ -3,6 +3,9 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:pov/presentation/widgets/bottom_navigation.dart';
 import 'package:latlong2/latlong.dart';
 
+import '../../../dto/post_dto.dart';
+import '../../../repository/post_repository.dart';
+import '../../controllers/homepage_controller.dart';
 import 'components/card_destaque.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,6 +16,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  HomePageController controller = HomePageController(PostRepository());
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -30,89 +35,75 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Colors.white,
           bottomNavigationBar: const BottomNavigation(),
           body: SingleChildScrollView(
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Container(
-                margin: const EdgeInsets.only(
-                    left: 15, right: 15, bottom: 10, top: 10),
-                height: 180,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: FlutterMap(
-                    options: MapOptions(
-                        center: const LatLng(-12.9704, -38.5124), zoom: 15),
-                    children: [
-                      TileLayer(
-                        urlTemplate:
-                            'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                        userAgentPackageName: 'com.example.app',
-                      )
-                    ],
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(
+                        left: 15, right: 15, bottom: 10, top: 10),
+                    height: 180,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: FlutterMap(
+                        options: MapOptions(
+                            center: const LatLng(-12.9704, -38.5124), zoom: 15),
+                        children: [
+                          TileLayer(
+                            urlTemplate:
+                                'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                            userAgentPackageName: 'com.example.app',
+                          )
+                        ],
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: Text(
-                  "Destaques da semana:",
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      fontStyle: FontStyle.italic,
-                      color: Color(0xFF393434)),
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.all(15),
-                child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CardDestaque(),
-                        CardDestaque(),
-                        CardDestaque(),
-                        CardDestaque(),
-                      ],
-                    )),
-              ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: Text(
-                  "Pacotes:",
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF393434)),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(15),
-                child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(right: 10),
-                          width: 220,
-                          height: 170,
-                          decoration: BoxDecoration(
-                              color: Colors.teal,
-                              borderRadius: BorderRadius.circular(10)),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(right: 10),
-                          width: 220,
-                          height: 170,
-                          decoration: BoxDecoration(
-                              color: Colors.teal,
-                              borderRadius: BorderRadius.circular(10)),
-                        )
-                      ],
-                    )),
-              ),
-            ]),
+                  Text(
+                    "Destaques da semana:",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        fontStyle: FontStyle.italic,
+                        color: Color(0xFF393434)),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: FutureBuilder<List<PostDTO?>?>(
+                            future: controller.listarPosts(),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                List<PostDTO?>? posts = snapshot.data;
+
+                                if (posts!.isEmpty) {
+                                  return Container();
+                                }
+
+                                return Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    ListView.builder(
+                                        scrollDirection: Axis.horizontal,
+                                        shrinkWrap: true,
+                                        itemCount: posts!.length,
+                                        itemBuilder: (_, index) {
+                                          final post = posts[index];
+
+                                          return CardDestaque(post: post!);
+                                        })
+                                  ],
+                                );
+                              }
+
+                              if (snapshot.hasError) {
+                                return const Text("ERROR");
+                              }
+                              return const Center(
+                                  child: CircularProgressIndicator());
+                            })),
+                  ),
+                ]),
           )),
     );
   }

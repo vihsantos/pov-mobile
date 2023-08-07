@@ -1,11 +1,13 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
+import '../../../../dto/post_dto.dart';
 import '../../post/postdetails_page.dart';
 
 class CardDestaque extends StatelessWidget {
-  const CardDestaque({
-    super.key,
-  });
+  final PostDTO post;
+
+  const CardDestaque({super.key, required this.post});
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +32,10 @@ class CardDestaque extends StatelessWidget {
                   width: 160,
                   height: 160,
                   margin: const EdgeInsets.only(top: 10, left: 10),
-                  decoration: BoxDecoration(
-                      color: Colors.purpleAccent[700],
-                      borderRadius: BorderRadius.circular(10)),
+                  child: Image.network(
+                    post.imageUrl!,
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 const SizedBox(height: 5),
                 Padding(
@@ -47,15 +50,15 @@ class CardDestaque extends StatelessWidget {
                             color: Colors.blueGrey,
                             borderRadius: BorderRadius.circular(15)),
                       ),
-                      const Column(
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text("ana"),
+                          Text(post.user!.username!),
                           Text(
-                            "Praia de Itapuã, Salvador",
+                            post.localizacao!,
                             maxLines: 2,
-                            style: TextStyle(fontSize: 9),
+                            style: const TextStyle(fontSize: 9),
                           )
                         ],
                       ),
@@ -84,19 +87,19 @@ class CardDestaque extends StatelessWidget {
                     blurRadius: 4,
                     color: Color.fromARGB(33, 0, 0, 0))
               ], color: Colors.white, borderRadius: BorderRadius.circular(10)),
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    "5",
-                    style: TextStyle(
+                    "${post.stars}",
+                    style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.pink),
                   ),
-                  SizedBox(width: 5),
-                  Icon(
+                  const SizedBox(width: 5),
+                  const Icon(
                     Icons.star,
                     size: 18,
                     color: Colors.pink,

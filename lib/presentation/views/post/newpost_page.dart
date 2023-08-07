@@ -208,6 +208,12 @@ class _NewPostPageState extends State<NewPostPage> {
                 onTap: () {
                   controller.novoPost.stars = value;
                   controller.enviarImagem(files[0]);
+
+                  if (controller.status!) {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("Post salvo com sucesso!")));
+                    Navigator.of(context).pop();
+                  }
                   //controller.criarPost();
                 },
                 child: Container(
