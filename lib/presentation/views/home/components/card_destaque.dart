@@ -32,16 +32,18 @@ class CardDestaque extends StatelessWidget {
                   width: 160,
                   height: 160,
                   margin: const EdgeInsets.only(top: 10, left: 10),
-                  child: Image.network(
-                    post.imageUrl!,
-                    fit: BoxFit.cover,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.network(
+                      post.imageUrl!,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 5),
                 Padding(
                   padding: const EdgeInsets.only(left: 10, right: 10),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
                         width: 30,
@@ -50,6 +52,7 @@ class CardDestaque extends StatelessWidget {
                             color: Colors.blueGrey,
                             borderRadius: BorderRadius.circular(15)),
                       ),
+                      const SizedBox(width: 10),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -68,9 +71,12 @@ class CardDestaque extends StatelessWidget {
                 const SizedBox(
                   height: 5,
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 10, right: 10),
-                  child: Text("Lorem ipsum dolor sit amet consectetur..."),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10, right: 10),
+                  child: Text(
+                    post.description!,
+                    maxLines: 1,
+                  ),
                 )
               ],
             ),
@@ -79,7 +85,7 @@ class CardDestaque extends StatelessWidget {
             top: 15,
             right: 15,
             child: Container(
-              width: 60,
+              width: 55,
               height: 30,
               decoration: BoxDecoration(boxShadow: const [
                 BoxShadow(
