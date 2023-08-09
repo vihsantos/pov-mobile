@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  Text(
+                  const Text(
                     "Destaques da semana:",
                     style: TextStyle(
                         fontSize: 18,
@@ -67,41 +67,44 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(15),
-                    child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: FutureBuilder<List<PostDTO?>?>(
-                            future: controller.listarPosts(),
-                            builder: (context, snapshot) {
-                              if (snapshot.hasData) {
-                                List<PostDTO?>? posts = snapshot.data;
+                    child: SizedBox(
+                      height: 270,
+                      child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: FutureBuilder<List<PostDTO?>?>(
+                              future: controller.listarPosts(),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  List<PostDTO?>? posts = snapshot.data;
 
-                                if (posts!.isEmpty) {
-                                  return Container();
+                                  if (posts!.isEmpty) {
+                                    return Container();
+                                  }
+
+                                  return Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      ListView.builder(
+                                          scrollDirection: Axis.horizontal,
+                                          shrinkWrap: true,
+                                          itemCount: posts.length,
+                                          itemBuilder: (_, index) {
+                                            final post = posts[index];
+
+                                            return CardDestaque(post: post!);
+                                          })
+                                    ],
+                                  );
                                 }
 
-                                return Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    ListView.builder(
-                                        scrollDirection: Axis.horizontal,
-                                        shrinkWrap: true,
-                                        itemCount: posts!.length,
-                                        itemBuilder: (_, index) {
-                                          final post = posts[index];
-
-                                          return CardDestaque(post: post!);
-                                        })
-                                  ],
-                                );
-                              }
-
-                              if (snapshot.hasError) {
-                                return const Text("ERROR");
-                              }
-                              return const Center(
-                                  child: CircularProgressIndicator());
-                            })),
+                                if (snapshot.hasError) {
+                                  return const Text("ERROR");
+                                }
+                                return const Center(
+                                    child: CircularProgressIndicator());
+                              })),
+                    ),
                   ),
                 ]),
           )),
