@@ -14,7 +14,7 @@ import '../services/error/applicationerrorimp.dart';
 class PostRepository {
   Future<PostModel?> criarPost(NovoPostDTO post) async {
     try {
-      String url = "http://192.168.2.104:8000/newpost";
+      String url = "http://192.168.2.101:8000/newpost";
       String? token = AuthSingleton(LoginRepository()).getToken();
 
       var response =
@@ -36,7 +36,7 @@ class PostRepository {
   }
 
   Future criarNovoPost(MultipartFile pic, NovoPostDTO model) async {
-    final uri = Uri.parse("http://192.168.2.104:8000/teste");
+    final uri = Uri.parse("http://192.168.2.101:8000/teste");
     String? token = AuthSingleton(LoginRepository()).getToken();
 
     Map<String, String> fields = {"dados": model.toJson().toString()};
@@ -61,7 +61,7 @@ class PostRepository {
 
   Future<PostModel?> buscarPorID(int id) async {
     try {
-      String url = "http://192.168.2.104:8000/newpost";
+      String url = "http://192.168.2.101:8000/newpost";
 
       String? token = AuthSingleton(LoginRepository()).getToken();
 
@@ -85,7 +85,7 @@ class PostRepository {
 
   Future<List<PostDTO>> getPosts() async {
     try {
-      String url = "http://192.168.2.104:8000/posts";
+      String url = "http://192.168.2.101:8000/posts";
 
       String? token = AuthSingleton(LoginRepository()).getToken();
 

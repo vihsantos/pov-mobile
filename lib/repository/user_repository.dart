@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 class UserRepository {
   Future<Either<Exception, User>> criarUsuario(NovoUsuarioDTO usuario) async {
     try {
-      String url = "http://192.168.2.104:8000/criarusuario";
+      String url = "http://192.168.2.101:8000/criarusuario";
 
       var response =
           await http.post(Uri.parse(url), body: usuario.toJson(), headers: {
