@@ -196,6 +196,49 @@ class _RegisterPageState extends State<RegisterPage> {
                       ],
                     ),
                     Column(children: [
+                      const InputField(
+                        label: 'Numero do Cadastur',
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 15),
+                          child: TextField(
+                            decoration: InputDecoration(
+                                hintStyle:
+                                    TextStyle(fontStyle: FontStyle.italic),
+                                enabledBorder: InputBorder.none,
+                                focusedBorder: InputBorder.none,
+                                hintText: "Digite o numero do Cadastur"),
+                          ),
+                        ),
+                      ),
+                      const InputField(
+                        label: 'Area de Atuação',
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 15),
+                          child: TextField(
+                            decoration: InputDecoration(
+                                hintStyle:
+                                    TextStyle(fontStyle: FontStyle.italic),
+                                enabledBorder: InputBorder.none,
+                                focusedBorder: InputBorder.none,
+                                hintText: "Digite a area de atuação"),
+                          ),
+                        ),
+                      ),
+                      const InputField(
+                        label: 'Data de Vencimento',
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 15),
+                          child: TextField(
+                            decoration: InputDecoration(
+                                hintStyle:
+                                    TextStyle(fontStyle: FontStyle.italic),
+                                enabledBorder: InputBorder.none,
+                                focusedBorder: InputBorder.none,
+                                hintText:
+                                    "Digite a data de Vencimento do Cadastur"),
+                          ),
+                        ),
+                      ),
                       const Text("Foi?"),
                       InkWell(
                         onTap: () {
