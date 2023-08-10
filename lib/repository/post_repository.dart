@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
-
 import 'package:http/http.dart';
 import 'package:pov/dto/novopost_dto.dart';
 import 'package:http/http.dart' as http;
@@ -96,7 +94,6 @@ class PostRepository {
       });
 
       if (response.statusCode == 200) {
-        log(response.body);
         Iterable lista = json.decode(response.body);
         List<PostDTO> posts =
             lista.map((model) => PostDTO.fromJson(model)).toList();

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pov/dto/novousuario_dto.dart';
-
+import '../../dto/novousuario_dto.dart';
 import '../../repository/user_repository.dart';
 import '../../services/error/applicationerror.dart';
 
@@ -16,8 +15,8 @@ class RegisterPageController {
 
   Future cadastrarUsuario() async {
     try {
-      var result = await repository.criarUsuario(usuario);
-      return result;
+      // var result = await repository.criarUsuario(usuario);
+      // return result;
     } on ApplicationError catch (e) {
       _error = e;
     }
