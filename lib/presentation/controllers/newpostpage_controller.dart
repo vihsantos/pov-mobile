@@ -15,10 +15,6 @@ class NewPostPageController {
   ApplicationError? get error => solicitacaoErrorApi.value;
   final solicitacaoErrorApi = ValueNotifier<ApplicationError?>(null);
 
-  set _status(bool? status) => statusApi.value = status;
-  bool? get status => statusApi.value;
-  final statusApi = ValueNotifier<bool?>(null);
-
   NewPostPageController({required this.repository});
 
   Future criarPost() async {
@@ -35,7 +31,7 @@ class NewPostPageController {
     _error = null;
     try {
       var pic = await MultipartFile.fromPath("arquivo", file.path);
-      _status = await repository.criarNovoPost(pic, novoPost);
+      return await repository.criarNovoPost(pic, novoPost);
     } on ApplicationError catch (e) {
       _error = e;
     }
