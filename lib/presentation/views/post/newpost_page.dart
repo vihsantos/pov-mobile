@@ -205,11 +205,11 @@ class _NewPostPageState extends State<NewPostPage> {
                 ),
               ),
               InkWell(
-                onTap: () {
+                onTap: () async {
                   controller.novoPost.stars = value;
-                  controller.enviarImagem(files[0]);
+                  bool enviou = await controller.enviarImagem(files[0]) as bool;
 
-                  if (controller.status!) {
+                  if (enviou) {
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text("Post salvo com sucesso!")));
                     Navigator.of(context).pop();
