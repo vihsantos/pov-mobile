@@ -17,16 +17,6 @@ class NewPostPageController {
 
   NewPostPageController({required this.repository});
 
-  Future criarPost() async {
-    _error = null;
-    try {
-      novoPost.user_id = 0;
-      repository.criarPost(novoPost);
-    } on ApplicationError catch (e) {
-      _error = e;
-    }
-  }
-
   Future enviarImagem(File file) async {
     _error = null;
     try {

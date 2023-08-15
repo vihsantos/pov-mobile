@@ -11,28 +11,6 @@ import '../dto/post_dto.dart';
 import '../services/error/applicationerrorimp.dart';
 
 class PostRepository {
-  Future<PostModel?> criarPost(NovoPostDTO post) async {
-    try {
-      String url = "http://192.168.2.101:8000/newpost";
-      String? token = AuthSingleton(LoginRepository()).getToken();
-
-      var response =
-          await http.post(Uri.parse(url), body: post.toJson(), headers: {
-        "content-type": "application/json",
-        "accept": "application/json",
-        'Authorization': 'Bearer $token',
-      });
-      if (response.statusCode == 200) {
-        return PostModel.fromJson(response.body);
-      }
-
-      throw ApplicationErrorImp(
-          mensagem: response.reasonPhrase.toString(),
-          statusCode: response.statusCode);
-    } catch (e) {
-      throw ApplicationErrorImp(mensagem: e.toString(), statusCode: 500);
-    }
-  }
 
   Future<bool> criarNovoPost(MultipartFile pic, NovoPostDTO model) async {
     final uri = Uri.parse("http://192.168.2.101:8000/teste");
@@ -110,7 +88,7 @@ class PostRepository {
     }
   }
 
-  Future<List<PostProfileMode>> getPostsByUser(int id) async {
+  Future<List<PostProfileModel>> getPostsByUser(int id) async {
     try {
       String url = "http://192.168.2.101:8000/posts";
 
@@ -124,8 +102,8 @@ class PostRepository {
 
       if (response.statusCode == 200) {
         Iterable lista = json.decode(response.body);
-        List<PostProfileMode> posts =
-            lista.map((model) => PostProfileMode.fromJson(model)).toList();
+        List<PostProfileModel> posts =
+            lista.map((model) => PostProfileModel.fromJson(model)).toList();
 
         return posts;
       }
