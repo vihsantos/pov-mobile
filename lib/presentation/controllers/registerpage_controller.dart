@@ -4,7 +4,6 @@ import '../../repository/user_repository.dart';
 import '../../services/error/applicationerror.dart';
 
 class RegisterPageController {
-  NovoUsuarioDTO usuario = NovoUsuarioDTO();
   final UserRepository repository;
 
   set _error(ApplicationError? error) => solicitacaoErrorApi.value = error;
@@ -13,10 +12,11 @@ class RegisterPageController {
 
   RegisterPageController({required this.repository});
 
+  NovoUsuarioDTO usuario = NovoUsuarioDTO();
+
   Future cadastrarUsuario() async {
     try {
-      // var result = await repository.criarUsuario(usuario);
-      // return result;
+       await repository.criarUsuario(usuario);
     } on ApplicationError catch (e) {
       _error = e;
     }
