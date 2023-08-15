@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pov/presentation/controllers/registerpage_controller.dart';
+import 'package:pov/repository/user_repository.dart';
 
 import '../../widgets/input_field.dart';
 import '../home/home_page.dart';
@@ -11,6 +13,9 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  RegisterPageController registerController =
+      RegisterPageController(repository: UserRepository());
+
   bool isGuide = false;
 
   @override
@@ -74,12 +79,14 @@ class _RegisterPageState extends State<RegisterPage> {
                         const SizedBox(
                           height: 30,
                         ),
-                        const InputField(
+                        InputField(
                           label: 'Nome',
                           child: Padding(
-                            padding: EdgeInsets.only(left: 15),
+                            padding: const EdgeInsets.only(left: 15),
                             child: TextField(
-                              decoration: InputDecoration(
+                              onChanged: (value) =>
+                                  registerController.usuario.nome = value,
+                              decoration: const InputDecoration(
                                   hintStyle:
                                       TextStyle(fontStyle: FontStyle.italic),
                                   enabledBorder: InputBorder.none,
@@ -88,12 +95,14 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ),
                         ),
-                        const InputField(
+                        InputField(
                           label: 'Email',
                           child: Padding(
-                            padding: EdgeInsets.only(left: 15),
+                            padding: const EdgeInsets.only(left: 15),
                             child: TextField(
-                              decoration: InputDecoration(
+                              onChanged: (value) =>
+                                  registerController.usuario.email = value,
+                              decoration: const InputDecoration(
                                   hintStyle:
                                       TextStyle(fontStyle: FontStyle.italic),
                                   enabledBorder: InputBorder.none,
@@ -102,17 +111,28 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ),
                         ),
-                        const InputField(
+                        InputField(
                           label: 'Data de Nascimento',
                           child: Padding(
-                            padding: EdgeInsets.only(left: 15),
+                            padding: const EdgeInsets.only(left: 15),
                             child: TextField(
+                              onTap: () async{
+                                DateTime? date = await showDatePicker(
+                                  context: context, 
+                                  initialDate: DateTime(DateTime.now().year - 18), 
+                                  firstDate: DateTime(DateTime.now().year - 18), 
+                                  lastDate: DateTime(DateTime.now().year - 13));
+
+                                if(date != null){
+                                  registerController.usuario.data_nascimento = date;
+                                }
+                              },
                               decoration: InputDecoration(
                                   hintStyle:
-                                      TextStyle(fontStyle: FontStyle.italic),
+                                      const TextStyle(fontStyle: FontStyle.italic),
                                   enabledBorder: InputBorder.none,
                                   focusedBorder: InputBorder.none,
-                                  hintText: "Informe a data de nascimento"),
+                                  hintText: registerController.usuario.data_nascimento == null ? "Informe a data de nascimento" : registerController.usuario.data_nascimento.toString()),
                             ),
                           ),
                         ),
@@ -131,22 +151,22 @@ class _RegisterPageState extends State<RegisterPage> {
                             Expanded(
                               child: RadioListTile(
                                   value: false,
-                                  groupValue: isGuide,
+                                  groupValue: registerController.usuario.guide,
                                   title: const Text("Não"),
                                   onChanged: (value) {
                                     setState(() {
-                                      isGuide = value as bool;
+                                      registerController.usuario.guide = value as bool;
                                     });
                                   }),
                             ),
                             Expanded(
                               child: RadioListTile(
                                   value: true,
-                                  groupValue: isGuide,
+                                  groupValue: registerController.usuario.guide,
                                   title: const Text("Sim"),
                                   onChanged: (value) {
                                     setState(() {
-                                      isGuide = value as bool;
+                                      registerController.usuario.guide = value as bool;
                                     });
                                   }),
                             ),
@@ -196,12 +216,14 @@ class _RegisterPageState extends State<RegisterPage> {
                       ],
                     ),
                     Column(children: [
-                      const InputField(
+                      InputField(
                         label: 'Numero do Cadastur',
                         child: Padding(
-                          padding: EdgeInsets.only(left: 15),
+                          padding: const EdgeInsets.only(left: 15),
                           child: TextField(
-                            decoration: InputDecoration(
+                            onChanged: (value) =>
+                                registerController.usuario.cadastur = value,
+                            decoration: const InputDecoration(
                                 hintStyle:
                                     TextStyle(fontStyle: FontStyle.italic),
                                 enabledBorder: InputBorder.none,
@@ -210,12 +232,14 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                         ),
                       ),
-                      const InputField(
+                      InputField(
                         label: 'Area de Atuação',
                         child: Padding(
-                          padding: EdgeInsets.only(left: 15),
+                          padding: const EdgeInsets.only(left: 15),
                           child: TextField(
-                            decoration: InputDecoration(
+                            onChanged: (value) =>
+                                registerController.usuario.areatuacao = value,
+                            decoration: const InputDecoration(
                                 hintStyle:
                                     TextStyle(fontStyle: FontStyle.italic),
                                 enabledBorder: InputBorder.none,
@@ -224,22 +248,34 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                         ),
                       ),
-                      const InputField(
+                      InputField(
                         label: 'Data de Vencimento',
                         child: Padding(
-                          padding: EdgeInsets.only(left: 15),
+                          padding: const EdgeInsets.only(left: 15),
                           child: TextField(
+                            onTap: () async {
+                              DateTime? date = await showDatePicker(
+                                context: context, 
+                                initialDate: DateTime.now(), 
+                                firstDate: DateTime.now(), 
+                                lastDate: DateTime(DateTime.now().year + 10));
+                              
+                              if(date != null){
+                                setState(() {
+                                  registerController.usuario.data_vencimento = date;
+                                });
+                              }
+                            },
                             decoration: InputDecoration(
                                 hintStyle:
-                                    TextStyle(fontStyle: FontStyle.italic),
+                                    const TextStyle(fontStyle: FontStyle.italic),
                                 enabledBorder: InputBorder.none,
                                 focusedBorder: InputBorder.none,
-                                hintText:
-                                    "Digite a data de Vencimento do Cadastur"),
+                                hintText: registerController.usuario.data_vencimento == null ?
+                                    "Digite a data de Vencimento do Cadastur" : registerController.usuario.data_vencimento.toString()),
                           ),
                         ),
                       ),
-                      const Text("Foi?"),
                       InkWell(
                         onTap: () {
                           controller.nextPage(
@@ -282,12 +318,14 @@ class _RegisterPageState extends State<RegisterPage> {
                         const SizedBox(
                           height: 30,
                         ),
-                        const InputField(
+                        InputField(
                           label: 'Username',
                           child: Padding(
-                            padding: EdgeInsets.only(left: 15),
+                            padding: const EdgeInsets.only(left: 15),
                             child: TextField(
-                              decoration: InputDecoration(
+                              onChanged: (value) =>
+                                  registerController.usuario.username = value,
+                              decoration: const InputDecoration(
                                   hintStyle:
                                       TextStyle(fontStyle: FontStyle.italic),
                                   enabledBorder: InputBorder.none,
@@ -296,12 +334,14 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ),
                         ),
-                        const InputField(
+                        InputField(
                           label: 'Senha',
                           child: Padding(
-                            padding: EdgeInsets.only(left: 15),
+                            padding: const EdgeInsets.only(left: 15),
                             child: TextField(
-                              decoration: InputDecoration(
+                              onChanged: (value) =>
+                                  registerController.usuario.password = value,
+                              decoration: const InputDecoration(
                                   hintStyle:
                                       TextStyle(fontStyle: FontStyle.italic),
                                   enabledBorder: InputBorder.none,
@@ -326,6 +366,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         InkWell(
                           onTap: () {
+                            registerController.cadastrarUsuario();
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
