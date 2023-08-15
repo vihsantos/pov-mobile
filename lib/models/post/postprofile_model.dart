@@ -3,11 +3,11 @@
 import 'dart:convert';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-class PostProfileMode {
+class PostProfileModel {
   final int id;
   final String image_url;
   final int stars;
-  PostProfileMode({
+  PostProfileModel({
     required this.id,
     required this.image_url,
     required this.stars,
@@ -21,8 +21,8 @@ class PostProfileMode {
     };
   }
 
-  factory PostProfileMode.fromMap(Map<String, dynamic> map) {
-    return PostProfileMode(
+  factory PostProfileModel.fromMap(Map<String, dynamic> map) {
+    return PostProfileModel(
       id: map['id'] as int,
       image_url: map['image_url'] as String,
       stars: map['stars'] as int,
@@ -31,5 +31,5 @@ class PostProfileMode {
 
   String toJson() => json.encode(toMap());
 
-  factory PostProfileMode.fromJson(String source) => PostProfileMode.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory PostProfileModel.fromJson(String source) => PostProfileModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }
