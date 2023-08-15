@@ -208,7 +208,8 @@ class _NewPostPageState extends State<NewPostPage> {
                 onTap: () async {
                   controller.novoPost.stars = value;
                   bool enviou = await controller.enviarImagem(files[0]) as bool;
-
+                  if (!mounted) return;
+                  
                   if (enviou) {
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text("Post salvo com sucesso!")));
