@@ -54,7 +54,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
     const GuidesPage(),
     const NewPostPage(),
     const GroupsPage(),
-    const ProfilePage()
+    const ProfilePage(isGuide: false)
   ];
 
   List<ItemDataButton> itensButtons = [
@@ -99,28 +99,25 @@ class ItemBottom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 5, bottom: 5),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            icon,
-            size: 36,
-            color:
-                selecionado ? const Color(0xFF6461E8) : const Color(0xFFC0C0C0),
-          ),
-          Text(
-            text,
-            style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w900,
-                color: selecionado
-                    ? const Color(0xFF6461E8)
-                    : const Color(0xFFC0C0C0)),
-          ),
-        ],
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          icon,
+          size: 36,
+          color:
+              selecionado ? const Color(0xFF6461E8) : const Color(0xFFC0C0C0),
+        ),
+        Text(
+          text,
+          style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w900,
+              color: selecionado
+                  ? const Color(0xFF6461E8)
+                  : const Color(0xFFC0C0C0)),
+        ),
+      ],
     );
   }
 }
