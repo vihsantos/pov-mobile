@@ -12,14 +12,14 @@ class HomePageController {
   ApplicationError? get error => solicitacaoErrorApi.value;
   final solicitacaoErrorApi = ValueNotifier<ApplicationError?>(null);
 
-  Future<List<PostDTO?>> listarPosts() async {
+  Future<List<PostDTO?>?> listarPosts() async {
     _error = null;
     try {
       List<PostDTO?> posts = await postRepository.getPosts();
       return posts;
     } on ApplicationError catch (e) {
       _error = e;
-      rethrow;
     }
+    return null;
   }
 }
