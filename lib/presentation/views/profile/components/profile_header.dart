@@ -7,14 +7,15 @@ class ProfileHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const SizedBox(
-          width: 100,
-          height: 110,
-          child: Column(
+         SizedBox(
+          width: size.width *0.28,
+          height: size.height * 0.08,
+          child: const Column(
             children: [
               Text(
                 "120",
@@ -28,8 +29,8 @@ class ProfileHeader extends StatelessWidget {
         Column(
           children: [
             Container(
-              width: 120,
-              height: 120,
+              width: size.width * 0.3,
+              height: size.height * 0.15,
               decoration: BoxDecoration(
                   color: Colors.black12,
                   borderRadius: BorderRadius.circular(75)),
@@ -42,11 +43,14 @@ class ProfileHeader extends StatelessWidget {
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
             ),
+            const SizedBox(
+              height: 10,
+            ),
             Visibility(
-              visible: false,
+              visible: true,
               child: Container(
-                width: 180,
-                height: 50,
+                width: size.width * 0.35,
+                height: size.height * 0.06,
                 decoration: BoxDecoration(
                     gradient: const LinearGradient(
                         begin: Alignment.topCenter,
@@ -58,17 +62,17 @@ class ProfileHeader extends StatelessWidget {
                   "Seguir",
                   style: TextStyle(
                       fontSize: 16,
-                      fontWeight: FontWeight.w700,
+                      fontWeight: FontWeight.w500,
                       color: Colors.white),
                 )),
               ),
             )
           ],
         ),
-        const SizedBox(
-          width: 100,
-          height: 110,
-          child: Column(
+        SizedBox(
+          width: size.width *0.28,
+          height: size.height * 0.08,
+          child: const Column(
             children: [
               Text(
                 "240",
