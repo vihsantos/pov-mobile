@@ -21,7 +21,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                 children: [
                   Container(
                     width: size.width,
-                    height: 450,
+                    height: size.height * 0.5,
                     decoration: BoxDecoration(
                         color: const Color.fromARGB(255, 223, 222, 222),
                         borderRadius: BorderRadius.circular(10)),
@@ -40,14 +40,14 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        height: size.height * 0.075,
+                        height: size.height * 0.08,
                         width: size.width * 0.16,
                         decoration: BoxDecoration(
                             color: Colors.pink,
                             borderRadius: BorderRadius.circular(50)),
                       ),
                       const SizedBox(
-                        width: 20,
+                        width: 10,
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,8 +113,8 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                     Navigator.pop(context);
                   },
                   child: Container(
-                    width: 60,
-                    height: 60,
+                    width: size.width * 0.14,
+                    height: size.height * 0.07,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.white),
@@ -130,13 +130,13 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                     Navigator.pop(context);
                   },
                   child: Container(
-                    width: 80,
-                    height: 40,
+                    width: size.width * 0.18,
+                    height: size.height * 0.05,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.white),
                     child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
@@ -146,7 +146,6 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                               fontWeight: FontWeight.bold,
                               color: Colors.pink),
                         ),
-                        SizedBox(width: 10),
                         Icon(
                           Icons.star,
                           size: 24,
