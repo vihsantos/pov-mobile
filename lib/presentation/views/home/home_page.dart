@@ -20,6 +20,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
@@ -29,7 +30,7 @@ class _HomePageState extends State<HomePage> {
             centerTitle: true,
             title: const Text(
               "Home",
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.w600),
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
             ),
           ),
           backgroundColor: Colors.white,
@@ -39,9 +40,8 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    margin: const EdgeInsets.only(
-                        left: 15, right: 15, bottom: 10, top: 10),
-                    height: 180,
+                    margin: const EdgeInsets.symmetric(horizontal: 15),
+                    height: size.height * 0.2,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: FlutterMap(
@@ -57,10 +57,13 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   const Text(
                     "Destaques da semana:",
                     style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 16,
                         fontWeight: FontWeight.w600,
                         fontStyle: FontStyle.italic,
                         color: Color(0xFF393434)),
