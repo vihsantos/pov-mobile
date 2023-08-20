@@ -21,7 +21,8 @@ class _IntroductionPageState extends State<IntroductionPage> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 450),
+            SizedBox(
+                height: size.height * 0.4),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15),
                 child: Text(

@@ -29,15 +29,15 @@ class _LoginPageState extends State<LoginPage> {
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(
               children: [
-                const SizedBox(
-                  height: 120,
+                 SizedBox(
+                  height: size.height * 0.2,
                 ),
                 Image.asset(
                   "asset/img/testelogo.png",
-                  width: 250,
+                  width: size.width * .5,
                 ),
-                const SizedBox(
-                  height: 40,
+                SizedBox(
+                  height: size.height * 0.03,
                 ),
                 InputField(
                     label: 'Nome de Usuário',
