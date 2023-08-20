@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:pov/presentation/widgets/bottom_navigation.dart';
+// ignore: depend_on_referenced_packages
 import 'package:latlong2/latlong.dart';
-
+import 'package:pov/presentation/widgets/search_map.dart';
 import '../../../dto/post_dto.dart';
 import '../../../repository/post_repository.dart';
 import '../../controllers/homepage_controller.dart';
@@ -46,7 +47,7 @@ class _HomePageState extends State<HomePage> {
                       borderRadius: BorderRadius.circular(10),
                       child: FlutterMap(
                         options: MapOptions(
-                            center: const LatLng(-12.9704, -38.5124), zoom: 15),
+                            center: LatLng(-12.9704, -38.5124), zoom: 15),
                         children: [
                           TileLayer(
                             urlTemplate:
@@ -74,8 +75,8 @@ class _HomePageState extends State<HomePage> {
                       height: 270,
                       child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
-                          child: FutureBuilder<List<PostDTO?>?>(
-                              future: controller.listarPosts(),
+                          child: FutureBuilder<List<PostDTO?>?>( 
+                                future: controller.listarPosts(),
                               builder: (context, snapshot) {
                                 if (snapshot.hasData) {
                                   List<PostDTO?>? posts = snapshot.data;
@@ -109,6 +110,17 @@ class _HomePageState extends State<HomePage> {
                               })),
                     ),
                   ),
+                  InkWell(
+                    onTap: (){
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SearchMap()));
+                    },
+                    child: Container(
+                      child: Text("Search"),
+                    ),
+                  )
                 ]),
           )),
     );
