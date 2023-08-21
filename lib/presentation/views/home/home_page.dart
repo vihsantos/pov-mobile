@@ -3,10 +3,10 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:pov/presentation/widgets/bottom_navigation.dart';
 // ignore: depend_on_referenced_packages
 import 'package:latlong2/latlong.dart';
-import 'package:pov/presentation/widgets/search_map.dart';
 import '../../../dto/post_dto.dart';
 import '../../../repository/post_repository.dart';
 import '../../controllers/homepage_controller.dart';
+import '../../widgets/search.dart';
 import 'components/card_destaque.dart';
 
 class HomePage extends StatefulWidget {
@@ -115,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const SearchMap()));
+                              builder: (context) => const Search()));
                     },
                     child: Container(
                       child: Text("Search"),
