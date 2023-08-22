@@ -90,7 +90,7 @@ class PostRepository {
 
   Future<List<PostProfileModel>> getPostsByUser(int id) async {
     try {
-      String url = "http://192.168.2.102:8000/posts";
+      String url = "http://192.168.2.102:8000/profileposts/$id";
 
       String? token = AuthSingleton(LoginRepository()).getToken();
 
