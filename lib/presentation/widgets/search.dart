@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:open_street_map_search_and_pick/open_street_map_search_and_pick.dart';
 
@@ -15,7 +17,7 @@ class _SearchState extends State<Search> {
       body: OpenStreetMapSearchAndPick(
           buttonTextStyle:
               const TextStyle(fontSize: 18, fontStyle: FontStyle.normal),
-          center: LatLong(23, 89),
+          center: const LatLong(23, 89),
           buttonColor: Colors.blue,
           buttonText: 'Escolha a sua localização atual',
           onPicked: (pickedData) {

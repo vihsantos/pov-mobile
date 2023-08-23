@@ -5,6 +5,7 @@ import 'package:pov/presentation/controllers/newpostpage_controller.dart';
 import 'package:pov/repository/post_repository.dart';
 
 import '../../widgets/input_field.dart';
+import '../../widgets/search.dart';
 
 class NewPostPage extends StatefulWidget {
   const NewPostPage({super.key});
@@ -90,17 +91,15 @@ class _NewPostPageState extends State<NewPostPage> {
               ),
               InputField(
                 label: 'Localização',
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15),
-                  child: TextFormField(
-                    onChanged: (value) =>
-                        controller.novoPost.localizacao = value,
-                    decoration: const InputDecoration(
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        hintText: "Informe a localização"),
+                child: InkWell(
+                    onTap: (){
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Search()));
+                    },
+                    child: const Text("Search"),
                   ),
-                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 15, right: 15, bottom: 10),

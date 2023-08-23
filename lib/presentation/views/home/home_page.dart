@@ -6,7 +6,6 @@ import 'package:latlong2/latlong.dart';
 import '../../../dto/post_dto.dart';
 import '../../../repository/post_repository.dart';
 import '../../controllers/homepage_controller.dart';
-import '../../widgets/search.dart';
 import 'components/card_destaque.dart';
 
 class HomePage extends StatefulWidget {
@@ -110,17 +109,7 @@ class _HomePageState extends State<HomePage> {
                               })),
                     ),
                   ),
-                  InkWell(
-                    onTap: (){
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Search()));
-                    },
-                    child: Container(
-                      child: Text("Search"),
-                    ),
-                  )
+                  
                 ]),
           )),
     );
