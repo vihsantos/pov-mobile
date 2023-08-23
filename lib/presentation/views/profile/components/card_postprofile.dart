@@ -1,11 +1,16 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
+import '../../../../models/post/postprofile_model.dart';
 import '../../post/postdetails_page.dart';
 
 class CardPostProfile extends StatelessWidget {
+
+  final PostProfileModel post;
   const CardPostProfile({
-    super.key,
-  });
+    Key? key,
+    required this.post,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
