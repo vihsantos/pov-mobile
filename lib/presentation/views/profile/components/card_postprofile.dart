@@ -39,19 +39,19 @@ class CardPostProfile extends StatelessWidget {
                     blurRadius: 4,
                     color: Color.fromARGB(33, 0, 0, 0))
               ], color: Colors.white, borderRadius: BorderRadius.circular(10)),
-              child: const Row(
+              child:  Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    "5",
-                    style: TextStyle(
+                    post.stars.toString(),
+                    style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.pink),
                   ),
-                  SizedBox(width: 5),
-                  Icon(
+                  const SizedBox(width: 5),
+                  const Icon(
                     Icons.star,
                     size: 18,
                     color: Colors.pink,
