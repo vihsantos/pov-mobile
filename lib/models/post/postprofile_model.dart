@@ -1,35 +1,27 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'dart:convert';
-
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class PostProfileModel {
-  final int id;
-  final String image_url;
-  final int stars;
+  int? id;
+  String? image_url;
+  int? stars;
   PostProfileModel({
-    required this.id,
-    required this.image_url,
-    required this.stars,
+    this.id,
+    this.image_url,
+    this.stars,
   });
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'id': id,
-      'image_url': image_url,
-      'stars': stars,
-    };
+  PostProfileModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    image_url = json['image_url'];
+    stars = json['stars'];
   }
 
-  factory PostProfileModel.fromMap(Map<String, dynamic> map) {
-    return PostProfileModel(
-      id: map['id'] as int,
-      image_url: map['image_url'] as String,
-      stars: map['stars'] as int,
-    );
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['image_url'] = image_url;
+    data['stars'] = stars;
+    return data;
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory PostProfileModel.fromJson(String source) => PostProfileModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }
