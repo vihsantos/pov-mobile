@@ -14,24 +14,23 @@ class ProfilePageController{
   List<PostProfileModel>? get posts => postsApi.value;
   final postsApi = ValueNotifier<List<PostProfileModel>?>(null);
 
-  set _loading(bool loading) => loadingApi.value = loading;
-  bool? get loading => loadingApi.value;
-  final loadingApi = ValueNotifier<bool>(false);
+  // set _loading(bool loading) => loadingApi.value = loading;
+  // bool? get loading => loadingApi.value;
+  // final loadingApi = ValueNotifier<bool>(false);
 
   set _error(ApplicationError? error) => solicitacaoErrorApi.value = error;
   ApplicationError? get error => solicitacaoErrorApi.value;
   final solicitacaoErrorApi = ValueNotifier<ApplicationError?>(null);
 
-  Future listarPosts(int id) async{
+  Future<List<PostProfileModel>?> listarPosts(int id) async{
     _error = null;
     try{
-      _loading = true;
-      _posts = await repository.getPostsByUser(id);
-      _loading = false;
+      return _posts = await repository.getPostsByUser(id);
 
     } on ApplicationError catch (e) {
       _error = e;
     }
+    return null;
   }
   
 }

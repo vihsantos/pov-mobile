@@ -13,6 +13,6 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    return widget.isGuide? const ProfileGuidePage() : const ProfilePersonPage();
+    return widget.isGuide? const ProfileGuidePage() : const ProfilePersonPage(id: 2,);
   }
 }

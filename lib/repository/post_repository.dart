@@ -102,6 +102,7 @@ class PostRepository {
 
       if (response.statusCode == 200) {
         Iterable lista = json.decode(response.body);
+        
         List<PostProfileModel> posts =
             lista.map((model) => PostProfileModel.fromJson(model)).toList();
 
