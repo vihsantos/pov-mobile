@@ -14,7 +14,7 @@ class CardDestaque extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const PostDetailsPage()));
+            MaterialPageRoute(builder: (context) => PostDetailsPage(id: post.id!,)));
       },
       child: Padding(
         padding: const EdgeInsets.only(right: 10),
@@ -59,7 +59,7 @@ class CardDestaque extends StatelessWidget {
                         children: [
                           Text(post.user!.username!),
                           Text(
-                            post.localizacao!,
+                            post.localizacao ?? "oi",
                             maxLines: 2,
                             style: const TextStyle(fontSize: 9),
                           )
