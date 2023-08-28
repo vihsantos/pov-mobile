@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:http/http.dart';
 import 'package:pov/dto/novopost_dto.dart';
 import 'package:http/http.dart' as http;
@@ -38,7 +39,7 @@ class PostRepository {
 
   Future<PostModel?> buscarPorID(int id) async {
     try {
-      String url = "http://192.168.2.102:8000/newpost";
+      String url = "http://192.168.2.102:8000/post/$id";
 
       String? token = AuthSingleton(LoginRepository()).getToken();
 
@@ -49,6 +50,7 @@ class PostRepository {
       });
 
       if (response.statusCode == 200) {
+        log(response.body);
         return PostModel.fromJson(response.body);
       }
 
