@@ -17,15 +17,18 @@ class CardPostProfile extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const PostDetailsPage()));
+            MaterialPageRoute(builder: (context) => PostDetailsPage(id: post.id!,)));
       },
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: Stack(children: [
-          Container(
-            decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 255, 227, 225),
-                borderRadius: BorderRadius.circular(10)),
+          SizedBox(
+            width: 200,
+            height: 200,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.network(post.image_url!, fit: BoxFit.cover,),
+            ),
           ),
           Positioned(
             top: 10,
