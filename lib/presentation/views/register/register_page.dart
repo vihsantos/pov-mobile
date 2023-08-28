@@ -120,7 +120,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 DateTime? date = await showDatePicker(
                                   context: context, 
                                   initialDate: DateTime(DateTime.now().year - 18), 
-                                  firstDate: DateTime(DateTime.now().year - 18), 
+                                  firstDate: DateTime(DateTime.now().year - 99), 
                                   lastDate: DateTime(DateTime.now().year - 13));
 
                                 if(date != null){
@@ -156,6 +156,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   onChanged: (value) {
                                     setState(() {
                                       registerController.usuario.guide = value as bool;
+                                      isGuide = value;
                                     });
                                   }),
                             ),
@@ -167,6 +168,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   onChanged: (value) {
                                     setState(() {
                                       registerController.usuario.guide = value as bool;
+                                      isGuide = value;
                                     });
                                   }),
                             ),
