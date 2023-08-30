@@ -50,7 +50,7 @@ class ProfileHeader extends StatelessWidget {
               visible: true,
               child: Container(
                 width: size.width * 0.35,
-                height: size.height * 0.06,
+                height: size.height * 0.05,
                 decoration: BoxDecoration(
                     gradient: const LinearGradient(
                         begin: Alignment.topCenter,
