@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pov/presentation/views/groups/groups_page.dart';
+import 'package:pov/repository/login_repository.dart';
+import 'package:pov/services/singleton/auth_singleton.dart';
 
 import '../views/guides/guides_page.dart';
 import '../views/home/home_page.dart';
@@ -15,6 +17,8 @@ class BottomNavigation extends StatefulWidget {
 
 class _BottomNavigationState extends State<BottomNavigation> {
   int itemSelecionado = 0;
+
+  AuthSingleton auth = AuthSingleton(LoginRepository());
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +57,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
     const HomePage(),
     const GuidesPage(),
     const NewPostPage(),
-    const GroupsPage(),
-    const ProfilePage(isGuide: false)
+    const ProfilePage(id: 2, isGuide: false)
   ];
 
   List<ItemDataButton> itensButtons = [
@@ -67,10 +70,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
       text: 'Guias',
     ),
     ItemDataButton(icon: Icons.add, text: "Novo Post"),
-    ItemDataButton(
-      icon: Icons.groups,
-      text: 'Grupos',
-    ),
     ItemDataButton(
       icon: Icons.account_circle,
       text: 'Perfil',
