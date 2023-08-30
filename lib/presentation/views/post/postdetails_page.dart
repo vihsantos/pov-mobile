@@ -37,7 +37,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                   }
 
                   if(post == null){
-                    return const Center(child: Text("Ocorreu um erro"));
+                    return const Center(child: Text(""));
                   }
 
                   return Stack(
@@ -136,8 +136,8 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                             Navigator.pop(context);
                           },
                           child: Container(
-                            width: size.width * 0.14,
-                            height: size.height * 0.07,
+                            width: size.width * 0.135,
+                            height: size.height * 0.06,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.white),
@@ -154,7 +154,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                           },
                           child: Container(
                             width: size.width * 0.18,
-                            height: size.height * 0.05,
+                            height: size.height * 0.04,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.white),
