@@ -96,7 +96,7 @@ class _NewPostPageState extends State<NewPostPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const Search()));
+                              builder: (context) => Search(controller: controller,)));
                     },
                     child: const Text("Search"),
                   ),
