@@ -11,11 +11,24 @@ class GuideCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Container(
       width: 200,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: Color.fromARGB(255, 236, 240, 239),
+        color: Colors.white,
+        border: Border.all(
+          color: const Color(0xFF6461E8),
+          width: 0.05
+        ),
+        boxShadow: const [
+           BoxShadow(
+            color: Color.fromARGB(255, 236, 240, 239),
+            offset: Offset(0, 4),
+            blurRadius: 10
+          )
+        ]
+      
       ),
       child: Padding(
         padding: const EdgeInsets.all(10),
@@ -30,11 +43,14 @@ class GuideCard extends StatelessWidget {
                 style: const TextStyle(
                     fontSize: 20, fontWeight: FontWeight.bold)),
             Text(guia.guide!.areaatuacao!),
+            SizedBox(
+              height: size.height * 0.005,
+            ),
             Container(
-              width: 120,
-              height: 45,
+              width: size.width * 0.6,
+              height: size.height * 0.06,
               decoration: BoxDecoration(
-                  color: Colors.pink,
+                  color: const Color(0xFF6461E8),
                   borderRadius: BorderRadius.circular(10)),
               child: const Center(
                   child: Text(
