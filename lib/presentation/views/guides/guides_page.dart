@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pov/dto/guide_dto.dart';
+import 'package:pov/presentation/controllers/guidespage_controller.dart';
+import 'package:pov/presentation/views/guides/components/guidecard.dart';
+import 'package:pov/repository/guide_repository.dart';
 
 class GuidesPage extends StatefulWidget {
   const GuidesPage({super.key});
@@ -8,74 +12,48 @@ class GuidesPage extends StatefulWidget {
 }
 
 class _GuidesPageState extends State<GuidesPage> {
+  GuidesPageController controller = GuidesPageController(GuideRepository());
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        body: GridView.count(
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          padding: EdgeInsets.all(10),
-          crossAxisCount: 2, 
-          children: const [
-            GuideCard(),
-            GuideCard(),
-            GuideCard(),
-            GuideCard(),
-            GuideCard()
-          ],
-          ))
-    );
-  }
-}
-
-class GuideCard extends StatelessWidget {
-  const GuideCard({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 200,
-      height: 260,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.lightBlueAccent,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              width: 100,
-              height: 100,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(100)),
+        child: Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              centerTitle: true,
+              title: const Text(
+                "Guias",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+              ),
             ),
-            const Text("luan",
-                style: TextStyle(
-                    fontSize: 20, fontWeight: FontWeight.bold)),
-            const Text(
-                "area de atuação, area de atuação, area de atuação"),
-            Container(
-              width: 120,
-              height: 45,
-              decoration: BoxDecoration(
-                  color: Colors.pink,
-                  borderRadius: BorderRadius.circular(10)),
-              child: const Center(
-                  child: Text(
-                "Seguir",
-                style: TextStyle(color: Colors.white),
-              )),
-            )
-          ],
-        ),
-      ),
-    );
+            body: FutureBuilder<List<GuideDTO?>?>(
+              future: controller.listarGuias(),
+              builder: (context, snapshot) {
+                List<GuideDTO?>? guias = snapshot.data;
+
+                if(guias == null){
+                  return const Text("ERRO");
+                }
+
+                if (snapshot.hasError) {
+                  return const Text("Ocorreu um erro");
+                }
+
+                return GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                            maxCrossAxisExtent: 200,
+                            childAspectRatio: 3 / 2,
+                            crossAxisSpacing: 20,
+                            mainAxisSpacing: 20),
+                    itemBuilder: (BuildContext ctx, index) {
+                      GuideDTO? guia = guias[index];
+
+                      return GuideCard(guia: guia!);
+                    });
+              },
+            )));
   }
 }
