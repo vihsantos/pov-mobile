@@ -29,18 +29,18 @@ class _RegisterPageState extends State<RegisterPage> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 60,
+              SizedBox(
+                height: size.height * 0.06,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 5),
                 child: Image.asset(
                   "asset/img/testelogo.png",
-                  height: 80,
+                  height: size.height * 0.12,
                 ),
               ),
-              const SizedBox(
-                height: 30,
+              SizedBox(
+                height: size.height * 0.06,
               ),
               const Padding(
                 padding: EdgeInsets.only(left: 15, right: 15, bottom: 10),
@@ -62,12 +62,9 @@ class _RegisterPageState extends State<RegisterPage> {
                       color: Color(0xFF393434)),
                 ),
               ),
-              const SizedBox(
-                height: 30,
-              ),
               SizedBox(
                 width: size.width,
-                height: size.height * 0.6,
+                height: size.height * 0.8,
                 child: PageView(
                   physics: const NeverScrollableScrollPhysics(),
                   controller: controller,
