@@ -60,14 +60,6 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(
                     height: 10,
                   ),
-                  const Text(
-                    "Destaques da semana:",
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        fontStyle: FontStyle.italic,
-                        color: Color(0xFF393434)),
-                  ),
                   Padding(
                     padding: const EdgeInsets.all(15),
                     child: SizedBox(
