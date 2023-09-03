@@ -89,7 +89,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                   SizedBox(
                                       width: size.width * 0.718,
                                       child: Text(
-                                          post?.localizacao ?? "Não informado",
+                                          post.localizacao ?? "Não informado",
                                           maxLines: 2))
                                 ],
                               )
