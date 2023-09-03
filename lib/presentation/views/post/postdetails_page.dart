@@ -32,12 +32,18 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                 builder: (context, snapshot) {
                   PostModel? post = snapshot.data;
 
-                  if (snapshot.hasError) {
-                    return const Center(child: Text("Ocorreu um erro"));
+                  if (!snapshot.hasData) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
                   }
 
-                  if(post == null){
-                    return const Center(child: Text(""));
+                  if(snapshot.hasError){
+                    return const Text("Ocorreu um erro!");
+                  }
+
+                  if(snapshot.data == null){
+                    return const Text("Ocorreu um erro!");
                   }
 
                   return Stack(
@@ -50,7 +56,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                             child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
                                 child: Image.network(
-                                  post.image_url!,
+                                  post!.image_url!,
                                   fit: BoxFit.cover,
                                 ),
                               ),
