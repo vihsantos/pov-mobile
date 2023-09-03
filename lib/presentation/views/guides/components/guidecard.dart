@@ -13,6 +13,7 @@ class GuideCard extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
+      margin: EdgeInsets.all(15),
       width: 200,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
