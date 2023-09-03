@@ -1,33 +1,22 @@
-import 'dart:convert';
-
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class UserProfileModel {
   int? id;
   String? username;
   String? profileicon;
-  UserProfileModel({
-    this.id,
-    this.username,
-    this.profileicon,
-  });
+  UserProfileModel({this.id, this.profileicon, this.username});
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'id': id,
-      'username': username,
-      'profileicon': profileicon,
-    };
+  UserProfileModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    profileicon = json['profileicon'];
+    username = json['username'];
   }
 
-  factory UserProfileModel.fromMap(Map<String, dynamic> map) {
-    return UserProfileModel(
-      id: map['id'] != null ? map['id'] as int : null,
-      username: map['username'] != null ? map['username'] as String : null,
-      profileicon: map['profileicon'] != null ? map['profileicon'] as String : null,
-    );
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['profileicon'] = profileicon;
+    data['username'] = username;
+    return data;
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory UserProfileModel.fromJson(String source) => UserProfileModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  
 }
