@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pov/presentation/views/groups/groups_page.dart';
 import 'package:pov/repository/login_repository.dart';
 import 'package:pov/services/singleton/auth_singleton.dart';
 
