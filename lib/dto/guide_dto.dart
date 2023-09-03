@@ -1,6 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
-
 import 'package:pov/models/guide/guide_model.dart';
 import 'package:pov/models/user/userprofile_model.dart';
 
@@ -12,21 +10,19 @@ class GuideDTO {
     this.user,
   });
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'guide': guide?.toMap(),
-      'user': user?.toMap(),
-    };
+  GuideDTO.fromJson(Map<String, dynamic> json) {
+    guide = json['guide'] != null ? GuideModel.FromJson(json['guide']) : null;
+    user = json['user'] != null ? UserProfileModel.fromJson(json['user']) : null;
   }
 
-  factory GuideDTO.fromMap(Map<String, dynamic> map) {
-    return GuideDTO(
-      guide: map['guide'] != null ? GuideModel.fromMap(map['guide'] as Map<String,dynamic>) : null,
-      user: map['user'] != null ? UserProfileModel.fromMap(map['user'] as Map<String,dynamic>) : null,
-    );
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (guide != null) {
+      data['guide'] = guide!.toJson();
+    }
+    if (user != null) {
+      data['user'] = user!.toJson();
+    }
+    return data;
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory GuideDTO.fromJson(String source) => GuideDTO.fromMap(json.decode(source) as Map<String, dynamic>);
 }
