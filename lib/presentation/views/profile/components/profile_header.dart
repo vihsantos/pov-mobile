@@ -52,10 +52,7 @@ class ProfileHeader extends StatelessWidget {
                 width: size.width * 0.35,
                 height: size.height * 0.05,
                 decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [Color(0xFFE8C261), Color(0xFFE86161)]),
+                    color: const Color(0xFF6461E8),
                     borderRadius: BorderRadius.circular(10)),
                 child: const Center(
                     child: Text(
