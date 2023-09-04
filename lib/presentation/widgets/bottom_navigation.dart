@@ -17,7 +17,12 @@ class BottomNavigation extends StatefulWidget {
 class _BottomNavigationState extends State<BottomNavigation> {
   int itemSelecionado = 0;
 
-  AuthSingleton auth = AuthSingleton(LoginRepository());
+  List pages = [
+    const HomePage(),
+    const GuidesPage(),
+    const NewPostPage(),
+    ProfilePage(id: AuthSingleton(LoginRepository()).getId()!, isGuide: AuthSingleton(LoginRepository()).getGuide()!)
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -51,13 +56,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
       ]),
     ));
   }
-
-  List pages = [
-    const HomePage(),
-    const GuidesPage(),
-    const NewPostPage(),
-    const ProfilePage(id: 2, isGuide: false)
-  ];
 
   List<ItemDataButton> itensButtons = [
     ItemDataButton(
