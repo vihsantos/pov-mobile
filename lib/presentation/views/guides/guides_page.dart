@@ -31,19 +31,25 @@ class _GuidesPageState extends State<GuidesPage> {
             body: FutureBuilder<List<GuideDTO?>?>(
               future: controller.listarGuias(),
               builder: (context, snapshot) {
-                if(snapshot.data == null){
-                  return const Text("ERRO");
+                if (!snapshot.hasData) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
                 }
 
                 if (snapshot.hasError) {
-                  return const Text("Ocorreu um erro");
+                  return const Text("Ocorreu um erro!");
+                }
+
+                if (snapshot.data == null) {
+                  return const Text("Ocorreu um erro!");
                 }
 
                 return GridView.builder(
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
-                            maxCrossAxisExtent: 300,
-                            childAspectRatio: 3/5,
+                            maxCrossAxisExtent: 260,
+                            childAspectRatio: 3 / 5,
                             crossAxisSpacing: 10,
                             mainAxisSpacing: 10),
                     itemCount: snapshot.data?.length,
