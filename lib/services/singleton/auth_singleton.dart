@@ -20,6 +20,14 @@ class AuthSingleton {
     return _acess == null ? null : _acess!.token;
   }
 
+  int? getId(){
+    return _acess == null ? null : _acess!.userid;
+  }
+
+  bool? getGuide(){
+    return _acess == null ? null : _acess!.guide;
+  }
+
   Future<AcessModel?> authenticate(LoginModel login) async {
     try {
       return _acess = await _repository.logar(login);
