@@ -3,26 +3,28 @@ import 'dart:convert';
 
 class AcessModel {
   final String? token;
-  final DateTime? acessoem;
+  final int? userid;
+  final bool? guide;
 
-  AcessModel({
+  AcessModel( {
     this.token,
-    this.acessoem,
+    this.userid, 
+    this.guide,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'token': token,
-      'acessoem': acessoem?.millisecondsSinceEpoch,
+      'userid': userid,
+      'guide': guide,
     };
   }
 
   factory AcessModel.fromMap(Map<String, dynamic> map) {
     return AcessModel(
       token: map['token'] != null ? map['token'] as String : null,
-      acessoem: map['acessoem'] != null
-          ? DateTime.tryParse(map['acessoem'] as String)
-          : null,
+      userid: map['userid'] != null ? map['userid'] as int : null,
+      guide: map['guide'] != null ? map['guide'] as bool : null,
     );
   }
 
