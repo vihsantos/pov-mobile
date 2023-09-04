@@ -1,11 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-
 import 'components/profile_header.dart';
+import 'components/trilhasbutton.dart';
 
 class ProfileGuidePage extends StatefulWidget {
   final int id;
-  
+
   const ProfileGuidePage({
     Key? key,
     required this.id,
@@ -18,38 +18,47 @@ class ProfileGuidePage extends StatefulWidget {
 class _ProfileGuidePageState extends State<ProfileGuidePage> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return const SafeArea(
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.all(15),
+          padding: EdgeInsets.all(15),
           child: Column(children: [
-            const ProfileHeader(),
-            const SizedBox(
+            ProfileHeader(),
+            SizedBox(
               height: 10,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  width: 90,
-                  height: 90,
-                  decoration: BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.circular(10)),
-                ),
-                Container(
-                  width: 90,
-                  height: 90,
-                  decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(10)),
-                ),
+                TrilhasButton(),
+                SizedBox(
+                  width: 280,
+                  height: 100,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Cadastur",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
+                      ),
+                      Text("1234565"),
+                      Text("Área de Atuação",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 12)),
+                      Text("dajksjkdjkjkjk"),
+                    ],
+                  ),
+                )
               ],
-            )
+            ),
           ]),
         ),
       ),
     );
   }
 }
+
