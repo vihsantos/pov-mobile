@@ -38,28 +38,30 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                     );
                   }
 
-                  if(snapshot.hasError){
+                  if (snapshot.hasError) {
                     return const Text("Ocorreu um erro!");
                   }
 
-                  if(snapshot.data == null){
+                  if (snapshot.data == null) {
                     return const Text("Ocorreu um erro!");
                   }
 
                   return Stack(
                     children: [
                       Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
                             width: size.width,
                             height: 450,
                             child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Image.network(
-                                  post!.image_url!,
-                                  fit: BoxFit.cover,
-                                ),
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.network(
+                                post!.image_url!,
+                                fit: BoxFit.cover,
                               ),
+                            ),
                           ),
                           const SizedBox(
                             height: 15,
@@ -68,7 +70,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                height: size.height * 0.08,
+                                height: size.height * 0.074,
                                 width: size.width * 0.16,
                                 decoration: BoxDecoration(
                                     color: Colors.pink,
@@ -98,39 +100,14 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                           const SizedBox(
                             height: 15,
                           ),
-                           Text(
+                          Text(
                             post.description!,
                             style: const TextStyle(fontSize: 17),
+                            textAlign: TextAlign.start,
                           ),
                           const SizedBox(
                             height: 15,
                           ),
-                          Row(
-                            children: [
-                              InkWell(
-                                onTap: () {},
-                                child: Container(
-                                  width: 60,
-                                  height: 60,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Colors.grey[300]),
-                                  child: const Icon(Icons.comment),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 15,
-                              ),
-                              Container(
-                                width: 60,
-                                height: 60,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.grey[300]),
-                                child: const Icon(Icons.flight_sharp),
-                              ),
-                            ],
-                          )
                           //CardComment()
                         ],
                       ),
@@ -159,8 +136,8 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                             Navigator.pop(context);
                           },
                           child: Container(
-                            width: size.width * 0.18,
-                            height: size.height * 0.04,
+                            width: size.width * 0.20,
+                            height: size.height * 0.055,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.white),
@@ -171,13 +148,13 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                 Text(
                                   "5",
                                   style: TextStyle(
-                                      fontSize: 24,
+                                      fontSize: 26,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.pink),
                                 ),
                                 Icon(
                                   Icons.star,
-                                  size: 24,
+                                  size: 26,
                                   color: Colors.pink,
                                 )
                               ],
