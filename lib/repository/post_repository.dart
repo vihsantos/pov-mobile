@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:http/http.dart';
 import 'package:pov/dto/novopost_dto.dart';
 import 'package:http/http.dart' as http;
@@ -12,9 +11,8 @@ import '../dto/post_dto.dart';
 import '../services/error/applicationerrorimp.dart';
 
 class PostRepository {
-
   Future<bool> criarNovoPost(MultipartFile pic, NovoPostDTO model) async {
-    final uri = Uri.parse("http://192.168.2.102:8000/teste");
+    final uri = Uri.parse("http://192.168.2.105:8000/teste");
     String? token = AuthSingleton(LoginRepository()).getToken();
 
     Map<String, String> fields = {"dados": model.toJson().toString()};
@@ -39,7 +37,7 @@ class PostRepository {
 
   Future<PostModel?> buscarPorID(int id) async {
     try {
-      String url = "http://192.168.2.102:8000/post/$id";
+      String url = "http://192.168.2.105:8000/post/$id";
 
       String? token = AuthSingleton(LoginRepository()).getToken();
 
@@ -50,7 +48,6 @@ class PostRepository {
       });
 
       if (response.statusCode == 200) {
-        log(response.body);
         return PostModel.fromJson(response.body);
       }
 
@@ -64,7 +61,7 @@ class PostRepository {
 
   Future<List<PostDTO>> getPosts() async {
     try {
-      String url = "http://192.168.2.102:8000/posts";
+      String url = "http://192.168.2.105:8000/posts";
 
       String? token = AuthSingleton(LoginRepository()).getToken();
 
@@ -92,7 +89,7 @@ class PostRepository {
 
   Future<List<PostProfileModel>> getPostsByUser(int id) async {
     try {
-      String url = "http://192.168.2.102:8000/profileposts/$id";
+      String url = "http://192.168.2.105:8000/profileposts/$id";
 
       String? token = AuthSingleton(LoginRepository()).getToken();
 
@@ -104,7 +101,7 @@ class PostRepository {
 
       if (response.statusCode == 200) {
         Iterable lista = json.decode(response.body);
-        
+
         List<PostProfileModel> posts =
             lista.map((model) => PostProfileModel.fromJson(model)).toList();
 

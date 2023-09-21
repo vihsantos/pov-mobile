@@ -6,7 +6,7 @@ import '../services/error/applicationerrorimp.dart';
 class LoginRepository {
   Future<AcessModel> logar(LoginModel login) async {
     try {
-      String url = "http://192.168.2.102:8000/acesso";
+      String url = "http://192.168.2.105:8000/acesso";
 
       var response =
           await http.post(Uri.parse(url), body: login.toJson(), headers: {

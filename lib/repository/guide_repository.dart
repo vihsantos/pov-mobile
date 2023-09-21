@@ -7,10 +7,10 @@ import '../services/error/applicationerrorimp.dart';
 import '../services/singleton/auth_singleton.dart';
 import 'login_repository.dart';
 
-class GuideRepository{
-    Future<List<GuideDTO>> getGuides() async {
+class GuideRepository {
+  Future<List<GuideDTO>> getGuides() async {
     try {
-      String url = "http://192.168.2.102:8000/guides";
+      String url = "http://192.168.2.105:8000/guides";
 
       String? token = AuthSingleton(LoginRepository()).getToken();
 
