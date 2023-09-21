@@ -1,9 +1,13 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 class ProfileHeader extends StatelessWidget {
+  final bool isprofileuser;
+
   const ProfileHeader({
-    super.key,
-  });
+    Key? key,
+    required this.isprofileuser,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +16,8 @@ class ProfileHeader extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-         SizedBox(
-          width: size.width *0.28,
+        SizedBox(
+          width: size.width * 0.28,
           height: size.height * 0.08,
           child: const Column(
             children: [
@@ -47,7 +51,7 @@ class ProfileHeader extends StatelessWidget {
               height: 10,
             ),
             Visibility(
-              visible: true,
+              visible: isprofileuser,
               child: Container(
                 width: size.width * 0.35,
                 height: size.height * 0.05,
@@ -67,7 +71,7 @@ class ProfileHeader extends StatelessWidget {
           ],
         ),
         SizedBox(
-          width: size.width *0.28,
+          width: size.width * 0.28,
           height: size.height * 0.08,
           child: const Column(
             children: [
