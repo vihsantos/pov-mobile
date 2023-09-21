@@ -29,7 +29,7 @@ class _ProfilePersonPageState extends State<ProfilePersonPage> {
             const SizedBox(height: 15),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 15),
-              child: ProfileHeader(),
+              child: ProfileHeader(isprofileuser: false),
             ),
             const SizedBox(
               height: 20,

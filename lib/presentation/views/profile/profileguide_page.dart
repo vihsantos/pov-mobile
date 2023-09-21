@@ -23,7 +23,7 @@ class _ProfileGuidePageState extends State<ProfileGuidePage> {
         body: Padding(
           padding: EdgeInsets.all(15),
           child: Column(children: [
-            ProfileHeader(),
+            ProfileHeader(isprofileuser: false),
             SizedBox(
               height: 10,
             ),
@@ -61,4 +61,3 @@ class _ProfileGuidePageState extends State<ProfileGuidePage> {
     );
   }
 }
-
