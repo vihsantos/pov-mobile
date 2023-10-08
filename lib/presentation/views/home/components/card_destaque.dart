@@ -13,8 +13,12 @@ class CardDestaque extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => PostDetailsPage(id: post.id!,)));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => PostDetailsPage(
+                      id: post.id!,
+                    )));
       },
       child: Padding(
         padding: const EdgeInsets.only(right: 10),
@@ -53,17 +57,23 @@ class CardDestaque extends StatelessWidget {
                             borderRadius: BorderRadius.circular(15)),
                       ),
                       const SizedBox(width: 10),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(post.user!.username!),
-                          Text(
-                            post.localizacao ?? "oi",
-                            maxLines: 2,
-                            style: const TextStyle(fontSize: 9),
-                          )
-                        ],
+                      SizedBox(
+                        width: 100,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(post.user!.username!),
+                            Text(
+                              post.localization == null
+                                  ? "oi"
+                                  : post.localization!.local!,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(fontSize: 9),
+                            )
+                          ],
+                        ),
                       ),
                     ],
                   ),
