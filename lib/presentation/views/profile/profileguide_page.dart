@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:pov/dto/dadosperfil_dto.dart';
 import 'components/profile_header.dart';
 import 'components/trilhasbutton.dart';
 
@@ -18,16 +19,19 @@ class ProfileGuidePage extends StatefulWidget {
 class _ProfileGuidePageState extends State<ProfileGuidePage> {
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
+    return SafeArea(
       child: Scaffold(
         body: Padding(
-          padding: EdgeInsets.all(15),
+          padding: const EdgeInsets.all(15),
           child: Column(children: [
-            ProfileHeader(isprofileuser: false),
-            SizedBox(
+            ProfileHeader(
+                dados: DadosPerfilDTO(
+                    username: "dasdsad", followers: [], following: []),
+                isprofileuser: false),
+            const SizedBox(
               height: 10,
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TrilhasButton(),

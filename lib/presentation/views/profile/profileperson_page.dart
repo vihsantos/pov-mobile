@@ -3,7 +3,9 @@ import 'package:pov/models/post/postprofile_model.dart';
 import 'package:pov/presentation/controllers/profilepage_controller.dart';
 import 'package:pov/presentation/views/profile/components/profile_header.dart';
 import 'package:pov/repository/post_repository.dart';
+import 'package:pov/repository/user_repository.dart';
 
+import '../../../dto/dadosperfil_dto.dart';
 import '../../widgets/bottom_navigation.dart';
 import 'components/card_postprofile.dart';
 
@@ -16,7 +18,8 @@ class ProfilePersonPage extends StatefulWidget {
 }
 
 class _ProfilePersonPageState extends State<ProfilePersonPage> {
-  ProfilePageController controller = ProfilePageController(PostRepository());
+  ProfilePageController controller = ProfilePageController(
+      postRepository: PostRepository(), userRepository: UserRepository());
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +30,23 @@ class _ProfilePersonPageState extends State<ProfilePersonPage> {
         body: Column(
           children: [
             const SizedBox(height: 15),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              child: ProfileHeader(isprofileuser: false),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: FutureBuilder<DadosPerfilDTO?>(
+                future: controller.dadosPerfil(widget.id),
+                builder: (context, snapshot) {
+                  DadosPerfilDTO? dados = snapshot.data;
+                  if (snapshot.hasError) {
+                    return const Text("Houve um erro!");
+                  }
+
+                  if (dados == null) {
+                    return Container();
+                  }
+
+                  return ProfileHeader(dados: dados, isprofileuser: false);
+                },
+              ),
             ),
             const SizedBox(
               height: 20,

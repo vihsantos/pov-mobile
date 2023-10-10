@@ -1,12 +1,15 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:pov/dto/dadosperfil_dto.dart';
 
 class ProfileHeader extends StatelessWidget {
   final bool isprofileuser;
+  final DadosPerfilDTO dados;
 
   const ProfileHeader({
     Key? key,
     required this.isprofileuser,
+    required this.dados,
   }) : super(key: key);
 
   @override
@@ -19,13 +22,13 @@ class ProfileHeader extends StatelessWidget {
         SizedBox(
           width: size.width * 0.28,
           height: size.height * 0.08,
-          child: const Column(
+          child: Column(
             children: [
               Text(
-                "120",
-                style: TextStyle(fontSize: 22),
+                dados.following!.length.toString(),
+                style: const TextStyle(fontSize: 22),
               ),
-              Text("Seguindo",
+              const Text("Seguindo",
                   style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16))
             ],
           ),
@@ -40,9 +43,9 @@ class ProfileHeader extends StatelessWidget {
                   borderRadius: BorderRadius.circular(75)),
             ),
             const SizedBox(height: 10),
-            const Text(
-              "leandra",
-              style: TextStyle(
+            Text(
+              dados.username!,
+              style: const TextStyle(
                   color: Color(0xFF393434),
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
@@ -73,13 +76,13 @@ class ProfileHeader extends StatelessWidget {
         SizedBox(
           width: size.width * 0.28,
           height: size.height * 0.08,
-          child: const Column(
+          child: Column(
             children: [
               Text(
-                "240",
-                style: TextStyle(fontSize: 22),
+                dados.followers!.length.toString(),
+                style: const TextStyle(fontSize: 22),
               ),
-              Text("Seguidores",
+              const Text("Seguidores",
                   style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16))
             ],
           ),
