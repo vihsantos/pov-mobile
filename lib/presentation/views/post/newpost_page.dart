@@ -92,14 +92,16 @@ class _NewPostPageState extends State<NewPostPage> {
               InputField(
                 label: 'Localização',
                 child: InkWell(
-                    onTap: (){
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Search(controller: controller,)));
-                    },
-                    child: const Text("Search"),
-                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Search(
+                                  controller: controller,
+                                )));
+                  },
+                  child: const Text("Search"),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 15, right: 15, bottom: 10),
@@ -208,7 +210,7 @@ class _NewPostPageState extends State<NewPostPage> {
                   controller.novoPost.stars = value;
                   bool enviou = await controller.enviarImagem(files[0]) as bool;
                   if (!mounted) return;
-                  
+
                   if (enviou) {
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text("Post salvo com sucesso!")));
