@@ -44,7 +44,7 @@ class PostRepository {
       var response = await http.get(Uri.parse(url), headers: {
         "content-type": "application/json",
         "accept": "application/json",
-        "token": token!
+        "token": 'Bearer $token!'
       });
 
       if (response.statusCode == 200) {
