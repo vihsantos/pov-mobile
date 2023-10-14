@@ -6,6 +6,7 @@ import '../views/guides/guides_page.dart';
 import '../views/home/home_page.dart';
 import '../views/post/newpost_page.dart';
 import '../views/profile/profile_page.dart';
+import '../views/ranking/ranking_page.dart';
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({super.key});
@@ -21,7 +22,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
     const HomePage(),
     const GuidesPage(),
     const NewPostPage(),
-    ProfilePage(id: AuthSingleton(LoginRepository()).getId()!, isGuide: AuthSingleton(LoginRepository()).getGuide()!)
+    const RankingPage(),
+    ProfilePage(
+        id: AuthSingleton(LoginRepository()).getId()!,
+        isGuide: AuthSingleton(LoginRepository()).getGuide()!)
   ];
 
   @override
@@ -67,6 +71,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
       text: 'Guias',
     ),
     ItemDataButton(icon: Icons.add, text: "Novo Post"),
+    ItemDataButton(icon: Icons.onetwothree, text: "Ranking"),
     ItemDataButton(
       icon: Icons.account_circle,
       text: 'Perfil',
