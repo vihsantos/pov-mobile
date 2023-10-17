@@ -85,13 +85,16 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                   Text(
                                     post.user!.username!,
                                     style: const TextStyle(
-                                        fontSize: 22,
+                                        fontSize: 20,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   SizedBox(
                                       width: size.width * 0.718,
-                                      child: Text(post.localization!.local!,
-                                          maxLines: 2))
+                                      child: Text(
+                                        post.localization!.local!,
+                                        maxLines: 2,
+                                        style: TextStyle(fontSize: 13),
+                                      ))
                                 ],
                               )
                             ],
@@ -136,22 +139,22 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                           },
                           child: Container(
                             width: size.width * 0.20,
-                            height: size.height * 0.055,
+                            height: size.height * 0.05,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.white),
-                            child: const Row(
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
-                                  "5",
-                                  style: TextStyle(
+                                  post.stars.toString(),
+                                  style: const TextStyle(
                                       fontSize: 26,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.pink),
                                 ),
-                                Icon(
+                                const Icon(
                                   Icons.star,
                                   size: 26,
                                   color: Colors.pink,
