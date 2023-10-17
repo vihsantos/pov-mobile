@@ -93,7 +93,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                       child: Text(
                                         post.localization!.local!,
                                         maxLines: 2,
-                                        style: TextStyle(fontSize: 13),
+                                        style: const TextStyle(fontSize: 13),
                                       ))
                                 ],
                               )
