@@ -32,11 +32,12 @@ class UserRepository {
     try {
       String url = "http://192.168.2.105:8000/usuario/$id";
 
-      //String? token = AuthSingleton(LoginRepository()).getToken();
+      String? token = AuthSingleton(LoginRepository()).getToken();
 
       var response = await http.get(Uri.parse(url), headers: {
         "content-type": "application/json",
         "accept": "application/json",
+        "Authorization": "Bearer $token",
       });
 
       if (response.statusCode == 200) {
