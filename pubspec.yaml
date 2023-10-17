@@ -75,6 +75,8 @@ flutter:
   assets:
     - asset/img/logo__pov.png
     - asset/img/testelogo.png
+    - asset/img/voo_selected.png
+    - asset/img/voo_unselected.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
