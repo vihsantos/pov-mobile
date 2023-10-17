@@ -79,20 +79,15 @@ class _RankingPageState extends State<RankingPage> {
                             return Container();
                           }
 
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              ListView.builder(
-                                  scrollDirection: Axis.vertical,
-                                  shrinkWrap: true,
-                                  itemCount: ranking.length,
-                                  itemBuilder: (_, index) {
-                                    final data = ranking[index];
+                          return ListView.builder(
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              itemCount: ranking.length,
+                              itemBuilder: (_, index) {
+                                final data = ranking[index];
 
-                                    return CardRankingByLocal(data: data!);
-                                  })
-                            ],
-                          );
+                                return CardRankingByLocal(data: data!);
+                              });
                         }
 
                         if (snapshot.hasError) {

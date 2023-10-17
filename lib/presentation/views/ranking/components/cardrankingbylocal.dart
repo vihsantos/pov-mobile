@@ -15,24 +15,29 @@ class CardRankingByLocal extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Container(
       width: size.width,
-      height: size.height * 0.10,
+      height: size.height * 0.15,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          color: const Color(0xFFF8F8F8)),
-      padding: EdgeInsets.all(10),
+          color: const Color(0xFFF8F8F8),
+          border: Border.all(color: const Color(0xFFEDEDED), width: 0.5)),
+      padding: const EdgeInsets.all(10),
+      margin: const EdgeInsets.only(top: 10, bottom: 10),
       child: Stack(
         children: [
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                data.local!,
-                maxLines: 2,
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22,
-                    color: Colors.pink),
+              SizedBox(
+                width: size.width * 0.68,
+                child: Text(
+                  data.local!,
+                  maxLines: 3,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Colors.pink),
+                ),
               ),
               RichText(
                 text: TextSpan(
@@ -70,7 +75,9 @@ class CardRankingByLocal extends StatelessWidget {
                 height: size.height * 0.042,
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(10)),
+                    borderRadius: BorderRadius.circular(10),
+                    border:
+                        Border.all(color: const Color(0xFFEDEDED), width: 0.5)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
