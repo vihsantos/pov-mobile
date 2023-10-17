@@ -6,6 +6,7 @@ import 'package:latlong2/latlong.dart';
 import '../../../dto/post_dto.dart';
 import '../../../repository/post_repository.dart';
 import '../../controllers/homepage_controller.dart';
+import '../../widgets/card_post.dart';
 import 'components/card_destaque.dart';
 
 class HomePage extends StatefulWidget {
@@ -66,8 +67,8 @@ class _HomePageState extends State<HomePage> {
                       height: 270,
                       child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
-                          child: FutureBuilder<List<PostDTO?>?>( 
-                                future: controller.listarPosts(),
+                          child: FutureBuilder<List<PostDTO?>?>(
+                              future: controller.listarPosts(),
                               builder: (context, snapshot) {
                                 if (snapshot.hasData) {
                                   List<PostDTO?>? posts = snapshot.data;
@@ -101,7 +102,7 @@ class _HomePageState extends State<HomePage> {
                               })),
                     ),
                   ),
-                  
+                  const CardPost()
                 ]),
           )),
     );
