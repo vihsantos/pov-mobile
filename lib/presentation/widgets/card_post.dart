@@ -21,10 +21,10 @@ class CardPost extends StatelessWidget {
           borderRadius: BorderRadius.circular(10)),
       child: Stack(children: [
         Positioned(
-          top: 15,
-          right: 15,
+          top: 10,
+          right: 10,
           child: Container(
-            width: size.width * 0.18,
+            width: size.width * 0.155,
             height: size.height * 0.04,
             decoration: BoxDecoration(boxShadow: const [
               BoxShadow(
@@ -39,14 +39,14 @@ class CardPost extends StatelessWidget {
                 Text(
                   "5",
                   style: TextStyle(
-                      fontSize: 26,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.pink),
                 ),
                 SizedBox(width: 5),
                 Icon(
                   Icons.star,
-                  size: 26,
+                  size: 18,
                   color: Colors.pink,
                 )
               ],
@@ -58,11 +58,11 @@ class CardPost extends StatelessWidget {
             right: 0,
             bottom: 0,
             child: Container(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(5),
                 width: size.width,
-                height: size.height * 0.15,
+                height: size.height * 0.16,
                 decoration: BoxDecoration(
-                    color: const Color.fromARGB(88, 255, 255, 255),
+                    color: const Color.fromARGB(206, 255, 255, 255),
                     borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(10),
                         bottomRight: Radius.circular(10)),
@@ -75,53 +75,75 @@ class CardPost extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                      //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          width: size.width * 0.13,
-                          height: size.height * 0.06,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(size.width)),
-                        ),
-                        const SizedBox(
-                          width: 15,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                        Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              "tere",
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.w500),
+                            Container(
+                              width: size.width * 0.12,
+                              height: size.height * 0.06,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadius.circular(size.width)),
                             ),
-                            SizedBox(
-                              width: size.width * 0.573,
-                              child: const Text(
-                                "tere",
-                                style: TextStyle(fontSize: 14),
-                              ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "username",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                SizedBox(
+                                  width: size.width * 0.6,
+                                  child: const Text(
+                                    "localization",
+                                    style: TextStyle(fontSize: 12),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
                         Container(
-                          width: size.width * 0.13,
+                          width: size.width * 0.11,
                           height: size.height * 0.06,
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(8)),
-                          child: const Column(
+                          child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [Icon(Icons.flight), Text("2 mil")],
+                            children: [
+                              Image(
+                                image: const AssetImage("asset/img/voo_selected.png"),
+                                width: size.width * 0.055,
+                                fit: BoxFit.cover,
+                                ),
+                              // Icon(
+                              //   Icons.flight,
+                              //   size: 18,
+                              // ),
+                              const Text(
+                                "2K",
+                                style: TextStyle(fontSize: 10, fontWeight: FontWeight.w800),
+                              )
+                            ],
                           ),
                         )
                       ],
                     ),
+                    const SizedBox(height: 5),
                     const Text(
                       "data data data data data data data data data data data data",
                       maxLines: 3,
+                      style: TextStyle(fontSize: 12),
                     )
                   ],
                 )))
