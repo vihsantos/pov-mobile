@@ -28,58 +28,60 @@ class _ProfileGuidePageState extends State<ProfileGuidePage> {
       child: Scaffold(
         body: Column(children: [
           const SizedBox(height: 15),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: FutureBuilder<DadosPerfilDTO?>(
-              future: widget.controller.dadosPerfil(widget.id),
-              builder: (context, snapshot) {
-                DadosPerfilDTO? dados = snapshot.data;
-                if (snapshot.hasError) {
-                  return const Text("Houve um erro!");
-                }
+          FutureBuilder<DadosPerfilDTO?>(
+            future: widget.controller.dadosPerfil(widget.id),
+            builder: (context, snapshot) {
+              DadosPerfilDTO? dados = snapshot.data;
+              if (snapshot.hasError) {
+                return const Text("Houve um erro!");
+              }
 
-                if (dados == null) {
-                  return Container();
-                }
+              if (dados == null) {
+                return Container();
+              }
 
-                return ProfileHeader(dados: dados, isprofileuser: false);
-              },
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TrilhasButton(),
-                SizedBox(
-                  width: 280,
-                  height: 100,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Cadastur",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12,
-                        ),
-                      ),
-                      Text("1234565"),
-                      Text("Área de Atuação",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 12)),
-                      Text("dajksjkdjkjkjk"),
-                    ],
-                  ),
-                )
-              ],
-            ),
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Column(
+                  children: [
+                    ProfileHeader(dados: dados, isprofileuser: false),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TrilhasButton(),
+                        SizedBox(
+                          width: 280,
+                          height: 100,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Cadastur",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12,
+                                ),
+                              ),
+                              Text("1234565"),
+                              Text("Área de Atuação",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12)),
+                              Text("dajksjkdjkjkjk"),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
           const SizedBox(
             height: 20,
