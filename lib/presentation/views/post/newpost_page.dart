@@ -89,20 +89,27 @@ class _NewPostPageState extends State<NewPostPage> {
                             )),
                 ),
               ),
-              InputField(
-                label: 'Localização',
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Search(
-                                  controller: controller,
-                                )));
-                  },
-                  child: const Text("Search"),
-                ),
-              ),
+              controller.novoPost.localization != null
+                  ? Padding(
+                      padding: const EdgeInsets.only(
+                          left: 15, right: 15, bottom: 10),
+                      child: Text(controller.novoPost.localization!.local!,
+                          maxLines: 1),
+                    )
+                  : InputField(
+                      label: 'Localização',
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Search(
+                                        controller: controller,
+                                      )));
+                        },
+                        child: const Text("Search"),
+                      ),
+                    ),
               Padding(
                 padding: const EdgeInsets.only(left: 15, right: 15, bottom: 10),
                 child: Column(
