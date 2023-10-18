@@ -33,18 +33,21 @@ class _RankingPageState extends State<RankingPage> {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(15),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text("Filtrar Por:",
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              child: Text("Filtrar Por:",
                   style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 18,
                       color: Color(0xFF8C8C8C))),
-              Row(
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -64,39 +67,40 @@ class _RankingPageState extends State<RankingPage> {
                   )
                 ],
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: FutureBuilder<List<RankingByLocalModel?>?>(
-                      future: controller.getRankingByLocal(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          List<RankingByLocalModel?>? ranking = snapshot.data;
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              height: size.height * 0.75,
+              child: FutureBuilder<List<RankingByLocalModel?>?>(
+                  future: controller.getRankingByLocal(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      List<RankingByLocalModel?>? ranking = snapshot.data;
 
-                          if (ranking!.isEmpty) {
-                            return Container();
-                          }
+                      if (ranking!.isEmpty) {
+                        return Container();
+                      }
 
-                          return ListView.builder(
-                              scrollDirection: Axis.vertical,
-                              shrinkWrap: true,
-                              itemCount: ranking.length,
-                              itemBuilder: (_, index) {
-                                final data = ranking[index];
+                      return ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          itemCount: ranking.length,
+                          shrinkWrap: true,
+                          itemBuilder: (_, index) {
+                            final data = ranking[index];
 
-                                return CardRankingByLocal(data: data!);
-                              });
-                        }
+                            return CardRankingByLocal(data: data!);
+                          });
+                    }
 
-                        if (snapshot.hasError) {
-                          return const Text("ERROR");
-                        }
-                        return const Center(child: CircularProgressIndicator());
-                      })),
-            ],
-          ),
+                    if (snapshot.hasError) {
+                      return const Text("ERROR");
+                    }
+                    return const Center(child: CircularProgressIndicator());
+                  }),
+            ),
+          ],
         ),
       ),
     );
