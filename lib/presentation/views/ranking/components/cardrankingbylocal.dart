@@ -21,7 +21,7 @@ class CardRankingByLocal extends StatelessWidget {
           color: const Color(0xFFF8F8F8),
           border: Border.all(color: const Color(0xFFEDEDED), width: 0.5)),
       padding: const EdgeInsets.all(10),
-      margin: const EdgeInsets.only(top: 10, bottom: 10),
+      margin: const EdgeInsets.all(15),
       child: Stack(
         children: [
           Column(
