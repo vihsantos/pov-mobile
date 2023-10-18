@@ -2,25 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:pov/models/post/postprofile_model.dart';
 import 'package:pov/presentation/controllers/profilepage_controller.dart';
 import 'package:pov/presentation/views/profile/components/profile_header.dart';
-import 'package:pov/repository/post_repository.dart';
-import 'package:pov/repository/user_repository.dart';
-
 import '../../../dto/dadosperfil_dto.dart';
 import '../../widgets/bottom_navigation.dart';
 import 'components/card_postprofile.dart';
 
 class ProfilePersonPage extends StatefulWidget {
   final int id;
-  const ProfilePersonPage({super.key, required this.id});
+  final ProfilePageController controller;
+  const ProfilePersonPage(
+      {super.key, required this.id, required this.controller});
 
   @override
   State<ProfilePersonPage> createState() => _ProfilePersonPageState();
 }
 
 class _ProfilePersonPageState extends State<ProfilePersonPage> {
-  ProfilePageController controller = ProfilePageController(
-      postRepository: PostRepository(), userRepository: UserRepository());
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -33,7 +29,7 @@ class _ProfilePersonPageState extends State<ProfilePersonPage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: FutureBuilder<DadosPerfilDTO?>(
-                future: controller.dadosPerfil(widget.id),
+                future: widget.controller.dadosPerfil(widget.id),
                 builder: (context, snapshot) {
                   DadosPerfilDTO? dados = snapshot.data;
                   if (snapshot.hasError) {
@@ -53,7 +49,7 @@ class _ProfilePersonPageState extends State<ProfilePersonPage> {
             ),
             Expanded(
                 child: FutureBuilder<List<PostProfileModel>?>(
-              future: controller.listarPosts(widget.id),
+              future: widget.controller.listarPosts(widget.id),
               builder: (context, snapshot) {
                 List<PostProfileModel>? posts = snapshot.data;
                 if (snapshot.hasError) {
@@ -70,10 +66,10 @@ class _ProfilePersonPageState extends State<ProfilePersonPage> {
                             childAspectRatio: 1 / 1,
                             maxCrossAxisExtent: 300,
                             mainAxisSpacing: 0),
-                    itemCount: controller.posts?.length,
+                    itemCount: widget.controller.posts?.length,
                     itemBuilder: (BuildContext context, index) {
                       return CardPostProfile(
-                        post: controller.posts![index],
+                        post: widget.controller.posts![index],
                       );
                     });
               },
