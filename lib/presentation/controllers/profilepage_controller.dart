@@ -21,10 +21,6 @@ class ProfilePageController {
   List<PostProfileModel>? get posts => postsApi.value;
   final postsApi = ValueNotifier<List<PostProfileModel>?>(null);
 
-  // set _loading(bool loading) => loadingApi.value = loading;
-  // bool? get loading => loadingApi.value;
-  // final loadingApi = ValueNotifier<bool>(false);
-
   set _error(ApplicationError? error) => solicitacaoErrorApi.value = error;
   ApplicationError? get error => solicitacaoErrorApi.value;
   final solicitacaoErrorApi = ValueNotifier<ApplicationError?>(null);
