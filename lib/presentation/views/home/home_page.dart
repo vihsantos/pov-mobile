@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:pov/presentation/views/home/components/card_trail_home.dart';
 import 'package:pov/presentation/widgets/bottom_navigation.dart';
 // ignore: depend_on_referenced_packages
 import 'package:latlong2/latlong.dart';
@@ -101,6 +102,21 @@ class _HomePageState extends State<HomePage> {
                               })),
                     ),
                   ),
+                  const Text(
+                    "Trilhas",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(children: [
+                        CardTrailHome(),
+                        CardTrailHome(),
+                        CardTrailHome(),
+                      ]),
+                    ),
+                  )
                 ]),
           )),
     );
