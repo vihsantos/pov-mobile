@@ -44,7 +44,7 @@ class CardTrailHome extends StatelessWidget {
                         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ullamcorper.",
                         maxLines: 5,
                         style: TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: 11))
+                            fontWeight: FontWeight.w500, fontSize: 10))
                   ],
                 ),
               )
