@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 
 import 'package:pov/dto/dadosperfil_dto.dart';
 import 'package:pov/models/post/postprofile_model.dart';
+import 'package:pov/repository/login_repository.dart';
 import 'package:pov/repository/post_repository.dart';
 import 'package:pov/repository/user_repository.dart';
+import 'package:pov/services/singleton/auth_singleton.dart';
 
 import '../../services/error/applicationerror.dart';
 
@@ -43,5 +45,9 @@ class ProfilePageController {
       _error = e;
     }
     return null;
+  }
+
+  bool isProfile(int id){
+    return AuthSingleton(LoginRepository()).getId() == id;
   }
 }
