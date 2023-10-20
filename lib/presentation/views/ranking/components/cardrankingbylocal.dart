@@ -35,7 +35,7 @@ class CardRankingByLocal extends StatelessWidget {
                   maxLines: 3,
                   style: const TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 18,
+                      fontSize: 16,
                       color: Colors.pink),
                 ),
               ),
@@ -45,21 +45,21 @@ class CardRankingByLocal extends StatelessWidget {
                   style: const TextStyle(
                       fontFamily: "Poppins",
                       fontWeight: FontWeight.w500,
-                      fontSize: 16,
+                      fontSize: 14,
                       color: Color(0xFF393434)),
                   children: <TextSpan>[
                     TextSpan(
                         text: data.quantidade.toString(),
                         style: const TextStyle(
                             fontFamily: "Poppins",
-                            fontSize: 17,
+                            fontSize: 15,
                             fontWeight: FontWeight.w900,
                             color: Colors.pink)),
                     const TextSpan(
                         text: " post's!",
                         style: TextStyle(
                             fontFamily: "Poppins",
-                            fontSize: 16,
+                            fontSize: 14,
                             fontWeight: FontWeight.w500,
                             color: Color(0xFF393434))),
                   ],
