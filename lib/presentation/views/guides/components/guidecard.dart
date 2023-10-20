@@ -24,7 +24,6 @@ class GuideCard extends StatelessWidget {
       },
       child: Container(
         margin: const EdgeInsets.all(15),
-        width: 200,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: Colors.white,
@@ -46,14 +45,15 @@ class GuideCard extends StatelessWidget {
                   profileIcon: guia.user?.profileicon),
               Text(guia.user!.username!,
                   style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold)),
-              Text(guia.guide!.areaatuacao!),
+                      fontSize: 18, fontWeight: FontWeight.bold)),
+              Text(guia.guide!.areaatuacao!, style: const
+              TextStyle(fontSize: 12), maxLines: 1,),
               SizedBox(
                 height: size.height * 0.005,
               ),
               Container(
-                width: size.width * 0.6,
-                height: size.height * 0.06,
+                width: size.width * 0.5,
+                height: size.height * 0.05,
                 decoration: BoxDecoration(
                     color: const Color(0xFF6461E8),
                     borderRadius: BorderRadius.circular(10)),
