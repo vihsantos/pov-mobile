@@ -40,7 +40,7 @@ class _ProfilePersonPageState extends State<ProfilePersonPage> {
                     return Container();
                   }
 
-                  return ProfileHeader(dados: dados, isprofileuser: false);
+                  return ProfileHeader(dados: dados, isprofileuser: widget.controller.isProfile(widget.id));
                 },
               ),
             ),
