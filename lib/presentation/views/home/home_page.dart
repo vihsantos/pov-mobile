@@ -25,6 +25,7 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
+            scrolledUnderElevation: 0,
             automaticallyImplyLeading: false,
             backgroundColor: Colors.transparent,
             elevation: 0,
