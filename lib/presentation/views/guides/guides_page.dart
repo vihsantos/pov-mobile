@@ -49,9 +49,7 @@ class _GuidesPageState extends State<GuidesPage> {
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
                             maxCrossAxisExtent: 260,
-                            childAspectRatio: 3 / 5,
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 10),
+                            childAspectRatio: 3 / 4),
                     itemCount: snapshot.data?.length,
                     itemBuilder: (BuildContext ctx, index) {
                       GuideDTO? guia = snapshot.data![index];
