@@ -54,7 +54,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                         children: [
                           SizedBox(
                             width: size.width,
-                            height: 450,
+                            height: size.height * 0.5,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10),
                               child: Image.network(
@@ -121,7 +121,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                             Navigator.pop(context);
                           },
                           child: Container(
-                            width: size.width * 0.135,
+                            width: size.width * 0.13,
                             height: size.height * 0.06,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
