@@ -44,37 +44,36 @@ class _ProfileGuidePageState extends State<ProfileGuidePage> {
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Column(
                   children: [
-                    ProfileHeader(dados: dados, isprofileuser: false),
+                    ProfileHeader(dados: dados, isprofileuser: widget.controller.isProfile(widget.id)),
                     const SizedBox(
                       height: 10,
                     ),
                     const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         TrilhasButton(),
                         SizedBox(
-                          width: 280,
-                          height: 100,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Cadastur",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12,
-                                ),
+                          width: 15
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Cadastur",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12,
                               ),
-                              Text("1234565"),
-                              Text("Área de Atuação",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12)),
-                              Text("dajksjkdjkjkjk"),
-                            ],
-                          ),
+                            ),
+                            Text("1234565"),
+                            Text("Área de Atuação",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 12)),
+                            Text("dajksjkdjkjkjk"),
+                          ],
                         )
                       ],
                     ),
