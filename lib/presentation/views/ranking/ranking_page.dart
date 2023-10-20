@@ -24,6 +24,7 @@ class _RankingPageState extends State<RankingPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          scrolledUnderElevation: 0,
           automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -72,7 +73,7 @@ class _RankingPageState extends State<RankingPage> {
               height: 10,
             ),
             SizedBox(
-              height: size.height * 0.75,
+              height: size.height * 0.74,
               child: FutureBuilder<List<RankingByLocalModel?>?>(
                   future: controller.getRankingByLocal(),
                   builder: (context, snapshot) {
