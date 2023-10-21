@@ -59,8 +59,26 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
+                  const SizedBox(height: 10),
+                  const Text(
+                    "Trilhas",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(children: [
+                        CardTrailHome(),
+                        CardTrailHome(),
+                        CardTrailHome(),
+                      ]),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    "Posts",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(15),
@@ -103,21 +121,6 @@ class _HomePageState extends State<HomePage> {
                               })),
                     ),
                   ),
-                  const Text(
-                    "Trilhas",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(children: [
-                        CardTrailHome(),
-                        CardTrailHome(),
-                        CardTrailHome(),
-                      ]),
-                    ),
-                  )
                 ]),
           )),
     );
