@@ -37,7 +37,7 @@ class ProfileHeader extends StatelessWidget {
           children: [
             Container(
               width: size.width * 0.3,
-              height: size.height * 0.15,
+              height: size.height * 0.14,
               decoration: BoxDecoration(
                   color: Colors.black12,
                   borderRadius: BorderRadius.circular(75)),
