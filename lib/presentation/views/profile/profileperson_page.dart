@@ -21,6 +21,17 @@ class _ProfilePersonPageState extends State<ProfilePersonPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          scrolledUnderElevation: 0,
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          centerTitle: true,
+          title: const Text(
+            "Perfil",
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+          ),
+        ),
         backgroundColor: Colors.white,
         bottomNavigationBar: const BottomNavigation(),
         body: Column(
@@ -40,7 +51,9 @@ class _ProfilePersonPageState extends State<ProfilePersonPage> {
                     return Container();
                   }
 
-                  return ProfileHeader(dados: dados, isprofileuser: widget.controller.isProfile(widget.id));
+                  return ProfileHeader(
+                      dados: dados,
+                      isprofileuser: widget.controller.isProfile(widget.id));
                 },
               ),
             ),

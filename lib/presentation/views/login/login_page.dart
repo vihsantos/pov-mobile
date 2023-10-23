@@ -29,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(
               children: [
-                 SizedBox(
+                SizedBox(
                   height: size.height * 0.2,
                 ),
                 Image.asset(
@@ -42,7 +42,8 @@ class _LoginPageState extends State<LoginPage> {
                 InputField(
                     label: 'Nome de Usuário',
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 15, right: 15),
+                      padding: const EdgeInsets.only(
+                          left: 15, right: 15, top: 10, bottom: 10),
                       child: TextField(
                         onChanged: (value) => controller.model.username = value,
                         decoration: const InputDecoration(
@@ -55,7 +56,8 @@ class _LoginPageState extends State<LoginPage> {
                 InputField(
                     label: 'Senha',
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 15, right: 15),
+                      padding: const EdgeInsets.only(
+                          left: 15, right: 15, top: 10, bottom: 10),
                       child: TextField(
                         onChanged: (value) => controller.model.password = value,
                         obscureText: true,

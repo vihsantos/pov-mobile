@@ -26,6 +26,17 @@ class _ProfileGuidePageState extends State<ProfileGuidePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          scrolledUnderElevation: 0,
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          centerTitle: true,
+          title: const Text(
+            "Perfil",
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+          ),
+        ),
         body: Column(children: [
           const SizedBox(height: 15),
           FutureBuilder<DadosPerfilDTO?>(
@@ -44,7 +55,9 @@ class _ProfileGuidePageState extends State<ProfileGuidePage> {
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Column(
                   children: [
-                    ProfileHeader(dados: dados, isprofileuser: widget.controller.isProfile(widget.id)),
+                    ProfileHeader(
+                        dados: dados,
+                        isprofileuser: widget.controller.isProfile(widget.id)),
                     const SizedBox(
                       height: 10,
                     ),
@@ -53,9 +66,7 @@ class _ProfileGuidePageState extends State<ProfileGuidePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         TrilhasButton(),
-                        SizedBox(
-                          width: 15
-                        ),
+                        SizedBox(width: 15),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,8 +81,7 @@ class _ProfileGuidePageState extends State<ProfileGuidePage> {
                             Text("1234565"),
                             Text("Área de Atuação",
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 12)),
+                                    fontWeight: FontWeight.bold, fontSize: 12)),
                             Text("dajksjkdjkjkjk"),
                           ],
                         )
