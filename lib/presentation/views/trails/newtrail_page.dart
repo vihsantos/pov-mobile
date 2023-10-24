@@ -25,26 +25,47 @@ class _NewTrailPageState extends State<NewTrailPage> {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
           ),
         ),
-        body: Column(
-          children: [
-            const InputField(
-                label: "Nome da Trilha",
-                child: Padding(
-                  padding:
-                      EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 10),
-                  child: TextField(
-                    decoration: InputDecoration(
-                        hintStyle: TextStyle(fontStyle: FontStyle.italic),
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        hintText: "Digite o nome da trilha"),
-                  ),
-                )),
-            InputField(
-                label: "Adicione imagens dessa trilha", child: Container()),
-            InputField(label: "Área de Atuação", child: Container()),
-            InputField(label: "Descrição", child: Container()),
-          ],
+        body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+              const InputField(
+                  label: "Nome da Trilha",
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        left: 15, right: 15, top: 10, bottom: 10),
+                    child: TextField(
+                      decoration: InputDecoration(
+                          hintStyle: TextStyle(fontStyle: FontStyle.italic),
+                          enabledBorder: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          hintText: "Digite o nome da trilha"),
+                    ),
+                  )),
+              InputField(
+                  label: "Adicione imagens dessa trilha",
+                  child: Row(
+                    children: [
+                      InkWell(
+                        onTap: () {},
+                        child: Container(
+                          width: 60,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 206, 206, 206),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: const Center(
+                              child: Icon(Icons.panorama,
+                                  color: Color.fromARGB(255, 97, 97, 97))),
+                        ),
+                      ),
+                    ],
+                  )),
+              InputField(label: "Área de Atuação", child: Container()),
+              InputField(label: "Descrição", child: Container()),
+            ],
+          ),
         ),
       ),
     );
