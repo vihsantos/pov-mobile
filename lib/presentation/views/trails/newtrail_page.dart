@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../controllers/newtrailpage_controller.dart';
 import '../../widgets/input_field.dart';
 
 class NewTrailPage extends StatefulWidget {
@@ -10,6 +11,7 @@ class NewTrailPage extends StatefulWidget {
 }
 
 class _NewTrailPageState extends State<NewTrailPage> {
+  NewTrailPageController controller = NewTrailPageController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -44,10 +46,10 @@ class _NewTrailPageState extends State<NewTrailPage> {
                   )),
               InputField(
                   label: "Adicione imagens dessa trilha",
-                  child: Row(
+                  child: Column(
                     children: [
                       InkWell(
-                        onTap: () {},
+                        onTap: () => controller.selecionarArquivos(),
                         child: Container(
                           width: 60,
                           height: 60,
