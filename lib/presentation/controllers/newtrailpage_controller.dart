@@ -4,7 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 class NewTrailPageController {
-  final filesNotifier = ValueNotifier<List<File>>([]);
+  final ValueNotifier<List<File>>filesNotifier = ValueNotifier<List<File>>([]);
 
   set files(List<File> files) => filesNotifier.value = files;
 
@@ -31,7 +31,9 @@ class NewTrailPageController {
 
     int sizeInBytes = 0;
 
-    for (int x = 0; x < files.length; x++) sizeInBytes += files[x].lengthSync();
+    for (int x = 0; x < files.length; x++) {
+      sizeInBytes += files[x].lengthSync();
+    }
 
     final sizeInMb = sizeInBytes / (1024 * 1024);
 
