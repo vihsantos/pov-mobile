@@ -1,5 +1,5 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
-
 import '../../controllers/newtrailpage_controller.dart';
 import '../../widgets/input_field.dart';
 
@@ -45,25 +45,63 @@ class _NewTrailPageState extends State<NewTrailPage> {
                     ),
                   )),
               InputField(
-                  label: "Adicione imagens dessa trilha",
-                  child: Column(
-                    children: [
-                      InkWell(
-                        onTap: () => controller.selecionarArquivos(),
-                        child: Container(
-                          width: 60,
-                          height: 60,
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 206, 206, 206),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: const Center(
-                              child: Icon(Icons.panorama,
-                                  color: Color.fromARGB(255, 97, 97, 97))),
+                label: "Adicione imagens dessa trilha",
+                child: Column(
+                  children: [
+                    const Text(
+                      "Selecione um até três arquivos",
+                      style:
+                          TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontStyle: FontStyle.italic, 
+                            fontSize: 12),
+                    ),
+                    InkWell(
+                      onTap: () => controller.selecionarArquivos(),
+                      child: Container(
+                        width: 60,
+                        height: 60,
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 206, 206, 206),
+                          borderRadius: BorderRadius.circular(10),
                         ),
+                        child: const Center(
+                            child: Icon(Icons.panorama,
+                                color: Color.fromARGB(255, 97, 97, 97))),
                       ),
-                    ],
-                  )),
+                    ),
+                    ValueListenableBuilder<List<File>>(
+                        valueListenable: controller.filesNotifier,
+                        builder: (__, files, _) {
+                          if (files.isEmpty) {
+                            return const Text("Sem arquivos para exibir");
+                          }
+
+                          if (files.isNotEmpty) {
+                            return SizedBox(
+                              height: 150,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                shrinkWrap: true,
+                                itemCount: files.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Image.file(
+                                      files[index],
+                                      fit: BoxFit.cover,
+                                    ),
+                                  );
+                                },
+                              ),
+                            );
+                          }
+
+                          return Container();
+                        }),
+                  ],
+                ),
+              ),
               InputField(label: "Área de Atuação", child: Container()),
               InputField(label: "Descrição", child: Container()),
             ],
