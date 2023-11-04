@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import 'package:pov/services/core/routes.dart';
 import '../models/login/acess_model.dart';
 import '../models/login/login_model.dart';
 import '../services/error/applicationerrorimp.dart';
@@ -6,7 +7,7 @@ import '../services/error/applicationerrorimp.dart';
 class LoginRepository {
   Future<AcessModel> logar(LoginModel login) async {
     try {
-      String url = "http://192.168.2.105:8000/acesso";
+      String url = Routes.login;
 
       var response =
           await http.post(Uri.parse(url), body: login.toJson(), headers: {

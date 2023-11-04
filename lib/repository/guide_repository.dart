@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:pov/dto/guide_dto.dart';
 import 'package:http/http.dart' as http;
+import 'package:pov/services/core/routes.dart';
 
 import '../services/error/applicationerrorimp.dart';
 import '../services/singleton/auth_singleton.dart';
@@ -10,7 +11,7 @@ import 'login_repository.dart';
 class GuideRepository {
   Future<List<GuideDTO>> getGuides() async {
     try {
-      String url = "http://192.168.2.105:8000/guides";
+      String url = Routes.guides;
 
       String? token = AuthSingleton(LoginRepository()).getToken();
 

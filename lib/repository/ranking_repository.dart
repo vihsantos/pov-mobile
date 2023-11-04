@@ -2,13 +2,14 @@ import 'dart:convert';
 import 'package:pov/models/ranking/rankingbylocal_model.dart';
 import 'package:pov/repository/login_repository.dart';
 import 'package:http/http.dart' as http;
+import 'package:pov/services/core/routes.dart';
 import '../services/error/applicationerrorimp.dart';
 import '../services/singleton/auth_singleton.dart';
 
 class RankingRepository {
   Future<List<RankingByLocalModel>> getRankingByLocal() async {
     try {
-      String url = "http://192.168.2.105:8000/ranking/local";
+      String url = Routes.rankingByLocal;
 
       String? token = AuthSingleton(LoginRepository()).getToken();
 
