@@ -3,7 +3,6 @@ import 'package:pov/presentation/controllers/registerpage_controller.dart';
 import 'package:pov/repository/user_repository.dart';
 import '../../../models/enums/AreaAtuacao.dart';
 import '../../widgets/input_field.dart';
-import '../home/home_page.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -18,16 +17,10 @@ class _RegisterPageState extends State<RegisterPage> {
 
   bool isGuide = false;
 
+  Set<AreaAtuacao> filters = <AreaAtuacao>{};
+
   @override
   Widget build(BuildContext context) {
-    final List<DropdownMenuEntry<AreaAtuacao>> dataEntries =
-        <DropdownMenuEntry<AreaAtuacao>>[];
-
-    for (final AreaAtuacao data in AreaAtuacao.values) {
-      dataEntries.add(
-          DropdownMenuEntry<AreaAtuacao>(value: data, label: data.descricao));
-    }
-
     final PageController controller = PageController();
     final Size size = MediaQuery.of(context).size;
     return SafeArea(
@@ -38,7 +31,7 @@ class _RegisterPageState extends State<RegisterPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: size.height * 0.06,
+                height: size.height * 0.02,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 5),
@@ -48,10 +41,10 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
               SizedBox(
-                height: size.height * 0.06,
+                height: size.height * 0.04,
               ),
               const Padding(
-                padding: EdgeInsets.only(left: 15, right: 15, bottom: 10),
+                padding: EdgeInsets.only(left: 15, right: 15),
                 child: Text(
                   "Crie a sua conta",
                   style: TextStyle(
@@ -70,9 +63,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       color: Color(0xFF393434)),
                 ),
               ),
+              const SizedBox(height: 10),
               SizedBox(
                 width: size.width,
-                height: size.height * 0.8,
+                height: size.height * 0.65,
                 child: PageView(
                   physics: const NeverScrollableScrollPhysics(),
                   controller: controller,
@@ -238,103 +232,125 @@ class _RegisterPageState extends State<RegisterPage> {
                         )
                       ],
                     ),
-                    Column(children: [
-                      InputField(
-                        label: 'Numero do Cadastur',
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 15, right: 15, top: 10, bottom: 10),
-                          child: TextField(
-                            onChanged: (value) =>
-                                registerController.usuario.cadastur = value,
-                            decoration: const InputDecoration(
-                                hintStyle:
-                                    TextStyle(fontStyle: FontStyle.italic),
-                                enabledBorder: InputBorder.none,
-                                focusedBorder: InputBorder.none,
-                                hintText: "Digite o numero do Cadastur"),
-                          ),
-                        ),
-                      ),
-                      InputField(
-                          label: 'Area de Atuação',
+                    SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: Column(children: [
+                        InputField(
+                          label: 'Numero do Cadastur',
                           child: Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 15, right: 15, top: 10, bottom: 10),
-                              child: DropdownMenu<AreaAtuacao>(
-                                  width: size.width,
-                                  dropdownMenuEntries: dataEntries))),
-                      InputField(
-                        label: 'Data de Vencimento',
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 15, right: 15, top: 10, bottom: 10),
-                          child: TextField(
-                            onTap: () async {
-                              DateTime? date = await showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime.now(),
-                                  lastDate: DateTime(DateTime.now().year + 10));
-
-                              if (date != null) {
-                                setState(() {
-                                  registerController.usuario.data_vencimento =
-                                      date;
-                                });
-                              }
-                            },
-                            decoration: InputDecoration(
-                                hintStyle: const TextStyle(
-                                    fontStyle: FontStyle.italic),
-                                enabledBorder: InputBorder.none,
-                                focusedBorder: InputBorder.none,
-                                hintText: registerController
-                                            .usuario.data_vencimento ==
-                                        null
-                                    ? "Digite a data de Vencimento do Cadastur"
-                                    : registerController.usuario.data_vencimento
-                                        .toString()),
+                            padding: const EdgeInsets.only(
+                                left: 15, right: 15, top: 10, bottom: 10),
+                            child: TextField(
+                              onChanged: (value) =>
+                                  registerController.usuario.cadastur = value,
+                              decoration: const InputDecoration(
+                                  hintStyle:
+                                      TextStyle(fontStyle: FontStyle.italic),
+                                  enabledBorder: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+                                  hintText: "Digite o numero do Cadastur"),
+                            ),
                           ),
                         ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          controller.nextPage(
-                              duration: const Duration(seconds: 2),
-                              curve: Curves.ease);
-                        },
-                        child: Container(
-                          margin: const EdgeInsets.all(15),
-                          width: size.width,
-                          height: 60,
-                          decoration: const BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                    offset: Offset(0, 4),
-                                    blurRadius: 4,
-                                    color: Color.fromARGB(55, 116, 116, 116))
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomLeft,
-                                  colors: [
-                                    Color.fromARGB(255, 105, 96, 232),
-                                    Color.fromARGB(255, 97, 232, 214)
-                                  ])),
-                          child: const Center(
-                              child: Text(
-                            "Próximo",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600),
-                          )),
+                        InputField(
+                          label: "Área de Atuação",
+                          child: Wrap(
+                            spacing: 5.0,
+                            children:
+                                AreaAtuacao.values.map((AreaAtuacao area) {
+                              return FilterChip(
+                                label: Text(
+                                  area.descricao,
+                                  maxLines: 2,
+                                ),
+                                selected: filters.contains(area),
+                                onSelected: (bool selected) {
+                                  setState(() {
+                                    if (selected) {
+                                      filters.add(area);
+                                    } else {
+                                      filters.remove(area);
+                                    }
+                                  });
+                                },
+                              );
+                            }).toList(),
+                          ),
                         ),
-                      )
-                    ]),
+                        InputField(
+                          label: 'Data de Vencimento',
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                left: 15, right: 15, top: 10, bottom: 10),
+                            child: TextField(
+                              onTap: () async {
+                                DateTime? date = await showDatePicker(
+                                    context: context,
+                                    initialDate: DateTime.now(),
+                                    firstDate: DateTime.now(),
+                                    lastDate:
+                                        DateTime(DateTime.now().year + 10));
+
+                                if (date != null) {
+                                  setState(() {
+                                    registerController.usuario.data_vencimento =
+                                        date;
+                                  });
+                                }
+                              },
+                              decoration: InputDecoration(
+                                  hintStyle: const TextStyle(
+                                      fontStyle: FontStyle.italic),
+                                  enabledBorder: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+                                  hintText: registerController
+                                              .usuario.data_vencimento ==
+                                          null
+                                      ? "Digite a data de Vencimento do Cadastur"
+                                      : registerController
+                                          .usuario.data_vencimento
+                                          .toString()),
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            controller.nextPage(
+                                duration: const Duration(seconds: 2),
+                                curve: Curves.ease);
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.all(15),
+                            width: size.width,
+                            height: 60,
+                            decoration: const BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                      offset: Offset(0, 4),
+                                      blurRadius: 4,
+                                      color: Color.fromARGB(55, 116, 116, 116))
+                                ],
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                gradient: LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomLeft,
+                                    colors: [
+                                      Color.fromARGB(255, 105, 96, 232),
+                                      Color.fromARGB(255, 97, 232, 214)
+                                    ])),
+                            child: const Center(
+                                child: Text(
+                              "Próximo",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600),
+                            )),
+                          ),
+                        )
+                      ]),
+                    ),
                     Column(
                       children: [
                         const SizedBox(
@@ -391,11 +407,18 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         InkWell(
                           onTap: () {
+                            if (filters.isNotEmpty) {
+                              String dados = "";
+
+                              for (var area in filters) {
+                                dados += "${area.id}; ";
+                              }
+
+                              registerController.usuario.areatuacao = dados;
+                            }
+
                             registerController.cadastrarUsuario();
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const HomePage()));
+                            Navigator.pop(context);
                           },
                           child: Container(
                             margin: const EdgeInsets.all(15),
