@@ -49,10 +49,33 @@ class _NewTrailPageState extends State<NewTrailPage> {
                           hintText: "Digite o nome da trilha"),
                     ),
                   )),
-              InputField(
-                label: "Adicione imagens dessa trilha",
-                child: Column(
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    const Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Adicione imagens dessa trilha!",
+                          maxLines: 2,
+                          style: TextStyle(
+                              color: Color(0xFF393434),
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        Text(
+                          "Toque no botão ao lado",
+                          maxLines: 2,
+                          style: TextStyle(
+                              color: Color(0xFF393434),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
                     InkWell(
                       onTap: () => controller.selecionarArquivos(),
                       child: Container(
@@ -67,35 +90,44 @@ class _NewTrailPageState extends State<NewTrailPage> {
                                 color: Color.fromARGB(255, 97, 97, 97))),
                       ),
                     ),
-                    ValueListenableBuilder<List<File>>(
-                        valueListenable: controller.filesNotifier,
-                        builder: (__, files, _) {
-                          if (files.isEmpty) {
-                            return const Text("Sem arquivos para exibir");
-                          }
-
-                          return SizedBox(
-                            height: 150,
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              shrinkWrap: true,
-                              itemCount: files.length,
-                              itemBuilder: (context, index) {
-                                return Padding(
-                                  padding: const EdgeInsets.all(10),
-                                  child: Image.file(
-                                    files[index],
-                                    fit: BoxFit.cover,
-                                    width: 100,
-                                    height: 100,
-                                  ),
-                                );
-                              },
-                            ),
-                          );
-                        }),
                   ],
                 ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(
+                    left: 15, right: 15, bottom: 15, top: 15),
+                width: size.width,
+                padding: const EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                    color: const Color(0xFFF6F6FC),
+                    borderRadius: BorderRadius.circular(10)),
+                child: ValueListenableBuilder<List<File>>(
+                    valueListenable: controller.filesNotifier,
+                    builder: (__, files, _) {
+                      if (files.isEmpty) {
+                        return const Text("Sem arquivos para exibir");
+                      }
+
+                      return SizedBox(
+                        height: 150,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          shrinkWrap: true,
+                          itemCount: files.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Image.file(
+                                files[index],
+                                fit: BoxFit.cover,
+                                width: 100,
+                                height: 100,
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    }),
               ),
               InputField(
                 label: "Área de Atuação",
