@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:pov/models/enums/AreaAtuacao.dart';
 import '../../controllers/newtrailpage_controller.dart';
 import '../../widgets/input_field.dart';
 
@@ -12,8 +13,12 @@ class NewTrailPage extends StatefulWidget {
 
 class _NewTrailPageState extends State<NewTrailPage> {
   NewTrailPageController controller = NewTrailPageController();
+
+  Set<AreaAtuacao> filters = <AreaAtuacao>{};
+
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -48,14 +53,6 @@ class _NewTrailPageState extends State<NewTrailPage> {
                 label: "Adicione imagens dessa trilha",
                 child: Column(
                   children: [
-                    const Text(
-                      "Selecione um até três arquivos",
-                      style:
-                          TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontStyle: FontStyle.italic, 
-                            fontSize: 12),
-                    ),
                     InkWell(
                       onTap: () => controller.selecionarArquivos(),
                       child: Container(
@@ -77,33 +74,101 @@ class _NewTrailPageState extends State<NewTrailPage> {
                             return const Text("Sem arquivos para exibir");
                           }
 
-                          if (files.isNotEmpty) {
-                            return SizedBox(
-                              height: 150,
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                shrinkWrap: true,
-                                itemCount: files.length,
-                                itemBuilder: (context, index) {
-                                  return Padding(
-                                    padding: const EdgeInsets.all(10),
-                                    child: Image.file(
-                                      files[index],
-                                      fit: BoxFit.cover,
-                                    ),
-                                  );
-                                },
-                              ),
-                            );
-                          }
-
-                          return Container();
+                          return SizedBox(
+                            height: 150,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              shrinkWrap: true,
+                              itemCount: files.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Image.file(
+                                    files[index],
+                                    fit: BoxFit.cover,
+                                    width: 100,
+                                    height: 100,
+                                  ),
+                                );
+                              },
+                            ),
+                          );
                         }),
                   ],
                 ),
               ),
-              InputField(label: "Área de Atuação", child: Container()),
-              InputField(label: "Descrição", child: Container()),
+              InputField(
+                label: "Área de Atuação",
+                child: Wrap(
+                  spacing: 5.0,
+                  children: AreaAtuacao.values.map((AreaAtuacao area) {
+                    return FilterChip(
+                      label: Text(
+                        area.descricao,
+                        maxLines: 2,
+                      ),
+                      selected: filters.contains(area),
+                      onSelected: (bool selected) {
+                        setState(() {
+                          if (selected) {
+                            filters.add(area);
+                          } else {
+                            filters.remove(area);
+                          }
+                        });
+                      },
+                    );
+                  }).toList(),
+                ),
+              ),
+              InputField(
+                  label: "Descrição",
+                  child: Container(
+                    width: 400,
+                    height: 120,
+                    decoration: BoxDecoration(
+                        color: const Color(0xFFF6F6FC),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 15, right: 15),
+                      child: TextFormField(
+                        maxLines: 5,
+                        decoration: const InputDecoration(
+                            enabledBorder: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            hintText:
+                                "Descreva as atividades presentes nesse pacote!"),
+                      ),
+                    ),
+                  )),
+              InkWell(
+                onTap: () async {},
+                child: Container(
+                  margin: const EdgeInsets.all(15),
+                  width: size.width,
+                  height: 60,
+                  decoration: const BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                            offset: Offset(0, 4),
+                            blurRadius: 4,
+                            color: Color.fromARGB(55, 116, 116, 116))
+                      ],
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [Color(0xFFE86060), Color(0xFFE86192)])),
+                  child: const Center(
+                      child: Text(
+                    "Salvar",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600),
+                  )),
+                ),
+              )
             ],
           ),
         ),
