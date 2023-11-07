@@ -105,7 +105,14 @@ class _NewTrailPageState extends State<NewTrailPage> {
                     valueListenable: controller.filesNotifier,
                     builder: (__, files, _) {
                       if (files.isEmpty) {
-                        return const Text("Sem arquivos para exibir");
+                        return Text(
+                          "Sem arquivos para exibir",
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontStyle: FontStyle.italic,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.grey[700]),
+                        );
                       }
 
                       return SizedBox(
