@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:pov/dto/trail_dto.dart';
 
 class NewTrailPageController {
   final ValueNotifier<List<File>>filesNotifier = ValueNotifier<List<File>>([]);
@@ -11,6 +12,8 @@ class NewTrailPageController {
   List<File> get files => filesNotifier.value;
   int get filesCount => files.length;
   bool get hasFiles => filesCount != 0;
+
+  TrailDTO trailDTO = TrailDTO();
 
   Future selecionarArquivos() async {
     final filePickerResult = await FilePicker.platform.pickFiles(
