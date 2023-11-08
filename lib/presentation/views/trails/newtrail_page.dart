@@ -82,7 +82,7 @@ class _NewTrailPageState extends State<NewTrailPage> {
                         width: 60,
                         height: 60,
                         decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 206, 206, 206),
+                          color: const Color.fromARGB(255, 225, 225, 230),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: const Center(
@@ -138,26 +138,29 @@ class _NewTrailPageState extends State<NewTrailPage> {
               ),
               InputField(
                 label: "Área de Atuação",
-                child: Wrap(
-                  spacing: 5.0,
-                  children: AreaAtuacao.values.map((AreaAtuacao area) {
-                    return FilterChip(
-                      label: Text(
-                        area.descricao,
-                        maxLines: 2,
-                      ),
-                      selected: filters.contains(area),
-                      onSelected: (bool selected) {
-                        setState(() {
-                          if (selected) {
-                            filters.add(area);
-                          } else {
-                            filters.remove(area);
-                          }
-                        });
-                      },
-                    );
-                  }).toList(),
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Wrap(
+                    spacing: 5.0,
+                    children: AreaAtuacao.values.map((AreaAtuacao area) {
+                      return FilterChip(
+                        label: Text(
+                          area.descricao,
+                          maxLines: 2,
+                        ),
+                        selected: filters.contains(area),
+                        onSelected: (bool selected) {
+                          setState(() {
+                            if (selected) {
+                              filters.add(area);
+                            } else {
+                              filters.remove(area);
+                            }
+                          });
+                        },
+                      );
+                    }).toList(),
+                  ),
                 ),
               ),
               InputField(
