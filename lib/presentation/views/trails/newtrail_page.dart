@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:pov/models/enums/AreaAtuacao.dart';
@@ -36,12 +38,13 @@ class _NewTrailPageState extends State<NewTrailPage> {
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
-              const InputField(
+              InputField(
                   label: "Nome da Trilha",
                   child: Padding(
                     padding: EdgeInsets.only(
                         left: 15, right: 15, top: 10, bottom: 10),
                     child: TextField(
+                      onChanged: (value) => controller.trailDTO.name = value,
                       decoration: InputDecoration(
                           hintStyle: TextStyle(fontStyle: FontStyle.italic),
                           enabledBorder: InputBorder.none,
@@ -174,6 +177,8 @@ class _NewTrailPageState extends State<NewTrailPage> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 15, right: 15),
                       child: TextFormField(
+                        onChanged: (value) =>
+                            controller.trailDTO.description = value,
                         maxLines: 5,
                         decoration: const InputDecoration(
                             enabledBorder: InputBorder.none,
@@ -184,7 +189,17 @@ class _NewTrailPageState extends State<NewTrailPage> {
                     ),
                   )),
               InkWell(
-                onTap: () async {},
+                onTap: () async {
+                  if (filters.isNotEmpty) {
+                    String dados = "";
+
+                    for (var area in filters) {
+                      dados += "${area.id}; ";
+                    }
+
+                    controller.trailDTO.occupation = dados;
+                  }
+                },
                 child: Container(
                   margin: const EdgeInsets.all(15),
                   width: size.width,
