@@ -254,27 +254,30 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         InputField(
                           label: "Área de Atuação",
-                          child: Wrap(
-                            spacing: 5.0,
-                            children:
-                                AreaAtuacao.values.map((AreaAtuacao area) {
-                              return FilterChip(
-                                label: Text(
-                                  area.descricao,
-                                  maxLines: 2,
-                                ),
-                                selected: filters.contains(area),
-                                onSelected: (bool selected) {
-                                  setState(() {
-                                    if (selected) {
-                                      filters.add(area);
-                                    } else {
-                                      filters.remove(area);
-                                    }
-                                  });
-                                },
-                              );
-                            }).toList(),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: Wrap(
+                              spacing: 5.0,
+                              children:
+                                  AreaAtuacao.values.map((AreaAtuacao area) {
+                                return FilterChip(
+                                  label: Text(
+                                    area.descricao,
+                                    maxLines: 2,
+                                  ),
+                                  selected: filters.contains(area),
+                                  onSelected: (bool selected) {
+                                    setState(() {
+                                      if (selected) {
+                                        filters.add(area);
+                                      } else {
+                                        filters.remove(area);
+                                      }
+                                    });
+                                  },
+                                );
+                              }).toList(),
+                            ),
                           ),
                         ),
                         InputField(
