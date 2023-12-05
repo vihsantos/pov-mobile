@@ -3,6 +3,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:pov/models/enums/AreaAtuacao.dart';
+import 'package:pov/repository/trail_repository.dart';
 import '../../controllers/newtrailpage_controller.dart';
 import '../../widgets/input_field.dart';
 
@@ -14,7 +15,8 @@ class NewTrailPage extends StatefulWidget {
 }
 
 class _NewTrailPageState extends State<NewTrailPage> {
-  NewTrailPageController controller = NewTrailPageController();
+  NewTrailPageController controller =
+      NewTrailPageController(repository: TrailRepository());
 
   Set<AreaAtuacao> filters = <AreaAtuacao>{};
 
