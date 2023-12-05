@@ -10,4 +10,5 @@ class Routes {
   static const String profilePosts = "$urlPartial/profileposts";
   static const String rankingByLocal = "$urlPartial/ranking/local";
   static const String guides = "$urlPartial/guides";
+  static const String trail = "$urlPartial/newtrail";
 }
