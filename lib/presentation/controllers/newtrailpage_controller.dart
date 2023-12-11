@@ -1,13 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:io';
-
-import 'package:dartz/dartz_unsafe.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-
 import 'package:pov/dto/trail_dto.dart';
-
 import '../../repository/trail_repository.dart';
 import '../../services/error/applicationerror.dart';
 
@@ -64,12 +60,11 @@ class NewTrailPageController {
     try {
       List<MultipartFile> arquivos = List.empty();
 
-      files.forEach((element) async {
-        var pic = await MultipartFile.fromPath("arquivo", element.path);
+      for(int x =0; x< files.length; x++){
+        var pic = await MultipartFile.fromPath("arquivo", files[x].path);
         arquivos.add(pic);
-      });
-
-      var dado = await repository.criarNovaTrilha(arquivos, trailDTO);
+      }
+      await repository.criarNovaTrilha(arquivos, trailDTO);
     } on ApplicationError catch (e) {
       _error = e;
     }
