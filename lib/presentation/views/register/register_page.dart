@@ -66,7 +66,7 @@ class _RegisterPageState extends State<RegisterPage> {
               const SizedBox(height: 10),
               SizedBox(
                 width: size.width,
-                height: size.height * 0.65,
+                height: size.height * 0.75,
                 child: PageView(
                   physics: const NeverScrollableScrollPhysics(),
                   controller: controller,
