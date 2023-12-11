@@ -31,7 +31,7 @@ class UserRepository {
 
   Future<DadosPerfilDTO> buscarDadosPerfil(int id) async {
     try {
-      String url = "${Routes.usuario}/$id";
+      String url = "${Routes.usuario}$id";
 
       String? token = AuthSingleton(LoginRepository()).getToken();
 
