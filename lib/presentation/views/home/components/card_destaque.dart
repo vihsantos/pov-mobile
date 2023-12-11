@@ -38,10 +38,7 @@ class CardDestaque extends StatelessWidget {
                   margin: const EdgeInsets.only(top: 10, left: 10),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: Image.network(
-                      post.imageUrl!,
-                      fit: BoxFit.cover,
-                    ),
+                    child: Container(),
                   ),
                 ),
                 const SizedBox(height: 5),
