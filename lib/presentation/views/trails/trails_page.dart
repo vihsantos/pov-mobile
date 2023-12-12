@@ -28,27 +28,33 @@ class _TrailsPageState extends State<TrailsPage> {
           ),
         ),
         backgroundColor: Colors.white,
-        body: Column(children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 15, right: 15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  width: size.width * 0.75,
-                  child: const Text(
-                    "Esta é uma listagem das suas trilhas, se deseja adicionar mais alguma, clique no botão ao lado.",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        color: ColorPallete.secondColor),
+        body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 15, right: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: size.width * 0.75,
+                    child: const Text(
+                      "Esta é uma listagem das suas trilhas, se deseja adicionar mais alguma, clique no botão ao lado.",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          color: ColorPallete.secondColor),
+                    ),
                   ),
-                ),
-                const ButtonNewTrail()
-              ],
+                  const ButtonNewTrail()
+                ],
+              ),
             ),
-          ),
-          const TrailCard(),
-        ]),
+            const TrailCard(),
+            const TrailCard(),
+            const TrailCard(),
+            const TrailCard(),
+          ]),
+        ),
       ),
     );
   }
