@@ -58,10 +58,11 @@ class NewTrailPageController {
   Future enviarImagem() async {
     _error = null;
     try {
-      List<MultipartFile> arquivos = List.empty();
+      List<MultipartFile> arquivos = List.empty(growable: true);
 
       for(int x =0; x< files.length; x++){
-        var pic = await MultipartFile.fromPath("arquivo", files[x].path);
+        String filename = files[x].path.split("/").last;
+        var pic = await MultipartFile.fromPath(filename, files[x].path);
         arquivos.add(pic);
       }
       await repository.criarNovaTrilha(arquivos, trailDTO);
