@@ -1,11 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:pov/dto/dadosperfil_dto.dart';
+import 'package:pov/presentation/views/trails/newtrail_page.dart';
+import 'package:pov/services/core/colorpallete.dart';
 import '../../../models/post/postprofile_model.dart';
 import '../../controllers/profilepage_controller.dart';
+import '../trails/trails_page.dart';
 import 'components/card_postprofile.dart';
 import 'components/profile_header.dart';
-import 'components/trilhasbutton.dart';
 
 class ProfileGuidePage extends StatefulWidget {
   final int id;
@@ -36,6 +38,27 @@ class _ProfileGuidePageState extends State<ProfileGuidePage> {
             "Perfil",
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
           ),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => TrailsPage(id: widget.id,)));
+                },
+                icon: const Icon(Icons.location_on, color: ColorPallete.secondColor)),
+            Visibility(
+              visible: widget.controller.isProfile(widget.id),
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const NewTrailPage()));
+                  },
+                  icon: const Icon(Icons.add_location_alt, color: ColorPallete.secondColor,)),
+            )
+          ],
         ),
         body: Column(children: [
           const SizedBox(height: 15),
@@ -60,33 +83,7 @@ class _ProfileGuidePageState extends State<ProfileGuidePage> {
                         isprofileuser: widget.controller.isProfile(widget.id)),
                     const SizedBox(
                       height: 10,
-                    ),
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TrilhasButton(),
-                        SizedBox(width: 15),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Cadastur",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12,
-                              ),
-                            ),
-                            Text("1234565"),
-                            Text("Área de Atuação",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 12)),
-                            Text("dajksjkdjkjkjk"),
-                          ],
-                        )
-                      ],
-                    ),
+                    )
                   ],
                 ),
               );
