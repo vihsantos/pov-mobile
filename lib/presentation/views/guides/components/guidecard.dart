@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pov/models/enums/AreaAtuacao.dart';
 import 'package:pov/presentation/views/guides/components/profileiconcard.dart';
 import 'package:pov/presentation/views/profile/profile_page.dart';
 
@@ -14,6 +15,25 @@ class GuideCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    var numAreas = guia.guide!.areaatuacao!.split(";");
+    List<AreaAtuacao> areaatuacao = List.empty(growable: true);
+    String areaas = "";
+
+    for (var area in numAreas) {
+      String numero = area.trim();
+
+      if (numero.isNotEmpty) {
+        AreaAtuacao a = AreaAtuacao.values.elementAt(int.parse(area.trim()));
+        areaatuacao.add(a);
+      }
+    }
+
+    for (var element in areaatuacao) {
+      areaas += "${element.descricao} - ";
+    }
+
+    areaas = areaas.substring(0, areaas.length -2);
+
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -46,8 +66,12 @@ class GuideCard extends StatelessWidget {
               Text(guia.user!.username!,
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold)),
-              Text(guia.guide!.areaatuacao!, style: const
-              TextStyle(fontSize: 12), maxLines: 1,),
+              Text(
+                areaas,
+                style: const TextStyle(fontSize: 10),
+                maxLines: 3,
+                textAlign: TextAlign.center,
+              ),
               SizedBox(
                 height: size.height * 0.005,
               ),
