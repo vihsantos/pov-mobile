@@ -11,7 +11,6 @@ class TrailDTO {
   UserPostModel? user;
   String? occupation;
   String? name;
-  List<File>? imagens;
   TrailDTO({
     this.id,
     this.files,
@@ -19,7 +18,6 @@ class TrailDTO {
     this.user,
     this.occupation,
     this.name,
-    this.imagens,
   });
 
   Map<String, dynamic> toMap() {
