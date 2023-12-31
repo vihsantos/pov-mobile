@@ -1,5 +1,5 @@
 class Routes {
-  static const String urlPartial = "http://172.22.17.34:8000";
+  static const String urlPartial = "http://192.168.100.10:8000";
 
   static const String login = "$urlPartial/acesso";
   static const String novoUsuario = "$urlPartial/criarusuario";
@@ -11,4 +11,5 @@ class Routes {
   static const String rankingByLocal = "$urlPartial/ranking/local";
   static const String guides = "$urlPartial/guides";
   static const String trail = "$urlPartial/newtrail";
+  static const String trails = "$urlPartial/trails";
 }
