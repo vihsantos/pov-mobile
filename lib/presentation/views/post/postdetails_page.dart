@@ -2,8 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:pov/presentation/controllers/postpage_controller.dart';
 import 'package:pov/repository/post_repository.dart';
+import 'package:pov/services/core/colorpallete.dart';
 
 import '../../../models/post/post_model.dart';
+import '../../widgets/alert_comentarios.dart';
 
 class PostDetailsPage extends StatefulWidget {
   final int id;
@@ -57,7 +59,10 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                             height: size.height * 0.5,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10),
-                              child: Container(),
+                              child: Image.network(
+                                post!.image_url!,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                           const SizedBox(
@@ -107,7 +112,88 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                           const SizedBox(
                             height: 15,
                           ),
-                          //CardComment()
+                          Row(
+                            children: [
+                              Container(
+                                width: 70,
+                                height: 75,
+                                decoration: BoxDecoration(
+                                    boxShadow: const [
+                                      BoxShadow(
+                                          color: Color.fromARGB(47, 49, 49, 49),
+                                          blurRadius: 5,
+                                          offset: Offset(2, 2))
+                                    ],
+                                    color: ColorPallete.bgItemColor,
+                                    borderRadius: BorderRadius.circular(10)),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              InkWell(
+                                onTap: () async {
+                                  if (!mounted) return;
+
+                                  showGeneralDialog(
+                                      barrierLabel: "Comentários",
+                                      barrierDismissible: true,
+                                      context: context,
+                                      pageBuilder: (context, _, __) =>
+                                          AlertComentarios());
+
+                                  // return showDialog(
+                                  //     context: context,
+                                  //     builder: (context) {
+                                  //       return AlertDialog(
+                                  //         title: const Text("Poxa!"),
+                                  //         content: const Text(
+                                  //             "Ocorreu um erro ao tentar realizar o login, por favor tente novamente!"),
+                                  //         actions: <Widget>[
+                                  //           TextButton(
+                                  //             child: const Text("Ok"),
+                                  //             onPressed: () {
+                                  //               Navigator.pop(context);
+                                  //             },
+                                  //           ),
+                                  //         ],
+                                  //       );
+                                  //     });
+                                },
+                                child: Container(
+                                  width: 70,
+                                  height: 75,
+                                  decoration: BoxDecoration(
+                                      boxShadow: const [
+                                        BoxShadow(
+                                            color:
+                                                Color.fromARGB(47, 49, 49, 49),
+                                            blurRadius: 5,
+                                            offset: Offset(2, 2))
+                                      ],
+                                      color: ColorPallete.bgItemColor,
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: const Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.insert_comment_rounded,
+                                        size: 30,
+                                        color: ColorPallete.secondColor,
+                                      ),
+                                      Text(
+                                        "14",
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            color: ColorPallete.secondColor),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              )
+                            ],
+                          )
                         ],
                       ),
                       Positioned(
@@ -148,7 +234,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                   post.stars.toString(),
                                   style: const TextStyle(
                                       fontSize: 26,
-                                      fontWeight: FontWeight.bold,
+                                      fontWeight: FontWeight.w500,
                                       color: Colors.pink),
                                 ),
                                 const Icon(
@@ -168,3 +254,6 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
     );
   }
 }
+
+
+

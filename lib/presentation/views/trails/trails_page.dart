@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:pov/services/core/colorpallete.dart';
-import 'components/buttonnewtrail.dart';
+import 'package:pov/presentation/controllers/trailpage_controller.dart';
+import 'package:pov/repository/trail_repository.dart';
 import 'components/trailcard.dart';
 
 class TrailsPage extends StatefulWidget {
-  const TrailsPage({super.key});
+  const TrailsPage({super.key, required this.id});
 
+  final int id;
   @override
   State<TrailsPage> createState() => _TrailsPageState();
 }
 
 class _TrailsPageState extends State<TrailsPage> {
+  TrailPageController controller =
+      TrailPageController(repository: TrailRepository());
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -23,40 +25,16 @@ class _TrailsPageState extends State<TrailsPage> {
           elevation: 0,
           centerTitle: true,
           title: const Text(
-            "Trilhas de username",
+            "Trilhas de ",
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
           ),
         ),
         backgroundColor: Colors.white,
-        body: SingleChildScrollView(
+        body: const SingleChildScrollView(
           scrollDirection: Axis.vertical,
-          child: Column(children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    width: size.width * 0.75,
-                    child: const Text(
-                      "Esta é uma listagem das suas trilhas, se deseja adicionar mais alguma, clique no botão ao lado.",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          color: ColorPallete.secondColor),
-                    ),
-                  ),
-                  const ButtonNewTrail()
-                ],
-              ),
-            ),
-            const TrailCard(),
-            const TrailCard(),
-            const TrailCard(),
-            const TrailCard(),
-          ]),
+          child: Column(children: []),
         ),
       ),
     );
   }
 }
-

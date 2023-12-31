@@ -26,6 +26,17 @@ class _NewPostPageState extends State<NewPostPage> {
 
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          scrolledUnderElevation: 0,
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          centerTitle: true,
+          title: const Text(
+            "Novo Post",
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+          ),
+        ),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

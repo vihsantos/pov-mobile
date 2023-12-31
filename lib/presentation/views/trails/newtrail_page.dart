@@ -200,6 +200,7 @@ class _NewTrailPageState extends State<NewTrailPage> {
                     }
 
                     controller.trailDTO.occupation = dados;
+                    controller.enviarImagem();
                   }
                 },
                 child: Container(
