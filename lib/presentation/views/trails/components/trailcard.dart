@@ -1,67 +1,37 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-
+import 'package:pov/dto/trail_dto.dart';
 import '../../../../services/core/colorpallete.dart';
 
 class TrailCard extends StatelessWidget {
-  const TrailCard({
-    super.key,
-  });
+  final TrailDTO trilha;
 
+  const TrailCard({
+    Key? key,
+    required this.trilha,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    var urls = trilha.files!.split(";");
     return Container(
       margin: const EdgeInsets.all(15),
       padding: const EdgeInsets.all(10),
       width: size.width,
-      height: size.height * 0.38,
+      height: size.height * 0.34,
       decoration: BoxDecoration(
           color: ColorPallete.bgItemColor,
           borderRadius: BorderRadius.circular(10)),
       child: Column(
         children: [
-          const Center(
+          Center(
             child: Text(
-              "Nome da Trilha",
-              style: TextStyle(
+              trilha.name!,
+              style: const TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 16,
                   color: ColorPallete.labelColor),
-            ),
-          ),
-          SizedBox(
-            height: size.height * 0.2,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    width: size.width * 0.35,
-                    height: size.height * 0.175,
-                    decoration: BoxDecoration(
-                        color: ColorPallete.bgColor,
-                        borderRadius: BorderRadius.circular(10)),
-                  ),
-                  const SizedBox(width: 10),
-                  Container(
-                    width: size.width * 0.35,
-                    height: size.height * 0.175,
-                    decoration: BoxDecoration(
-                        color: ColorPallete.bgColor,
-                        borderRadius: BorderRadius.circular(10)),
-                  ),
-                  const SizedBox(width: 10),
-                  Container(
-                    width: size.width * 0.35,
-                    height: size.height * 0.175,
-                    decoration: BoxDecoration(
-                        color: ColorPallete.bgColor,
-                        borderRadius: BorderRadius.circular(10)),
-                  )
-                ],
-              ),
             ),
           ),
           const Text(
@@ -75,14 +45,14 @@ class TrailCard extends StatelessWidget {
           const SizedBox(
             height: 5,
           ),
-          const Text(
-            "DESCRIÇÃO DA TRILHA DESCRIÇÃO DA TRILHA DESCRIÇÃO DA TRILHA DESCRIÇÃO DA TRILHA DESCRIÇÃO DA TRILHA", 
+          Text(
+            trilha.description!,
             maxLines: 3,
-            style: TextStyle(
-            color: ColorPallete.primaryColor,
-            fontSize: 12,
-            fontWeight: FontWeight.w500
-          ),)
+            style: const TextStyle(
+                color: ColorPallete.primaryColor,
+                fontSize: 12,
+                fontWeight: FontWeight.w500),
+          )
         ],
       ),
     );

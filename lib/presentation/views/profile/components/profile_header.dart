@@ -36,8 +36,8 @@ class ProfileHeader extends StatelessWidget {
         Column(
           children: [
             Container(
-              width: size.width * 0.3,
-              height: size.height * 0.15,
+              width: 130,
+              height: 130,
               decoration: BoxDecoration(
                   color: Colors.black12,
                   borderRadius: BorderRadius.circular(75)),

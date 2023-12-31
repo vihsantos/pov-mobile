@@ -10,16 +10,15 @@ class ProfileIconCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return profileIcon != "" ? Container(
-      width: size.width * 0.25,
-      height: size.height * 0.125,
+      width: 100,
+      height: 100,
       decoration: BoxDecoration(
           color: Colors.grey[50],
           borderRadius: BorderRadius.circular(100)),
     ) : Container(
-      width: size.width * 0.25,
-      height: size.height * 0.125,
+      width: 100,
+      height: 100,
       decoration: BoxDecoration(
           color: Colors.grey[50],
           borderRadius: BorderRadius.circular(100)

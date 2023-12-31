@@ -25,7 +25,7 @@ class CardPostProfile extends StatelessWidget {
           SizedBox(
             width: 200,
             height: 200,
-            child:Container(),
+            child: Image.network(post.image_url!, fit: BoxFit.cover)
           ),
           Positioned(
             top: 10,
