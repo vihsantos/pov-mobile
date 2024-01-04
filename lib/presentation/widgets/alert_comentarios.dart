@@ -30,7 +30,7 @@ class AlertComentarios extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 10),
                   child: SizedBox(
                     width: size.width,
-                    height: 330,
+                    height: size.height * 0.31,
                     child: const SingleChildScrollView(
                       child: Column(
                         children: [
@@ -59,14 +59,17 @@ class AlertComentarios extends StatelessWidget {
                         Container(
                           width: size.width * 0.75,
                           height: 100,
-                          padding: const EdgeInsets.all(10),
+                          padding: const EdgeInsets.only(left:10, right: 10, bottom: 10),
                           decoration: const BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.only(topLeft: Radius.circular(10), bottomLeft: Radius.circular(10))
                           ),
                           child: const TextField(
+                            maxLength: 500,
+                            maxLines: 3,
                             decoration: InputDecoration(
-                              border: InputBorder.none
+                              border: InputBorder.none,
+                              hintText: "Escreva um comentário",
                             ),
                           ),
                         ),
