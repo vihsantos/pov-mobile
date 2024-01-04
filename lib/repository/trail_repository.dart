@@ -60,4 +60,32 @@ class TrailRepository {
       throw ApplicationErrorImp(mensagem: e.toString(), statusCode: 500);
     }
   }
+
+    Future<List<TrailDTO>> getTrilhas() async {
+    try {
+      String url = Routes.trails;
+
+      String? token = AuthSingleton(LoginRepository()).getToken();
+
+      var response = await http.get(Uri.parse(url), headers: {
+        "content-type": "application/json",
+        "accept": "application/json",
+        'Authorization': 'Bearer $token',
+      });
+
+      if (response.statusCode == 200) {
+        Iterable lista = json.decode(response.body);
+        List<TrailDTO> trilhas =
+            lista.map((model) => TrailDTO.fromJson(model)).toList();
+
+        return trilhas;
+      }
+
+      throw ApplicationErrorImp(
+          mensagem: response.reasonPhrase.toString(),
+          statusCode: response.statusCode);
+    } catch (e) {
+      throw ApplicationErrorImp(mensagem: e.toString(), statusCode: 500);
+    }
+  }
 }
