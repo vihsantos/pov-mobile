@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pov/dto/trail_dto.dart';
 import 'package:pov/presentation/widgets/bottom_navigation.dart';
+import 'package:pov/repository/trail_repository.dart';
 import '../../../dto/post_dto.dart';
 import '../../../repository/post_repository.dart';
 import '../../controllers/homepage_controller.dart';
@@ -13,7 +15,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  HomePageController controller = HomePageController(PostRepository());
+  HomePageController controller = HomePageController(PostRepository(), TrailRepository());
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +47,53 @@ class _HomePageState extends State<HomePage> {
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     //Colocar aqui as trilhas
+                    Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: SizedBox(
+                        height: 270,
+                        child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: FutureBuilder<List<TrailDTO?>?>(
+                                future: controller.listarTrilhas(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    List<TrailDTO?>? trails = snapshot.data;
+
+                                    if (trails!.isEmpty) {
+                                      return Container();
+                                    }
+
+                                    if(controller.error != null){
+                                      return Text(controller.error!.mensagem);
+                                    }
+
+                                    return Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        ListView.builder(
+                                            scrollDirection: Axis.horizontal,
+                                            shrinkWrap: true,
+                                            itemCount: trails.length,
+                                            itemBuilder: (_, index) {
+                                              //final trail = trails[index];
+
+                                              //return CardDestaque(post: post!);
+                                              return Container();
+                                            })
+                                      ],
+                                    );
+                                  }
+
+                                  if (snapshot.hasError) {
+                                    return const Text("ERROR");
+                                  }
+
+                                  return Container();
+
+                                })),
+                      ),
+                    ),
                     const SizedBox(height: 10),
                     const Text(
                       "Posts",
@@ -87,8 +136,9 @@ class _HomePageState extends State<HomePage> {
                                   if (snapshot.hasError) {
                                     return const Text("ERROR");
                                   }
-                                  return const Center(
-                                      child: CircularProgressIndicator());
+                                  
+                                  
+                                  return Container();
                                 })),
                       ),
                     ),
