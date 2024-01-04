@@ -27,227 +27,229 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        body: Padding(
-            padding: const EdgeInsets.all(15),
-            child: FutureBuilder<PostModel?>(
-                future: controller.buscarPostPorID(widget.id),
-                builder: (context, snapshot) {
-                  PostModel? post = snapshot.data;
-
-                  if (!snapshot.hasData) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-
-                  if (snapshot.hasError) {
-                    return const Text("Ocorreu um erro!");
-                  }
-
-                  if (snapshot.data == null) {
-                    return const Text("Ocorreu um erro!");
-                  }
-
-                  return Stack(
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            width: size.width,
-                            height: size.height * 0.5,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Image.network(
-                                post!.image_url!,
-                                fit: BoxFit.cover,
+        body: SingleChildScrollView(
+          child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: FutureBuilder<PostModel?>(
+                  future: controller.buscarPostPorID(widget.id),
+                  builder: (context, snapshot) {
+                    PostModel? post = snapshot.data;
+        
+                    if (!snapshot.hasData) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+        
+                    if (snapshot.hasError) {
+                      return const Text("Ocorreu um erro!");
+                    }
+        
+                    if (snapshot.data == null) {
+                      return const Text("Ocorreu um erro!");
+                    }
+        
+                    return Stack(
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: size.width,
+                              height: size.height * 0.5,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Image.network(
+                                  post!.image_url!,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                height: size.height * 0.074,
-                                width: size.width * 0.16,
-                                decoration: BoxDecoration(
-                                    color: Colors.pink,
-                                    borderRadius: BorderRadius.circular(50)),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    post.user!.username!,
-                                    style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                      width: size.width * 0.718,
-                                      child: Text(
-                                        post.localization!.local!,
-                                        maxLines: 2,
-                                        style: const TextStyle(fontSize: 13),
-                                      ))
-                                ],
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          Text(
-                            post.description!,
-                            style: const TextStyle(fontSize: 17),
-                            textAlign: TextAlign.start,
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          Row(
-                            children: [
-                              Container(
-                                width: 70,
-                                height: 75,
-                                decoration: BoxDecoration(
-                                    boxShadow: const [
-                                      BoxShadow(
-                                          color: Color.fromARGB(47, 49, 49, 49),
-                                          blurRadius: 5,
-                                          offset: Offset(2, 2))
-                                    ],
-                                    color: ColorPallete.bgItemColor,
-                                    borderRadius: BorderRadius.circular(10)),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              InkWell(
-                                onTap: () async {
-                                  if (!mounted) return;
-
-                                  showModalBottomSheet(
-                                      context: context,
-                                      builder: (context) =>
-                                          const AlertComentarios());
-
-                                  // return showDialog(
-                                  //     context: context,
-                                  //     builder: (context) {
-                                  //       return AlertDialog(
-                                  //         title: const Text("Poxa!"),
-                                  //         content: const Text(
-                                  //             "Ocorreu um erro ao tentar realizar o login, por favor tente novamente!"),
-                                  //         actions: <Widget>[
-                                  //           TextButton(
-                                  //             child: const Text("Ok"),
-                                  //             onPressed: () {
-                                  //               Navigator.pop(context);
-                                  //             },
-                                  //           ),
-                                  //         ],
-                                  //       );
-                                  //     });
-                                },
-                                child: Container(
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  height: size.height * 0.074,
+                                  width: size.width * 0.16,
+                                  decoration: BoxDecoration(
+                                      color: Colors.pink,
+                                      borderRadius: BorderRadius.circular(50)),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      post.user!.username!,
+                                      style: const TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(
+                                        width: size.width * 0.718,
+                                        child: Text(
+                                          post.localization!.local!,
+                                          maxLines: 2,
+                                          style: const TextStyle(fontSize: 13),
+                                        ))
+                                  ],
+                                )
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Text(
+                              post.description!,
+                              style: const TextStyle(fontSize: 17),
+                              textAlign: TextAlign.start,
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Row(
+                              children: [
+                                Container(
                                   width: 70,
                                   height: 75,
                                   decoration: BoxDecoration(
                                       boxShadow: const [
                                         BoxShadow(
-                                            color:
-                                                Color.fromARGB(47, 49, 49, 49),
+                                            color: Color.fromARGB(47, 49, 49, 49),
                                             blurRadius: 5,
                                             offset: Offset(2, 2))
                                       ],
                                       color: ColorPallete.bgItemColor,
                                       borderRadius: BorderRadius.circular(10)),
-                                  child: const Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.insert_comment_rounded,
-                                        size: 30,
-                                        color: ColorPallete.secondColor,
-                                      ),
-                                      Text(
-                                        "14",
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            color: ColorPallete.secondColor),
-                                      )
-                                    ],
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                InkWell(
+                                  onTap: () async {
+                                    if (!mounted) return;
+        
+                                    showModalBottomSheet(
+                                        context: context,
+                                        builder: (context) =>
+                                            const AlertComentarios());
+        
+                                    // return showDialog(
+                                    //     context: context,
+                                    //     builder: (context) {
+                                    //       return AlertDialog(
+                                    //         title: const Text("Poxa!"),
+                                    //         content: const Text(
+                                    //             "Ocorreu um erro ao tentar realizar o login, por favor tente novamente!"),
+                                    //         actions: <Widget>[
+                                    //           TextButton(
+                                    //             child: const Text("Ok"),
+                                    //             onPressed: () {
+                                    //               Navigator.pop(context);
+                                    //             },
+                                    //           ),
+                                    //         ],
+                                    //       );
+                                    //     });
+                                  },
+                                  child: Container(
+                                    width: 70,
+                                    height: 75,
+                                    decoration: BoxDecoration(
+                                        boxShadow: const [
+                                          BoxShadow(
+                                              color:
+                                                  Color.fromARGB(47, 49, 49, 49),
+                                              blurRadius: 5,
+                                              offset: Offset(2, 2))
+                                        ],
+                                        color: ColorPallete.bgItemColor,
+                                        borderRadius: BorderRadius.circular(10)),
+                                    child: const Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.insert_comment_rounded,
+                                          size: 30,
+                                          color: ColorPallete.secondColor,
+                                        ),
+                                        Text(
+                                          "14",
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              color: ColorPallete.secondColor),
+                                        )
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                      Positioned(
-                        top: 5,
-                        left: 5,
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: Container(
-                            width: size.width * 0.13,
-                            height: size.height * 0.06,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.white),
-                            child: const Icon(Icons.arrow_back_ios_rounded),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top: 5,
-                        right: 5,
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: Container(
-                            width: size.width * 0.20,
-                            height: size.height * 0.05,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.white),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  post.stars.toString(),
-                                  style: const TextStyle(
-                                      fontSize: 26,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.pink),
-                                ),
-                                const Icon(
-                                  Icons.star,
-                                  size: 26,
-                                  color: Colors.pink,
                                 )
                               ],
+                            )
+                          ],
+                        ),
+                        Positioned(
+                          top: 5,
+                          left: 5,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: Container(
+                              width: size.width * 0.13,
+                              height: size.height * 0.06,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.white),
+                              child: const Icon(Icons.arrow_back_ios_rounded),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  );
-                })),
+                        Positioned(
+                          top: 5,
+                          right: 5,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: Container(
+                              width: size.width * 0.20,
+                              height: size.height * 0.05,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.white),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    post.stars.toString(),
+                                    style: const TextStyle(
+                                        fontSize: 26,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.pink),
+                                  ),
+                                  const Icon(
+                                    Icons.star,
+                                    size: 26,
+                                    color: Colors.pink,
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  })),
+        ),
       ),
     );
   }
