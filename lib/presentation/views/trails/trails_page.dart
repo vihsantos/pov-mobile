@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pov/presentation/controllers/trailpage_controller.dart';
 import 'package:pov/repository/trail_repository.dart';
-import 'components/trailcard.dart';
+
 
 class TrailsPage extends StatefulWidget {
   const TrailsPage({super.key, required this.id});

@@ -85,7 +85,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    post!.user!.username!,
+                                    post.user!.username!,
                                     style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
@@ -134,12 +134,10 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                 onTap: () async {
                                   if (!mounted) return;
 
-                                  showGeneralDialog(
-                                      barrierLabel: "Comentários",
-                                      barrierDismissible: true,
+                                  showModalBottomSheet(
                                       context: context,
-                                      pageBuilder: (context, _, __) =>
-                                          AlertComentarios());
+                                      builder: (context) =>
+                                          const AlertComentarios());
 
                                   // return showDialog(
                                   //     context: context,
