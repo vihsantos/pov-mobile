@@ -14,7 +14,7 @@ class TrailCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    var urls = trilha.files!.split(";");
+    //var urls = trilha.files!.split(";");
     return Container(
       margin: const EdgeInsets.all(15),
       padding: const EdgeInsets.all(10),
