@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pov/dto/trail_dto.dart';
+import 'package:pov/presentation/views/trails/components/trailcard.dart';
 import 'package:pov/presentation/widgets/bottom_navigation.dart';
 import 'package:pov/repository/trail_repository.dart';
 import '../../../dto/post_dto.dart';
@@ -40,59 +41,53 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 10),
                     const Text(
                       "Trilhas",
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                    //Colocar aqui as trilhas
-                    Padding(
-                      padding: const EdgeInsets.all(15),
-                      child: SizedBox(
-                        height: 270,
-                        child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: FutureBuilder<List<TrailDTO?>?>(
-                                future: controller.listarTrilhas(),
-                                builder: (context, snapshot) {
-                                  if (snapshot.hasData) {
-                                    List<TrailDTO?>? trails = snapshot.data;
+                    SizedBox(
+                      height: 220,
+                      child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: FutureBuilder<List<TrailDTO?>?>(
+                              future: controller.listarTrilhas(),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  List<TrailDTO?>? trails = snapshot.data;
 
-                                    if (trails!.isEmpty) {
-                                      return Container();
-                                    }
-
-                                    if(controller.error != null){
-                                      return Text(controller.error!.mensagem);
-                                    }
-
-                                    return Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        ListView.builder(
-                                            scrollDirection: Axis.horizontal,
-                                            shrinkWrap: true,
-                                            itemCount: trails.length,
-                                            itemBuilder: (_, index) {
-                                              //final trail = trails[index];
-
-                                              //return CardDestaque(post: post!);
-                                              return Container();
-                                            })
-                                      ],
-                                    );
+                                  if (trails!.isEmpty) {
+                                    return Container();
                                   }
 
-                                  if (snapshot.hasError) {
-                                    return const Text("ERROR");
+                                  if(controller.error != null){
+                                    return Text(controller.error!.mensagem);
                                   }
 
-                                  return Container();
+                                  return Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      ListView.builder(
+                                          scrollDirection: Axis.horizontal,
+                                          shrinkWrap: true,
+                                          itemCount: trails.length,
+                                          itemBuilder: (_, index) {
+                                            final trail = trails[index];
 
-                                })),
-                      ),
+                                            return TrailCard(trilha: trail!);
+                                          })
+                                    ],
+                                  );
+                                }
+
+                                if (snapshot.hasError) {
+                                  return const Text("ERROR");
+                                }
+
+                                return Container();
+
+                              })),
                     ),
                     const SizedBox(height: 10),
                     const Text(
@@ -100,47 +95,44 @@ class _HomePageState extends State<HomePage> {
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(15),
-                      child: SizedBox(
-                        height: 270,
-                        child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: FutureBuilder<List<PostDTO?>?>(
-                                future: controller.listarPosts(),
-                                builder: (context, snapshot) {
-                                  if (snapshot.hasData) {
-                                    List<PostDTO?>? posts = snapshot.data;
+                    SizedBox(
+                      height: 270,
+                      child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: FutureBuilder<List<PostDTO?>?>(
+                              future: controller.listarPosts(),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  List<PostDTO?>? posts = snapshot.data;
 
-                                    if (posts!.isEmpty) {
-                                      return Container();
-                                    }
-
-                                    return Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        ListView.builder(
-                                            scrollDirection: Axis.horizontal,
-                                            shrinkWrap: true,
-                                            itemCount: posts.length,
-                                            itemBuilder: (_, index) {
-                                              final post = posts[index];
-
-                                              return CardDestaque(post: post!);
-                                            })
-                                      ],
-                                    );
+                                  if (posts!.isEmpty) {
+                                    return Container();
                                   }
 
-                                  if (snapshot.hasError) {
-                                    return const Text("ERROR");
-                                  }
-                                  
-                                  
-                                  return Container();
-                                })),
-                      ),
+                                  return Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      ListView.builder(
+                                          scrollDirection: Axis.horizontal,
+                                          shrinkWrap: true,
+                                          itemCount: posts.length,
+                                          itemBuilder: (_, index) {
+                                            final post = posts[index];
+
+                                            return CardDestaque(post: post!);
+                                          })
+                                    ],
+                                  );
+                                }
+
+                                if (snapshot.hasError) {
+                                  return const Text("ERROR");
+                                }
+                                
+                                
+                                return Container();
+                              })),
                     ),
                   ]),
             ),
