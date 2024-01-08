@@ -30,7 +30,7 @@ class AlertComentarios extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 10),
                   child: SizedBox(
                     width: size.width,
-                    height: size.height * 0.31,
+                    height: size.height * 0.35,
                     child: const SingleChildScrollView(
                       child: Column(
                         children: [
