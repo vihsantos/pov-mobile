@@ -15,7 +15,6 @@ class PostModel {
   LocalizationModel? localization;
   int? stars;
   List<UserVoosModel>? voos;
-  List<CommentModel>? comment;
   UserPostModel? user;
 
   PostModel({
@@ -26,7 +25,6 @@ class PostModel {
     this.localization,
     this.stars,
     this.voos,
-    this.comment,
     this.user,
   });
 
@@ -39,7 +37,6 @@ class PostModel {
       'localization': localization?.toJson(),
       'stars': stars,
       'voos': voos!.map((x) => x.toMap()).toList(),
-      'comment': comment!.map((x) => x.toMap()).toList(),
       'user': user!.toJson(),
     };
   }
@@ -62,13 +59,6 @@ class PostModel {
           ? List<UserVoosModel>.from(
               (map['voos'] as List<dynamic>).map<UserVoosModel?>(
                 (x) => UserVoosModel.fromMap(x as Map<String, dynamic>),
-              ),
-            )
-          : null,
-      comment: map['comment'] != null
-          ? List<CommentModel>.from(
-              (map['comment'] as List<dynamic>).map<CommentModel?>(
-                (x) => CommentModel.fromMap(x as Map<String, dynamic>),
               ),
             )
           : null,
