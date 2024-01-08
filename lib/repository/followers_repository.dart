@@ -1,3 +1,5 @@
+import 'package:pov/services/core/routes.dart';
+
 import '../services/error/applicationerrorimp.dart';
 import '../services/singleton/auth_singleton.dart';
 import 'login_repository.dart';
@@ -6,11 +8,9 @@ import 'package:http/http.dart' as http;
 class FollowersRepository {
   Future follow() async {
     try {
-      String url = "http://172.22.17.34:8000/";
-
       String? token = AuthSingleton(LoginRepository()).getToken();
 
-      var response = await http.get(Uri.parse(url), headers: {
+      var response = await http.get(Uri.parse(Routes.following), headers: {
         "content-type": "application/json",
         "accept": "application/json",
         'Authorization': 'Bearer $token',
@@ -28,11 +28,9 @@ class FollowersRepository {
 
   Future unfollow() async{
     try {
-      String url = "http://172.22.17.34:8000/";
-
       String? token = AuthSingleton(LoginRepository()).getToken();
 
-      var response = await http.get(Uri.parse(url), headers: {
+      var response = await http.get(Uri.parse(Routes.unfollow), headers: {
         "content-type": "application/json",
         "accept": "application/json",
         'Authorization': 'Bearer $token',
