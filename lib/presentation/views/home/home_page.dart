@@ -16,7 +16,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  HomePageController controller = HomePageController(PostRepository(), TrailRepository());
+  HomePageController controller =
+      HomePageController(PostRepository(), TrailRepository());
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,7 @@ class _HomePageState extends State<HomePage> {
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
-                      height: 220,
+                      height: 230,
                       child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: FutureBuilder<List<TrailDTO?>?>(
@@ -60,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                                     return Container();
                                   }
 
-                                  if(controller.error != null){
+                                  if (controller.error != null) {
                                     return Text(controller.error!.mensagem);
                                   }
 
@@ -86,7 +87,6 @@ class _HomePageState extends State<HomePage> {
                                 }
 
                                 return Container();
-
                               })),
                     ),
                     const SizedBox(height: 10),
@@ -129,8 +129,7 @@ class _HomePageState extends State<HomePage> {
                                 if (snapshot.hasError) {
                                   return const Text("ERROR");
                                 }
-                                
-                                
+
                                 return Container();
                               })),
                     ),
