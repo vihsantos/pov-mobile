@@ -1,9 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file: non_constant_identifier_names
 import 'dart:convert';
-
 import 'package:pov/models/localization_model.dart';
-import 'package:pov/models/post/comment_model.dart';
 import 'package:pov/models/user/userpost_model.dart';
 import 'package:pov/models/user/uservoos_model.dart';
 
