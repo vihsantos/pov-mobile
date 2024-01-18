@@ -33,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: size.height * 0.2,
                 ),
                 Image.asset(
-                  "asset/img/testelogo.png",
+                  "asset/img/pov-logo.png",
                   width: size.width * .5,
                 ),
                 SizedBox(
