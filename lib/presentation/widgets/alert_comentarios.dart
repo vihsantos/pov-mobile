@@ -1,13 +1,22 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:pov/presentation/widgets/comment_container.dart';
-
 import '../../services/core/colorpallete.dart';
+import '../controllers/commentpage_controller.dart';
 
-class AlertComentarios extends StatelessWidget {
+class AlertComentarios extends StatefulWidget {
+  final CommentPageController controller;
+
   const AlertComentarios({
-    super.key,
-  });
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
 
+  @override
+  State<AlertComentarios> createState() => _AlertComentariosState();
+}
+
+class _AlertComentariosState extends State<AlertComentarios> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -51,19 +60,20 @@ class AlertComentarios extends StatelessWidget {
                     width: size.width,
                     height: 100,
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 198, 198, 226),
-                      borderRadius: BorderRadius.circular(20)
-                    ),
+                        color: const Color.fromARGB(255, 198, 198, 226),
+                        borderRadius: BorderRadius.circular(20)),
                     child: Row(
                       children: [
                         Container(
                           width: size.width * 0.75,
                           height: 100,
-                          padding: const EdgeInsets.only(left:10, right: 10, bottom: 10),
+                          padding: const EdgeInsets.only(
+                              left: 10, right: 10, bottom: 10),
                           decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(topLeft: Radius.circular(10), bottomLeft: Radius.circular(10))
-                          ),
+                              color: Colors.white,
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(10),
+                                  bottomLeft: Radius.circular(10))),
                           child: const TextField(
                             maxLength: 500,
                             maxLines: 3,
@@ -73,7 +83,14 @@ class AlertComentarios extends StatelessWidget {
                             ),
                           ),
                         ),
-                        IconButton(onPressed: (){}, icon: const Icon(Icons.send, color: ColorPallete.primaryColor,))
+                        IconButton(
+                            onPressed: () {
+                              widget.controller.criarNovoComentario();
+                            },
+                            icon: const Icon(
+                              Icons.send,
+                              color: ColorPallete.primaryColor,
+                            ))
                       ],
                     ),
                   ),

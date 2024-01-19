@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:pov/presentation/controllers/commentpage_controller.dart';
 import 'package:pov/presentation/controllers/postpage_controller.dart';
+import 'package:pov/repository/comment_repository.dart';
 import 'package:pov/repository/post_repository.dart';
 import 'package:pov/services/core/colorpallete.dart';
 
@@ -22,6 +24,9 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
   PostPageController controller =
       PostPageController(repository: PostRepository());
 
+  CommentPageController commentController =
+      CommentPageController(repository: CommentRepository());
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -34,21 +39,21 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                   future: controller.buscarPostPorID(widget.id),
                   builder: (context, snapshot) {
                     PostModel? post = snapshot.data;
-        
+
                     if (!snapshot.hasData) {
                       return const Center(
                         child: CircularProgressIndicator(),
                       );
                     }
-        
+
                     if (snapshot.hasError) {
                       return const Text("Ocorreu um erro!");
                     }
-        
+
                     if (snapshot.data == null) {
                       return const Text("Ocorreu um erro!");
                     }
-        
+
                     return Stack(
                       children: [
                         Column(
@@ -121,7 +126,8 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                   decoration: BoxDecoration(
                                       boxShadow: const [
                                         BoxShadow(
-                                            color: Color.fromARGB(47, 49, 49, 49),
+                                            color:
+                                                Color.fromARGB(47, 49, 49, 49),
                                             blurRadius: 5,
                                             offset: Offset(2, 2))
                                       ],
@@ -134,29 +140,15 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                 InkWell(
                                   onTap: () async {
                                     if (!mounted) return;
-        
+
+                                    commentController.comment.post_id =
+                                        widget.id;
+
                                     showModalBottomSheet(
                                         context: context,
-                                        builder: (context) =>
-                                            const AlertComentarios());
-        
-                                    // return showDialog(
-                                    //     context: context,
-                                    //     builder: (context) {
-                                    //       return AlertDialog(
-                                    //         title: const Text("Poxa!"),
-                                    //         content: const Text(
-                                    //             "Ocorreu um erro ao tentar realizar o login, por favor tente novamente!"),
-                                    //         actions: <Widget>[
-                                    //           TextButton(
-                                    //             child: const Text("Ok"),
-                                    //             onPressed: () {
-                                    //               Navigator.pop(context);
-                                    //             },
-                                    //           ),
-                                    //         ],
-                                    //       );
-                                    //     });
+                                        builder: (context) => AlertComentarios(
+                                              controller: commentController,
+                                            ));
                                   },
                                   child: Container(
                                     width: 70,
@@ -164,15 +156,17 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                     decoration: BoxDecoration(
                                         boxShadow: const [
                                           BoxShadow(
-                                              color:
-                                                  Color.fromARGB(47, 49, 49, 49),
+                                              color: Color.fromARGB(
+                                                  47, 49, 49, 49),
                                               blurRadius: 5,
                                               offset: Offset(2, 2))
                                         ],
                                         color: ColorPallete.bgItemColor,
-                                        borderRadius: BorderRadius.circular(10)),
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
                                     child: const Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
@@ -226,7 +220,8 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                   borderRadius: BorderRadius.circular(10),
                                   color: Colors.white),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
@@ -254,6 +249,3 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
     );
   }
 }
-
-
-
