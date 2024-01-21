@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import '../dto/comment_dto.dart';
-import '../models/post/comment_model.dart';
+import '../models/comment_model.dart';
 import '../services/core/routes.dart';
 import 'package:http/http.dart' as http;
 
