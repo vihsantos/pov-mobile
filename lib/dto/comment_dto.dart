@@ -4,13 +4,13 @@ import 'dart:convert';
 class CommentDTO {
   int? post_id;
   int? user_id;
-  String? descricao;
+  String? description;
   int? trail_id;
 
   CommentDTO({
     this.post_id,
     this.user_id,
-    this.descricao,
+    this.description,
     this.trail_id,
   });
 
@@ -18,7 +18,7 @@ class CommentDTO {
     return <String, dynamic>{
       'post_id': post_id,
       'user_id': user_id,
-      'descricao': descricao,
+      'description': description,
       'trail_id': trail_id,
     };
   }
@@ -27,7 +27,8 @@ class CommentDTO {
     return CommentDTO(
       post_id: map['post_id'] != null ? map['post_id'] as int : null,
       user_id: map['user_id'] != null ? map['user_id'] as int : null,
-      descricao: map['descricao'] != null ? map['descricao'] as String : null,
+      description:
+          map['description'] != null ? map['description'] as String : null,
       trail_id: map['trail_id'] != null ? map['trail_id'] as int : null,
     );
   }
