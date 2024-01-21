@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:pov/models/comment_model.dart';
 import 'package:pov/presentation/widgets/comment_container.dart';
 import '../../services/core/colorpallete.dart';
 import '../controllers/commentpage_controller.dart';
@@ -38,21 +39,49 @@ class _AlertComentariosState extends State<AlertComentarios> {
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: SizedBox(
-                    width: size.width,
-                    height: size.height * 0.35,
-                    child: const SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          CommentContainer(),
-                          CommentContainer(),
-                          CommentContainer(),
-                          CommentContainer(),
-                          CommentContainer(),
-                          CommentContainer()
-                        ],
-                      ),
-                    ),
-                  ),
+                      width: size.width,
+                      height: size.height * 0.35,
+                      child: SingleChildScrollView(
+                          scrollDirection: Axis.vertical,
+                          child: FutureBuilder<List<CommentModel?>?>(
+                              future: widget.controller.listarComentarios(),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  List<CommentModel?>? comentarios =
+                                      snapshot.data;
+
+                                  if (comentarios!.isEmpty) {
+                                    return Container();
+                                  }
+
+                                  if (widget.controller.error != null) {
+                                    return Text(
+                                        widget.controller.error!.mensagem);
+                                  }
+
+                                  return Column(
+                                    children: [
+                                      ListView.builder(
+                                          scrollDirection: Axis.vertical,
+                                          shrinkWrap: true,
+                                          itemCount: comentarios.length,
+                                          itemBuilder: (_, index) {
+                                            final comentario =
+                                                comentarios[index];
+
+                                            return CommentContainer(
+                                                comentario: comentario!);
+                                          })
+                                    ],
+                                  );
+                                }
+
+                                if (snapshot.hasError) {
+                                  return const Text("ERROR");
+                                }
+
+                                return Container();
+                              }))),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 15),
@@ -74,10 +103,12 @@ class _AlertComentariosState extends State<AlertComentarios> {
                               borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(10),
                                   bottomLeft: Radius.circular(10))),
-                          child: const TextField(
+                          child: TextField(
                             maxLength: 500,
                             maxLines: 3,
-                            decoration: InputDecoration(
+                            onChanged: (value) =>
+                                widget.controller.comment.description = value,
+                            decoration: const InputDecoration(
                               border: InputBorder.none,
                               hintText: "Escreva um comentário",
                             ),
