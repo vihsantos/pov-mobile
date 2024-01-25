@@ -38,40 +38,6 @@ class _RankingPageState extends State<RankingPage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              child: Text("Filtrar Por:",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18,
-                      color: Color(0xFF8C8C8C))),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    width: size.width * 0.45,
-                    height: size.height * 0.06,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: Colors.amber),
-                  ),
-                  Container(
-                    width: size.width * 0.45,
-                    height: size.height * 0.06,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: Colors.pink),
-                  )
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
             SizedBox(
               height: size.height * 0.74,
               child: FutureBuilder<List<RankingByLocalModel?>?>(
