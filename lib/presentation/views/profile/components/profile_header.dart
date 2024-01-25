@@ -1,8 +1,9 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, non_constant_identifier_names
 import 'package:flutter/material.dart';
 import 'package:pov/dto/dadosperfil_dto.dart';
 
 class ProfileHeader extends StatelessWidget {
+  final int user_id;
   final bool isprofileuser;
   final DadosPerfilDTO dados;
 
@@ -10,6 +11,7 @@ class ProfileHeader extends StatelessWidget {
     Key? key,
     required this.isprofileuser,
     required this.dados,
+    required this.user_id,
   }) : super(key: key);
 
   @override
@@ -55,20 +57,23 @@ class ProfileHeader extends StatelessWidget {
             ),
             Visibility(
               visible: !isprofileuser,
-              child: Container(
-                width: size.width * 0.35,
-                height: size.height * 0.05,
-                decoration: BoxDecoration(
-                    color: const Color(0xFF6461E8),
-                    borderRadius: BorderRadius.circular(10)),
-                child: const Center(
-                    child: Text(
-                  "Seguir",
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white),
-                )),
+              child: InkWell(
+                onTap: () {},
+                child: Container(
+                  width: size.width * 0.35,
+                  height: size.height * 0.05,
+                  decoration: BoxDecoration(
+                      color: const Color(0xFF6461E8),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: const Center(
+                      child: Text(
+                    "Seguir",
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white),
+                  )),
+                ),
               ),
             )
           ],

@@ -5,7 +5,6 @@ import '../../../../models/post/postprofile_model.dart';
 import '../../post/postdetails_page.dart';
 
 class CardPostProfile extends StatelessWidget {
-
   final PostProfileModel post;
   const CardPostProfile({
     Key? key,
@@ -16,17 +15,20 @@ class CardPostProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => PostDetailsPage(id: post.id!,)));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => PostDetailsPage(
+                      id: post.id!,
+                    )));
       },
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: Stack(children: [
           SizedBox(
-            width: 200,
-            height: 200,
-            child: Image.network(post.image_url!, fit: BoxFit.cover)
-          ),
+              width: 200,
+              height: 200,
+              child: Image.network(post.image_url!, fit: BoxFit.cover)),
           Positioned(
             top: 10,
             right: 10,
@@ -39,7 +41,7 @@ class CardPostProfile extends StatelessWidget {
                     blurRadius: 4,
                     color: Color.fromARGB(33, 0, 0, 0))
               ], color: Colors.white, borderRadius: BorderRadius.circular(10)),
-              child:  Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [

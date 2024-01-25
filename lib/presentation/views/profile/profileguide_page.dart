@@ -44,9 +44,12 @@ class _ProfileGuidePageState extends State<ProfileGuidePage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => TrailsPage(id: widget.id,)));
+                          builder: (context) => TrailsPage(
+                                id: widget.id,
+                              )));
                 },
-                icon: const Icon(Icons.location_on, color: ColorPallete.secondColor)),
+                icon: const Icon(Icons.location_on,
+                    color: ColorPallete.secondColor)),
             Visibility(
               visible: widget.controller.isProfile(widget.id),
               child: IconButton(
@@ -56,7 +59,10 @@ class _ProfileGuidePageState extends State<ProfileGuidePage> {
                         MaterialPageRoute(
                             builder: (context) => const NewTrailPage()));
                   },
-                  icon: const Icon(Icons.add_location_alt, color: ColorPallete.secondColor,)),
+                  icon: const Icon(
+                    Icons.add_location_alt,
+                    color: ColorPallete.secondColor,
+                  )),
             )
           ],
         ),
@@ -80,7 +86,8 @@ class _ProfileGuidePageState extends State<ProfileGuidePage> {
                   children: [
                     ProfileHeader(
                         dados: dados,
-                        isprofileuser: widget.controller.isProfile(widget.id)),
+                        isprofileuser: widget.controller.isProfile(widget.id),
+                        user_id: widget.id),
                     const SizedBox(
                       height: 10,
                     )
