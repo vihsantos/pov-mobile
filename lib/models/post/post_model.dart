@@ -14,17 +14,18 @@ class PostModel {
   int? stars;
   List<UserVoosModel>? voos;
   UserPostModel? user;
+  int? comentarios;
 
-  PostModel({
-    this.id,
-    this.dataCriacao,
-    this.description,
-    this.image_url,
-    this.localization,
-    this.stars,
-    this.voos,
-    this.user,
-  });
+  PostModel(
+      {this.id,
+      this.dataCriacao,
+      this.description,
+      this.image_url,
+      this.localization,
+      this.stars,
+      this.voos,
+      this.user,
+      this.comentarios});
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -36,6 +37,7 @@ class PostModel {
       'stars': stars,
       'voos': voos!.map((x) => x.toMap()).toList(),
       'user': user!.toJson(),
+      'comentarios': comentarios,
     };
   }
 
@@ -63,6 +65,8 @@ class PostModel {
       user: map['user'] != null
           ? UserPostModel.fromJson(map['user'] as Map<String, dynamic>)
           : null,
+      comentarios:
+          map['comentarios'] != null ? map['comentarios'] as int : null,
     );
   }
 
