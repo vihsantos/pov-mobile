@@ -164,22 +164,23 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                         color: ColorPallete.bgItemColor,
                                         borderRadius:
                                             BorderRadius.circular(10)),
-                                    child: const Column(
+                                    child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        Icon(
-                                          Icons.insert_comment_rounded,
+                                        const Icon(
+                                          Icons.comment_rounded,
                                           size: 30,
                                           color: ColorPallete.secondColor,
                                         ),
                                         Text(
-                                          "14",
-                                          style: TextStyle(
+                                          "${post.comentarios!}",
+                                          style: const TextStyle(
                                               fontSize: 18,
-                                              color: ColorPallete.secondColor),
+                                              color: ColorPallete.secondColor,
+                                              fontWeight: FontWeight.bold),
                                         )
                                       ],
                                     ),
