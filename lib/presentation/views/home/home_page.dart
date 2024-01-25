@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
-                      height: 230,
+                      height: 300,
                       child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: FutureBuilder<List<TrailDTO?>?>(
