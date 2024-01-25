@@ -39,60 +39,75 @@ class TrailCard extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.all(10),
-      width: size.width * 0.9,
+      width: size.width * 0.95,
       height: size.height * 0.3,
       decoration: BoxDecoration(
           color: ColorPallete.bgItemColor,
           borderRadius: BorderRadius.circular(10)),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
         children: [
+          Container(
+            width: size.width * 0.46,
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+            child: Image.network(
+              urls[0],
+              fit: BoxFit.cover,
+            ),
+          ),
+          const SizedBox(width: 5),
           SizedBox(
-            height: size.height * 0.16,
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.all(8),
-                itemCount: urls.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: SizedBox(
-                      width: size.width * 0.35,
-                      child: Image.network(
-                        urls[index],
-                        fit: BoxFit.cover,
-                      ),
+            width: size.width * 0.4,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      width: 30,
+                      height: 30,
+                      decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 4, 81, 119),
+                          borderRadius: BorderRadius.circular(15)),
                     ),
-                  );
-                }),
+                    const SizedBox(width: 10),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [Text(trilha.user!.username!)],
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  trilha.name!,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                      color: ColorPallete.labelColor),
+                ),
+                Text(
+                  areaas,
+                  maxLines: 4,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 10,
+                      color: ColorPallete.labelColor),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  trilha.description!,
+                  maxLines: 6,
+                  style: const TextStyle(
+                      color: ColorPallete.primaryColor,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500),
+                )
+              ],
+            ),
           ),
-          Text(
-            trilha.name!,
-            style: const TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
-                color: ColorPallete.labelColor),
-          ),
-          Text(
-            areaas,
-            maxLines: 2,
-            style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 10,
-                color: ColorPallete.labelColor),
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          Text(
-            trilha.description!,
-            maxLines: 2,
-            style: const TextStyle(
-                color: ColorPallete.primaryColor,
-                fontSize: 12,
-                fontWeight: FontWeight.w500),
-          )
         ],
       ),
     );
