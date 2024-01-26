@@ -1,17 +1,14 @@
 import 'dart:convert';
-import 'dart:developer';
-
 import '../dto/comment_dto.dart';
 import '../models/comment_model.dart';
 import '../services/core/routes.dart';
 import 'package:http/http.dart' as http;
-
 import '../services/error/applicationerrorimp.dart';
 import '../services/singleton/auth_singleton.dart';
 import 'login_repository.dart';
 
 class CommentRepository {
-  Future criarComentario(CommentDTO comentario) async {
+  Future<bool> criarComentario(CommentDTO comentario) async {
     try {
       String url = Routes.comment;
       String? token = AuthSingleton(LoginRepository()).getToken();
@@ -23,7 +20,7 @@ class CommentRepository {
         'Authorization': 'Bearer $token',
       });
 
-      if (response.statusCode == 201) log("FOI!!");
+      if (response.statusCode == 200) return true;
 
       throw ApplicationErrorImp(
           mensagem: response.reasonPhrase.toString(),

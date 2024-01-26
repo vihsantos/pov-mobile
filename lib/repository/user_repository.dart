@@ -42,7 +42,6 @@ class UserRepository {
       });
 
       if (response.statusCode == 200) {
-        log(response.body);
         return DadosPerfilDTO.fromJson(response.body);
       }
 
