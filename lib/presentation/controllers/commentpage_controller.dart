@@ -21,7 +21,7 @@ class CommentPageController {
   Future criarNovoComentario() async {
     _error = null;
     try {
-      await repository.criarComentario(comment);
+      return await repository.criarComentario(comment);
     } on ApplicationError catch (e) {
       _error = e;
     }
@@ -33,13 +33,11 @@ class CommentPageController {
       List<CommentModel>? comentarios;
 
       if (comment.post_id != null) {
-        comentarios =
-            await repository.listarComentariosPorPost(comment.post_id!);
+        comentarios = await repository.listarComentariosPorPost(comment.post_id!);
       }
 
       if (comment.trail_id != null) {
-        comentarios =
-            await repository.listarComentariosPorPost(comment.post_id!);
+        comentarios = await repository.listarComentariosPorPost(comment.post_id!);
       }
 
       return comentarios;

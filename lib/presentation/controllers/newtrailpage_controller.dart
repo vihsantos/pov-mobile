@@ -65,7 +65,7 @@ class NewTrailPageController {
         var pic = await MultipartFile.fromPath(filename, files[x].path);
         arquivos.add(pic);
       }
-      await repository.criarNovaTrilha(arquivos, trailDTO);
+      return await repository.criarNovaTrilha(arquivos, trailDTO);
     } on ApplicationError catch (e) {
       _error = e;
     }
