@@ -101,24 +101,29 @@ class _NewPostPageState extends State<NewPostPage> {
                 ),
               ),
               controller.novoPost.localization != null
-                  ? Padding(
-                      padding: const EdgeInsets.only(
-                          left: 15, right: 15, bottom: 10),
+                  ? InputField(
+                    label: "Localização",
+                    child: Padding(
+                      padding: const EdgeInsets.all(15),
                       child: Text(controller.novoPost.localization!.local!,
-                          maxLines: 1),
-                    )
+                          maxLines: 2),
+                    ),
+                  )
                   : InputField(
                       label: 'Localização',
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Search(
-                                        controller: controller,
-                                      )));
-                        },
-                        child: const Text("Search"),
+                      child: Padding(
+                        padding: const EdgeInsets.all(15),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Search(
+                                          controller: controller,
+                                        )));
+                          },
+                          child: const Text("Search"),
+                        ),
                       ),
                     ),
               Padding(
@@ -234,7 +239,6 @@ class _NewPostPageState extends State<NewPostPage> {
                         content: Text("Post salvo com sucesso!")));
                     Navigator.of(context).pop();
                   }
-                  //controller.criarPost();
                 },
                 child: Container(
                   margin: const EdgeInsets.all(15),

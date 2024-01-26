@@ -200,7 +200,16 @@ class _NewTrailPageState extends State<NewTrailPage> {
                     }
 
                     controller.trailDTO.occupation = dados;
-                    controller.enviarImagem();
+
+                    bool enviou = await controller.enviarImagem();
+
+                    if (!mounted) return;
+
+                    if (enviou) {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text("Eba!! Trilha criada com sucesso!")));
+                      Navigator.of(context).pop();
+                    }
                   }
                 },
                 child: Container(

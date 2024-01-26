@@ -50,6 +50,10 @@ class _RankingPageState extends State<RankingPage> {
                         return Container();
                       }
 
+                      if(controller.error != null){
+                        return const Center(child:  Text("Ops, algo aconteceu!"));
+                      }
+
                       return ListView.builder(
                           scrollDirection: Axis.vertical,
                           itemCount: ranking.length,

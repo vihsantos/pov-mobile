@@ -115,8 +115,18 @@ class _AlertComentariosState extends State<AlertComentarios> {
                           ),
                         ),
                         IconButton(
-                            onPressed: () {
-                              widget.controller.criarNovoComentario();
+                            onPressed: () async {
+                              bool enviou = await widget.controller.criarNovoComentario();
+
+                              if (!mounted) return;
+
+                              if (enviou) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content:
+                                            Text("Comentário enviado com sucesso!")));
+                                Navigator.of(context).pop();
+                              }
                             },
                             icon: const Icon(
                               Icons.send,

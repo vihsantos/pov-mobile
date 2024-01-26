@@ -1,9 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:pov/presentation/controllers/trailpage_controller.dart';
 import 'package:pov/repository/trail_repository.dart';
-
 import '../../../dto/trail_dto.dart';
 import 'components/trailcard.dart';
 
@@ -49,8 +46,6 @@ class _TrailsPageState extends State<TrailsPage> {
                     if (controller.error != null) {
                       return Text(controller.error!.mensagem);
                     }
-
-                    log(trails.toString());
 
                     return Column(
                       children: [
