@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
+
 import 'package:pov/models/user/userpost_model.dart';
 
 class TrailDTO {
@@ -17,26 +19,34 @@ class TrailDTO {
       this.occupation,
       this.user});
 
-  TrailDTO.fromJson(Map<String, dynamic> json) {
-    description = json['description'];
-    files = json['files'];
-    id = json['id'];
-    name = json['name'];
-    occupation = json['occupation'];
-    user = json['user'] != null ? UserPostModel.fromJson(json['user']) : null;
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'description': description,
+      'files': files,
+      'id': id,
+      'name': name,
+      'occupation': occupation,
+      'user': user?.toJson(),
+    };
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['description'] = description;
-    data['files'] = files;
-    data['id'] = id;
-    data['name'] = name;
-    data['occupation'] = occupation;
-    if (user != null) {
-      data['user'] = user!.toJson();
-    }
-    return data;
+  factory TrailDTO.fromMap(Map<String, dynamic> map) {
+    return TrailDTO(
+      description:
+          map['description'] != null ? map['description'] as String : null,
+      files: map['files'] != null ? map['files'] as String : null,
+      id: map['id'] != null ? map['id'] as int : null,
+      name: map['name'] != null ? map['name'] as String : null,
+      occupation:
+          map['occupation'] != null ? map['occupation'] as String : null,
+      user: map['user'] != null
+          ? UserPostModel.fromJson(map['user'] as Map<String, dynamic>)
+          : null,
+    );
   }
+
+  String toJson() => json.encode(toMap());
+
+  factory TrailDTO.fromJson(String source) =>
+      TrailDTO.fromMap(json.decode(source) as Map<String, dynamic>);
 }
-

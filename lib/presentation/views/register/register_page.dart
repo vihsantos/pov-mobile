@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:pov/presentation/controllers/registerpage_controller.dart';
 import 'package:pov/repository/user_repository.dart';
 import '../../../models/enums/AreaAtuacao.dart';
@@ -23,6 +26,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     final PageController controller = PageController();
     final Size size = MediaQuery.of(context).size;
+    String? data;
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -298,6 +302,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                   setState(() {
                                     registerController.usuario.data_vencimento =
                                         date;
+                                    data =
+                                        DateFormat("dd/MM/yyyy").format(date);
+                                    log(data!);
                                   });
                                 }
                               },
@@ -306,13 +313,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                       fontStyle: FontStyle.italic),
                                   enabledBorder: InputBorder.none,
                                   focusedBorder: InputBorder.none,
-                                  hintText: registerController
+                                  labelText: registerController
                                               .usuario.data_vencimento ==
                                           null
                                       ? "Digite a data de Vencimento do Cadastur"
-                                      : registerController
-                                          .usuario.data_vencimento
-                                          .toString()),
+                                      : data),
                             ),
                           ),
                         ),
@@ -390,21 +395,6 @@ class _RegisterPageState extends State<RegisterPage> {
                                   enabledBorder: InputBorder.none,
                                   focusedBorder: InputBorder.none,
                                   hintText: "Digite sua senha"),
-                            ),
-                          ),
-                        ),
-                        const InputField(
-                          label: 'Confirme sua senha',
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                                left: 15, right: 15, top: 10, bottom: 10),
-                            child: TextField(
-                              decoration: InputDecoration(
-                                  hintStyle:
-                                      TextStyle(fontStyle: FontStyle.italic),
-                                  enabledBorder: InputBorder.none,
-                                  focusedBorder: InputBorder.none,
-                                  hintText: "Confirme a senha escolhida"),
                             ),
                           ),
                         ),
