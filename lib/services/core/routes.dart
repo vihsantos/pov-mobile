@@ -1,5 +1,5 @@
 class Routes {
-  static const String urlPartial = "http://192.168.2.106:8000";
+  static const String urlPartial = "http://192.168.2.107:8000";
 
   static const String login = "$urlPartial/acesso";
   static const String novoUsuario = "$urlPartial/criarusuario";
@@ -17,4 +17,5 @@ class Routes {
   static const String comment = "$urlPartial/comment";
   static const String following = "$urlPartial/following";
   static const String unfollow = "$urlPartial/unfollow";
+  static const String addicon = "$urlPartial/addicon";
 }
