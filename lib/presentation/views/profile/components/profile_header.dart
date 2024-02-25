@@ -1,8 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, non_constant_identifier_names
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:pov/dto/dadosperfil_dto.dart';
+import 'package:pov/services/core/colorpallete.dart';
 
-class ProfileHeader extends StatelessWidget {
+class ProfileHeader extends StatefulWidget {
   final int user_id;
   final bool isprofileuser;
   final DadosPerfilDTO dados;
@@ -14,6 +18,11 @@ class ProfileHeader extends StatelessWidget {
     required this.user_id,
   }) : super(key: key);
 
+  @override
+  State<ProfileHeader> createState() => _ProfileHeaderState();
+}
+
+class _ProfileHeaderState extends State<ProfileHeader> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -27,7 +36,7 @@ class ProfileHeader extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                dados.following!.length.toString(),
+                widget.dados.following!.length.toString(),
                 style: const TextStyle(fontSize: 22),
               ),
               const Text("Seguindo",
@@ -37,16 +46,96 @@ class ProfileHeader extends StatelessWidget {
         ),
         Column(
           children: [
-            Container(
-              width: 130,
-              height: 130,
-              decoration: BoxDecoration(
-                  color: Colors.black12,
-                  borderRadius: BorderRadius.circular(75)),
+            Stack(
+              children: [
+                Container(
+                  width: 130,
+                  height: 130,
+                  decoration: BoxDecoration(
+                    color: Colors.black12,
+                    borderRadius: BorderRadius.circular(75),
+                  ),
+                ),
+                Positioned(
+                  bottom: 4,
+                  child: InkWell(
+                    onTap: () async {
+                      return showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: const Text("Troque sua foto de perfil!"),
+                              content: SizedBox(
+                                height: 200,
+                                child: Column(
+                                  children: [
+                                    InkWell(
+                                      onTap: () async {
+                                        final filePickerResult =
+                                            await FilePicker.platform.pickFiles(
+                                                allowMultiple: false,
+                                                type: FileType.custom,
+                                                allowedExtensions: [
+                                              'png',
+                                              'jpeg',
+                                            ]);
+                              
+                                        if (filePickerResult == null) return;
+                              
+                                        setState(() {
+                                          var files = filePickerResult.paths
+                                              .map((path) => File(path!))
+                                              .toList();
+                                        });
+                                      },
+                                      child: const Text("Clique aqui e escolha a foto"),
+                                    ),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    Container(
+                                      width: 150,
+                                      height:  150,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: ColorPallete.bgItemColor,
+                                      ),
+                                      child: Icon(Icons.burst_mode_rounded, size: 64, color: ColorPallete.bottomUnselectedColor,),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              actions: <Widget>[
+                                TextButton(
+                                  child: const Text("Ok"),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                              ],
+                            );
+                          });
+                    },
+                    child: Container(
+                        width: 50,
+                        height: 50,
+                        decoration: BoxDecoration(
+                            color: ColorPallete.bgItemColor,
+                            borderRadius: BorderRadius.circular(25),
+                            border: Border.all(
+                                color: const Color.fromARGB(45, 57, 52, 52),
+                                width: 0.5)),
+                        child: const Icon(
+                          Icons.edit,
+                          color: ColorPallete.primaryColor,
+                        )),
+                  ),
+                )
+              ],
             ),
             const SizedBox(height: 10),
             Text(
-              dados.username!,
+              widget.dados.username!,
               style: const TextStyle(
                   color: Color(0xFF393434),
                   fontSize: 20,
@@ -56,7 +145,7 @@ class ProfileHeader extends StatelessWidget {
               height: 10,
             ),
             Visibility(
-              visible: !isprofileuser,
+              visible: !widget.isprofileuser,
               child: InkWell(
                 onTap: () {},
                 child: Container(
@@ -84,7 +173,7 @@ class ProfileHeader extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                dados.followers!.length.toString(),
+                widget.dados.followers!.length.toString(),
                 style: const TextStyle(fontSize: 22),
               ),
               const Text("Seguidores",
