@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage> {
                                   List<TrailDTO?>? trails = snapshot.data;
 
                                   if (trails!.isEmpty) {
-                                    return Container();
+                                    return const Center(child: Text("Nada encontrado!"));
                                   }
 
                                   if (controller.error != null) {
@@ -106,7 +106,7 @@ class _HomePageState extends State<HomePage> {
                                   List<PostDTO?>? posts = snapshot.data;
 
                                   if (posts!.isEmpty) {
-                                    return Container();
+                                    return const Center(child: Text("Nada encontrado!"));
                                   }
 
                                   return Row(
