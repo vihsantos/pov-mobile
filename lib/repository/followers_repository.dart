@@ -6,11 +6,11 @@ import 'login_repository.dart';
 import 'package:http/http.dart' as http;
 
 class FollowersRepository {
-  Future follow() async {
+  Future follow(int id) async {
     try {
       String? token = AuthSingleton(LoginRepository()).getToken();
 
-      var response = await http.get(Uri.parse(Routes.following), headers: {
+      var response = await http.get(Uri.parse("${Routes.following}/$id"), headers: {
         "content-type": "application/json",
         "accept": "application/json",
         'Authorization': 'Bearer $token',
@@ -26,11 +26,11 @@ class FollowersRepository {
     }
   }
 
-  Future unfollow() async{
+  Future unfollow(int id) async{
     try {
       String? token = AuthSingleton(LoginRepository()).getToken();
 
-      var response = await http.get(Uri.parse(Routes.unfollow), headers: {
+      var response = await http.get(Uri.parse("${Routes.unfollow}/$id"), headers: {
         "content-type": "application/json",
         "accept": "application/json",
         'Authorization': 'Bearer $token',
