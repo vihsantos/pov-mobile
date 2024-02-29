@@ -4,6 +4,9 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:pov/dto/dadosperfil_dto.dart';
+import 'package:pov/presentation/controllers/profilepage_controller.dart';
+import 'package:pov/repository/post_repository.dart';
+import 'package:pov/repository/user_repository.dart';
 import 'package:pov/services/core/colorpallete.dart';
 
 class ProfileHeader extends StatefulWidget {
@@ -11,12 +14,12 @@ class ProfileHeader extends StatefulWidget {
   final bool isprofileuser;
   final DadosPerfilDTO dados;
 
-  const ProfileHeader({
-    Key? key,
-    required this.isprofileuser,
-    required this.dados,
-    required this.user_id,
-  }) : super(key: key);
+  const ProfileHeader(
+      {Key? key,
+      required this.isprofileuser,
+      required this.dados,
+      required this.user_id})
+      : super(key: key);
 
   @override
   State<ProfileHeader> createState() => _ProfileHeaderState();
@@ -26,6 +29,9 @@ class _ProfileHeaderState extends State<ProfileHeader> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
+    ProfilePageController controller = ProfilePageController(postRepository: PostRepository(), userRepository: UserRepository());
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -79,28 +85,35 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                                               'png',
                                               'jpeg',
                                             ]);
-                              
+
                                         if (filePickerResult == null) return;
-                              
+
                                         setState(() {
+                                          // ignore: unused_local_variable
                                           var files = filePickerResult.paths
                                               .map((path) => File(path!))
                                               .toList();
                                         });
                                       },
-                                      child: const Text("Clique aqui e escolha a foto"),
+                                      child: const Text(
+                                          "Clique aqui e escolha a foto"),
                                     ),
                                     const SizedBox(
                                       height: 20,
                                     ),
                                     Container(
                                       width: 150,
-                                      height:  150,
+                                      height: 150,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
                                         color: ColorPallete.bgItemColor,
                                       ),
-                                      child: Icon(Icons.burst_mode_rounded, size: 64, color: ColorPallete.bottomUnselectedColor,),
+                                      child: const Icon(
+                                        Icons.burst_mode_rounded,
+                                        size: 64,
+                                        color:
+                                            ColorPallete.bottomUnselectedColor,
+                                      ),
                                     )
                                   ],
                                 ),
@@ -147,17 +160,23 @@ class _ProfileHeaderState extends State<ProfileHeader> {
             Visibility(
               visible: !widget.isprofileuser,
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  if (controller.isFollower!) {
+                    return;
+                  }
+                },
                 child: Container(
                   width: size.width * 0.35,
                   height: size.height * 0.05,
                   decoration: BoxDecoration(
-                      color: const Color(0xFF6461E8),
+                      color: !controller.isFollower!
+                          ? ColorPallete.primaryColor
+                          : ColorPallete.bottomUnselectedColor,
                       borderRadius: BorderRadius.circular(10)),
-                  child: const Center(
+                  child: Center(
                       child: Text(
-                    "Seguir",
-                    style: TextStyle(
+                    !controller.isFollower! ? "Seguir" : "Deixar de seguir",
+                    style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                         color: Colors.white),

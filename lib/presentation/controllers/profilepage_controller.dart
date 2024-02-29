@@ -27,6 +27,11 @@ class ProfilePageController {
   ApplicationError? get error => solicitacaoErrorApi.value;
   final solicitacaoErrorApi = ValueNotifier<ApplicationError?>(null);
 
+
+  set _isFollower(bool? error) => isFollowerApi.value = isFollower;
+  bool? get isFollower => isFollowerApi.value;
+  final isFollowerApi = ValueNotifier<bool?>(false);
+
   Future<List<PostProfileModel>?> listarPosts(int id) async {
     _error = null;
     try {
@@ -50,4 +55,5 @@ class ProfilePageController {
   bool isProfile(int id){
     return AuthSingleton(LoginRepository()).getId() == id;
   }
+
 }
