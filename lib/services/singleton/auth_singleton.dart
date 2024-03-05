@@ -35,4 +35,8 @@ class AuthSingleton {
       rethrow;
     }
   }
+
+  Future getLocalization() async {
+    
+  }
 }

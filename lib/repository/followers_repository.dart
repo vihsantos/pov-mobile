@@ -10,13 +10,16 @@ class FollowersRepository {
     try {
       String? token = AuthSingleton(LoginRepository()).getToken();
 
-      var response = await http.get(Uri.parse("${Routes.following}/$id"), headers: {
+      var response =
+          await http.get(Uri.parse("${Routes.following}/$id"), headers: {
         "content-type": "application/json",
         "accept": "application/json",
         'Authorization': 'Bearer $token',
       });
 
-      if (response.statusCode == 200) {}
+      if (response.statusCode == 200) {
+        return;
+      }
 
       throw ApplicationErrorImp(
           mensagem: response.reasonPhrase.toString(),
@@ -26,17 +29,43 @@ class FollowersRepository {
     }
   }
 
-  Future unfollow(int id) async{
+  Future unfollow(int id) async {
     try {
       String? token = AuthSingleton(LoginRepository()).getToken();
 
-      var response = await http.get(Uri.parse("${Routes.unfollow}/$id"), headers: {
+      var response =
+          await http.get(Uri.parse("${Routes.unfollow}/$id"), headers: {
         "content-type": "application/json",
         "accept": "application/json",
         'Authorization': 'Bearer $token',
       });
 
-      if (response.statusCode == 200) {}
+      if (response.statusCode == 200) {
+        return;
+      }
+
+      throw ApplicationErrorImp(
+          mensagem: response.reasonPhrase.toString(),
+          statusCode: response.statusCode);
+    } catch (e) {
+      throw ApplicationErrorImp(mensagem: e.toString(), statusCode: 500);
+    }
+  }
+
+  Future<bool> isFollower(int id) async {
+    try {
+      String? token = AuthSingleton(LoginRepository()).getToken();
+
+      var response =
+          await http.get(Uri.parse("${Routes.isFollower}/$id"), headers: {
+        "content-type": "application/json",
+        "accept": "application/json",
+        'Authorization': 'Bearer $token',
+      });
+
+      if (response.statusCode == 200) {
+        return bool.parse(response.body);
+      }
 
       throw ApplicationErrorImp(
           mensagem: response.reasonPhrase.toString(),
