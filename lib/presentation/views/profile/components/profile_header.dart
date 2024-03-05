@@ -95,24 +95,19 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                                               .toList();
                                         });
                                       },
-                                      child: const Text(
-                                          "Clique aqui e escolha a foto"),
-                                    ),
-                                    const SizedBox(
-                                      height: 20,
-                                    ),
-                                    Container(
-                                      width: 150,
-                                      height: 150,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: ColorPallete.bgItemColor,
-                                      ),
-                                      child: const Icon(
-                                        Icons.burst_mode_rounded,
-                                        size: 64,
-                                        color:
-                                            ColorPallete.bottomUnselectedColor,
+                                      child: Container(
+                                        width: 150,
+                                        height: 150,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+                                          color: ColorPallete.bgItemColor,
+                                        ),
+                                        child: const Icon(
+                                          Icons.add_a_photo,
+                                          size: 64,
+                                          color:
+                                              ColorPallete.bottomUnselectedColor,
+                                        ),
                                       ),
                                     )
                                   ],
