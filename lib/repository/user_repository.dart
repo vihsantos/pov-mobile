@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:http/http.dart';
 import 'package:pov/dto/novousuario_dto.dart';
 import 'package:http/http.dart' as http;
 import 'package:pov/services/core/routes.dart';
@@ -48,6 +49,29 @@ class UserRepository {
       throw ApplicationErrorImp(
           mensagem: response.reasonPhrase.toString(),
           statusCode: response.statusCode);
+    } catch (e) {
+      throw ApplicationErrorImp(mensagem: e.toString(), statusCode: 500);
+    }
+  }
+
+  Future<bool> alterarFotoPerfil(MultipartFile pic) async {
+    try {
+      String? token = AuthSingleton(LoginRepository()).getToken();
+
+      var request = MultipartRequest("POST", Uri.parse(Routes.addicon));
+
+      request.headers.addAll({
+        "content-type": "application/json",
+        "accept": "application/json",
+        'Authorization': 'Bearer $token',
+      });
+
+      request.files.add(pic);
+
+      var response = await request.send();
+      if (response.statusCode == 200) return true;
+
+      return false;
     } catch (e) {
       throw ApplicationErrorImp(mensagem: e.toString(), statusCode: 500);
     }
