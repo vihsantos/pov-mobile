@@ -72,8 +72,10 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                             return AlertDialog(
                               title: const Text("Troque sua foto de perfil!"),
                               content: SizedBox(
-                                height: 200,
+                                height: 160,
                                 child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     InkWell(
                                       onTap: () async {

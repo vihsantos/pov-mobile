@@ -1,3 +1,4 @@
+import 'package:location/location.dart';
 import 'package:pov/models/login/acess_model.dart';
 import 'package:pov/models/login/login_model.dart';
 
@@ -37,6 +38,8 @@ class AuthSingleton {
   }
 
   Future getLocalization() async {
-    
+    Location location = Location();
+
+    final locationData = await location.getLocation();
   }
 }
