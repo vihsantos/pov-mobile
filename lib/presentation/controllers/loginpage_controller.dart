@@ -20,6 +20,7 @@ class LoginPageController {
     _error = null;
     try {
       var user = await authSingleton.authenticate(model);
+      await authSingleton.verifyLocalization();
       return user;
     } on ApplicationError catch (e) {
       _error = e;

@@ -235,8 +235,10 @@ class _NewPostPageState extends State<NewPostPage> {
                   if (!mounted) return;
 
                   if (enviou) {
+                    // ignore: use_build_context_synchronously
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text("Post salvo com sucesso!")));
+                    // ignore: use_build_context_synchronously
                     Navigator.of(context).pop();
                   }
                 },

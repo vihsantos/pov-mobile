@@ -2,10 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:latlng/latlng.dart';
 import 'package:open_street_map_search_and_pick/open_street_map_search_and_pick.dart';
 import 'package:pov/presentation/controllers/newpostpage_controller.dart';
 
 import '../../models/localization_model.dart';
+import '../../repository/login_repository.dart';
+import '../../services/singleton/auth_singleton.dart';
 
 class Search extends StatefulWidget {
   final NewPostPageController controller;
@@ -17,17 +20,17 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
   Position? position;
+  LatLng? location;
+
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      getLocation();
     });
+    location = AuthSingleton(LoginRepository()).getLocalization();
+
     super.initState();
   }
 
-  getLocation() async {
-    position = await widget.controller.getLocation();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +38,7 @@ class _SearchState extends State<Search> {
         body: OpenStreetMapSearchAndPick(
       buttonTextStyle:
           const TextStyle(fontSize: 18, fontStyle: FontStyle.normal),
-      center: const LatLong(-12.9704, -38.5124),
+      center: LatLong(location!.latitude, location!.longitude),
       buttonColor: Colors.blue,
       buttonText: 'Escolha a sua localização atual',
       onPicked: (pickedData) {

@@ -75,6 +75,7 @@ class _LoginPageState extends State<LoginPage> {
 
                     if (controller.error != null) {
                       return showDialog(
+                          // ignore: use_build_context_synchronously
                           context: context,
                           builder: (context) {
                             return AlertDialog(
@@ -95,6 +96,7 @@ class _LoginPageState extends State<LoginPage> {
 
                     if (dado != null) {
                       Navigator.push(
+                          // ignore: use_build_context_synchronously
                           context,
                           MaterialPageRoute(
                               builder: (context) => const HomePage()));
