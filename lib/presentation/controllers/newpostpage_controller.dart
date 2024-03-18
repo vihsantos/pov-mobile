@@ -1,10 +1,7 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart';
 import 'package:pov/repository/post_repository.dart';
-import 'package:pov/services/singleton/auth_singleton.dart';
 
 import '../../dto/novopost_dto.dart';
 import '../../services/error/applicationerror.dart';

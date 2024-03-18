@@ -46,12 +46,24 @@ class TrailCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(10)),
       child: Row(
         children: [
-          Container(
+          SizedBox(
+            height: size.height * 0.3,
             width: size.width * 0.46,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-            child: Image.network(
-              urls[0],
-              fit: BoxFit.cover,
+            child: PageView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: urls.length,
+              controller: PageController(viewportFraction: 1),
+              itemBuilder: (BuildContext context, int itemIndex) {
+                return Container(
+                  width: size.width * 0.46,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Image.network(
+                    urls[itemIndex],
+                    fit: BoxFit.cover,
+                  ),
+                );
+              },
             ),
           ),
           const SizedBox(width: 5),
@@ -78,7 +90,7 @@ class TrailCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 10),
                 Text(
                   trilha.name!,
                   style: const TextStyle(

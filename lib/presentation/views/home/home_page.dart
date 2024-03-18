@@ -58,7 +58,8 @@ class _HomePageState extends State<HomePage> {
                                   List<TrailDTO?>? trails = snapshot.data;
 
                                   if (trails!.isEmpty) {
-                                    return const Center(child: Text("Nada encontrado!"));
+                                    return const Center(
+                                        child: Text("Nada encontrado!"));
                                   }
 
                                   if (controller.error != null) {
@@ -80,13 +81,7 @@ class _HomePageState extends State<HomePage> {
                                           })
                                     ],
                                   );
-                                }
-
-                                if (snapshot.hasError) {
-                                  return const Text("ERROR");
-                                }
-
-                                return Container();
+                                } return Container();
                               })),
                     ),
                     const SizedBox(height: 10),
@@ -106,7 +101,8 @@ class _HomePageState extends State<HomePage> {
                                   List<PostDTO?>? posts = snapshot.data;
 
                                   if (posts!.isEmpty) {
-                                    return const Center(child: Text("Nada encontrado!"));
+                                    return const Center(
+                                        child: Text("Nada encontrado!"));
                                   }
 
                                   return Row(
