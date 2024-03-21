@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pov/repository/login_repository.dart';
 import 'package:pov/services/singleton/auth_singleton.dart';
-
 import '../views/guides/guides_page.dart';
 import '../views/home/home_page.dart';
-import '../views/post/newpost_page.dart';
 import '../views/profile/profile_page.dart';
 import '../views/ranking/ranking_page.dart';
 
@@ -21,7 +19,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
   List pages = [
     const HomePage(),
     const GuidesPage(),
-    const NewPostPage(),
     const RankingPage(),
     ProfilePage(
         id: AuthSingleton(LoginRepository()).getId()!,
@@ -46,10 +43,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
                 onTap: () {
                   setState(() {
                     itemSelecionado = index;
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => pages[itemSelecionado]));
                   });
                 },
                 child: ItemBottom(
@@ -70,7 +63,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
       icon: Icons.person_search,
       text: 'Guias',
     ),
-    ItemDataButton(icon: Icons.add, text: "Novo Post"),
     ItemDataButton(icon: Icons.onetwothree, text: "Ranking"),
     ItemDataButton(
       icon: Icons.account_circle,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pov/dto/trail_dto.dart';
 import 'package:pov/presentation/views/trails/components/trailcard.dart';
-import 'package:pov/presentation/widgets/bottom_navigation.dart';
 import 'package:pov/repository/trail_repository.dart';
 import '../../../dto/post_dto.dart';
 import '../../../repository/post_repository.dart';
@@ -35,13 +34,14 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           backgroundColor: Colors.white,
-          bottomNavigationBar: const BottomNavigation(),
           body: Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: SingleChildScrollView(
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    const Text("Adicione uma nova trilha"),
+
                     const Text(
                       "Trilhas",
                       style:

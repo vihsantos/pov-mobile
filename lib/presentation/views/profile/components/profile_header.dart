@@ -5,6 +5,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:pov/dto/dadosperfil_dto.dart';
 import 'package:pov/presentation/controllers/profilepage_controller.dart';
+import 'package:pov/repository/followers_repository.dart';
 import 'package:pov/repository/post_repository.dart';
 import 'package:pov/repository/user_repository.dart';
 import 'package:pov/services/core/colorpallete.dart';
@@ -26,19 +27,28 @@ class ProfileHeader extends StatefulWidget {
 }
 
 class _ProfileHeaderState extends State<ProfileHeader> {
+  ProfilePageController controller = ProfilePageController(
+      postRepository: PostRepository(),
+      userRepository: UserRepository(),
+      followersRepository: FollowersRepository());
+
+  @override
+  void initState() {
+    controller.verificarSeguidor(widget.user_id);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
-    ProfilePageController controller = ProfilePageController(postRepository: PostRepository(), userRepository: UserRepository());
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         SizedBox(
-          width: size.width * 0.28,
-          height: size.height * 0.08,
+          width: size.width * 0.26,
+          height: size.height * 0.075,
           child: Column(
             children: [
               Text(
@@ -46,7 +56,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                 style: const TextStyle(fontSize: 22),
               ),
               const Text("Seguindo",
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16))
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15))
             ],
           ),
         ),
@@ -101,14 +111,15 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                                         width: 150,
                                         height: 150,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                           color: ColorPallete.bgItemColor,
                                         ),
                                         child: const Icon(
                                           Icons.add_a_photo,
                                           size: 64,
-                                          color:
-                                              ColorPallete.bottomUnselectedColor,
+                                          color: ColorPallete
+                                              .bottomUnselectedColor,
                                         ),
                                       ),
                                     )
@@ -154,14 +165,11 @@ class _ProfileHeaderState extends State<ProfileHeader> {
             const SizedBox(
               height: 10,
             ),
+            //o visibility tem que ficar dentro de um value listnable
             Visibility(
               visible: !widget.isprofileuser,
               child: InkWell(
-                onTap: () {
-                  if (controller.isFollower!) {
-                    return;
-                  }
-                },
+                onTap: () => controller.seguirOuDeixarDeSeguir(widget.user_id),
                 child: Container(
                   width: size.width * 0.35,
                   height: size.height * 0.05,
@@ -184,8 +192,8 @@ class _ProfileHeaderState extends State<ProfileHeader> {
           ],
         ),
         SizedBox(
-          width: size.width * 0.28,
-          height: size.height * 0.08,
+          width: size.width * 0.26,
+          height: size.height * 0.075,
           child: Column(
             children: [
               Text(
@@ -193,7 +201,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                 style: const TextStyle(fontSize: 22),
               ),
               const Text("Seguidores",
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16))
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15))
             ],
           ),
         ),

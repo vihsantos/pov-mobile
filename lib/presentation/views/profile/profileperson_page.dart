@@ -3,7 +3,6 @@ import 'package:pov/models/post/postprofile_model.dart';
 import 'package:pov/presentation/controllers/profilepage_controller.dart';
 import 'package:pov/presentation/views/profile/components/profile_header.dart';
 import '../../../dto/dadosperfil_dto.dart';
-import '../../widgets/bottom_navigation.dart';
 import 'components/card_postprofile.dart';
 
 class ProfilePersonPage extends StatefulWidget {
@@ -33,7 +32,6 @@ class _ProfilePersonPageState extends State<ProfilePersonPage> {
           ),
         ),
         backgroundColor: Colors.white,
-        bottomNavigationBar: const BottomNavigation(),
         body: Column(
           children: [
             const SizedBox(height: 15),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pov/presentation/views/home/home_page.dart';
+import 'package:pov/presentation/views/init_page.dart';
 import 'package:pov/services/singleton/auth_singleton.dart';
 import '../../../repository/login_repository.dart';
 import '../../controllers/loginpage_controller.dart';
@@ -99,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                           // ignore: use_build_context_synchronously
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const HomePage()));
+                              builder: (context) => const InitPage()));
                     }
                   },
                   child: Container(

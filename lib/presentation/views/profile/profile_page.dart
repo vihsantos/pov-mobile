@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pov/presentation/controllers/profilepage_controller.dart';
 import 'package:pov/presentation/views/profile/profileguide_page.dart';
 import 'package:pov/presentation/views/profile/profileperson_page.dart';
+import 'package:pov/repository/followers_repository.dart';
 
 import '../../../repository/post_repository.dart';
 import '../../../repository/user_repository.dart';
@@ -17,7 +18,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   ProfilePageController controller = ProfilePageController(
-      postRepository: PostRepository(), userRepository: UserRepository());
+      postRepository: PostRepository(), userRepository: UserRepository(), followersRepository: FollowersRepository());
 
   @override
   Widget build(BuildContext context) {

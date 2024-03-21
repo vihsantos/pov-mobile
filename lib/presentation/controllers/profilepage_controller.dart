@@ -1,8 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 import 'package:pov/dto/dadosperfil_dto.dart';
 import 'package:pov/models/post/postprofile_model.dart';
+import 'package:pov/repository/followers_repository.dart';
 import 'package:pov/repository/login_repository.dart';
 import 'package:pov/repository/post_repository.dart';
 import 'package:pov/repository/user_repository.dart';
@@ -13,10 +15,12 @@ import '../../services/error/applicationerror.dart';
 class ProfilePageController {
   final PostRepository postRepository;
   final UserRepository userRepository;
+  final FollowersRepository followersRepository;
 
   ProfilePageController({
     required this.postRepository,
     required this.userRepository,
+    required this.followersRepository,
   });
 
   set _posts(List<PostProfileModel>? posts) => postsApi.value = posts;
@@ -26,6 +30,10 @@ class ProfilePageController {
   set _error(ApplicationError? error) => solicitacaoErrorApi.value = error;
   ApplicationError? get error => solicitacaoErrorApi.value;
   final solicitacaoErrorApi = ValueNotifier<ApplicationError?>(null);
+
+  set _profileIcon(FilePicker? profileIcon) => profileIconApi.value = profileIcon;
+  FilePicker? get profileIcon => profileIconApi.value;
+  final profileIconApi = ValueNotifier<FilePicker?>(null);
 
 
   set _isFollower(bool? error) => isFollowerApi.value = isFollower;
@@ -54,6 +62,29 @@ class ProfilePageController {
 
   bool isProfile(int id){
     return AuthSingleton(LoginRepository()).getId() == id;
+  }
+
+  Future? verificarSeguidor(int id) async {
+
+    bool perfil = isProfile(id);
+
+    if(!perfil){
+      _isFollower = await followersRepository.isFollower(id);
+    } else{
+      _isFollower = false;
+    }
+  }
+
+  Future? seguirOuDeixarDeSeguir(int id)async {
+
+    if(isFollower!){
+      await followersRepository.unfollow(id);
+      _isFollower = false;
+    } else {
+      await followersRepository.follow(id);
+      _isFollower = true;
+    }
+
   }
 
 }
