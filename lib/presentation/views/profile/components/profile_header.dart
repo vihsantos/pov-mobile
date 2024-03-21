@@ -48,7 +48,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
       children: [
         SizedBox(
           width: size.width * 0.26,
-          height: size.height * 0.075,
+          height: size.height * 0.08,
           child: Column(
             children: [
               Text(
@@ -166,21 +166,25 @@ class _ProfileHeaderState extends State<ProfileHeader> {
               height: 10,
             ),
             //o visibility tem que ficar dentro de um value listnable
-            Visibility(
+            ValueListenableBuilder<bool>(
+              builder: (BuildContext context, bool value, Widget? child) {
+                // This builder will only get called when the _counter
+                // is updated.
+                return Visibility(
               visible: !widget.isprofileuser,
               child: InkWell(
                 onTap: () => controller.seguirOuDeixarDeSeguir(widget.user_id),
                 child: Container(
                   width: size.width * 0.35,
-                  height: size.height * 0.05,
+                  height: size.height * 0.06,
                   decoration: BoxDecoration(
-                      color: !controller.isFollower!
-                          ? ColorPallete.primaryColor
-                          : ColorPallete.bottomUnselectedColor,
+                      color: value
+                          ? ColorPallete.bottomUnselectedColor
+                          :  ColorPallete.primaryColor,
                       borderRadius: BorderRadius.circular(10)),
                   child: Center(
                       child: Text(
-                    !controller.isFollower! ? "Seguir" : "Deixar de seguir",
+                    value ? "Deixar de seguir" : "Seguir",
                     style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
@@ -188,12 +192,16 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                   )),
                 ),
               ),
-            )
+            );
+              },
+              valueListenable: controller.isFollowerApi,
+            ),
+            
           ],
         ),
         SizedBox(
           width: size.width * 0.26,
-          height: size.height * 0.075,
+          height: size.height * 0.08,
           child: Column(
             children: [
               Text(

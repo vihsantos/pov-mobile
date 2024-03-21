@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pov/services/core/colorpallete.dart';
 
 import '../../../../models/ranking/rankingbylocal_model.dart';
 
@@ -15,7 +16,7 @@ class CardRankingByLocal extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Container(
       width: size.width,
-      height: size.height * 0.15,
+      height: size.height * 0.18,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           color: const Color(0xFFF8F8F8),
@@ -36,7 +37,7 @@ class CardRankingByLocal extends StatelessWidget {
                   style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
-                      color: Colors.pink),
+                      color: ColorPallete.primaryColor),
                 ),
               ),
               RichText(
@@ -72,7 +73,7 @@ class CardRankingByLocal extends StatelessWidget {
               right: 0,
               child: Container(
                 width: size.width * 0.2,
-                height: size.height * 0.042,
+                height: size.height * 0.055,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),

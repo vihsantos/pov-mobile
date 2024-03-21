@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pov/repository/login_repository.dart';
+import 'package:pov/services/core/colorpallete.dart';
 import 'package:pov/services/singleton/auth_singleton.dart';
 import '../views/guides/guides_page.dart';
 import '../views/home/home_page.dart';
@@ -31,10 +32,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
     return SafeArea(
         child: Container(
       width: size.width,
-      height: size.height * 0.075,
+      height: size.height * 0.085,
       margin: const EdgeInsets.all(15),
       decoration: BoxDecoration(
-          color: const Color(0xFFF8F8F8),
+          color: ColorPallete.bgItemColor,
           borderRadius: BorderRadius.circular(10)),
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
         ...List.generate(

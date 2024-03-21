@@ -18,16 +18,17 @@ class _InitPageState extends State<InitPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigation(),
+      bottomNavigationBar: const BottomNavigation(),
       body: PageView(
         controller: null,
         onPageChanged: (index){
+          // ignore: avoid_print
           print(index);
         },
         children: [
-          HomePage(),
-          GuidesPage(),
-          RankingPage(),
+          const HomePage(),
+          const GuidesPage(),
+          const RankingPage(),
           ProfilePage(isGuide: AuthSingleton(LoginRepository()).getGuide()!, id: AuthSingleton(LoginRepository()).getId()!)
         ],
       )

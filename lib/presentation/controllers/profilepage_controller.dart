@@ -31,14 +31,15 @@ class ProfilePageController {
   ApplicationError? get error => solicitacaoErrorApi.value;
   final solicitacaoErrorApi = ValueNotifier<ApplicationError?>(null);
 
+  // ignore: unused_element
   set _profileIcon(FilePicker? profileIcon) => profileIconApi.value = profileIcon;
   FilePicker? get profileIcon => profileIconApi.value;
   final profileIconApi = ValueNotifier<FilePicker?>(null);
 
 
-  set _isFollower(bool? error) => isFollowerApi.value = isFollower;
-  bool? get isFollower => isFollowerApi.value;
-  final isFollowerApi = ValueNotifier<bool?>(false);
+  set _isFollower(bool error) => isFollowerApi.value = isFollower;
+  bool get isFollower => isFollowerApi.value;
+  final isFollowerApi = ValueNotifier<bool>(false);
 
   Future<List<PostProfileModel>?> listarPosts(int id) async {
     _error = null;
@@ -69,20 +70,20 @@ class ProfilePageController {
     bool perfil = isProfile(id);
 
     if(!perfil){
-      _isFollower = await followersRepository.isFollower(id);
-    } else{
-      _isFollower = false;
-    }
+      bool dado = await followersRepository.isFollower(id);
+      _isFollower = dado;
+    } 
   }
 
   Future? seguirOuDeixarDeSeguir(int id)async {
 
-    if(isFollower!){
+    if(isFollower){
       await followersRepository.unfollow(id);
-      _isFollower = false;
+      verificarSeguidor(id);
+
     } else {
       await followersRepository.follow(id);
-      _isFollower = true;
+      verificarSeguidor(id);
     }
 
   }
