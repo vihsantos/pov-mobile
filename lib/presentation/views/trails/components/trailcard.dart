@@ -42,9 +42,11 @@ class TrailCard extends StatelessWidget {
       width: size.width * 0.95,
       height: size.height * 0.3,
       decoration: BoxDecoration(
-          color: ColorPallete.bgItemColor,
+          color: const Color(0xFFF8F8F8),
           borderRadius: BorderRadius.circular(10)),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
             height: size.height * 0.3,
@@ -70,8 +72,6 @@ class TrailCard extends StatelessWidget {
           SizedBox(
             width: size.width * 0.4,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [

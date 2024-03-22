@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pov/dto/trail_dto.dart';
 import 'package:pov/presentation/views/trails/components/trailcard.dart';
 import 'package:pov/repository/trail_repository.dart';
+import 'package:pov/services/core/colorpallete.dart';
 import '../../../dto/post_dto.dart';
 import '../../../repository/post_repository.dart';
 import '../../controllers/homepage_controller.dart';
@@ -40,8 +41,7 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text("Adicione uma nova trilha"),
-
+                    NewPostButton(),
                     const Text(
                       "Trilhas",
                       style:
@@ -81,7 +81,8 @@ class _HomePageState extends State<HomePage> {
                                           })
                                     ],
                                   );
-                                } return Container();
+                                }
+                                return Container();
                               })),
                     ),
                     const SizedBox(height: 10),
@@ -133,5 +134,30 @@ class _HomePageState extends State<HomePage> {
             ),
           )),
     );
+  }
+}
+
+class NewPostButton extends StatelessWidget {
+  const NewPostButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return Container(
+        width: size.width,
+        margin: const EdgeInsets.only(bottom: 10),
+        height: 60,
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+            color: const Color(0xFFF8F8F8),
+            borderRadius: BorderRadius.circular(10)),
+        child: const Center(
+            child: Text(
+          "Adicione um novo post",
+          style: TextStyle(
+              color: ColorPallete.primaryColor, fontWeight: FontWeight.w600, fontSize: 16),
+        )));
   }
 }

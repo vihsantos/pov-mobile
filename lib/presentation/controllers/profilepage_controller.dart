@@ -67,12 +67,16 @@ class ProfilePageController {
 
   Future? verificarSeguidor(int id) async {
 
-    bool perfil = isProfile(id);
+    try{
+      bool perfil = isProfile(id);
 
     if(!perfil){
       bool dado = await followersRepository.isFollower(id);
       _isFollower = dado;
     } 
+    } on ApplicationError catch (e) {
+      _error = e;
+    }
   }
 
   Future? seguirOuDeixarDeSeguir(int id)async {
