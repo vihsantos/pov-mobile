@@ -16,7 +16,7 @@ class CardRankingByLocal extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Container(
       width: size.width,
-      height: size.height * 0.18,
+      height: size.height * 0.15,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           color: const Color(0xFFF8F8F8),

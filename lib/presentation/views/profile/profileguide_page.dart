@@ -87,7 +87,8 @@ class _ProfileGuidePageState extends State<ProfileGuidePage> {
                     ProfileHeader(
                         dados: dados,
                         isprofileuser: widget.controller.isProfile(widget.id),
-                        user_id: widget.id),
+                        user_id: widget.id,
+                        profilePageController: widget.controller,),
                     const SizedBox(
                       height: 10,
                     )

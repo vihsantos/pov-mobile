@@ -52,7 +52,8 @@ class _ProfilePersonPageState extends State<ProfilePersonPage> {
                   return ProfileHeader(
                       dados: dados,
                       isprofileuser: widget.controller.isProfile(widget.id),
-                      user_id: widget.id);
+                      user_id: widget.id,
+                      profilePageController: widget.controller,);
                 },
               ),
             ),

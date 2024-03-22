@@ -5,36 +5,25 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:pov/dto/dadosperfil_dto.dart';
 import 'package:pov/presentation/controllers/profilepage_controller.dart';
-import 'package:pov/repository/followers_repository.dart';
-import 'package:pov/repository/post_repository.dart';
-import 'package:pov/repository/user_repository.dart';
 import 'package:pov/services/core/colorpallete.dart';
 
 class ProfileHeader extends StatefulWidget {
   final int user_id;
   final bool isprofileuser;
   final DadosPerfilDTO dados;
+  final ProfilePageController profilePageController;
 
-  const ProfileHeader(
-      {Key? key,
-      required this.isprofileuser,
-      required this.dados,
-      required this.user_id})
-      : super(key: key);
+  const ProfileHeader({super.key, required this.user_id, required this.isprofileuser, required this.dados, required this.profilePageController});
 
   @override
   State<ProfileHeader> createState() => _ProfileHeaderState();
 }
 
 class _ProfileHeaderState extends State<ProfileHeader> {
-  ProfilePageController controller = ProfilePageController(
-      postRepository: PostRepository(),
-      userRepository: UserRepository(),
-      followersRepository: FollowersRepository());
 
   @override
   void initState() {
-    controller.verificarSeguidor(widget.user_id);
+    widget.profilePageController.verificarSeguidor(widget.user_id);
     super.initState();
   }
 
@@ -173,7 +162,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                 return Visibility(
               visible: !widget.isprofileuser,
               child: InkWell(
-                onTap: () => controller.seguirOuDeixarDeSeguir(widget.user_id),
+                onTap: () => widget.profilePageController.seguirOuDeixarDeSeguir(widget.user_id),
                 child: Container(
                   width: size.width * 0.35,
                   height: size.height * 0.06,
@@ -194,7 +183,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
               ),
             );
               },
-              valueListenable: controller.isFollowerApi,
+              valueListenable: widget.profilePageController.isFollowerApi,
             ),
             
           ],

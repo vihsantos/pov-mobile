@@ -74,19 +74,20 @@ class GuideCard extends StatelessWidget {
               ),
               SizedBox(
                 height: size.height * 0.005,
-              ),
-              Container(
-                width: size.width * 0.5,
-                height: size.height * 0.05,
-                decoration: BoxDecoration(
-                    color: const Color(0xFF6461E8),
-                    borderRadius: BorderRadius.circular(10)),
-                child: const Center(
-                    child: Text(
-                  "Seguir",
-                  style: TextStyle(color: Colors.white),
-                )),
               )
+              // ,
+              // Container(
+              //   width: size.width * 0.5,
+              //   height: size.height * 0.05,
+              //   decoration: BoxDecoration(
+              //       color: const Color(0xFF6461E8),
+              //       borderRadius: BorderRadius.circular(10)),
+              //   child: const Center(
+              //       child: Text(
+              //     "Seguir",
+              //     style: TextStyle(color: Colors.white),
+              //   )),
+              // )
             ],
           ),
         ),
