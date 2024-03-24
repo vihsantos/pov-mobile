@@ -24,45 +24,49 @@ class CardPostProfile extends StatelessWidget {
       },
       child: Padding(
         padding: const EdgeInsets.all(10),
-        child: Stack(children: [
-          SizedBox(
-              width: 200,
-              height: 200,
-              child: Image.network(post.image_url!, fit: BoxFit.cover)),
-          Positioned(
-            top: 10,
-            right: 10,
-            child: Container(
-              width: 60,
-              height: 30,
-              decoration: BoxDecoration(boxShadow: const [
-                BoxShadow(
-                    offset: Offset(0, 4),
-                    blurRadius: 4,
-                    color: Color.fromARGB(33, 0, 0, 0))
-              ], color: Colors.white, borderRadius: BorderRadius.circular(10)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    post.stars.toString(),
-                    style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.pink),
-                  ),
-                  const SizedBox(width: 5),
-                  const Icon(
-                    Icons.star,
-                    size: 18,
-                    color: Colors.pink,
-                  )
-                ],
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: Stack(
+            children: [
+            SizedBox(
+                width: 200,
+                height: 200,
+                child: Image.network(post.image_url!, fit: BoxFit.cover)),
+            Positioned(
+              top: 10,
+              right: 10,
+              child: Container(
+                width: 60,
+                height: 30,
+                decoration: BoxDecoration(boxShadow: const [
+                  BoxShadow(
+                      offset: Offset(0, 4),
+                      blurRadius: 4,
+                      color: Color.fromARGB(33, 0, 0, 0))
+                ], color: Colors.white, borderRadius: BorderRadius.circular(10)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      post.stars.toString(),
+                      style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.pink),
+                    ),
+                    const SizedBox(width: 5),
+                    const Icon(
+                      Icons.star,
+                      size: 18,
+                      color: Colors.pink,
+                    )
+                  ],
+                ),
               ),
-            ),
-          )
-        ]),
+            )
+          ]),
+        ),
       ),
     );
   }

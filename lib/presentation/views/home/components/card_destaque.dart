@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:pov/services/core/colorpallete.dart';
 
 import '../../../../dto/post_dto.dart';
 import '../../post/postdetails_page.dart';
@@ -27,7 +28,7 @@ class CardDestaque extends StatelessWidget {
             width: 180,
             height: 260,
             decoration: BoxDecoration(
-                color: const Color(0xFFF8F8F8),
+                color: ColorPallete.bgItemColor,
                 borderRadius: BorderRadius.circular(10)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -28,7 +28,7 @@ class _NewPostPageState extends State<NewPostPage> {
       child: Scaffold(
         appBar: AppBar(
           scrolledUnderElevation: 0,
-          automaticallyImplyLeading: false,
+          automaticallyImplyLeading: true,
           backgroundColor: Colors.transparent,
           elevation: 0,
           centerTitle: true,
