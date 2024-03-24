@@ -3,6 +3,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:pov/presentation/controllers/newpostpage_controller.dart';
 import 'package:pov/repository/post_repository.dart';
+import 'package:pov/services/core/colorpallete.dart';
 
 import '../../widgets/input_field.dart';
 import '../../widgets/search.dart';
@@ -112,7 +113,7 @@ class _NewPostPageState extends State<NewPostPage> {
                   : InputField(
                       label: 'Localização',
                       child: Padding(
-                        padding: const EdgeInsets.all(15),
+                        padding: const EdgeInsets.all(20),
                         child: InkWell(
                           onTap: () {
                             Navigator.push(
@@ -122,7 +123,7 @@ class _NewPostPageState extends State<NewPostPage> {
                                           controller: controller,
                                         )));
                           },
-                          child: const Text("Search"),
+                          child: const Text("Search", style: TextStyle(color: ColorPallete.labelColor, fontSize: 16, fontWeight: FontWeight.w500),),
                         ),
                       ),
                     ),
