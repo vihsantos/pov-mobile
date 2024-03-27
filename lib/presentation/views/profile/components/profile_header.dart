@@ -61,84 +61,87 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                     borderRadius: BorderRadius.circular(75),
                   ),
                 ),
-                Positioned(
-                  bottom: 4,
-                  child: InkWell(
-                    onTap: () async {
-                      return showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: const Text("Troque sua foto de perfil!"),
-                              content: SizedBox(
-                                height: 160,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    InkWell(
-                                      onTap: () async {
-                                        final filePickerResult =
-                                            await FilePicker.platform.pickFiles(
-                                                allowMultiple: false,
-                                                type: FileType.custom,
-                                                allowedExtensions: [
-                                              'png',
-                                              'jpeg',
-                                            ]);
-
-                                        if (filePickerResult == null) return;
-
-                                        setState(() {
-                                          // ignore: unused_local_variable
-                                          var files = filePickerResult.paths
-                                              .map((path) => File(path!))
-                                              .toList();
-                                        });
-                                      },
-                                      child: Container(
-                                        width: 150,
-                                        height: 150,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          color: ColorPallete.bgItemColor,
+                Visibility(
+                  visible: widget.isprofileuser,
+                  child: Positioned(
+                    bottom: 4,
+                    child: InkWell(
+                      onTap: () async {
+                        return showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: const Text("Troque sua foto de perfil!"),
+                                content: SizedBox(
+                                  height: 160,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      InkWell(
+                                        onTap: () async {
+                                          final filePickerResult =
+                                              await FilePicker.platform.pickFiles(
+                                                  allowMultiple: false,
+                                                  type: FileType.custom,
+                                                  allowedExtensions: [
+                                                'png',
+                                                'jpeg',
+                                              ]);
+                  
+                                          if (filePickerResult == null) return;
+                  
+                                          setState(() {
+                                            // ignore: unused_local_variable
+                                            var files = filePickerResult.paths
+                                                .map((path) => File(path!))
+                                                .toList();
+                                          });
+                                        },
+                                        child: Container(
+                                          width: 150,
+                                          height: 150,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: ColorPallete.bgItemColor,
+                                          ),
+                                          child: const Icon(
+                                            Icons.add_a_photo,
+                                            size: 64,
+                                            color: ColorPallete
+                                                .bottomUnselectedColor,
+                                          ),
                                         ),
-                                        child: const Icon(
-                                          Icons.add_a_photo,
-                                          size: 64,
-                                          color: ColorPallete
-                                              .bottomUnselectedColor,
-                                        ),
-                                      ),
-                                    )
-                                  ],
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              actions: <Widget>[
-                                TextButton(
-                                  child: const Text("Ok"),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                ),
-                              ],
-                            );
-                          });
-                    },
-                    child: Container(
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                            color: ColorPallete.bgItemColor,
-                            borderRadius: BorderRadius.circular(25),
-                            border: Border.all(
-                                color: const Color.fromARGB(45, 57, 52, 52),
-                                width: 0.5)),
-                        child: const Icon(
-                          Icons.edit,
-                          color: ColorPallete.primaryColor,
-                        )),
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: const Text("Ok"),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                ],
+                              );
+                            });
+                      },
+                      child: Container(
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                              color: ColorPallete.bgItemColor,
+                              borderRadius: BorderRadius.circular(25),
+                              border: Border.all(
+                                  color: const Color.fromARGB(45, 57, 52, 52),
+                                  width: 0.5)),
+                          child: const Icon(
+                            Icons.edit,
+                            color: ColorPallete.primaryColor,
+                          )),
+                    ),
                   ),
                 )
               ],

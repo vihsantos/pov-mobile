@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:pov/dto/trail_dto.dart';
 import '../../../../models/enums/AreaAtuacao.dart';
 import '../../../../services/core/colorpallete.dart';
@@ -39,18 +38,20 @@ class TrailCard extends StatelessWidget {
     areaas = areaas.substring(0, areaas.length - 2);
 
     return Container(
-      width: 410,
-      height: 200,
+      width: size.width * 0.94,
+      height: size.height * 0.34,
       decoration: BoxDecoration(
         color: ColorPallete.bgItemColor,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
+          const SizedBox(height: 12),
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: SizedBox(
-              width: 410,
+              width: size.width * 0.87,
               height: 195,
               child: PageView.builder(
                 scrollDirection: Axis.horizontal,
@@ -92,7 +93,8 @@ class TrailCard extends StatelessWidget {
                 ],
               ),
             ),
-          )
+          ),
+          const SizedBox(height: 12),
         ],
       ),
     );

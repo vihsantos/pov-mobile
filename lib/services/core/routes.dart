@@ -1,5 +1,5 @@
 class Routes {
-  static const String urlPartial = "http://192.168.0.104:8000";
+  static const String urlPartial = "http://192.168.100.55:8000";
 
   static const String login = "$urlPartial/acesso";
   static const String novoUsuario = "$urlPartial/criarusuario";
