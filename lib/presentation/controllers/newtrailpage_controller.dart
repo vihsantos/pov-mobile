@@ -44,15 +44,7 @@ class NewTrailPageController {
 
     files = filePickerResult.paths.map((path) => File(path!)).toList();
 
-    int sizeInBytes = 0;
-
-    for (int x = 0; x < files.length; x++) {
-      sizeInBytes += files[x].lengthSync();
-    }
-
-    final sizeInMb = sizeInBytes / (1024 * 1024);
-
-    if (sizeInMb > 5) files = [];
+    if (files.length > 2) files = [];
   }
 
   Future enviarImagem() async {

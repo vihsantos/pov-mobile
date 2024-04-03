@@ -31,11 +31,11 @@ class NovoUsuarioDTO {
       'email': email,
       'username': username,
       'password': password,
-      'data_nascimento': data_nascimento?.toIso8601String(),
+      'data_nascimento': data_nascimento?.toString(),
       'guide': guide,
       'cadastur': cadastur,
       'areatuacao': areatuacao,
-      'data_vencimento': data_vencimento?.toIso8601String(),
+      'data_vencimento': data_vencimento?.toString(),
     };
   }
 

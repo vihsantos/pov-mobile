@@ -37,7 +37,7 @@ class TrailModel {
       description:
           map['description'] != null ? map['description'] as String : null,
       user: map['user'] != null
-          ? UserPostModel.fromJson(map['user'] as Map<String, dynamic>)
+          ? UserPostModel.fromMap(map['user'])
           : null,
       occupation:
           map['occupation'] != null ? map['occupation'] as String : null,

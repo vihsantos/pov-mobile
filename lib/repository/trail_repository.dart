@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:http/http.dart';
 import 'package:pov/dto/trail_dto.dart';
@@ -47,8 +48,11 @@ class TrailRepository {
 
       if (response.statusCode == 200) {
         Iterable lista = json.decode(response.body);
-        List<TrailDTO> trilhas =
-            lista.map((model) => TrailDTO.fromJson(model)).toList();
+        List<TrailDTO> trilhas = [];
+
+        for (var element in lista) {
+          trilhas.add(TrailDTO.fromMap(element));
+        }
 
         return trilhas;
       }
@@ -75,8 +79,11 @@ class TrailRepository {
 
       if (response.statusCode == 200) {
         Iterable lista = json.decode(response.body);
-        List<TrailDTO> trilhas =
-            lista.map((model) => TrailDTO.fromJson(model)).toList();
+        List<TrailDTO> trilhas = [];
+
+        for (var element in lista) {
+          trilhas.add(TrailDTO.fromMap(element));
+        }
 
         return trilhas;
       }

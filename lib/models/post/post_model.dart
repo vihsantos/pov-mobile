@@ -63,7 +63,7 @@ class PostModel {
             )
           : null,
       user: map['user'] != null
-          ? UserPostModel.fromJson(map['user'] as Map<String, dynamic>)
+          ? UserPostModel.fromMap(map['user'])
           : null,
       comentarios:
           map['comentarios'] != null ? map['comentarios'] as int : null,

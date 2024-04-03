@@ -309,15 +309,17 @@ class _RegisterPageState extends State<RegisterPage> {
                                 }
                               },
                               decoration: InputDecoration(
-                                  hintStyle: const TextStyle(
-                                      fontStyle: FontStyle.italic),
-                                  enabledBorder: InputBorder.none,
-                                  focusedBorder: InputBorder.none,
-                                  labelText: registerController
-                                              .usuario.data_vencimento ==
-                                          null
-                                      ? "Digite a data de Vencimento do Cadastur"
-                                      : data),
+                                hintStyle: const TextStyle(
+                                    fontStyle: FontStyle.italic),
+                                enabledBorder: InputBorder.none,
+                                focusedBorder: InputBorder.none,
+                                hintText: registerController
+                                            .usuario.data_vencimento ==
+                                        null
+                                    ? "Informe a data de vencimento do Cadastur"
+                                    : registerController.usuario.data_vencimento
+                                        .toString(),
+                              ),
                             ),
                           ),
                         ),
