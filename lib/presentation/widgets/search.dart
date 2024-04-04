@@ -50,7 +50,7 @@ class _SearchState extends State<Search> {
         widget.controller.novoPost.localization = LocalizationModel(
             lat: pickedData.latLong.latitude,
             long: pickedData.latLong.longitude,
-            local: pickedData.addressName);
+            local: pickedData.address["road"] +", " + pickedData.address["city"] + ", " + pickedData.address["state"] + ", " + pickedData.address["postcode"]);
         Navigator.of(context).pop();
       },
     ));
