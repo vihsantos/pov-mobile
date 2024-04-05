@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:io';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -32,9 +34,9 @@ class ProfilePageController {
   final solicitacaoErrorApi = ValueNotifier<ApplicationError?>(null);
 
   // ignore: unused_element
-  set _profileIcon(FilePicker? profileIcon) => profileIconApi.value = profileIcon;
-  FilePicker? get profileIcon => profileIconApi.value;
-  final profileIconApi = ValueNotifier<FilePicker?>(null);
+  set _profileIcon(File? profileIcon) => profileIconApi.value = profileIcon;
+  File? get profileIcon => profileIconApi.value;
+  final profileIconApi = ValueNotifier<File?>(null);
 
 
   set _isFollower(bool error) => isFollowerApi.value = isFollower;
@@ -90,6 +92,10 @@ class ProfilePageController {
       verificarSeguidor(id);
     }
 
+  }
+
+  alterarProfileIcon(File file){
+    _profileIcon = file;
   }
 
 }

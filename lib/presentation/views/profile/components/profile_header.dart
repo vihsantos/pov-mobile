@@ -13,14 +13,18 @@ class ProfileHeader extends StatefulWidget {
   final DadosPerfilDTO dados;
   final ProfilePageController profilePageController;
 
-  const ProfileHeader({super.key, required this.user_id, required this.isprofileuser, required this.dados, required this.profilePageController});
+  const ProfileHeader(
+      {super.key,
+      required this.user_id,
+      required this.isprofileuser,
+      required this.dados,
+      required this.profilePageController});
 
   @override
   State<ProfileHeader> createState() => _ProfileHeaderState();
 }
 
 class _ProfileHeaderState extends State<ProfileHeader> {
-
   @override
   void initState() {
     widget.profilePageController.verificarSeguidor(widget.user_id);
@@ -76,26 +80,31 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                                   height: 160,
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
                                       InkWell(
                                         onTap: () async {
                                           final filePickerResult =
-                                              await FilePicker.platform.pickFiles(
-                                                  allowMultiple: false,
-                                                  type: FileType.custom,
-                                                  allowedExtensions: [
+                                              await FilePicker.platform
+                                                  .pickFiles(
+                                                      allowMultiple: false,
+                                                      type: FileType.custom,
+                                                      allowedExtensions: [
                                                 'png',
                                                 'jpeg',
                                               ]);
-                  
+
                                           if (filePickerResult == null) return;
-                  
+
                                           setState(() {
                                             // ignore: unused_local_variable
-                                            var files = filePickerResult.paths
+                                            File file = filePickerResult.paths
                                                 .map((path) => File(path!))
-                                                .toList();
+                                                .toList()
+                                                .firstOrNull!;
+                                            widget.profilePageController
+                                                .alterarProfileIcon(file);
                                           });
                                         },
                                         child: Container(
@@ -106,12 +115,22 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                                                 BorderRadius.circular(10),
                                             color: ColorPallete.bgItemColor,
                                           ),
-                                          child: const Icon(
-                                            Icons.add_a_photo,
-                                            size: 64,
-                                            color: ColorPallete
-                                                .bottomUnselectedColor,
-                                          ),
+                                          child: ValueListenableBuilder<File?>(
+                                              valueListenable: widget
+                                                  .profilePageController
+                                                  .profileIconApi,
+                                              builder: (_, file, __) {
+                                                if (file == null) {
+                                                  return const Icon(
+                                                    Icons.add_a_photo,
+                                                    size: 64,
+                                                    color: ColorPallete
+                                                        .bottomUnselectedColor,
+                                                  );
+                                                }
+
+                                                return Image.file(file, fit: BoxFit.cover,);
+                                              }),
                                         ),
                                       )
                                     ],
@@ -163,32 +182,32 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                 // This builder will only get called when the _counter
                 // is updated.
                 return Visibility(
-              visible: !widget.isprofileuser,
-              child: InkWell(
-                onTap: () => widget.profilePageController.seguirOuDeixarDeSeguir(widget.user_id),
-                child: Container(
-                  width: size.width * 0.35,
-                  height: size.height * 0.06,
-                  decoration: BoxDecoration(
-                      color: value
-                          ? ColorPallete.bottomUnselectedColor
-                          :  ColorPallete.primaryColor,
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Center(
-                      child: Text(
-                    value ? "Deixar de seguir" : "Seguir",
-                    style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white),
-                  )),
-                ),
-              ),
-            );
+                  visible: !widget.isprofileuser,
+                  child: InkWell(
+                    onTap: () => widget.profilePageController
+                        .seguirOuDeixarDeSeguir(widget.user_id),
+                    child: Container(
+                      width: size.width * 0.35,
+                      height: size.height * 0.06,
+                      decoration: BoxDecoration(
+                          color: value
+                              ? ColorPallete.bottomUnselectedColor
+                              : ColorPallete.primaryColor,
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Center(
+                          child: Text(
+                        value ? "Deixar de seguir" : "Seguir",
+                        style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white),
+                      )),
+                    ),
+                  ),
+                );
               },
               valueListenable: widget.profilePageController.isFollowerApi,
             ),
-            
           ],
         ),
         SizedBox(
