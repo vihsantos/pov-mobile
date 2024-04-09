@@ -57,6 +57,14 @@ class _ProfileHeaderState extends State<ProfileHeader> {
           children: [
             Stack(
               children: [
+                widget.dados.profileIcon != null ?
+                SizedBox(
+                  width: 130,
+                  height: 130,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: Image.network(widget.dados.profileIcon!, fit: BoxFit.cover,)),
+                ):
                 Container(
                   width: 130,
                   height: 130,
@@ -140,6 +148,8 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                                   TextButton(
                                     child: const Text("Ok"),
                                     onPressed: () {
+
+                                      widget.profilePageController.enviarImagem();
                                       Navigator.pop(context);
                                     },
                                   ),

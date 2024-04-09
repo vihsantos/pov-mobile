@@ -8,12 +8,14 @@ class DadosPerfilDTO {
   bool? guide;
   List<UserFollowModel>? followers;
   List<UserFollowModel>? following;
+  String? profileIcon;
 
   DadosPerfilDTO({
     this.username,
     this.guide,
     this.followers,
     this.following,
+    this.profileIcon,
   });
 
   Map<String, dynamic> toMap() {
@@ -22,6 +24,7 @@ class DadosPerfilDTO {
       'guide': guide,
       'followers': followers!.map((x) => x.toMap()).toList(),
       'following': following!.map((x) => x.toMap()).toList(),
+      'profileIcon':profileIcon,
     };
   }
 
@@ -43,6 +46,7 @@ class DadosPerfilDTO {
               ),
             )
           : null,
+      profileIcon: map['profileIcon'] != null ? map['profileIcon'] as String : null,
     );
   }
 

@@ -1,21 +1,30 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
 import 'package:pov/repository/login_repository.dart';
 import 'package:pov/services/core/colorpallete.dart';
 import 'package:pov/services/singleton/auth_singleton.dart';
+
 import '../views/guides/guides_page.dart';
 import '../views/home/home_page.dart';
 import '../views/profile/profile_page.dart';
 import '../views/ranking/ranking_page.dart';
 
 class BottomNavigation extends StatefulWidget {
-  const BottomNavigation({super.key});
+  int itemSelecionado;
+  Function trocaIndex;
+
+  BottomNavigation({
+    Key? key,
+    required this.itemSelecionado,
+    required this.trocaIndex,
+  }) : super(key: key);
 
   @override
   State<BottomNavigation> createState() => _BottomNavigationState();
 }
 
 class _BottomNavigationState extends State<BottomNavigation> {
-  int itemSelecionado = 0;
 
   List pages = [
     const HomePage(),
@@ -41,15 +50,11 @@ class _BottomNavigationState extends State<BottomNavigation> {
         ...List.generate(
             itensButtons.length,
             (index) => GestureDetector(
-                onTap: () {
-                  setState(() {
-                    itemSelecionado = index;
-                  });
-                },
+                onTap: () => widget.trocaIndex,
                 child: ItemBottom(
                   icon: itensButtons[index].icon,
                   text: itensButtons[index].text,
-                  selecionado: itemSelecionado == index,
+                  selecionado: widget.itemSelecionado == index,
                 )))
       ]),
     ));

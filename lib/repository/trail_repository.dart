@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
-
 import 'package:http/http.dart';
 import 'package:pov/dto/trail_dto.dart';
 import 'package:pov/services/error/applicationerrorimp.dart';

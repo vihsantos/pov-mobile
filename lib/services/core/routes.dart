@@ -17,6 +17,6 @@ class Routes {
   static const String comment = "$urlPartial/comment";
   static const String following = "$urlPartial/following";
   static const String unfollow = "$urlPartial/unfollow";
-  static const String addicon = "$urlPartial/addicon";
+  static const String addicon = "$urlPartial/addProfileIcon";
   static const String isFollower = "$urlPartial/isfollower";
 }
