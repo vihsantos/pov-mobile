@@ -16,10 +16,9 @@ class CardRankingByLocal extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Container(
       width: size.width,
-      height: size.height * 0.15,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          color: const Color(0xFFF8F8F8),
+          color: ColorPallete.bgItemColor,
           border: Border.all(color: const Color(0xFFEDEDED), width: 0.5)),
       padding: const EdgeInsets.all(10),
       margin: const EdgeInsets.all(15),
@@ -30,7 +29,7 @@ class CardRankingByLocal extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                width: size.width * 0.68,
+                width: size.width * 0.70,
                 child: Text(
                   data.local!,
                   maxLines: 3,
@@ -40,30 +39,33 @@ class CardRankingByLocal extends StatelessWidget {
                       color: ColorPallete.primaryColor),
                 ),
               ),
-              RichText(
-                text: TextSpan(
-                  text: 'Mencionado por ',
-                  style: const TextStyle(
-                      fontFamily: "Poppins",
-                      fontWeight: FontWeight.w500,
-                      fontSize: 14,
-                      color: Color(0xFF393434)),
-                  children: <TextSpan>[
-                    TextSpan(
-                        text: data.quantidade.toString(),
-                        style: const TextStyle(
-                            fontFamily: "Poppins",
-                            fontSize: 15,
-                            fontWeight: FontWeight.w900,
-                            color: Colors.pink)),
-                    const TextSpan(
-                        text: " post's!",
-                        style: TextStyle(
-                            fontFamily: "Poppins",
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFF393434))),
-                  ],
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: RichText(
+                  text: TextSpan(
+                    text: 'Mencionado por ',
+                    style: const TextStyle(
+                        fontFamily: "Poppins",
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14,
+                        color: Color(0xFF393434)),
+                    children: <TextSpan>[
+                      TextSpan(
+                          text: data.quantidade.toString(),
+                          style: const TextStyle(
+                              fontFamily: "Poppins",
+                              fontSize: 15,
+                              fontWeight: FontWeight.w900,
+                              color: Colors.pink)),
+                      const TextSpan(
+                          text: " post's!",
+                          style: TextStyle(
+                              fontFamily: "Poppins",
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xFF393434))),
+                    ],
+                  ),
                 ),
               )
             ],
@@ -73,7 +75,7 @@ class CardRankingByLocal extends StatelessWidget {
               right: 0,
               child: Container(
                 width: size.width * 0.2,
-                height: size.height * 0.055,
+                height: size.height * 0.045,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),

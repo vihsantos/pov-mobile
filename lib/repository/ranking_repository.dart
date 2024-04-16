@@ -35,4 +35,33 @@ class RankingRepository {
       throw ApplicationErrorImp(mensagem: e.toString(), statusCode: 500);
     }
   }
+
+  Future<List<RankingByLocalModel>> searchGetRankingByLocal(String nome) async {
+    try {
+      String url = "${Routes.searchRankingByLocal}/$nome";
+
+      String? token = AuthSingleton(LoginRepository()).getToken();
+
+      var response = await http.get(Uri.parse(url), headers: {
+        "content-type": "application/json",
+        "accept": "application/json",
+        'Authorization': 'Bearer $token',
+      });
+
+      if (response.statusCode == 200) {
+        Iterable lista = json.decode(response.body);
+
+        List<RankingByLocalModel> data =
+            lista.map((model) => RankingByLocalModel.fromJson(model)).toList();
+
+        return data;
+      }
+
+      throw ApplicationErrorImp(
+          mensagem: response.reasonPhrase.toString(),
+          statusCode: response.statusCode);
+    } catch (e) {
+      throw ApplicationErrorImp(mensagem: e.toString(), statusCode: 500);
+    }
+  }
 }

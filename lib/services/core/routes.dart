@@ -9,6 +9,7 @@ class Routes {
   static const String posts = "$urlPartial/posts";
   static const String profilePosts = "$urlPartial/profileposts";
   static const String rankingByLocal = "$urlPartial/ranking/local";
+  static const String searchRankingByLocal = "$urlPartial/ranking";
   static const String guides = "$urlPartial/guides";
   static const String trail = "$urlPartial/newtrail";
   static const String trails = "$urlPartial/trails";

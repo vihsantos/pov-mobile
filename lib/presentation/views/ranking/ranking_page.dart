@@ -1,8 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-
-import 'package:pov/models/ranking/rankingbylocal_model.dart';
-
+import 'package:pov/services/core/colorpallete.dart';
 import '../../../repository/ranking_repository.dart';
 import '../../controllers/rankingpage_controller.dart';
 import 'components/cardrankingbylocal.dart';
@@ -17,6 +15,12 @@ class RankingPage extends StatefulWidget {
 class _RankingPageState extends State<RankingPage> {
   RankingPageController controller =
       RankingPageController(rankingRepository: RankingRepository());
+
+    @override
+  void initState() {
+    controller.getRankingByLocal();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,44 +38,76 @@ class _RankingPageState extends State<RankingPage> {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
           ),
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: size.height * 0.74,
-              child: FutureBuilder<List<RankingByLocalModel?>?>(
-                  future: controller.getRankingByLocal(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      List<RankingByLocalModel?>? ranking = snapshot.data;
-
-                      if (ranking!.isEmpty) {
-                        return Container();
-                      }
-
-                      if(controller.error != null){
-                        return const Center(child:  Text("Ops, algo aconteceu!"));
-                      }
-
-                      return ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          itemCount: ranking.length,
-                          shrinkWrap: true,
-                          itemBuilder: (_, index) {
-                            final data = ranking[index];
-
-                            return CardRankingByLocal(data: data!);
-                          });
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                margin: const EdgeInsets.all(15),
+                width: size.width,
+                height: size.height * 0.065,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 250, 250, 253),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: TextField(
+                      decoration: InputDecoration(
+                          suffixIcon: IconButton(
+                              onPressed: () {
+                                //controller.searchGetRankingByLocal()
+                              },
+                              icon: const Icon(
+                                Icons.search,
+                                color: ColorPallete.secondColor,
+                              )),
+                          hintText: "Busque por um local...",
+                          hintStyle: const TextStyle(
+                              color: ColorPallete.secondColor,
+                              fontStyle: FontStyle.italic),
+                          border: InputBorder.none),
+                    ),
+                  ),
+                ),
+              ),
+              ValueListenableBuilder<bool?>(
+                  valueListenable: controller.loadingApi,
+                  builder: (_, loading, __) {
+              
+                    if (loading!) {
+                      return const Center(child: CircularProgressIndicator());
                     }
-
-                    if (snapshot.hasError) {
-                      return const Text("ERROR");
+              
+                    if(controller.error != null){
+                      return Center(child: Text(controller.error!.mensagem));
                     }
-                    return const Center(child: CircularProgressIndicator());
+              
+                    if(controller.ranking!.isEmpty){
+                      return const Center(child: Text("Nada encontrado"));
+                    }
+              
+                    return SizedBox(
+                      height: size.height * 0.74,
+                      child: Column(
+                        children: [
+                          ListView.builder(
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              itemCount: controller.ranking?.length,
+                              itemBuilder: (_, index) {
+                                final ranking = controller.ranking![index];
+                      
+                                return CardRankingByLocal(data: ranking!);
+                              })
+                        ],
+                      ),
+                    );
                   }),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

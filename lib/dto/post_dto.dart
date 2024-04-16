@@ -1,11 +1,13 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, non_constant_identifier_names
+import 'dart:convert';
+
 import '../models/localization_model.dart';
 import '../models/user/userpost_model.dart';
 
 class PostDTO {
   String? description;
   int? id;
-  String? imageUrl;
+  String? image_url;
   LocalizationModel? localization;
   int? stars;
   UserPostModel? user;
@@ -13,35 +15,35 @@ class PostDTO {
   PostDTO({
     this.description,
     this.id,
-    this.imageUrl,
+    this.image_url,
     this.localization,
     this.stars,
     this.user,
   });
 
-  PostDTO.fromJson(Map<String, dynamic> json) {
-    description = json['description'];
-    id = json['id'];
-    imageUrl = json['image_url'];
-    localization = json['localization'] != null
-        ? LocalizationModel.fromJson(json['localization'])
-        : null;
-    stars = json['stars'];
-    user = json['user'] != null ? UserPostModel.fromJson(json['user']) : null;
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'description': description,
+      'id': id,
+      'image_url': image_url,
+      'localization': localization?.toJson(),
+      'stars': stars,
+      'user': user?.toJson(),
+    };
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['description'] = description;
-    data['id'] = id;
-    data['image_url'] = imageUrl;
-    if (localization != null) {
-      data['localization'] = localization!.toJson();
-    }
-    data['stars'] = stars;
-    if (user != null) {
-      data['user'] = user!.toJson();
-    }
-    return data;
+  factory PostDTO.fromMap(Map<String, dynamic> map) {
+    return PostDTO(
+      description: map['description'] != null ? map['description'] as String : null,
+      id: map['id'] != null ? map['id'] as int : null,
+      image_url: map['image_url'] != null ? map['image_url'] as String : null,
+      localization: map['localization'] != null ? LocalizationModel.fromJson(map['localization'] as Map<String,dynamic>) : null,
+      stars: map['stars'] != null ? map['stars'] as int : null,
+      user: map['user'] != null ? UserPostModel.fromMap(map['user'] as Map<String,dynamic>) : null,
+    );
   }
+
+  String toJson() => json.encode(toMap());
+
+  factory PostDTO.fromJson(String source) => PostDTO.fromMap(json.decode(source) as Map<String, dynamic>);
 }

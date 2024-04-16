@@ -74,8 +74,11 @@ class PostRepository {
 
       if (response.statusCode == 200) {
         Iterable lista = json.decode(response.body);
-        List<PostDTO> posts =
-            lista.map((model) => PostDTO.fromJson(model)).toList();
+        List<PostDTO> posts = [];
+
+        for (var element in lista) {
+          posts.add(PostDTO.fromMap(element));
+        }
 
         return posts;
       }
