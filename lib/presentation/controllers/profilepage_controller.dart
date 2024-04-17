@@ -86,7 +86,7 @@ class ProfilePageController {
   }
 
   Future seguirOuDeixarDeSeguir(int id)async {
-
+    _loading = true;
     if(isFollower!){
       await followersRepository.unfollow(id);
       verificarSeguidor(id);
@@ -95,6 +95,7 @@ class ProfilePageController {
       await followersRepository.follow(id);
       verificarSeguidor(id);
     }
+    _loading = false;
 
   }
 

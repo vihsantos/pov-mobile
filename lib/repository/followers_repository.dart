@@ -34,7 +34,7 @@ class FollowersRepository {
       String? token = AuthSingleton(LoginRepository()).getToken();
 
       var response =
-          await http.post(Uri.parse("${Routes.unfollow}/$id"), headers: {
+          await http.delete(Uri.parse("${Routes.unfollow}/$id"), headers: {
         "content-type": "application/json",
         "accept": "application/json",
         'Authorization': 'Bearer $token',

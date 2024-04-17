@@ -130,13 +130,13 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                         width: size.width * 0.35,
                         height: size.height * 0.06,
                         decoration: BoxDecoration(
-                            color: widget.profilePageController.isFollower!
+                            color: widget.profilePageController.isFollower ?? widget.isprofileuser
                                 ? ColorPallete.bottomUnselectedColor
                                 : ColorPallete.primaryColor,
                             borderRadius: BorderRadius.circular(10)),
                         child: Center(
                             child: Text(
-                          widget.profilePageController.isFollower!
+                          widget.profilePageController.isFollower ?? widget.isprofileuser
                               ? "Deixar de seguir"
                               : "Seguir",
                           style: const TextStyle(
