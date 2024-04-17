@@ -64,7 +64,8 @@ class FollowersRepository {
       });
 
       if (response.statusCode == 200) {
-        return bool.parse(response.body);
+        bool valor = bool.parse(response.body);
+        return valor;
       }
 
       throw ApplicationErrorImp(

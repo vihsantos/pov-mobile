@@ -55,10 +55,11 @@ class _RankingPageState extends State<RankingPage> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: TextField(
+                      onChanged: (value) => controller.local = value,
                       decoration: InputDecoration(
                           suffixIcon: IconButton(
                               onPressed: () {
-                                //controller.searchGetRankingByLocal()
+                                controller.searchGetRankingByLocal();
                               },
                               icon: const Icon(
                                 Icons.search,

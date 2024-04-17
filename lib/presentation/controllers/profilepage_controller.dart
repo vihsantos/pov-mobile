@@ -24,6 +24,10 @@ class ProfilePageController {
     required this.followersRepository,
   });
 
+  set _loading(bool? loading) => loadingApi.value = loading;
+  bool? get loading => loadingApi.value;
+  final loadingApi = ValueNotifier<bool?>(null);
+
   set _posts(List<PostProfileModel>? posts) => postsApi.value = posts;
   List<PostProfileModel>? get posts => postsApi.value;
   final postsApi = ValueNotifier<List<PostProfileModel>?>(null);
@@ -38,9 +42,9 @@ class ProfilePageController {
   final profileIconApi = ValueNotifier<File?>(null);
 
 
-  set _isFollower(bool error) => isFollowerApi.value = isFollower;
-  bool get isFollower => isFollowerApi.value;
-  final isFollowerApi = ValueNotifier<bool>(false);
+  set _isFollower(bool? isFollower) => isFollowerApi.value = isFollower;
+  bool? get isFollower => isFollowerApi.value;
+  final isFollowerApi = ValueNotifier<bool?>(null);
 
   Future<List<PostProfileModel>?> listarPosts(int id) async {
     _error = null;
@@ -66,8 +70,8 @@ class ProfilePageController {
     return AuthSingleton(LoginRepository()).getId() == id;
   }
 
-  Future? verificarSeguidor(int id) async {
-
+  Future verificarSeguidor(int id) async {
+    _loading = true;
     try{
       bool perfil = isProfile(id);
 
@@ -78,11 +82,12 @@ class ProfilePageController {
     } on ApplicationError catch (e) {
       _error = e;
     }
+    _loading = false;
   }
 
-  Future? seguirOuDeixarDeSeguir(int id)async {
+  Future seguirOuDeixarDeSeguir(int id)async {
 
-    if(isFollower){
+    if(isFollower!){
       await followersRepository.unfollow(id);
       verificarSeguidor(id);
 
@@ -101,7 +106,7 @@ class ProfilePageController {
     _error = null;
     try {
 
-      if(profileIcon == null) throw ApplicationErrorImp(mensagem: "Imagem não escolhida");
+      if(profileIcon == null) throw ApplicationErrorImp(mensagem: "Imagem nÃ£o escolhida");
 
       var pic = await MultipartFile.fromPath("arquivo", profileIcon!.path);
       return await userRepository.alterarFotoPerfil(pic);

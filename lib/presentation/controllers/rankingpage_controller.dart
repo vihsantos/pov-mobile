@@ -12,7 +12,10 @@ class RankingPageController {
     required this.rankingRepository,
   });
 
-  set _ranking(List<RankingByLocalModel?>? ranking) => rankingApi.value = ranking;
+  String local = "";
+
+  set _ranking(List<RankingByLocalModel?>? ranking) =>
+      rankingApi.value = ranking;
   List<RankingByLocalModel?>? get ranking => rankingApi.value;
   final rankingApi = ValueNotifier<List<RankingByLocalModel?>?>(null);
 
@@ -37,13 +40,15 @@ class RankingPageController {
     _loading = false;
   }
 
-  Future searchGetRankingByLocal(String local) async {
+  Future searchGetRankingByLocal() async {
     _error = null;
     _loading = true;
     try {
-      List<RankingByLocalModel?> data =
-          await rankingRepository.searchGetRankingByLocal(local.toUpperCase());
-      _ranking = data;
+      if (local != "") {
+        List<RankingByLocalModel?> data = await rankingRepository
+            .searchGetRankingByLocal(local.toUpperCase());
+        _ranking = data;
+      }
     } on ApplicationError catch (e) {
       _error = e;
     }
