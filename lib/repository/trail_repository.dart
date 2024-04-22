@@ -93,4 +93,30 @@ class TrailRepository {
       throw ApplicationErrorImp(mensagem: e.toString(), statusCode: 500);
     }
   }
+
+  Future<TrailDTO?> buscarTrilhaPorId(int id) async{
+    try {
+      
+      String url = "${Routes.findTrail}/$id";
+
+      String? token = AuthSingleton(LoginRepository()).getToken();
+
+      var response = await http.get(Uri.parse(url), headers: {
+        "content-type": "application/json",
+        "accept": "application/json",
+        'Authorization': 'Bearer $token',
+      });
+
+      if(response.statusCode == 200){
+        return TrailDTO.fromJson(response.body);
+      }
+
+      throw ApplicationErrorImp(
+          mensagem: response.reasonPhrase.toString(),
+          statusCode: response.statusCode);
+
+    } catch (e) {
+      throw ApplicationErrorImp(mensagem: e.toString(), statusCode: 500);
+    }
+  }
 }

@@ -8,6 +8,8 @@ import '../../services/error/applicationerror.dart';
 class TrailPageController {
   TrailRepository repository;
 
+  List? urls = List.empty();
+
   TrailPageController({
     required this.repository,
   });
@@ -24,5 +26,21 @@ class TrailPageController {
       _error = e;
     }
     return null;
+  }
+
+  Future<TrailDTO?> buscarTrilhaPorID(int id) async{
+    _error = null;
+    try {
+      var trilha = await repository.buscarTrilhaPorId(id);
+
+      if(trilha != null){
+        urls = trilha.files!.split(";");
+        urls!.removeLast();
+
+        return trilha;
+      }
+    } on ApplicationError catch (e) {
+      _error = e;
+    }
   }
 }

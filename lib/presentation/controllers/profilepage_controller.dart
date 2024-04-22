@@ -107,7 +107,7 @@ class ProfilePageController {
     _error = null;
     try {
 
-      if(profileIcon == null) throw ApplicationErrorImp(mensagem: "Imagem nÃ£o escolhida");
+      if(profileIcon == null) throw ApplicationErrorImp(mensagem: "Imagem não escolhida");
 
       var pic = await MultipartFile.fromPath("arquivo", profileIcon!.path);
       return await userRepository.alterarFotoPerfil(pic);

@@ -13,6 +13,7 @@ class Routes {
   static const String guides = "$urlPartial/guides";
   static const String trail = "$urlPartial/newtrail";
   static const String trails = "$urlPartial/trails";
+  static const String findTrail = "$urlPartial/trail";
   static const String commentsByPosts = "$urlPartial/commentByPost";
   static const String commentsByTrails = "$urlPartial/commentByTrails";
   static const String comment = "$urlPartial/comment";
@@ -20,4 +21,5 @@ class Routes {
   static const String unfollow = "$urlPartial/unfollow";
   static const String addicon = "$urlPartial/addProfileIcon";
   static const String isFollower = "$urlPartial/isfollower";
+  static const String infoGuide = "$urlPartial/infoguide";
 }
