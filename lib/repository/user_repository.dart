@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:http/http.dart';
+import 'package:pov/dto/infoguide_dto.dart';
 import 'package:pov/dto/novousuario_dto.dart';
 import 'package:http/http.dart' as http;
 import 'package:pov/services/core/routes.dart';
@@ -72,6 +73,28 @@ class UserRepository {
       if (response.statusCode == 200) return true;
 
       return false;
+    } catch (e) {
+      throw ApplicationErrorImp(mensagem: e.toString(), statusCode: 500);
+    }
+  }
+
+  Future<InfoGuideDTO?> buscarInformacoesGuia(int user) async {
+    try {
+      String url = "${Routes.infoGuide}/$user";
+
+      String? token = AuthSingleton(LoginRepository()).getToken();
+
+      var response = await http.get(Uri.parse(url), headers: {
+        "content-type": "application/json",
+        "accept": "application/json",
+        "Authorization": "Bearer $token",
+      });
+
+      if(response.statusCode == 200){
+        return InfoGuideDTO.fromJson(response.body);
+      }
+
+      
     } catch (e) {
       throw ApplicationErrorImp(mensagem: e.toString(), statusCode: 500);
     }

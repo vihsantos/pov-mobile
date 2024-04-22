@@ -8,6 +8,7 @@ import 'package:pov/services/core/colorpallete.dart';
 import '../../../models/post/postprofile_model.dart';
 import '../../controllers/profilepage_controller.dart';
 import '../trails/trails_page.dart';
+import 'components/campotitulo.dart';
 import 'components/card_postprofile.dart';
 import 'components/profile_header.dart';
 
@@ -47,39 +48,67 @@ class _ProfileGuidePageState extends State<ProfileGuidePage> {
                       context: context,
                       builder: (context) {
                         return AlertDialog(
-                          title: const Text("Informações sobre o guia", 
-                          textAlign: TextAlign.center, 
-                          style: TextStyle(
-                            color: ColorPallete.labelColor,
-                            fontWeight: FontWeight.bold, 
-                            fontSize: 18)),
-                          content: SizedBox(
-                            width: 400,
-                            height: 250,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                CampoTitulo(titulo: "CADASTUR"),
-                                const Text("XXXXXXXXXXXX", 
-                                style: TextStyle(fontSize: 14, color: ColorPallete.labelColor)),
-                                const SizedBox(height: 10),
-                                CampoTitulo(titulo: "Vencimento do CADASTUR"),
-                                const Text("DD/MM/AAAA", 
-                                style: TextStyle(fontSize: 14, color: ColorPallete.labelColor)),
-                                const SizedBox(height: 10),
-                                CampoTitulo(titulo: "Áreas de Atuação"),
-                                const Text("teste teste teste teste teste teste teste teste",
-                                maxLines: 3, 
-                                style: TextStyle(fontSize: 14, color: ColorPallete.labelColor)),
-                                const SizedBox(height: 10),
-                                CampoTitulo(titulo: "Contato"),
-                                const Text("email", 
-                                style: TextStyle(fontSize: 14, color: ColorPallete.labelColor)),
-                              ],
-                            ),
-                          ),
-                        );
+                            title: const Text("Informações sobre o guia",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: ColorPallete.labelColor,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18)),
+                            content: FutureBuilder(
+                                future: widget.controller
+                                    .buscarInformacoesGuia(widget.id),
+                                builder: (BuildContext context,
+                                    AsyncSnapshot snapshot) {
+                                  if (snapshot.hasData) {
+                                    return const Center(
+                                        child: CircularProgressIndicator());
+                                  }
+
+                                  var info = snapshot.data;
+
+                                  return SizedBox(
+                                    width: 400,
+                                    height: 250,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        CampoTitulo(titulo: "CADASTUR"),
+                                        const Text("XXXXXXXXXXXX",
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                color:
+                                                    ColorPallete.labelColor)),
+                                        const SizedBox(height: 10),
+                                        CampoTitulo(
+                                            titulo: "Vencimento do CADASTUR"),
+                                        const Text("DD/MM/AAAA",
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                color:
+                                                    ColorPallete.labelColor)),
+                                        const SizedBox(height: 10),
+                                        CampoTitulo(titulo: "Áreas de Atuação"),
+                                        const Text(
+                                            "teste teste teste teste teste teste teste teste",
+                                            maxLines: 3,
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                color:
+                                                    ColorPallete.labelColor)),
+                                        const SizedBox(height: 10),
+                                        CampoTitulo(titulo: "Contato"),
+                                        const Text("email",
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                color:
+                                                    ColorPallete.labelColor)),
+                                      ],
+                                    ),
+                                  );
+                                }));
                       });
                 },
                 icon: const Icon(Icons.info, color: ColorPallete.secondColor)),
@@ -174,24 +203,5 @@ class _ProfileGuidePageState extends State<ProfileGuidePage> {
         ]),
       ),
     );
-  }
-}
-
-class CampoTitulo extends StatelessWidget {
-
-  String titulo;
-
-  CampoTitulo({
-    Key? key,
-    required this.titulo,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(titulo, 
-    style: const TextStyle(
-      color: ColorPallete.labelColor,
-      fontWeight: FontWeight.bold, 
-      fontSize: 13));
   }
 }
