@@ -127,7 +127,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                       onTap: () => widget.profilePageController
                           .seguirOuDeixarDeSeguir(widget.user_id),
                       child: Container(
-                        width: size.width * 0.35,
+                        width: size.width * 0.4,
                         height: size.height * 0.06,
                         decoration: BoxDecoration(
                             color: widget.profilePageController.isFollower ?? widget.isprofileuser

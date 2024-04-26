@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:pov/dto/dadosperfil_dto.dart';
+import 'package:pov/dto/infoguide_dto.dart';
 import 'package:pov/models/post/postprofile_model.dart';
 import 'package:pov/repository/followers_repository.dart';
 import 'package:pov/repository/login_repository.dart';
@@ -111,6 +112,17 @@ class ProfilePageController {
 
       var pic = await MultipartFile.fromPath("arquivo", profileIcon!.path);
       return await userRepository.alterarFotoPerfil(pic);
+    } on ApplicationError catch (e) {
+      _error = e;
+    }
+  }
+
+  Future<InfoGuideDTO?> buscarInformacoesGuia(int id) async {
+    _error = null;
+    try{
+      var informacoes = userRepository.buscarInformacoesGuia(id);
+
+      return informacoes;
     } on ApplicationError catch (e) {
       _error = e;
     }

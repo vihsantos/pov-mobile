@@ -95,7 +95,9 @@ class TrailCard extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Row(
                   children: [
-                    Container(width: 40, height: 40, color: Colors.red),
+                    Container(
+                      width: 40, height: 40, 
+                      decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(40)),),
                     const SizedBox(width: 10),
                     Text(trilha.user!.username!)
                   ],

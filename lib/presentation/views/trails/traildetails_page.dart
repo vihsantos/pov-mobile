@@ -26,7 +26,9 @@ class _TrailDetailsPageState extends State<TrailDetailsPage> {
 
   @override
   void initState() {
-    pageController = PageController(initialPage: indexSelecionado);
+    pageController = PageController(
+      initialPage: indexSelecionado,
+    );
     super.initState();
   }
 
@@ -42,29 +44,28 @@ class _TrailDetailsPageState extends State<TrailDetailsPage> {
                 future: controller.buscarTrilhaPorID(widget.id),
                 builder:
                     (BuildContext context, AsyncSnapshot<TrailDTO?> snapshot) {
-                  
                   if (!snapshot.hasData) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
 
                   TrailDTO trilha = snapshot.data as TrailDTO;
 
                   return SingleChildScrollView(
                     child: Column(
                       children: [
-                         Padding(
-                           padding: const EdgeInsets.all(10),
-                           child: Text(
+                        Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
                             trilha.name!,
                             style: const TextStyle(
                                 color: ColorPallete.labelColor,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 20),
-                                textAlign: TextAlign.center,
-                                                   ),
-                         ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
                         Stack(
                           children: [
                             Container(

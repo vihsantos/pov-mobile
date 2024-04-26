@@ -2,8 +2,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:pov/dto/dadosperfil_dto.dart';
+import 'package:pov/dto/infoguide_dto.dart';
 import 'package:pov/presentation/views/trails/newtrail_page.dart';
 import 'package:pov/services/core/colorpallete.dart';
+import 'package:pov/services/core/utils.dart';
 
 import '../../../models/post/postprofile_model.dart';
 import '../../controllers/profilepage_controller.dart';
@@ -59,12 +61,16 @@ class _ProfileGuidePageState extends State<ProfileGuidePage> {
                                     .buscarInformacoesGuia(widget.id),
                                 builder: (BuildContext context,
                                     AsyncSnapshot snapshot) {
-                                  if (snapshot.hasData) {
-                                    return const Center(
-                                        child: CircularProgressIndicator());
+
+                                  if (!snapshot.hasData) {
+                                    return const SizedBox(
+                                      height: 100,
+                                      child: Center(
+                                          child: CircularProgressIndicator()),
+                                    );
                                   }
 
-                                  var info = snapshot.data;
+                                  InfoGuideDTO info = snapshot.data;
 
                                   return SizedBox(
                                     width: 400,
@@ -76,25 +82,25 @@ class _ProfileGuidePageState extends State<ProfileGuidePage> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         CampoTitulo(titulo: "CADASTUR"),
-                                        const Text("XXXXXXXXXXXX",
-                                            style: TextStyle(
+                                        Text(info.cod_cadastur!,
+                                            style: const TextStyle(
                                                 fontSize: 14,
                                                 color:
                                                     ColorPallete.labelColor)),
                                         const SizedBox(height: 10),
                                         CampoTitulo(
                                             titulo: "Vencimento do CADASTUR"),
-                                        const Text("DD/MM/AAAA",
-                                            style: TextStyle(
+                                        Text(Utils.data(info.data_vencimento!),
+                                            style: const TextStyle(
                                                 fontSize: 14,
                                                 color:
                                                     ColorPallete.labelColor)),
                                         const SizedBox(height: 10),
                                         CampoTitulo(titulo: "Áreas de Atuação"),
-                                        const Text(
-                                            "teste teste teste teste teste teste teste teste",
+                                        Text(
+                                            Utils.descricaoAreaAtuacao(info.areaatuacao!),
                                             maxLines: 3,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 fontSize: 14,
                                                 color:
                                                     ColorPallete.labelColor)),

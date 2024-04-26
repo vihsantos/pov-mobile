@@ -24,7 +24,7 @@ class InfoGuideDTO {
   factory InfoGuideDTO.fromMap(Map<String, dynamic> map) {
     return InfoGuideDTO(
       cod_cadastur: map['cod_cadastur'] != null ? map['cod_cadastur'] as String : null,
-      data_vencimento: map['data_vencimento'] != null ? DateTime.fromMillisecondsSinceEpoch(map['data_vencimento'] as int) : null,
+      data_vencimento: map['data_vencimento'] != null ? DateTime.tryParse(map['data_vencimento'] as String) : null,
       areaatuacao: map['areaatuacao'] != null ? map['areaatuacao'] as String : null,
     );
   }
