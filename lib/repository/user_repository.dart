@@ -98,5 +98,6 @@ class UserRepository {
     } catch (e) {
       throw ApplicationErrorImp(mensagem: e.toString(), statusCode: 500);
     }
+    return null;
   }
 }

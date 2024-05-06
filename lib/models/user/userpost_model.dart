@@ -4,14 +4,16 @@ import 'dart:convert';
 class UserPostModel {
   int? id;
   String? username;
+  String? profile;
 
-  UserPostModel({this.id, this.username});
+  UserPostModel({this.id, this.username, this.profile});
   
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
       'username': username,
+      'profile': profile
     };
   }
 
@@ -19,6 +21,7 @@ class UserPostModel {
     return UserPostModel(
       id: map['id'] != null ? map['id'] as int : null,
       username: map['username'] != null ? map['username'] as String : null,
+      profile: map['profile'] != null ? map['profile'] as String : null,
     );
   }
 

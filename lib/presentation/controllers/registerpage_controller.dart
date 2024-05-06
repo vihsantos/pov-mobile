@@ -6,6 +6,9 @@ import '../../services/error/applicationerror.dart';
 class RegisterPageController {
   final UserRepository repository;
 
+  String senha = "";
+
+
   set _error(ApplicationError? error) => solicitacaoErrorApi.value = error;
   ApplicationError? get error => solicitacaoErrorApi.value;
   final solicitacaoErrorApi = ValueNotifier<ApplicationError?>(null);

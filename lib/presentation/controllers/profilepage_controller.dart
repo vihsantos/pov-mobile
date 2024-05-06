@@ -121,11 +121,11 @@ class ProfilePageController {
     _error = null;
     try{
       var informacoes = userRepository.buscarInformacoesGuia(id);
-
       return informacoes;
     } on ApplicationError catch (e) {
       _error = e;
     }
+    return null;
   }
 
 }

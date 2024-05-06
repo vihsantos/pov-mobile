@@ -13,6 +13,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  IconData passwordIcon = Icons.visibility_off;
+  bool isObscure = true;
+
   LoginPageController controller = LoginPageController(
     authSingleton: AuthSingleton(LoginRepository()),
   );
@@ -60,9 +63,23 @@ class _LoginPageState extends State<LoginPage> {
                           left: 15, right: 15, top: 10, bottom: 10),
                       child: TextField(
                         onChanged: (value) => controller.model.password = value,
-                        obscureText: true,
-                        decoration: const InputDecoration(
-                            hintStyle: TextStyle(fontStyle: FontStyle.italic),
+                        obscureText: isObscure,
+                        decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    isObscure = !isObscure;
+
+                                    if (isObscure) {
+                                      passwordIcon = Icons.visibility_off;
+                                    } else {
+                                      passwordIcon = Icons.visibility;
+                                    }
+                                  });
+                                },
+                                icon: Icon(passwordIcon)),
+                            hintStyle:
+                                const TextStyle(fontStyle: FontStyle.italic),
                             enabledBorder: InputBorder.none,
                             focusedBorder: InputBorder.none,
                             hintText: "Digite sua senha"),
@@ -98,8 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                       Navigator.push(
                           // ignore: use_build_context_synchronously
                           context,
-                          MaterialPageRoute(
-                              builder: (context) =>  InitPage()));
+                          MaterialPageRoute(builder: (context) => InitPage()));
                     }
                   },
                   child: Container(

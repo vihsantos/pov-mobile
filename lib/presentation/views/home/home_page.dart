@@ -19,6 +19,9 @@ class _HomePageState extends State<HomePage> {
   HomePageController controller =
       HomePageController(PostRepository(), TrailRepository());
 
+  ScrollController scroll = ScrollController();
+  
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -48,7 +51,7 @@ class _HomePageState extends State<HomePage> {
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
-                      height: 300,
+                      height: 320,
                       child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: FutureBuilder<List<TrailDTO?>?>(
@@ -56,30 +59,35 @@ class _HomePageState extends State<HomePage> {
                               builder: (context, snapshot) {
                                 if (snapshot.hasData) {
                                   List<TrailDTO?>? trails = snapshot.data;
-
+                      
                                   if (trails!.isEmpty) {
                                     return const Center(
                                         child: Text("Nada encontrado!"));
                                   }
-
+                      
                                   if (controller.error != null) {
                                     return Text(controller.error!.mensagem);
                                   }
-
-                                  return Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      ListView.builder(
-                                          scrollDirection: Axis.horizontal,
-                                          shrinkWrap: true,
-                                          itemCount: trails.length,
-                                          itemBuilder: (_, index) {
-                                            final trail = trails[index];
-
-                                            return TrailCard(trilha: trail!);
-                                          })
-                                    ],
+                      
+                                  return Scrollbar(
+                                    controller: scroll,
+                                    thumbVisibility: true,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        ListView.builder(
+                                            controller: scroll,
+                                            scrollDirection: Axis.horizontal,
+                                            shrinkWrap: true,
+                                            itemCount: trails.length,
+                                            itemBuilder: (_, index) {
+                                              final trail = trails[index];
+                                                          
+                                              return TrailCard(trilha: trail!);
+                                            })
+                                      ],
+                                    ),
                                   );
                                 }
                                 return Container();

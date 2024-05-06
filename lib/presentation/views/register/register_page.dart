@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pov/presentation/controllers/registerpage_controller.dart';
 import 'package:pov/repository/user_repository.dart';
+import 'package:pov/services/core/colorpallete.dart';
+import 'package:pov/services/core/utils.dart';
 import '../../../models/enums/AreaAtuacao.dart';
 import '../../widgets/input_field.dart';
 
@@ -15,6 +17,9 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  IconData passwordIcon = Icons.visibility_off;
+  bool isObscure = true;
+
   RegisterPageController registerController =
       RegisterPageController(repository: UserRepository());
 
@@ -27,6 +32,7 @@ class _RegisterPageState extends State<RegisterPage> {
     final PageController controller = PageController();
     final Size size = MediaQuery.of(context).size;
     String? data;
+
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -146,9 +152,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                               .usuario.data_nascimento ==
                                           null
                                       ? "Informe a data de nascimento"
-                                      : registerController
-                                          .usuario.data_nascimento
-                                          .toString()),
+                                      : Utils.data(registerController
+                                          .usuario.data_nascimento!)),
                             ),
                           ),
                         ),
@@ -317,8 +322,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                             .usuario.data_vencimento ==
                                         null
                                     ? "Informe a data de vencimento do Cadastur"
-                                    : registerController.usuario.data_vencimento
-                                        .toString(),
+                                    : Utils.data(registerController
+                                        .usuario.data_vencimento!),
                               ),
                             ),
                           ),
@@ -375,8 +380,9 @@ class _RegisterPageState extends State<RegisterPage> {
                               onChanged: (value) =>
                                   registerController.usuario.username = value,
                               decoration: const InputDecoration(
-                                  hintStyle:
-                                      TextStyle(fontStyle: FontStyle.italic),
+                                  hintStyle: TextStyle(
+                                      fontStyle: FontStyle.normal,
+                                      color: ColorPallete.labelColor),
                                   enabledBorder: InputBorder.none,
                                   focusedBorder: InputBorder.none,
                                   hintText: "Digite seu nome de usuário"),
@@ -389,11 +395,26 @@ class _RegisterPageState extends State<RegisterPage> {
                             padding: const EdgeInsets.only(
                                 left: 15, right: 15, top: 10, bottom: 10),
                             child: TextField(
+                              obscureText: isObscure,
                               onChanged: (value) =>
                                   registerController.usuario.password = value,
-                              decoration: const InputDecoration(
-                                  hintStyle:
-                                      TextStyle(fontStyle: FontStyle.italic),
+                              decoration: InputDecoration(
+                                  suffixIcon: IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          isObscure = !isObscure;
+
+                                          if (isObscure) {
+                                            passwordIcon = Icons.visibility_off;
+                                          } else {
+                                            passwordIcon = Icons.visibility;
+                                          }
+                                        });
+                                      },
+                                      icon: Icon(passwordIcon)),
+                                  hintStyle: const TextStyle(
+                                      fontStyle: FontStyle.normal,
+                                      color: ColorPallete.labelColor),
                                   enabledBorder: InputBorder.none,
                                   focusedBorder: InputBorder.none,
                                   hintText: "Digite sua senha"),

@@ -42,5 +42,6 @@ class TrailPageController {
     } on ApplicationError catch (e) {
       _error = e;
     }
+    return null;
   }
 }

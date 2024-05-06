@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pov/models/enums/AreaAtuacao.dart';
+import 'package:pov/dto/guide_dto.dart';
 import 'package:pov/presentation/views/guides/components/profileiconcard.dart';
 import 'package:pov/presentation/views/profile/profile_page.dart';
 import 'package:pov/services/core/utils.dart';
-
-import '../../../../dto/guide_dto.dart';
 
 class GuideCard extends StatelessWidget {
   final GuideDTO guia;

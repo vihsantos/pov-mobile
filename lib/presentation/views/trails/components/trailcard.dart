@@ -46,8 +46,9 @@ class TrailCard extends StatelessWidget {
                 builder: (context) => TrailDetailsPage(id: trilha.id!)));
       },
       child: Container(
+        margin: const EdgeInsets.all(10),
         width: size.width * 0.94,
-        height: size.height * 0.34,
+        height: size.height * 0.36,
         decoration: BoxDecoration(
           color: ColorPallete.bgItemColor,
           borderRadius: BorderRadius.circular(10),
