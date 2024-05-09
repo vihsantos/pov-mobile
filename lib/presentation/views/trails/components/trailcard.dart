@@ -97,8 +97,23 @@ class TrailCard extends StatelessWidget {
                 child: Row(
                   children: [
                     Container(
-                      width: 40, height: 40, 
-                      decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(40)),),
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                          color: ColorPallete.secondColor,
+                          borderRadius: BorderRadius.circular(40)),
+                      child: trilha.user!.profile != null
+                          ? ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: Image.network(
+                                trilha.user!.profile!,
+                                fit: BoxFit.cover,
+                              ))
+                          : const Icon(
+                              Icons.person,
+                              color: ColorPallete.labelColor,
+                            ),
+                    ),
                     const SizedBox(width: 10),
                     Text(trilha.user!.username!)
                   ],

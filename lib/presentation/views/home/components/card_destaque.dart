@@ -57,7 +57,7 @@ class CardDestaque extends StatelessWidget {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(15),
                           child: Image.network(post.user!.profile!, fit: BoxFit.cover,)) : 
-                        const Icon(Icons.person, color: ColorPallete.labelColor,) ,
+                        const Icon(Icons.person, color: ColorPallete.labelColor,)
                       ),
                       const SizedBox(width: 10),
                       SizedBox(
