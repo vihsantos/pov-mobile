@@ -43,7 +43,7 @@ class GuideCard extends StatelessWidget {
             children: [
               ProfileIconCard(
                   username: guia.user!.username!,
-                  profileIcon: guia.user?.profileicon),
+                  profileIcon: guia.user?.profile),
               Text(guia.user!.username!,
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold)),

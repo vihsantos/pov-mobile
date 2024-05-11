@@ -2,21 +2,20 @@
 class UserProfileModel {
   int? id;
   String? username;
-  String? profileicon;
-  UserProfileModel({this.id, this.profileicon, this.username});
+  String? profile;
+  UserProfileModel({this.id, this.profile, this.username});
 
   UserProfileModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    profileicon = json['profileicon'];
+    profile = json['profile'];
     username = json['username'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['profileicon'] = profileicon;
+    data['profile'] = profile;
     data['username'] = username;
     return data;
   }
-  
 }
