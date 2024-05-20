@@ -1,7 +1,7 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:pov/dto/municipio_dto.dart';
 import 'package:pov/presentation/controllers/registerpage_controller.dart';
 import 'package:pov/repository/user_repository.dart';
 import 'package:pov/services/core/colorpallete.dart';
@@ -261,6 +261,76 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ),
                         ),
+                        InputField(
+                            label: "Estado",
+                            child: DropdownMenu<String>(
+                              requestFocusOnTap: true,
+                              onSelected: (value) {
+                                registerController.usuario.estado = value;
+                              },
+                              enableSearch: true,
+                              menuStyle: const MenuStyle(
+                                backgroundColor:
+                                    MaterialStatePropertyAll<Color>(
+                                        ColorPallete.bgItemColor),
+                              ),
+                              inputDecorationTheme: const InputDecorationTheme(
+                                border: InputBorder.none,
+                              ),
+                              width: size.width * 0.9,
+                              menuHeight: 200,
+                              dropdownMenuEntries:
+                                  Utils.listarUFs().map((String uf) {
+                                return DropdownMenuEntry<String>(
+                                    value: uf, label: uf);
+                              }).toList(),
+                            )),
+                        InputField(
+                            label: "Municipio",
+                            child: registerController.usuario.estado == null
+                                ? Container()
+                                : FutureBuilder<List<MunicipioDTO?>?>(
+                                    future: registerController
+                                        .listarMunicipiosPorUF(
+                                            registerController.usuario.estado!),
+                                    builder: (BuildContext context,
+                                        AsyncSnapshot snapshot) {
+                                      if (!snapshot.hasData) {
+                                        return const Center(
+                                            child: CircularProgressIndicator());
+                                      }
+                                      List<MunicipioDTO>? dados = snapshot.data;
+
+                                      if (dados != null) {
+                                        return DropdownMenu<MunicipioDTO>(
+                                          onSelected: (value){
+                                            registerController.usuario.municipio = value!.nome;
+                                          },
+                                          requestFocusOnTap: true,
+                                          enableSearch: true,
+                                            menuStyle: const MenuStyle(
+                                              backgroundColor:
+                                                  MaterialStatePropertyAll<
+                                                          Color>(
+                                                      ColorPallete.bgItemColor),
+                                            ),
+                                            inputDecorationTheme:
+                                                const InputDecorationTheme(
+                                              border: InputBorder.none,
+                                            ),
+                                            width: size.width * 0.9,
+                                            menuHeight: 200,
+                                            dropdownMenuEntries: dados
+                                                .map((MunicipioDTO municipio) {
+                                              return DropdownMenuEntry<
+                                                      MunicipioDTO>(
+                                                  value: municipio,
+                                                  label: municipio.nome!);
+                                            }).toList());
+                                      }
+
+                                      return Container();
+                                    })),
                         InputField(
                           label: "Área de Atuação",
                           child: Padding(

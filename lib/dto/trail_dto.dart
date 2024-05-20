@@ -9,6 +9,7 @@ class TrailDTO {
   String? name;
   String? occupation;
   UserPostModel? user;
+  int? comentarios;
 
   TrailDTO(
       {this.description,
@@ -16,7 +17,9 @@ class TrailDTO {
       this.id,
       this.name,
       this.occupation,
-      this.user});
+      this.user,
+      this.comentarios
+      });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -26,6 +29,7 @@ class TrailDTO {
       'name': name,
       'occupation': occupation,
       'user': user?.toMap(),
+      'comentarios': comentarios
     };
   }
 
@@ -37,6 +41,7 @@ class TrailDTO {
       name: map['name'] != null ? map['name'] as String : null,
       occupation: map['occupation'] != null ? map['occupation'] as String : null,
       user: map['user'] != null ? UserPostModel.fromMap(map['user'] as Map<String,dynamic>) : null,
+      comentarios: map['comentarios'] != null ? map['comentarios'] as int : null,
     );
   }
 

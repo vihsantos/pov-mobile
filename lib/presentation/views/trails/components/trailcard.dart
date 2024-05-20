@@ -2,10 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:pov/dto/trail_dto.dart';
 import 'package:pov/presentation/views/trails/traildetails_page.dart';
-import '../../../../models/enums/AreaAtuacao.dart';
+import 'package:pov/services/core/utils.dart';
 import '../../../../services/core/colorpallete.dart';
 
-class TrailCard extends StatelessWidget {
+class TrailCard extends StatefulWidget {
   final TrailDTO trilha;
 
   const TrailCard({
@@ -14,36 +14,33 @@ class TrailCard extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<TrailCard> createState() => _TrailCardState();
+}
+
+class _TrailCardState extends State<TrailCard> {
+  int indexSelecionado = 0;
+  PageController? pageController;
+
+  @override
+  void initState() {
+    pageController =  PageController(initialPage: indexSelecionado);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    var urls = trilha.files!.split(";");
+    var urls = widget.trilha.files!.split(";");
     urls.removeLast();
 
-    var numAreas = trilha.occupation!.split(";");
-    List<AreaAtuacao> areaatuacao = List.empty(growable: true);
-    String areaas = "";
-
-    for (var area in numAreas) {
-      String numero = area.trim();
-
-      if (numero.isNotEmpty) {
-        AreaAtuacao a = AreaAtuacao.values.elementAt(int.parse(area.trim()));
-        areaatuacao.add(a);
-      }
-    }
-
-    for (var element in areaatuacao) {
-      areaas += "${element.descricao} - ";
-    }
-
-    areaas = areaas.substring(0, areaas.length - 2);
+    
 
     return InkWell(
       onTap: () {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => TrailDetailsPage(id: trilha.id!)));
+                builder: (context) => TrailDetailsPage(id: widget.trilha.id!)));
       },
       child: Container(
         margin: const EdgeInsets.all(10),
@@ -57,25 +54,57 @@ class TrailCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             const SizedBox(height: 12),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: SizedBox(
-                width: size.width * 0.87,
-                height: 195,
-                child: PageView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: urls.length,
-                  controller: PageController(viewportFraction: 1),
-                  itemBuilder: (BuildContext context, int itemIndex) {
-                    return Image.network(
-                      urls[itemIndex],
-                      fit: BoxFit.cover,
-                    );
-                  },
-                ),
+            SizedBox(
+              width: size.width * 0.87,
+              height: 195,
+              child: Stack(
+                children: [
+                  SizedBox(
+                    height: 180,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: PageView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: urls.length,
+                        controller: pageController,
+                        onPageChanged: (index){
+                          setState(() {
+                            indexSelecionado = index; 
+                          });
+                        },
+                        itemBuilder: (BuildContext context, int itemIndex) {
+                          return Image.network(
+                            urls[itemIndex],
+                            fit: BoxFit.cover,
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    left: 170,
+                    right: 170,
+                    child: Row(
+                      children: [
+                        ...List.generate(
+                            2,
+                            (index) => Container(
+                                  margin:
+                                      const EdgeInsets.symmetric(horizontal: 2),
+                                  width: 10,
+                                  height: 10,
+                                  decoration: BoxDecoration(
+                                      color: indexSelecionado == index? Colors.pink : Colors.grey,
+                                      borderRadius: BorderRadius.circular(10)),
+                                ))
+                      ],
+                    ),
+                  )
+                ],
               ),
             ),
-            Text(trilha.name!,
+            Text(widget.trilha.name!,
                 style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
@@ -83,7 +112,7 @@ class TrailCard extends StatelessWidget {
                 maxLines: 2,
                 textAlign: TextAlign.center),
             Text(
-              areaas,
+              Utils.descricaoAreaAtuacao(widget.trilha.occupation!),
               maxLines: 2,
               style: const TextStyle(
                   fontWeight: FontWeight.bold,
@@ -100,13 +129,13 @@ class TrailCard extends StatelessWidget {
                       width: 40,
                       height: 40,
                       decoration: BoxDecoration(
-                          color: ColorPallete.secondColor,
+                          color: ColorPallete.bgColor,
                           borderRadius: BorderRadius.circular(40)),
-                      child: trilha.user!.profile != null
+                      child: widget.trilha.user!.profile != null
                           ? ClipRRect(
-                              borderRadius: BorderRadius.circular(15),
+                              borderRadius: BorderRadius.circular(30),
                               child: Image.network(
-                                trilha.user!.profile!,
+                                widget.trilha.user!.profile!,
                                 fit: BoxFit.cover,
                               ))
                           : const Icon(
@@ -115,7 +144,12 @@ class TrailCard extends StatelessWidget {
                             ),
                     ),
                     const SizedBox(width: 10),
-                    Text(trilha.user!.username!)
+                    Text(
+                      widget.trilha.user!.username!,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: ColorPallete.labelColor),
+                    )
                   ],
                 ),
               ),

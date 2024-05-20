@@ -11,6 +11,8 @@ class NovoUsuarioDTO {
   String? cadastur;
   String? areatuacao;
   DateTime? data_vencimento;
+  String? estado;
+  String? municipio;
   
   NovoUsuarioDTO({
     this.nome,
@@ -22,6 +24,8 @@ class NovoUsuarioDTO {
     this.cadastur,
     this.areatuacao,
     this.data_vencimento,
+    this.estado,
+    this.municipio,
   });
 
 
@@ -36,6 +40,8 @@ class NovoUsuarioDTO {
       'cadastur': cadastur,
       'areatuacao': areatuacao,
       'data_vencimento': data_vencimento?.toString(),
+      'estado': estado,
+      'municipio': municipio,
     };
   }
 
@@ -50,6 +56,8 @@ class NovoUsuarioDTO {
       cadastur: map['cadastur'] != null ? map['cadastur'] as String : null,
       areatuacao: map['areatuacao'] != null ? map['areatuacao'] as String : null,
       data_vencimento: map['data_vencimento'] != null ? DateTime.parse(map['data_vencimento'] as String) : null,
+      estado: map['estado'] != null ? map['estado'] as String : null,
+      municipio: map['municipio'] != null ? map['municipio'] as String : null,
     );
   }
 

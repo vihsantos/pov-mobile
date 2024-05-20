@@ -69,25 +69,21 @@ class _HomePageState extends State<HomePage> {
                                     return Text(controller.error!.mensagem);
                                   }
                       
-                                  return Scrollbar(
-                                    controller: scroll,
-                                    thumbVisibility: true,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        ListView.builder(
-                                            controller: scroll,
-                                            scrollDirection: Axis.horizontal,
-                                            shrinkWrap: true,
-                                            itemCount: trails.length,
-                                            itemBuilder: (_, index) {
-                                              final trail = trails[index];
-                                                          
-                                              return TrailCard(trilha: trail!);
-                                            })
-                                      ],
-                                    ),
+                                  return Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      ListView.builder(
+                                          controller: scroll,
+                                          scrollDirection: Axis.horizontal,
+                                          shrinkWrap: true,
+                                          itemCount: trails.length,
+                                          itemBuilder: (_, index) {
+                                            final trail = trails[index];
+                                                        
+                                            return TrailCard(trilha: trail!);
+                                          })
+                                    ],
                                   );
                                 }
                                 return Container();

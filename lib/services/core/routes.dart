@@ -22,4 +22,6 @@ class Routes {
   static const String addicon = "$urlPartial/addProfileIcon";
   static const String isFollower = "$urlPartial/isfollower";
   static const String infoGuide = "$urlPartial/infoguide";
+  static const String municipioPorUF = "https://servicodados.ibge.gov.br/api/v1/localidades/estados/";
+
 }

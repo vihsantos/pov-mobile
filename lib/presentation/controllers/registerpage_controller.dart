@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pov/dto/municipio_dto.dart';
+import 'package:pov/repository/municipio_repository.dart';
 import '../../dto/novousuario_dto.dart';
 import '../../repository/user_repository.dart';
 import '../../services/error/applicationerror.dart';
@@ -23,5 +25,14 @@ class RegisterPageController {
     } on ApplicationError catch (e) {
       _error = e;
     }
+  }
+
+  Future<List<MunicipioDTO?>?> listarMunicipiosPorUF(String uf) async{
+    try {
+      return await MunicipioRepository().buscarMunicipiosPorUF(uf);
+    } catch (e) {
+      rethrow;
+    }
+
   }
 }

@@ -37,7 +37,7 @@ class CommentPageController {
       }
 
       if (comment.trail_id != null) {
-        comentarios = await repository.listarComentariosPorPost(comment.post_id!);
+        comentarios = await repository.listarComentariosPorTrilha(comment.trail_id!);
       }
 
       return comentarios;

@@ -57,4 +57,32 @@ class CommentRepository {
       throw ApplicationErrorImp(mensagem: e.toString(), statusCode: 500);
     }
   }
+
+  // ignore: non_constant_identifier_names
+  Future<List<CommentModel>> listarComentariosPorTrilha(int trail_id) async {
+    try {
+      String url = "${Routes.commentsByTrails}/$trail_id";
+      String? token = AuthSingleton(LoginRepository()).getToken();
+
+      var response = await http.get(Uri.parse(url), headers: {
+        "content-type": "application/json",
+        "accept": "application/json",
+        'Authorization': 'Bearer $token',
+      });
+
+      if (response.statusCode == 200) {
+        Iterable lista = json.decode(response.body);
+        List<CommentModel> comments =
+            lista.map((model) => CommentModel.fromJson(model)).toList();
+
+        return comments;
+      }
+
+      throw ApplicationErrorImp(
+          mensagem: response.reasonPhrase.toString(),
+          statusCode: response.statusCode);
+    } catch (e) {
+      throw ApplicationErrorImp(mensagem: e.toString(), statusCode: 500);
+    }
+  }
 }
