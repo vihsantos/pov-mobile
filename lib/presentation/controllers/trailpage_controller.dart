@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:pov/dto/trail_dto.dart';
+import 'package:pov/models/trails/trail_model.dart';
 import 'package:pov/repository/trail_repository.dart';
 
 import '../../services/error/applicationerror.dart';
@@ -28,7 +29,7 @@ class TrailPageController {
     return null;
   }
 
-  Future<TrailDTO?> buscarTrilhaPorID(int id) async{
+  Future<TrailModel?> buscarTrilhaPorID(int id) async{
     _error = null;
     try {
       var trilha = await repository.buscarTrilhaPorId(id);

@@ -44,8 +44,8 @@ class _TrailCardState extends State<TrailCard> {
       },
       child: Container(
         margin: const EdgeInsets.all(10),
-        width: size.width * 0.94,
-        height: size.height * 0.36,
+        width: size.width * 0.92,
+        height: size.height * 0.38,
         decoration: BoxDecoration(
           color: ColorPallete.bgItemColor,
           borderRadius: BorderRadius.circular(10),
@@ -56,11 +56,11 @@ class _TrailCardState extends State<TrailCard> {
             const SizedBox(height: 12),
             SizedBox(
               width: size.width * 0.87,
-              height: 195,
+              height: 180,
               child: Stack(
                 children: [
                   SizedBox(
-                    height: 180,
+                    height: 165,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: PageView.builder(
@@ -111,14 +111,18 @@ class _TrailCardState extends State<TrailCard> {
                     color: ColorPallete.secondColor),
                 maxLines: 2,
                 textAlign: TextAlign.center),
-            Text(
-              Utils.descricaoAreaAtuacao(widget.trilha.occupation!),
-              maxLines: 2,
-              style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 10,
-                  color: ColorPallete.labelColor),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Text(
+                Utils.descricaoAreaAtuacao(widget.trilha.occupation!),
+                maxLines: 2,
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 10,
+                    color: ColorPallete.labelColor),
+              ),
             ),
+            const SizedBox(height: 5),
             SizedBox(
               width: size.width,
               child: Padding(

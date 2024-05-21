@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:pov/dto/trail_dto.dart';
+import 'package:pov/models/trails/trail_model.dart';
 import 'package:pov/presentation/controllers/trailpage_controller.dart';
 import 'package:pov/presentation/widgets/alert_comentarios.dart';
 import 'package:pov/repository/comment_repository.dart';
@@ -46,14 +46,14 @@ class _TrailDetailsPageState extends State<TrailDetailsPage> {
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
-          child: FutureBuilder<TrailDTO?>(
+          child: FutureBuilder<TrailModel?>(
               future: controller.buscarTrilhaPorID(widget.id),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (!snapshot.hasData) {
                   return const Center(child: CircularProgressIndicator());
                 }
 
-                TrailDTO? trail = snapshot.data;
+                TrailModel? trail = snapshot.data;
 
                 if (trail != null) {
                   var urls = trail.files!.split(";");

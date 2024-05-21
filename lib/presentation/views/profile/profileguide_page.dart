@@ -61,7 +61,6 @@ class _ProfileGuidePageState extends State<ProfileGuidePage> {
                                     .buscarInformacoesGuia(widget.id),
                                 builder: (BuildContext context,
                                     AsyncSnapshot snapshot) {
-
                                   if (!snapshot.hasData) {
                                     return const SizedBox(
                                       height: 100,
@@ -74,7 +73,7 @@ class _ProfileGuidePageState extends State<ProfileGuidePage> {
 
                                   return SizedBox(
                                     width: 400,
-                                    height: 250,
+                                    height: 300,
                                     child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
@@ -98,16 +97,24 @@ class _ProfileGuidePageState extends State<ProfileGuidePage> {
                                         const SizedBox(height: 10),
                                         CampoTitulo(titulo: "Áreas de Atuação"),
                                         Text(
-                                            Utils.descricaoAreaAtuacao(info.areaatuacao!),
+                                            Utils.descricaoAreaAtuacao(
+                                                info.areaatuacao!),
                                             maxLines: 3,
                                             style: const TextStyle(
                                                 fontSize: 14,
                                                 color:
                                                     ColorPallete.labelColor)),
                                         const SizedBox(height: 10),
-                                        CampoTitulo(titulo: "Contato"),
-                                        const Text("email",
-                                            style: TextStyle(
+                                        CampoTitulo(titulo: "Estado"),
+                                        Text("${info.estado}",
+                                            style: const TextStyle(
+                                                fontSize: 14,
+                                                color:
+                                                    ColorPallete.labelColor)),
+                                        const SizedBox(height: 10),            
+                                        CampoTitulo(titulo: "Município"),
+                                        Text("${info.municipio}",
+                                            style: const TextStyle(
                                                 fontSize: 14,
                                                 color:
                                                     ColorPallete.labelColor)),

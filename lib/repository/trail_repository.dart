@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:pov/dto/trail_dto.dart';
+import 'package:pov/models/trails/trail_model.dart';
 import 'package:pov/services/error/applicationerrorimp.dart';
 import 'package:http/http.dart' as http;
 import '../services/core/routes.dart';
@@ -94,7 +95,7 @@ class TrailRepository {
     }
   }
 
-  Future<TrailDTO?> buscarTrilhaPorId(int id) async{
+  Future<TrailModel?> buscarTrilhaPorId(int id) async{
     try {
       
       String url = "${Routes.findTrail}/$id";
@@ -108,7 +109,7 @@ class TrailRepository {
       });
 
       if(response.statusCode == 200){
-        return TrailDTO.fromJson(response.body);
+        return TrailModel.fromJson(response.body);
       }
 
       throw ApplicationErrorImp(
