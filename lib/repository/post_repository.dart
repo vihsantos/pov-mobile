@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:http/http.dart';
 import 'package:pov/dto/novopost_dto.dart';
 import 'package:http/http.dart' as http;
@@ -12,6 +13,23 @@ import '../dto/post_dto.dart';
 import '../services/error/applicationerrorimp.dart';
 
 class PostRepository {
+
+  Future curtirPost(int postid) async {
+
+    String? token = AuthSingleton(LoginRepository()).getToken();
+
+      var response = await http.get(Uri.parse(Routes.addVooInPost+postid.toString()), headers: {
+        "content-type": "application/json",
+        "accept": "application/json",
+        'Authorization': 'Bearer $token',
+      });
+
+      if(response.statusCode == 200){
+        log("Ok");
+      }
+
+  }
+
   Future<bool> criarNovoPost(MultipartFile pic, NovoPostDTO model) async {
     final uri = Uri.parse(Routes.novoPost);
     String? token = AuthSingleton(LoginRepository()).getToken();

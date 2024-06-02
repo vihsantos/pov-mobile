@@ -118,7 +118,25 @@ class _TrailDetailsPageState extends State<TrailDetailsPage> {
                                             ))
                                   ],
                                 ),
-                              )
+                              ),
+                              Positioned(
+                                top: 5,
+                                left: 5,
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Container(
+                                    width: size.width * 0.13,
+                                    height: size.height * 0.06,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: Colors.white),
+                                    child: const Icon(
+                                        Icons.arrow_back_ios_rounded),
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),

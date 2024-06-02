@@ -10,12 +10,13 @@ class ProfileIconCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return profileIcon != "" ? Container(
+    return profileIcon != null ? SizedBox(
       width: 100,
       height: 100,
-      decoration: BoxDecoration(
-          color: Colors.grey[50],
-          borderRadius: BorderRadius.circular(100)),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(50),
+        child: Image.network(profileIcon!, fit: BoxFit.cover,)
+      ),
     ) : Container(
       width: 100,
       height: 100,

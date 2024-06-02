@@ -133,21 +133,25 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                       ],
                                       color: ColorPallete.bgItemColor,
                                       borderRadius: BorderRadius.circular(10)),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      SizedBox(
-                                        height: 30,
-                                        child: Image.asset("asset/img/voo_selected.png")),
-                                      const Text(
-                                        "0",
-                                        style: TextStyle(
-                                              fontSize: 18,
-                                              color: ColorPallete.secondColor,
-                                              fontWeight: FontWeight.bold),
-                                      )
-                                    ],
+                                  child: InkWell(
+                                    onTap: (){
+                                    },
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        SizedBox(
+                                          height: 30,
+                                          child: Image.asset("asset/img/voo_selected.png")),
+                                        const Text(
+                                          "0",
+                                          style: TextStyle(
+                                                fontSize: 18,
+                                                color: ColorPallete.secondColor,
+                                                fontWeight: FontWeight.bold),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(

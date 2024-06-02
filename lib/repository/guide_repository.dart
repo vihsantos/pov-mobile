@@ -36,4 +36,32 @@ class GuideRepository {
       throw ApplicationErrorImp(mensagem: e.toString(), statusCode: 500);
     }
   }
+
+  Future<List<GuideDTO>> filterGuides(String estado, String municipio) async {
+    try {
+      String url = "${Routes.searchGuides}$estado/$municipio";
+
+      String? token = AuthSingleton(LoginRepository()).getToken();
+
+      var response = await http.get(Uri.parse(url), headers: {
+        "content-type": "application/json",
+        "accept": "application/json",
+        'Authorization': 'Bearer $token',
+      });
+
+      if (response.statusCode == 200) {
+        Iterable lista = json.decode(response.body);
+        List<GuideDTO> guias =
+            lista.map((model) => GuideDTO.fromJson(model)).toList();
+
+        return guias;
+      }
+
+      throw ApplicationErrorImp(
+          mensagem: response.reasonPhrase.toString(),
+          statusCode: response.statusCode);
+    } catch (e) {
+      throw ApplicationErrorImp(mensagem: e.toString(), statusCode: 500);
+    }
+  }
 }

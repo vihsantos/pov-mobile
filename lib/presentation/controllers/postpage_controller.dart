@@ -16,4 +16,12 @@ class PostPageController {
       return null;
     }
   }
+
+  Future<void> curtirPost() async{
+    try {
+    //  await repository.
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

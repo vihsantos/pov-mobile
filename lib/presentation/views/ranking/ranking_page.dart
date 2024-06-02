@@ -38,76 +38,80 @@ class _RankingPageState extends State<RankingPage> {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                margin: const EdgeInsets.all(15),
-                width: size.width,
-                height: size.height * 0.065,
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 250, 250, 253),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: TextField(
-                      onChanged: (value) => controller.local = value,
-                      decoration: InputDecoration(
-                          suffixIcon: IconButton(
-                              onPressed: () {
-                                controller.searchGetRankingByLocal();
-                              },
-                              icon: const Icon(
-                                Icons.search,
+        body: SizedBox(
+          height: 600,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: const EdgeInsets.all(15),
+                  width: size.width,
+                  height: size.height * 0.065,
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 250, 250, 253),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: TextField(
+                        onChanged: (value) => controller.local = value,
+                        decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                                onPressed: () {
+                                  controller.searchGetRankingByLocal();
+                                },
+                                icon: const Icon(
+                                  Icons.search,
+                                  color: ColorPallete.primaryColor,
+                                )),
+                            hintText: "Busque por um local...",
+                            hintStyle: const TextStyle(
                                 color: ColorPallete.secondColor,
-                              )),
-                          hintText: "Busque por um local...",
-                          hintStyle: const TextStyle(
-                              color: ColorPallete.secondColor,
-                              fontStyle: FontStyle.italic),
-                          border: InputBorder.none),
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.bold),
+                            border: InputBorder.none),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              ValueListenableBuilder<bool?>(
-                  valueListenable: controller.loadingApi,
-                  builder: (_, loading, __) {
-              
-                    if (loading!) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-              
-                    if(controller.error != null){
-                      return Center(child: Text(controller.error!.mensagem));
-                    }
-              
-                    if(controller.ranking!.isEmpty){
-                      return const Center(child: Text("Nada encontrado"));
-                    }
-              
-                    return SizedBox(
-                      height: size.height * 0.74,
-                      child: Column(
-                        children: [
-                          ListView.builder(
-                              scrollDirection: Axis.vertical,
-                              shrinkWrap: true,
-                              itemCount: controller.ranking?.length,
-                              itemBuilder: (_, index) {
-                                final ranking = controller.ranking![index];
-                      
-                                return CardRankingByLocal(data: ranking!);
-                              })
-                        ],
-                      ),
-                    );
-                  }),
-            ],
+                ValueListenableBuilder<bool?>(
+                    valueListenable: controller.loadingApi,
+                    builder: (_, loading, __) {
+                
+                      if (loading!) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                
+                      if(controller.error != null){
+                        return Center(child: Text(controller.error!.mensagem));
+                      }
+                
+                      if(controller.ranking!.isEmpty){
+                        return const Center(child: Text("Nada encontrado"));
+                      }
+                
+                      return SizedBox(
+                        height: size.height * 0.74,
+                        child: Column(
+                          children: [
+                            ListView.builder(
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemCount: controller.ranking?.length,
+                                itemBuilder: (_, index) {
+                                  final ranking = controller.ranking![index];
+                        
+                                  return CardRankingByLocal(data: ranking!);
+                                })
+                          ],
+                        ),
+                      );
+                    }),
+              ],
+            ),
           ),
         ),
       ),
