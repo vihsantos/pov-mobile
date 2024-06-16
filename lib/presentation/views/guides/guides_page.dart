@@ -98,7 +98,9 @@ class _GuidesPageState extends State<GuidesPage> {
                           hintText: "Selecione o estado...",
                           requestFocusOnTap: true,
                           onSelected: (value) {
-                            controller.estado = value;
+                            setState(() {
+                              controller.estado = value;
+                            });
                           },
                           enableSearch: true,
                           menuStyle: const MenuStyle(
@@ -119,7 +121,9 @@ class _GuidesPageState extends State<GuidesPage> {
                     InputField(
                         label: "Munícipio",
                         child: controller.estado == " "
-                            ? Container()
+                            ? const SizedBox(
+                              height: 60,
+                            )
                             : FutureBuilder<List<MunicipioDTO?>?>(
                                 future: controller
                                     .listarMunicipiosPorUF(controller.estado!),

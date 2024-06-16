@@ -65,13 +65,12 @@ class _RankingPageState extends State<RankingPage> {
                                 },
                                 icon: const Icon(
                                   Icons.search,
-                                  color: ColorPallete.primaryColor,
+                                  color: ColorPallete.secondColor,
                                 )),
                             hintText: "Busque por um local...",
                             hintStyle: const TextStyle(
                                 color: ColorPallete.secondColor,
-                                fontStyle: FontStyle.italic,
-                                fontWeight: FontWeight.bold),
+                                fontStyle: FontStyle.italic),
                             border: InputBorder.none),
                       ),
                     ),

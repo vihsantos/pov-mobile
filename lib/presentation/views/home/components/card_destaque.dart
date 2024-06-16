@@ -51,7 +51,7 @@ class CardDestaque extends StatelessWidget {
                         width: 30,
                         height: 30,
                         decoration: BoxDecoration(
-                            color: ColorPallete.secondColor,
+                            color: ColorPallete.bottomUnselectedColor,
                             borderRadius: BorderRadius.circular(15)),
                         child: post.user!.profile != null ? 
                         ClipRRect(

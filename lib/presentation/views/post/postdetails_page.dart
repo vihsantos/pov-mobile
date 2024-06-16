@@ -134,21 +134,23 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                       color: ColorPallete.bgItemColor,
                                       borderRadius: BorderRadius.circular(10)),
                                   child: InkWell(
-                                    onTap: (){
-                                    },
+                                    onTap: () {},
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
                                       children: [
                                         SizedBox(
-                                          height: 30,
-                                          child: Image.asset("asset/img/voo_selected.png")),
+                                            height: 30,
+                                            child: Image.asset(
+                                                "asset/img/voo_selected.png")),
                                         const Text(
                                           "0",
                                           style: TextStyle(
-                                                fontSize: 18,
-                                                color: ColorPallete.secondColor,
-                                                fontWeight: FontWeight.bold),
+                                              fontSize: 18,
+                                              color: ColorPallete.secondColor,
+                                              fontWeight: FontWeight.bold),
                                         )
                                       ],
                                     ),
@@ -205,7 +207,31 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                       ],
                                     ),
                                   ),
-                                )
+                                ),
+                                Visibility(
+                                    visible: false,
+                                    child: InkWell(
+                                      onTap: () async {},
+                                      child: Container(
+                                        width: 70,
+                                        height: 75,
+                                        decoration: BoxDecoration(
+                                            boxShadow: const [
+                                              BoxShadow(
+                                                  color: Color.fromARGB(
+                                                      47, 49, 49, 49),
+                                                  blurRadius: 5,
+                                                  offset: Offset(2, 2))
+                                            ],
+                                            color: ColorPallete.bgItemColor,
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        child: const Center(
+                                          child: Icon(Icons.more_horiz,
+                                              color: ColorPallete.primaryColor),
+                                        ),
+                                      ),
+                                    ))
                               ],
                             )
                           ],
