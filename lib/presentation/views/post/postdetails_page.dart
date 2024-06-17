@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:pov/presentation/controllers/commentpage_controller.dart';
 import 'package:pov/presentation/controllers/postpage_controller.dart';
+import 'package:pov/presentation/views/home/home_page.dart';
 import 'package:pov/repository/comment_repository.dart';
 import 'package:pov/repository/post_repository.dart';
 import 'package:pov/services/core/colorpallete.dart';
@@ -208,10 +209,65 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                     ),
                                   ),
                                 ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
                                 Visibility(
-                                    visible: false,
+                                    visible: true,
                                     child: InkWell(
-                                      onTap: () async {},
+                                      onTap: () async {
+                                        return showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return AlertDialog(
+                                                content: SizedBox(
+                                                  height: 100,
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      InkWell(
+                                                        onTap: () async {
+                                                          bool excluido =
+                                                              await controller
+                                                                  .excluirPost(
+                                                                      widget
+                                                                          .id);
+
+                                                          if (excluido) {
+                                                            //
+                                                          }
+
+                                                          Navigator.pushAndRemoveUntil(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder:
+                                                                      (context) =>
+                                                                          const HomePage()),
+                                                              (Route<dynamic>
+                                                                      route) =>
+                                                                  false);
+                                                        },
+                                                        child: const Text(
+                                                          "Excluir",
+                                                          style: TextStyle(
+                                                              fontSize: 14,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              color: ColorPallete
+                                                                  .labelColor),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              );
+                                            });
+                                      },
                                       child: Container(
                                         width: 70,
                                         height: 75,
@@ -227,8 +283,8 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                             borderRadius:
                                                 BorderRadius.circular(10)),
                                         child: const Center(
-                                          child: Icon(Icons.more_horiz,
-                                              color: ColorPallete.primaryColor),
+                                          child: Icon(Icons.more_vert_rounded,
+                                              color: ColorPallete.secondColor),
                                         ),
                                       ),
                                     ))

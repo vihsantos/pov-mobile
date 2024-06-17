@@ -137,4 +137,26 @@ class PostRepository {
       throw ApplicationErrorImp(mensagem: e.toString(), statusCode: 500);
     }
   }
+
+  Future<bool> excluirPost(int id) async {
+    try {
+      String url = "${Routes.deletePost}/$id";
+
+      String? token = AuthSingleton(LoginRepository()).getToken();
+
+      var response = await http.delete(Uri.parse(url), headers: {
+        'Authorization': 'Bearer $token',
+      });
+
+      if(response.statusCode == 200){
+        return true;
+      }
+
+      throw ApplicationErrorImp(
+          mensagem: response.reasonPhrase.toString(),
+          statusCode: response.statusCode);
+    } catch (e) {
+      throw ApplicationErrorImp(mensagem: e.toString(), statusCode: 500);
+    }
+  }
 }

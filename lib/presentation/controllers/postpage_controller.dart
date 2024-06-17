@@ -24,4 +24,12 @@ class PostPageController {
       rethrow;
     }
   }
+
+  Future<bool> excluirPost(int id) async{
+    try {
+      return await repository.excluirPost(id);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

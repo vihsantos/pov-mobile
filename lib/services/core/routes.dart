@@ -25,4 +25,5 @@ class Routes {
   static const String municipioPorUF = "https://servicodados.ibge.gov.br/api/v1/localidades/estados/";
   static const String addVooInPost = "$urlPartial/addvooinpost/";
   static const String searchGuides = "$urlPartial/searchguide/";
+  static const String deletePost = "$urlPartial/removepost";
 }

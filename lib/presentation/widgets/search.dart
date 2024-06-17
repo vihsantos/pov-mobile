@@ -47,7 +47,7 @@ class _SearchState extends State<Search> {
         print(pickedData.address);
         print(pickedData.addressName);
 
-        String endereco = pickedData.address["road"] +", " + pickedData.address["city"] + ", " + pickedData.address["state"] + ", " + pickedData.address["postcode"];
+        String endereco = pickedData.address["tourism"] + ", " + pickedData.address["road"] +", " + pickedData.address["city"] + ", " + pickedData.address["state"] + ", " + pickedData.address["postcode"];
 
         widget.controller.novoPost.localization = LocalizationModel(
             lat: pickedData.latLong.latitude,
