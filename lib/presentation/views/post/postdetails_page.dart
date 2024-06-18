@@ -214,7 +214,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                   width: 10,
                                 ),
                                 Visibility(
-                                    visible: true,
+                                    visible: controller.isProfile(post.user!.id!),
                                     child: InkWell(
                                       onTap: () async {
                                         return showDialog(
