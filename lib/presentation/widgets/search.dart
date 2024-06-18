@@ -47,12 +47,24 @@ class _SearchState extends State<Search> {
         print(pickedData.address);
         print(pickedData.addressName);
 
-        String endereco = pickedData.address["tourism"] + ", " + pickedData.address["road"] +", " + pickedData.address["city"] + ", " + pickedData.address["state"] + ", " + pickedData.address["postcode"];
+        String pontoTuristico = "";
 
-        widget.controller.novoPost.localization = LocalizationModel(
+        if(pickedData.address["tourism"] != null){
+          pontoTuristico = pickedData.address["tourism"] + ", ";
+        }
+        
+        String endereco = pickedData.address["road"] +", " + pickedData.address["city"] + ", " + pickedData.address["state"] + ", " + pickedData.address["postcode"];
+
+        if(pontoTuristico != ""){
+          endereco = pontoTuristico + endereco;
+        }
+
+        setState(() {
+          widget.controller.novoPost.localization = LocalizationModel(
             lat: pickedData.latLong.latitude,
             long: pickedData.latLong.longitude,
             local: endereco.toUpperCase());
+        });
         Navigator.of(context).pop();
       },
     ));

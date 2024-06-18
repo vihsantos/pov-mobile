@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pov/presentation/controllers/commentpage_controller.dart';
 import 'package:pov/presentation/controllers/postpage_controller.dart';
 import 'package:pov/presentation/views/home/home_page.dart';
+import 'package:pov/presentation/views/init_page.dart';
 import 'package:pov/repository/comment_repository.dart';
 import 'package:pov/repository/post_repository.dart';
 import 'package:pov/services/core/colorpallete.dart';
@@ -221,7 +222,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                             builder: (context) {
                                               return AlertDialog(
                                                 content: SizedBox(
-                                                  height: 100,
+                                                  height: 50,
                                                   child: Column(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment.start,
@@ -238,18 +239,26 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                                                           .id);
 
                                                           if (excluido) {
-                                                            //
+                                                            // ignore: use_build_context_synchronously
+                                                            ScaffoldMessenger
+                                                                    .of(context)
+                                                                .showSnackBar(
+                                                                    const SnackBar(
+                                                                        content:
+                                                                            Text("Post excluído com sucesso!")));
                                                           }
 
-                                                          Navigator.pushAndRemoveUntil(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                                  builder:
-                                                                      (context) =>
-                                                                          const HomePage()),
-                                                              (Route<dynamic>
-                                                                      route) =>
-                                                                  false);
+                                                          Navigator
+                                                              .pushAndRemoveUntil(
+                                                                  // ignore: use_build_context_synchronously
+                                                                  context,
+                                                                  MaterialPageRoute(
+                                                                      builder:
+                                                                          (context) =>
+                                                                              InitPage()),
+                                                                  (Route<dynamic>
+                                                                          route) =>
+                                                                      false);
                                                         },
                                                         child: const Text(
                                                           "Excluir",
