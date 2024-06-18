@@ -1,8 +1,7 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, use_build_context_synchronously
 import 'package:flutter/material.dart';
 import 'package:pov/presentation/controllers/commentpage_controller.dart';
 import 'package:pov/presentation/controllers/postpage_controller.dart';
-import 'package:pov/presentation/views/home/home_page.dart';
 import 'package:pov/presentation/views/init_page.dart';
 import 'package:pov/repository/comment_repository.dart';
 import 'package:pov/repository/post_repository.dart';
@@ -239,7 +238,6 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                                                           .id);
 
                                                           if (excluido) {
-                                                            // ignore: use_build_context_synchronously
                                                             ScaffoldMessenger
                                                                     .of(context)
                                                                 .showSnackBar(
@@ -250,7 +248,6 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
 
                                                           Navigator
                                                               .pushAndRemoveUntil(
-                                                                  // ignore: use_build_context_synchronously
                                                                   context,
                                                                   MaterialPageRoute(
                                                                       builder:
