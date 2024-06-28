@@ -1,13 +1,13 @@
-import 'dart:developer';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:pov/dto/municipio_dto.dart';
 import 'package:pov/presentation/controllers/registerpage_controller.dart';
+import 'package:pov/presentation/views/register/components/header_register.dart';
+import 'package:pov/presentation/views/register/components/page_one.dart';
+import 'package:pov/presentation/views/register/components/page_three.dart';
+import 'package:pov/presentation/views/register/components/page_two.dart';
 import 'package:pov/repository/user_repository.dart';
 import 'package:pov/services/core/colorpallete.dart';
-import 'package:pov/services/core/utils.dart';
 import '../../../models/enums/AreaAtuacao.dart';
-import '../../widgets/input_field.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -31,7 +31,6 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     final PageController controller = PageController();
     final Size size = MediaQuery.of(context).size;
-    String? data;
 
     return SafeArea(
       child: Scaffold(
@@ -40,503 +39,95 @@ class _RegisterPageState extends State<RegisterPage> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: size.height * 0.02,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 5),
-                child: Image.asset(
-                  "asset/img/testelogo.png",
-                  height: size.height * 0.12,
-                ),
-              ),
-              SizedBox(
-                height: size.height * 0.04,
-              ),
-              const Padding(
-                padding: EdgeInsets.only(left: 15, right: 15),
-                child: Text(
-                  "Crie a sua conta",
-                  style: TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.w500,
-                      color: Color(0xFF393434)),
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(left: 15, right: 15),
-                child: Text(
-                  "Que bom que deseja fazer parte da nossa rede!",
-                  style: TextStyle(
-                      fontStyle: FontStyle.italic,
-                      fontSize: 16,
-                      color: Color(0xFF393434)),
-                ),
-              ),
-              const SizedBox(height: 10),
-              SizedBox(
+              const HeaderRegister(),
+              Container(
                 width: size.width,
-                height: size.height * 0.75,
+                height: size.height * 0.69,
+                margin: const EdgeInsets.all(15),
+                decoration: const BoxDecoration(
+                    color: Color.fromARGB(255, 229, 229, 243),
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
                 child: PageView(
                   physics: const NeverScrollableScrollPhysics(),
                   controller: controller,
                   children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        InputField(
-                          label: 'Nome',
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                left: 15, right: 15, top: 10, bottom: 10),
-                            child: TextField(
-                              onChanged: (value) =>
-                                  registerController.usuario.nome = value,
-                              decoration: const InputDecoration(
-                                  hintStyle:
-                                      TextStyle(fontStyle: FontStyle.italic),
-                                  enabledBorder: InputBorder.none,
-                                  focusedBorder: InputBorder.none,
-                                  hintText: "Digite seu nome"),
-                            ),
-                          ),
-                        ),
-                        InputField(
-                          label: 'Email',
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                left: 15, right: 15, top: 10, bottom: 10),
-                            child: TextField(
-                              onChanged: (value) =>
-                                  registerController.usuario.email = value,
-                              decoration: const InputDecoration(
-                                  hintStyle:
-                                      TextStyle(fontStyle: FontStyle.italic),
-                                  enabledBorder: InputBorder.none,
-                                  focusedBorder: InputBorder.none,
-                                  hintText: "Digite seu email"),
-                            ),
-                          ),
-                        ),
-                        InputField(
-                          label: 'Data de Nascimento',
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                left: 15, right: 15, top: 10, bottom: 10),
-                            child: TextField(
-                              onTap: () async {
-                                DateTime? date = await showDatePicker(
-                                    context: context,
-                                    initialDate:
-                                        DateTime(DateTime.now().year - 18),
-                                    firstDate:
-                                        DateTime(DateTime.now().year - 99),
-                                    lastDate:
-                                        DateTime(DateTime.now().year - 13));
+                    PageOne(
+                      controller: registerController,
+                      onTap: () {
+                        var dados = registerController.usuario;
 
-                                if (date != null) {
-                                  registerController.usuario.data_nascimento =
-                                      date;
-                                }
-                              },
-                              decoration: InputDecoration(
-                                  hintStyle: const TextStyle(
-                                      fontStyle: FontStyle.italic),
-                                  enabledBorder: InputBorder.none,
-                                  focusedBorder: InputBorder.none,
-                                  hintText: registerController
-                                              .usuario.data_nascimento ==
-                                          null
-                                      ? "Informe a data de nascimento"
-                                      : Utils.data(registerController
-                                          .usuario.data_nascimento!)),
-                            ),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(
-                              left: 15, right: 15, top: 10, bottom: 10),
-                          child: Text(
-                            "Você é guia turístico?",
-                            style: TextStyle(
-                                color: Color(0xFF393434),
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: RadioListTile(
-                                  value: false,
-                                  groupValue: registerController.usuario.guide,
-                                  title: const Text("Não"),
-                                  onChanged: (value) {
-                                    setState(() {
-                                      registerController.usuario.guide =
-                                          value as bool;
-                                      isGuide = value;
-                                    });
-                                  }),
-                            ),
-                            Expanded(
-                              child: RadioListTile(
-                                  value: true,
-                                  groupValue: registerController.usuario.guide,
-                                  title: const Text("Sim"),
-                                  onChanged: (value) {
-                                    setState(() {
-                                      registerController.usuario.guide =
-                                          value as bool;
-                                      isGuide = value;
-                                    });
-                                  }),
-                            ),
-                          ],
-                        ),
-                        InkWell(
-                          onTap: () {
-                            if (!isGuide) {
-                              controller.jumpToPage(3);
-                              return;
-                            }
+                        bool dadosNaoPreenchidos = dados.nome == null ||
+                            dados.email == null ||
+                            dados.data_nascimento == null ||
+                            dados.guide == null;
 
-                            controller.nextPage(
-                                duration: const Duration(seconds: 2),
-                                curve: Curves.ease);
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.all(15),
-                            width: size.width,
-                            height: 60,
-                            decoration: const BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                      offset: Offset(0, 4),
-                                      blurRadius: 4,
-                                      color: Color.fromARGB(55, 116, 116, 116))
-                                ],
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                                gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomLeft,
-                                    colors: [
-                                      Color.fromARGB(255, 105, 96, 232),
-                                      Color.fromARGB(255, 97, 232, 214)
-                                    ])),
-                            child: const Center(
-                                child: Text(
-                              "Próximo",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600),
-                            )),
-                          ),
-                        )
-                      ],
-                    ),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.vertical,
-                      child: Column(children: [
-                        InputField(
-                          label: 'Numero do Cadastur',
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                left: 15, right: 15, top: 10, bottom: 10),
-                            child: TextField(
-                              onChanged: (value) =>
-                                  registerController.usuario.cadastur = value,
-                              decoration: const InputDecoration(
-                                  hintStyle:
-                                      TextStyle(fontStyle: FontStyle.italic),
-                                  enabledBorder: InputBorder.none,
-                                  focusedBorder: InputBorder.none,
-                                  hintText: "Digite o numero do Cadastur"),
-                            ),
-                          ),
-                        ),
-                        InputField(
-                            label: "Estado",
-                            child: DropdownMenu<String>(
-                              requestFocusOnTap: true,
-                              onSelected: (value) {
-                                registerController.usuario.estado = value;
-                              },
-                              enableSearch: true,
-                              menuStyle: const MenuStyle(
-                                backgroundColor:
-                                    MaterialStatePropertyAll<Color>(
-                                        ColorPallete.bgItemColor),
-                              ),
-                              inputDecorationTheme: const InputDecorationTheme(
-                                border: InputBorder.none,
-                              ),
-                              width: size.width * 0.9,
-                              menuHeight: 200,
-                              dropdownMenuEntries:
-                                  Utils.listarUFs().map((String uf) {
-                                return DropdownMenuEntry<String>(
-                                    value: uf, label: uf);
-                              }).toList(),
-                            )),
-                        InputField(
-                            label: "Municipio",
-                            child: registerController.usuario.estado == null
-                                ? Container()
-                                : FutureBuilder<List<MunicipioDTO?>?>(
-                                    future: registerController
-                                        .listarMunicipiosPorUF(
-                                            registerController.usuario.estado!),
-                                    builder: (BuildContext context,
-                                        AsyncSnapshot snapshot) {
-                                      if (!snapshot.hasData) {
-                                        return const Center(
-                                            child: CircularProgressIndicator());
-                                      }
-                                      List<MunicipioDTO>? dados = snapshot.data;
+                        // bool dadosNaoPreenchidos = dados.estado == null ||
+                        //     dados.municipio == null ||
+                        //     dados.areatuacao == null ||
+                        //     dados.data_vencimento == null;
 
-                                      if (dados != null) {
-                                        return DropdownMenu<MunicipioDTO>(
-                                          onSelected: (value){
-                                            registerController.usuario.municipio = value!.nome;
-                                          },
-                                          requestFocusOnTap: true,
-                                          enableSearch: true,
-                                            menuStyle: const MenuStyle(
-                                              backgroundColor:
-                                                  MaterialStatePropertyAll<
-                                                          Color>(
-                                                      ColorPallete.bgItemColor),
-                                            ),
-                                            inputDecorationTheme:
-                                                const InputDecorationTheme(
-                                              border: InputBorder.none,
-                                            ),
-                                            width: size.width * 0.9,
-                                            menuHeight: 200,
-                                            dropdownMenuEntries: dados
-                                                .map((MunicipioDTO municipio) {
-                                              return DropdownMenuEntry<
-                                                      MunicipioDTO>(
-                                                  value: municipio,
-                                                  label: municipio.nome!);
-                                            }).toList());
-                                      }
-
-                                      return Container();
-                                    })),
-                        InputField(
-                          label: "Área de Atuação",
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Wrap(
-                              spacing: 5.0,
-                              children:
-                                  AreaAtuacao.values.map((AreaAtuacao area) {
-                                return FilterChip(
-                                  label: Text(
-                                    area.descricao,
-                                    maxLines: 2,
+                        if (dadosNaoPreenchidos) {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return const AlertDialog(
+                                  title: Text(
+                                    "Você precisa preencher todos os dados da tela para seguir para a próxima etapa.",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        color: ColorPallete.labelColor,
+                                        fontWeight: FontWeight.bold),
                                   ),
-                                  selected: filters.contains(area),
-                                  onSelected: (bool selected) {
-                                    setState(() {
-                                      if (selected) {
-                                        filters.add(area);
-                                      } else {
-                                        filters.remove(area);
-                                      }
-                                    });
-                                  },
                                 );
-                              }).toList(),
-                            ),
-                          ),
-                        ),
-                        InputField(
-                          label: 'Data de Vencimento',
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                left: 15, right: 15, top: 10, bottom: 10),
-                            child: TextField(
-                              onTap: () async {
-                                DateTime? date = await showDatePicker(
-                                    context: context,
-                                    initialDate: DateTime.now(),
-                                    firstDate: DateTime.now(),
-                                    lastDate:
-                                        DateTime(DateTime.now().year + 10));
+                              });
+                          return;
+                        }
 
-                                if (date != null) {
-                                  setState(() {
-                                    registerController.usuario.data_vencimento =
-                                        date;
-                                    data =
-                                        DateFormat("dd/MM/yyyy").format(date);
-                                    log(data!);
-                                  });
-                                }
-                              },
-                              decoration: InputDecoration(
-                                hintStyle: const TextStyle(
-                                    fontStyle: FontStyle.italic),
-                                enabledBorder: InputBorder.none,
-                                focusedBorder: InputBorder.none,
-                                hintText: registerController
-                                            .usuario.data_vencimento ==
-                                        null
-                                    ? "Informe a data de vencimento do Cadastur"
-                                    : Utils.data(registerController
-                                        .usuario.data_vencimento!),
-                              ),
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            controller.nextPage(
-                                duration: const Duration(seconds: 2),
-                                curve: Curves.ease);
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.all(15),
-                            width: size.width,
-                            height: 60,
-                            decoration: const BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                      offset: Offset(0, 4),
-                                      blurRadius: 4,
-                                      color: Color.fromARGB(55, 116, 116, 116))
-                                ],
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                                gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomLeft,
-                                    colors: [
-                                      Color.fromARGB(255, 105, 96, 232),
-                                      Color.fromARGB(255, 97, 232, 214)
-                                    ])),
-                            child: const Center(
-                                child: Text(
-                              "Próximo",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600),
-                            )),
-                          ),
-                        )
-                      ]),
+                        if (!registerController.isGuide) {
+                          controller.jumpToPage(3);
+                          return;
+                        }
+
+                        controller.nextPage(
+                            duration: const Duration(seconds: 2),
+                            curve: Curves.ease);
+                      },
                     ),
-                    Column(
-                      children: [
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        InputField(
-                          label: 'Username',
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                left: 15, right: 15, top: 10, bottom: 10),
-                            child: TextField(
-                              onChanged: (value) =>
-                                  registerController.usuario.username = value,
-                              decoration: const InputDecoration(
-                                  hintStyle: TextStyle(
-                                      fontStyle: FontStyle.normal,
-                                      color: ColorPallete.labelColor),
-                                  enabledBorder: InputBorder.none,
-                                  focusedBorder: InputBorder.none,
-                                  hintText: "Digite seu nome de usuário"),
-                            ),
-                          ),
-                        ),
-                        InputField(
-                          label: 'Senha',
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                left: 15, right: 15, top: 10, bottom: 10),
-                            child: TextField(
-                              obscureText: isObscure,
-                              onChanged: (value) =>
-                                  registerController.usuario.password = value,
-                              decoration: InputDecoration(
-                                  suffixIcon: IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          isObscure = !isObscure;
+                    PageTwo(
+                      controller: registerController,
+                      onTap: () {
+                        var dados = registerController.usuario;
 
-                                          if (isObscure) {
-                                            passwordIcon = Icons.visibility_off;
-                                          } else {
-                                            passwordIcon = Icons.visibility;
-                                          }
-                                        });
-                                      },
-                                      icon: Icon(passwordIcon)),
-                                  hintStyle: const TextStyle(
-                                      fontStyle: FontStyle.normal,
-                                      color: ColorPallete.labelColor),
-                                  enabledBorder: InputBorder.none,
-                                  focusedBorder: InputBorder.none,
-                                  hintText: "Digite sua senha"),
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            if (filters.isNotEmpty) {
-                              String dados = "";
+                        bool dadosNaoPreenchidos = dados.estado == null ||
+                            dados.municipio == null ||
+                            dados.areatuacao == null ||
+                            dados.data_vencimento == null;
 
-                              for (var area in filters) {
-                                dados += "${area.id}; ";
-                              }
+                        if (dadosNaoPreenchidos) {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return const AlertDialog(
+                                  title: Text(
+                                    "Você precisa preencher todos os dados da tela para seguir para a próxima etapa.",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        color: ColorPallete.labelColor,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                );
+                              });
+                          return;
+                        }
 
-                              registerController.usuario.areatuacao = dados;
-                            }
 
-                            registerController.cadastrarUsuario();
-                            Navigator.pop(context);
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.all(15),
-                            width: size.width,
-                            height: 60,
-                            decoration: const BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                      offset: Offset(0, 4),
-                                      blurRadius: 4,
-                                      color: Color.fromARGB(55, 116, 116, 116))
-                                ],
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                                gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomLeft,
-                                    colors: [
-                                      Color.fromARGB(255, 112, 232, 96),
-                                      Color.fromARGB(255, 180, 232, 97)
-                                    ])),
-                            child: const Center(
-                                child: Text(
-                              "Salvar",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600),
-                            )),
-                          ),
-                        )
-                      ],
+                        controller.nextPage(
+                            duration: const Duration(seconds: 2),
+                            curve: Curves.ease);
+                      },
+                    ),
+                    PageThree(
+                      controller: registerController,
                     )
                   ],
                 ),
