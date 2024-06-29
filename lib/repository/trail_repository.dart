@@ -120,4 +120,26 @@ class TrailRepository {
       throw ApplicationErrorImp(mensagem: e.toString(), statusCode: 500);
     }
   }
+
+  Future<bool> excluirTrilha(int id) async {
+    try {
+      String url = "${Routes.deleteTrail}/$id";
+
+      String? token = AuthSingleton(LoginRepository()).getToken();
+
+      var response = await http.delete(Uri.parse(url), headers: {
+        'Authorization': 'Bearer $token',
+      });
+
+      if(response.statusCode == 200){
+        return true;
+      }
+
+      throw ApplicationErrorImp(
+          mensagem: response.reasonPhrase.toString(),
+          statusCode: response.statusCode);
+    } catch (e) {
+      throw ApplicationErrorImp(mensagem: e.toString(), statusCode: 500);
+    }
+  }
 }

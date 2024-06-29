@@ -257,15 +257,17 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                                                           route) =>
                                                                       false);
                                                         },
-                                                        child: const Text(
-                                                          "Excluir",
-                                                          style: TextStyle(
-                                                              fontSize: 14,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              color: ColorPallete
-                                                                  .labelColor),
+                                                        child: const Center(
+                                                          child:  Text(
+                                                            "Excluir",
+                                                            style: TextStyle(
+                                                                fontSize: 18,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                color: ColorPallete
+                                                                    .labelColor),
+                                                          ),
                                                         ),
                                                       ),
                                                     ],

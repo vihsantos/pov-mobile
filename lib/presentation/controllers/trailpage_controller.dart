@@ -2,7 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:pov/dto/trail_dto.dart';
 import 'package:pov/models/trails/trail_model.dart';
+import 'package:pov/repository/login_repository.dart';
 import 'package:pov/repository/trail_repository.dart';
+import 'package:pov/services/singleton/auth_singleton.dart';
 
 import '../../services/error/applicationerror.dart';
 
@@ -44,5 +46,17 @@ class TrailPageController {
       _error = e;
     }
     return null;
+  }
+
+  bool isProfile(int id){
+    return AuthSingleton(LoginRepository()).getId() == id;
+  }
+
+  Future<bool> excluirTrilha(int id) async{
+    try {
+      return await repository.excluirTrilha(id);
+    } catch (e) {
+      rethrow;
+    }
   }
 }
