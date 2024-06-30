@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pov/dto/trail_dto.dart';
 import 'package:pov/presentation/views/home/components/newpostbutton.dart';
 import 'package:pov/presentation/views/trails/components/trailcard.dart';
+import 'package:pov/presentation/widgets/card_post.dart';
 import 'package:pov/repository/trail_repository.dart';
 import '../../../dto/post_dto.dart';
 import '../../../repository/post_repository.dart';
@@ -46,7 +47,51 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     const NewPostButton(),
                     const Text(
-                      "Trilhas",
+                      "Posts cinco estrelas mais recentes",
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 270,
+                      child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: FutureBuilder<List<PostDTO?>?>(
+                              future: controller.listarPosts(),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  List<PostDTO?>? posts = snapshot.data;
+
+                                  if (posts!.isEmpty) {
+                                    return const Center(
+                                        child: Text("Nada encontrado!"));
+                                  }
+
+                                  return Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      ListView.builder(
+                                          scrollDirection: Axis.horizontal,
+                                          shrinkWrap: true,
+                                          itemCount: posts.length,
+                                          itemBuilder: (_, index) {
+                                            final post = posts[index];
+
+                                            return CardDestaque(post: post!);
+                                          })
+                                    ],
+                                  );
+                                }
+
+                                if (snapshot.hasError) {
+                                  return const Text("ERROR");
+                                }
+
+                                return Container();
+                              })),
+                    ),
+                    const Text(
+                      "Trilhas recentes",
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
@@ -90,50 +135,7 @@ class _HomePageState extends State<HomePage> {
                               })),
                     ),
                     const SizedBox(height: 10),
-                    const Text(
-                      "Posts",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      height: 270,
-                      child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: FutureBuilder<List<PostDTO?>?>(
-                              future: controller.listarPosts(),
-                              builder: (context, snapshot) {
-                                if (snapshot.hasData) {
-                                  List<PostDTO?>? posts = snapshot.data;
-
-                                  if (posts!.isEmpty) {
-                                    return const Center(
-                                        child: Text("Nada encontrado!"));
-                                  }
-
-                                  return Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      ListView.builder(
-                                          scrollDirection: Axis.horizontal,
-                                          shrinkWrap: true,
-                                          itemCount: posts.length,
-                                          itemBuilder: (_, index) {
-                                            final post = posts[index];
-
-                                            return CardDestaque(post: post!);
-                                          })
-                                    ],
-                                  );
-                                }
-
-                                if (snapshot.hasError) {
-                                  return const Text("ERROR");
-                                }
-
-                                return Container();
-                              })),
-                    ),
+                    CardPost()
                   ]),
             ),
           )),
