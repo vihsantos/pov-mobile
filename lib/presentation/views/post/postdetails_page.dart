@@ -6,6 +6,7 @@ import 'package:pov/presentation/views/init_page.dart';
 import 'package:pov/repository/comment_repository.dart';
 import 'package:pov/repository/post_repository.dart';
 import 'package:pov/services/core/colorpallete.dart';
+import 'package:pov/services/core/utils.dart';
 
 import '../../../models/post/post_model.dart';
 import '../../widgets/alert_comentarios.dart';
@@ -145,10 +146,10 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                         SizedBox(
                                             height: 30,
                                             child: Image.asset(
-                                                "asset/img/voo_selected.png")),
-                                        const Text(
-                                          "0",
-                                          style: TextStyle(
+                                                Utils.voounselected)),
+                                        Text(
+                                          "${post.voos!.length}",
+                                          style: const TextStyle(
                                               fontSize: 18,
                                               color: ColorPallete.secondColor,
                                               fontWeight: FontWeight.bold),
@@ -213,7 +214,8 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                   width: 10,
                                 ),
                                 Visibility(
-                                    visible: controller.isProfile(post.user!.id!),
+                                    visible:
+                                        controller.isProfile(post.user!.id!),
                                     child: InkWell(
                                       onTap: () async {
                                         return showDialog(
@@ -246,19 +248,18 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                                                             Text("Post excluído com sucesso!")));
                                                           }
 
-                                                          Navigator
-                                                              .pushAndRemoveUntil(
-                                                                  context,
-                                                                  MaterialPageRoute(
-                                                                      builder:
-                                                                          (context) =>
-                                                                              InitPage()),
-                                                                  (Route<dynamic>
-                                                                          route) =>
-                                                                      false);
+                                                          Navigator.pushAndRemoveUntil(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder:
+                                                                      (context) =>
+                                                                          InitPage()),
+                                                              (Route<dynamic>
+                                                                      route) =>
+                                                                  false);
                                                         },
                                                         child: const Center(
-                                                          child:  Text(
+                                                          child: Text(
                                                             "Excluir",
                                                             style: TextStyle(
                                                                 fontSize: 18,
@@ -320,35 +321,30 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                         Positioned(
                           top: 5,
                           right: 5,
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: Container(
-                              width: size.width * 0.20,
-                              height: size.height * 0.05,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.white),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    post.stars.toString(),
-                                    style: const TextStyle(
-                                        fontSize: 26,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.pink),
-                                  ),
-                                  const Icon(
-                                    Icons.star,
-                                    size: 26,
-                                    color: Colors.pink,
-                                  )
-                                ],
-                              ),
+                          child: Container(
+                            width: size.width * 0.20,
+                            height: size.height * 0.05,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.white),
+                            child: Row(
+                              mainAxisAlignment:
+                                  MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  post.stars.toString(),
+                                  style: const TextStyle(
+                                      fontSize: 26,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.pink),
+                                ),
+                                const Icon(
+                                  Icons.star,
+                                  size: 26,
+                                  color: Colors.pink,
+                                )
+                              ],
                             ),
                           ),
                         ),
