@@ -39,6 +39,7 @@ class _PageOneState extends State<PageOne> {
                 const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 10),
             child: TextField(
               onChanged: (value) => widget.controller.usuario.nome = value,
+              keyboardType: TextInputType.datetime,
               decoration: const InputDecoration(
                   hintStyle: TextStyle(fontStyle: FontStyle.italic),
                   enabledBorder: InputBorder.none,

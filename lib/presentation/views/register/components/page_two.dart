@@ -169,6 +169,7 @@ class _PageTwoState extends State<PageTwo> {
                       padding: const EdgeInsets.only(
                           left: 15, right: 15, top: 10, bottom: 10),
                       child: TextField(
+                        keyboardType: TextInputType.datetime,
                         onTap: () async {
                           DateTime? date = await showDatePicker(
                               context: context,

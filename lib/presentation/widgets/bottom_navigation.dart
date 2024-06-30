@@ -42,7 +42,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
         child: Container(
       width: size.width,
       height: size.height * 0.085,
-      margin: const EdgeInsets.all(15),
+      margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
           color: ColorPallete.bgItemColor,
           borderRadius: BorderRadius.circular(10)),
