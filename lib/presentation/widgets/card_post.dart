@@ -1,153 +1,121 @@
 import 'package:flutter/material.dart';
+import 'package:pov/services/core/colorpallete.dart';
+import 'package:pov/services/core/utils.dart';
 
 class CardPost extends StatelessWidget {
-  const CardPost({
-    super.key,
-  });
+  const CardPost({super.key});
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      margin: const EdgeInsets.only(bottom: 10, left: 15, right: 15),
       width: size.width,
-      height: size.height * 0.5,
+      height: size.height * 0.49,
       decoration: BoxDecoration(
-          image: const DecorationImage(
-              fit: BoxFit.cover,
-              image: NetworkImage(
-                  "https://a.cdn-hotels.com/gdcs/production42/d500/8f83cf87-3f2a-4c7b-8a26-766b94cc5c4e.jpg?impolicy=fcrop&w=800&h=533&q=medium")),
-          color: Colors.amber,
+          color: const Color.fromARGB(255, 226, 199, 231),
           borderRadius: BorderRadius.circular(10)),
-      child: Stack(children: [
-        Positioned(
-          top: 10,
-          right: 10,
-          child: Container(
-            width: size.width * 0.155,
-            height: size.height * 0.04,
-            decoration: BoxDecoration(boxShadow: const [
-              BoxShadow(
-                  offset: Offset(0, 4),
-                  blurRadius: 4,
-                  color: Color.fromARGB(33, 0, 0, 0))
-            ], color: Colors.white, borderRadius: BorderRadius.circular(6)),
-            child: const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  "5",
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.pink),
-                ),
-                SizedBox(width: 5),
-                Icon(
-                  Icons.star,
-                  size: 18,
-                  color: Colors.pink,
-                )
-              ],
+      child: Stack(
+        children: [
+          Positioned(
+            top: 10,
+            right: 10,
+            child: Container(
+              width: size.width * 0.20,
+              height: size.height * 0.05,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15), color: Colors.white),
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "0",
+                    style: TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.pink),
+                  ),
+                  Icon(
+                    Icons.star,
+                    size: 26,
+                    color: Colors.pink,
+                  )
+                ],
+              ),
             ),
           ),
-        ),
-        Positioned(
-            left: 0,
-            right: 0,
+          Positioned(
             bottom: 0,
             child: Container(
-                padding: const EdgeInsets.all(5),
-                width: size.width,
-                height: size.height * 0.16,
-                decoration: BoxDecoration(
-                    color: const Color.fromARGB(206, 255, 255, 255),
-                    borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10)),
-                    border: Border.all(
-                        strokeAlign: BorderSide.strokeAlignCenter,
-                        color: const Color.fromARGB(24, 255, 255, 255),
-                        width: 2)),
+              width: size.width * 0.957,
+              height: size.height * 0.15,
+              decoration: const BoxDecoration(
+                color: Color.fromARGB(61, 246, 246, 252),
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(10),
+                  bottomRight: Radius.circular(10)
+                )
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(10),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              width: size.width * 0.12,
-                              height: size.height * 0.06,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius:
-                                      BorderRadius.circular(size.width)),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  "username",
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                SizedBox(
-                                  width: size.width * 0.6,
-                                  child: const Text(
-                                    "localization",
-                                    style: TextStyle(fontSize: 12),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
                         Container(
-                          width: size.width * 0.11,
-                          height: size.height * 0.06,
+                          width: 60,
+                          height: 60,
                           decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8)),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(40)
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        SizedBox(
+                          width: size.width * 0.595,
+                          child: const Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Image(
-                                image: const AssetImage("asset/img/voo_selected.png"),
-                                width: size.width * 0.055,
-                                fit: BoxFit.cover,
-                                ),
-                              // Icon(
-                              //   Icons.flight,
-                              //   size: 18,
-                              // ),
-                              const Text(
-                                "2K",
-                                style: TextStyle(fontSize: 10, fontWeight: FontWeight.w800),
-                              )
+                              Text("username", style: TextStyle(color: ColorPallete.labelColor, fontWeight: FontWeight.bold, fontSize: 16)),
+                              Text("localização", maxLines: 2, style: TextStyle(color: ColorPallete.labelColor, fontSize: 12)),
                             ],
                           ),
-                        )
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Container(
+                          width: 55,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            color: ColorPallete.bgItemColor,
+                            borderRadius: BorderRadius.circular(10)
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 35,
+                                child: Image.asset(Utils.vooselected)),
+                              Text("0", style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: ColorPallete.secondColor),)
+                            ],
+                          ),
+                        ),
                       ],
                     ),
-                    const SizedBox(height: 5),
-                    const Text(
-                      "data data data data data data data data data data data data",
-                      maxLines: 3,
-                      style: TextStyle(fontSize: 12),
-                    )
+                    Text("descrição", maxLines: 3,)
                   ],
-                )))
-      ]),
+                ),
+              ),
+            ))
+        ],
+      ),
     );
   }
 }
