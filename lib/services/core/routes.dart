@@ -27,4 +27,5 @@ class Routes {
   static const String searchGuides = "$urlPartial/searchguide/";
   static const String deletePost = "$urlPartial/removepost";
   static const String deleteTrail = "$urlPartial/removetrail";
+  static const String allPosts = "$urlPartial/allPosts";
 }
