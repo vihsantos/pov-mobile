@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
 
   carregarDados(){
 
-    bool posts = (controller.qtdPosts > 0 ) | (controller.qtdPosts > controller.skip);
+    bool posts = (controller.qtdPosts > 0 ) & (controller.qtdPosts > 10) & (controller.qtdPosts > controller.skip);
     if((pageScroll.position.pixels == pageScroll.position.maxScrollExtent) & posts){
       log("chegou ao fim");
       controller.listarMaisPosts();
