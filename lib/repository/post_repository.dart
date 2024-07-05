@@ -111,7 +111,7 @@ class PostRepository {
 
   Future<List<PostDTO>> getAllPosts(int take, int skip) async {
     try {
-      String url = "$Routes.allPosts/$take/$skip";
+      String url = "${Routes.allPosts}/$take/$skip";
 
       String? token = AuthSingleton(LoginRepository()).getToken();
 

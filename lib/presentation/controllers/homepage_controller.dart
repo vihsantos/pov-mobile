@@ -19,6 +19,16 @@ class HomePageController {
   bool? get loading => loadingApi.value;
   final loadingApi = ValueNotifier<bool?>(null);
 
+  set _posts(List<PostDTO>? posts) => postApi.value = posts;
+  List<PostDTO>? get posts => postApi.value;
+  final postApi = ValueNotifier<List<PostDTO>?>(null);
+
+  int get qtdPosts => posts != null ? posts!.length : 0;
+
+  int skip = 0;
+  int take = 10;
+ 
+
   Future<List<PostDTO?>?> listarPosts() async {
     _error = null;
     try {
@@ -41,14 +51,29 @@ class HomePageController {
     return null;
   }
   
-  Future<List<PostDTO?>?> listarTodosPosts(int take, int skip) async {
+  Future listarTodosPosts() async {
     _error = null;
+    _loading = true;
     try {
-      List<PostDTO?> posts = await postRepository.getAllPosts(take, skip);
-      return posts;
+      _posts = await postRepository.getAllPosts(take, skip);
     } on ApplicationError catch (e) {
       _error = e;
     }
-    return null;
+    _loading = false;
+  }
+
+  Future listarMaisPosts () async{
+    _error = null;
+    _loading = true;
+    try {
+      take += 10;
+      skip += 10;
+
+      posts!.addAll(await postRepository.getAllPosts(take, skip));
+      
+    } on ApplicationError catch (e) {
+      _error = e;
+    }
+    _loading = false;
   }
 }
