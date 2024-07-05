@@ -11,7 +11,7 @@ import '../services/singleton/auth_singleton.dart';
 import 'login_repository.dart';
 
 class UserRepository {
-  Future criarUsuario(NovoUsuarioDTO usuario) async {
+  Future<bool?> criarUsuario(NovoUsuarioDTO usuario) async {
     try {
       String url = Routes.novoUsuario;
 
@@ -21,7 +21,7 @@ class UserRepository {
         "accept": "application/json",
       });
 
-      if (response.statusCode == 201) log("FOI!!");
+      if (response.statusCode == 201) return true;
 
       throw ApplicationErrorImp(
           mensagem: response.reasonPhrase.toString(),

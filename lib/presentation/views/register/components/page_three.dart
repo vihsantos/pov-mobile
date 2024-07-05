@@ -91,7 +91,7 @@ class _PageThreeState extends State<PageThree> {
                 ),
               ),
               InkWell(
-                onTap: () {
+                onTap: () async {
                   var dados = widget.controller.usuario;
 
                         bool dadosNaoPreenchidos = dados.username == null ||
@@ -114,8 +114,21 @@ class _PageThreeState extends State<PageThree> {
                           return;
                         }
 
-                  widget.controller.cadastrarUsuario();
-                  Navigator.pop(context);
+                  bool cadastrado = await widget.controller.cadastrarUsuario();
+
+                  if(cadastrado){
+                    // ignore: use_build_context_synchronously
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("Usuário cadastrado com sucesso!")));
+                    // ignore: use_build_context_synchronously
+                    Navigator.of(context).pop();
+                  } else {
+                    // ignore: use_build_context_synchronously
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("Não foi possível cadastrar usuário!")));
+                    // ignore: use_build_context_synchronously
+                    Navigator.of(context).pop();
+                  }
                 },
                 child: Container(
                   margin: const EdgeInsets.all(15),

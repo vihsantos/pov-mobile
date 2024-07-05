@@ -100,7 +100,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
                         bool dadosNaoPreenchidos = dados.estado == null ||
                             dados.municipio == null ||
-                            dados.areatuacao == null ||
                             dados.data_vencimento == null;
 
                         if (dadosNaoPreenchidos) {

@@ -1,6 +1,6 @@
 class Routes {
-  static const String urlPartial = "https://visantos.pythonanywhere.com/";
-  //static const String urlPartial = "http://192.168.0.110:8000";
+  static const String urlPartial = "https://vihsantos.pythonanywhere.com";
+  //static const String urlPartial = "http://192.168.114.101:8000";
 
   static const String login = "$urlPartial/acesso";
   static const String novoUsuario = "$urlPartial/criarusuario";

@@ -26,7 +26,7 @@ class _TrailsPageState extends State<TrailsPage> {
           elevation: 0,
           centerTitle: true,
           title: const Text(
-            "Trilhas",
+            "Trilhas do Guia",
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
           ),
         ),

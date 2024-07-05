@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
             
                                   if (posts!.isEmpty) {
                                     return const Center(
-                                        child: Text("Nada encontrado!"));
+                                        child: Text("Nenhum post encontrado!"));
                                   }
             
                                   return Row(
@@ -131,7 +131,7 @@ class _HomePageState extends State<HomePage> {
                       
                                   if (trails!.isEmpty) {
                                     return const Center(
-                                        child: Text("Nada encontrado!"));
+                                        child: Text("Nenhuma trilha encontrada!"));
                                   }
                       
                                   if (controller.error != null) {
@@ -172,7 +172,7 @@ class _HomePageState extends State<HomePage> {
                       }
                 
                       if(controller.posts!.isEmpty){
-                        return const Center(child: Text("Nada encontrado"));
+                        return Container();
                       }
                 
                       return Column(

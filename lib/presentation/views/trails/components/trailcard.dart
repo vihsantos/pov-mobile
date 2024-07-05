@@ -43,9 +43,8 @@ class _TrailCardState extends State<TrailCard> {
                 builder: (context) => TrailDetailsPage(id: widget.trilha.id!)));
       },
       child: Container(
-        margin: const EdgeInsets.all(10),
         width: size.width * 0.92,
-        height: size.height * 0.38,
+        height: size.height * 0.33,
         decoration: BoxDecoration(
           color: ColorPallete.bgItemColor,
           borderRadius: BorderRadius.circular(10),

@@ -22,7 +22,7 @@ class RegisterPageController {
 
   Set<AreaAtuacao> filters = <AreaAtuacao>{};
 
-  Future cadastrarUsuario() async {
+  Future<bool> cadastrarUsuario() async {
     try {
       if (filters.isNotEmpty) {
         String dados = "";
@@ -34,10 +34,19 @@ class RegisterPageController {
         usuario.areatuacao = dados;
       }
 
-      await repository.criarUsuario(usuario);
+      bool? cadastrou = await repository.criarUsuario(usuario);
+
+      if(cadastrou != null) {
+        return cadastrou;
+      } else {
+        return false;
+      }
+
     } on ApplicationError catch (e) {
       _error = e;
+      return false;
     }
+
   }
 
   Future<List<MunicipioDTO?>?> listarMunicipiosPorUF(String uf) async {

@@ -24,6 +24,7 @@ class PageTwo extends StatefulWidget {
 class _PageTwoState extends State<PageTwo> {
   @override
   Widget build(BuildContext context) {
+    final ScrollController controller = ScrollController();
     Size size = MediaQuery.of(context).size;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -39,114 +40,106 @@ class _PageTwoState extends State<PageTwo> {
         SizedBox(
           width: size.width,
           height: size.height * 0.64,
-          child: PageView(
-            children: [
-              SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Column(
-                  children: [
-                    InputField(
-                        label: "Estado",
-                        child: DropdownMenu<String>(
-                          requestFocusOnTap: true,
-                          onSelected: (value) {
-                            widget.controller.usuario.estado = value;
-                          },
-                          enableSearch: true,
-                          menuStyle: const MenuStyle(
-                            backgroundColor: MaterialStatePropertyAll<Color>(
-                                ColorPallete.bgItemColor),
-                          ),
-                          inputDecorationTheme: const InputDecorationTheme(
-                            border: InputBorder.none,
-                          ),
-                          width: size.width * 0.9,
-                          menuHeight: 200,
-                          dropdownMenuEntries: Utils.listarUFs().map((String uf) {
-                            return DropdownMenuEntry<String>(
-                                value: uf, label: uf);
-                          }).toList(),
-                        )),
-                    InputField(
-                        label: "Municipio",
-                        child: widget.controller.usuario.estado == null
-                            ? Container()
-                            : FutureBuilder<List<MunicipioDTO?>?>(
-                                future: widget.controller.listarMunicipiosPorUF(
-                                    widget.controller.usuario.estado!),
-                                builder: (BuildContext context,
-                                    AsyncSnapshot snapshot) {
-                                  if (!snapshot.hasData) {
-                                    return const Center(
-                                        child: CircularProgressIndicator());
-                                  }
-                                  List<MunicipioDTO>? dados = snapshot.data;
-                          
-                                  if (dados != null) {
-                                    return DropdownMenu<MunicipioDTO>(
-                                        onSelected: (value) {
-                                          widget.controller.usuario.municipio =
-                                              value!.nome;
-                                        },
-                                        requestFocusOnTap: true,
-                                        enableSearch: true,
-                                        menuStyle: const MenuStyle(
-                                          backgroundColor:
-                                              MaterialStatePropertyAll<Color>(
-                                                  ColorPallete.bgItemColor),
-                                        ),
-                                        inputDecorationTheme:
-                                            const InputDecorationTheme(
-                                          border: InputBorder.none,
-                                        ),
-                                        width: size.width * 0.9,
-                                        menuHeight: 200,
-                                        dropdownMenuEntries:
-                                            dados.map((MunicipioDTO municipio) {
-                                          return DropdownMenuEntry<MunicipioDTO>(
-                                              value: municipio,
-                                              label: municipio.nome!);
-                                        }).toList());
-                                  }
-                          
-                                  return Container();
-                                })),
-                    InputField(
-                      label: "Área de Atuação",
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Wrap(
-                          spacing: 2.0,
-                          children: AreaAtuacao.values.map((AreaAtuacao area) {
-                            return FilterChip(
-                              label: Text(
-                                area.descricao,
-                                maxLines: 2,
-                              ),
-                              selected: widget.controller.filters.contains(area),
-                              onSelected: (bool selected) {
-                                setState(() {
-                                  if (selected) {
-                                    widget.controller.filters.add(area);
-                                  } else {
-                                    widget.controller.filters.remove(area);
-                                  }
-                                });
-                              },
-                            );
-                          }).toList(),
+          child: Scrollbar(
+            thumbVisibility: true,
+            controller: controller,
+            child: SingleChildScrollView(
+              controller: controller,
+              child: Column(
+                children: [
+                  InputField(
+                      label: "Estado",
+                      child: DropdownMenu<String>(
+                        requestFocusOnTap: true,
+                        onSelected: (value) {
+                          widget.controller.usuario.estado = value;
+                        },
+                        enableSearch: true,
+                        menuStyle: const MenuStyle(
+                          backgroundColor: MaterialStatePropertyAll<Color>(
+                              ColorPallete.bgItemColor),
                         ),
+                        inputDecorationTheme: const InputDecorationTheme(
+                          border: InputBorder.none,
+                        ),
+                        width: size.width * 0.9,
+                        menuHeight: 200,
+                        dropdownMenuEntries: Utils.listarUFs().map((String uf) {
+                          return DropdownMenuEntry<String>(
+                              value: uf, label: uf);
+                        }).toList(),
+                      )),
+                  InputField(
+                      label: "Municipio",
+                      child: widget.controller.usuario.estado == null
+                          ? Container()
+                          : FutureBuilder<List<MunicipioDTO?>?>(
+                              future: widget.controller.listarMunicipiosPorUF(
+                                  widget.controller.usuario.estado!),
+                              builder: (BuildContext context,
+                                  AsyncSnapshot snapshot) {
+                                if (!snapshot.hasData) {
+                                  return const Center(
+                                      child: CircularProgressIndicator());
+                                }
+                                List<MunicipioDTO>? dados = snapshot.data;
+              
+                                if (dados != null) {
+                                  return DropdownMenu<MunicipioDTO>(
+                                      onSelected: (value) {
+                                        widget.controller.usuario.municipio =
+                                            value!.nome;
+                                      },
+                                      requestFocusOnTap: true,
+                                      enableSearch: true,
+                                      menuStyle: const MenuStyle(
+                                        backgroundColor:
+                                            MaterialStatePropertyAll<Color>(
+                                                ColorPallete.bgItemColor),
+                                      ),
+                                      inputDecorationTheme:
+                                          const InputDecorationTheme(
+                                        border: InputBorder.none,
+                                      ),
+                                      width: size.width * 0.9,
+                                      menuHeight: 200,
+                                      dropdownMenuEntries:
+                                          dados.map((MunicipioDTO municipio) {
+                                        return DropdownMenuEntry<MunicipioDTO>(
+                                            value: municipio,
+                                            label: municipio.nome!);
+                                      }).toList());
+                                }
+              
+                                return Container();
+                              })),
+                  InputField(
+                    label: "Área de Atuação",
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Wrap(
+                        spacing: 2.0,
+                        children: AreaAtuacao.values.map((AreaAtuacao area) {
+                          return FilterChip(
+                            label: Text(
+                              area.descricao,
+                              maxLines: 2,
+                            ),
+                            selected: widget.controller.filters.contains(area),
+                            onSelected: (bool selected) {
+                              setState(() {
+                                if (selected) {
+                                  widget.controller.filters.add(area);
+                                } else {
+                                  widget.controller.filters.remove(area);
+                                }
+                              });
+                            },
+                          );
+                        }).toList(),
                       ),
                     ),
-                    const Text(
-                      "Arraste para o lado >>",
-                      style: TextStyle(color: Colors.grey),
-                    )
-                  ],
-                ),
-              ),
-              Column(
-                children: [
+                  ),
                   InputField(
                     label: 'Numero do Cadastur',
                     child: Padding(
@@ -164,7 +157,7 @@ class _PageTwoState extends State<PageTwo> {
                     ),
                   ),
                   InputField(
-                    label: 'Data de Vencimento',
+                    label: 'Data de Vencimento Cadastur',
                     child: Padding(
                       padding: const EdgeInsets.only(
                           left: 15, right: 15, top: 10, bottom: 10),
@@ -176,7 +169,7 @@ class _PageTwoState extends State<PageTwo> {
                               initialDate: DateTime.now(),
                               firstDate: DateTime.now(),
                               lastDate: DateTime(DateTime.now().year + 10));
-          
+              
                           if (date != null) {
                             setState(() {
                               widget.controller.usuario.data_vencimento = date;
@@ -200,7 +193,7 @@ class _PageTwoState extends State<PageTwo> {
                   ButtonNext(onTap: widget.onTap)
                 ],
               ),
-            ],
+            ),
           ),
         ),
       ],
