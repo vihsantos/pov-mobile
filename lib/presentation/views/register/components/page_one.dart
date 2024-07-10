@@ -22,6 +22,7 @@ class PageOne extends StatefulWidget {
 class _PageOneState extends State<PageOne> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -32,7 +33,13 @@ class _PageOneState extends State<PageOne> {
               fontWeight: FontWeight.w500,
               color: ColorPallete.primaryColor),
         ),
-        InputField(
+        SizedBox(
+          width: size.width,
+          height: size.height * 0.64,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              InputField(
           label: 'Nome',
           child: Padding(
             padding:
@@ -128,6 +135,11 @@ class _PageOneState extends State<PageOne> {
           ],
         ),
         ButtonNext(onTap: widget.onTap)
+            ],
+          ),
+        ),
+          )
+        
       ],
     );
   }

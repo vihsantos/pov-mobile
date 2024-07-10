@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:http/http.dart';
 import 'package:pov/dto/infoguide_dto.dart';
 import 'package:pov/dto/novousuario_dto.dart';

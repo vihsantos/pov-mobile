@@ -83,6 +83,7 @@ class CardPost extends StatelessWidget {
                       children: [
                         Row(
                           children: [
+                            post.user!.profile != null ?
                             ClipRRect(
                               borderRadius: BorderRadius.circular(40),
                               child: SizedBox(
@@ -92,6 +93,15 @@ class CardPost extends StatelessWidget {
                                     post.user!.profile!,
                                     fit: BoxFit.cover,
                                   )),
+                            )
+                            : Container(
+                              width: 60,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(40),
+                                color: ColorPallete.bgItemColor
+                              ),
+                              child: const Center(child: Icon(Icons.person, size: 38, color: ColorPallete.bottomUnselectedColor,)),
                             ),
                             const SizedBox(
                               width: 10,

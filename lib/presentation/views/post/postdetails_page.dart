@@ -79,13 +79,32 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Container(
-                                  height: size.height * 0.074,
-                                  width: size.width * 0.16,
-                                  decoration: BoxDecoration(
-                                      color: Colors.pink,
-                                      borderRadius: BorderRadius.circular(50)),
-                                ),
+                                post.user!.profile != null
+                                    ? ClipRRect(
+                                        borderRadius: BorderRadius.circular(40),
+                                        child: SizedBox(
+                                            width: 80,
+                                            height: 80,
+                                            child: Image.network(
+                                              post.user!.profile!,
+                                              fit: BoxFit.cover,
+                                            )),
+                                      )
+                                    : Container(
+                                        width: 80,
+                                        height: 80,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(40),
+                                            color: ColorPallete.bgItemColor),
+                                        child: const Center(
+                                            child: Icon(
+                                          Icons.person,
+                                          size: 38,
+                                          color: ColorPallete
+                                              .bottomUnselectedColor,
+                                        )),
+                                      ),
                                 const SizedBox(
                                   width: 10,
                                 ),
@@ -328,8 +347,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.white),
                             child: Row(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(

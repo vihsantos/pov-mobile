@@ -21,7 +21,6 @@ class NewPostButton extends StatelessWidget {
       child: Container(
           width: size.width,
           margin: const EdgeInsets.only(bottom: 10),
-          height: 70,
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
               color: const Color(0xFFF8F8F8),
@@ -36,12 +35,13 @@ class NewPostButton extends StatelessWidget {
             children: [
               Text(
                 "Heeey! Que tal criar um post?",
+                maxLines: 2,
                 style: TextStyle(
                     color: ColorPallete.primaryColor,
                     fontWeight: FontWeight.w600,
                     fontSize: 16),
               ),
-              Text("Clique aqui e compartilhe conosco uma experiência!", style: TextStyle(color: ColorPallete.labelColor),)
+              Text("Clique aqui e compartilhe conosco uma experiência!", maxLines:2, style : TextStyle(color: ColorPallete.labelColor),)
             ],
           )),
     );
