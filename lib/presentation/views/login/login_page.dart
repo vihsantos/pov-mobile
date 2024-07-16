@@ -85,6 +85,48 @@ class _LoginPageState extends State<LoginPage> {
                             hintText: "Digite sua senha"),
                       ),
                     )),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15),
+                  child: Row(
+                    children: [
+                      const Text("Esqueceu a senha?"),
+                      TextButton(
+                          onPressed: () async {
+                            return showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    content: SizedBox(
+                                      height: size.height * .4,
+                                      child: const Column(
+                                        children: [
+                                          Text("Troque sua senha",
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold)),
+                                          InputField(
+                                              label: "Nome de usuário",
+                                              child: TextField(
+                                                  decoration: InputDecoration(
+                                                      hintStyle: TextStyle(
+                                                          fontStyle:
+                                                              FontStyle.italic),
+                                                      enabledBorder:
+                                                          InputBorder.none,
+                                                      focusedBorder:
+                                                          InputBorder.none,
+                                                      hintText:
+                                                          "Digite seu nome de usuário")))
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                });
+                          },
+                          child: const Text("Clique aqui!"))
+                    ],
+                  ),
+                ),
                 InkWell(
                   onTap: () async {
                     var dado = await controller.logar();

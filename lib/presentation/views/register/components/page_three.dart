@@ -41,7 +41,7 @@ class _PageThreeState extends State<PageThree> {
           child: Column(
             children: [
               InputField(
-                label: 'Username',
+                label: 'Nome de usuário',
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 15, right: 15, top: 10, bottom: 10),

@@ -15,7 +15,7 @@ class HeaderRegister extends StatelessWidget {
         const SizedBox(height: 10),
         Image.asset(
           "asset/img/testelogo.png",
-          height: size.height * 0.12,
+          height: size.height * 0.10,
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),
