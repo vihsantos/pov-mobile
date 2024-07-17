@@ -83,8 +83,8 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                     ? ClipRRect(
                                         borderRadius: BorderRadius.circular(40),
                                         child: SizedBox(
-                                            width: 80,
-                                            height: 80,
+                                            width: size.width * 0.15,
+                                            height: size.height * 0.076,
                                             child: Image.network(
                                               post.user!.profile!,
                                               fit: BoxFit.cover,

@@ -38,7 +38,6 @@ class _SearchState extends State<Search> {
         body: OpenStreetMapSearchAndPick(
       buttonTextStyle:
           const TextStyle(fontSize: 18, fontStyle: FontStyle.normal),
-      center: LatLong(location!.latitude, location!.longitude),
       buttonColor: Colors.blue,
       buttonText: 'Escolha a sua localização atual',
       onPicked: (pickedData) {

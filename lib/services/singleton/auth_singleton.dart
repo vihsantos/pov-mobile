@@ -67,6 +67,6 @@ class AuthSingleton {
 
     final locationData = await location.getLocation();
 
-    _localization = LatLng(locationData.latitude!, locationData.longitude!);
+    _localization = LatLng.degree(locationData.latitude!, locationData.longitude!);
   }
 }
