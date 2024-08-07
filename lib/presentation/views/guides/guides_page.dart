@@ -104,7 +104,7 @@ class _GuidesPageState extends State<GuidesPage> {
                           },
                           enableSearch: true,
                           menuStyle: const MenuStyle(
-                            backgroundColor: MaterialStatePropertyAll<Color>(
+                            backgroundColor: WidgetStatePropertyAll<Color>(
                                 ColorPallete.bgItemColor),
                           ),
                           inputDecorationTheme: const InputDecorationTheme(
@@ -144,7 +144,7 @@ class _GuidesPageState extends State<GuidesPage> {
                                         enableSearch: true,
                                         menuStyle: const MenuStyle(
                                           backgroundColor:
-                                              MaterialStatePropertyAll<Color>(
+                                              WidgetStatePropertyAll<Color>(
                                                   ColorPallete.bgItemColor),
                                         ),
                                         inputDecorationTheme:

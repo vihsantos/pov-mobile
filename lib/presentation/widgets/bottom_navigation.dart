@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, must_be_immutable
 import 'package:flutter/material.dart';
-
 import 'package:pov/repository/login_repository.dart';
 import 'package:pov/services/core/colorpallete.dart';
 import 'package:pov/services/singleton/auth_singleton.dart';
@@ -12,12 +11,10 @@ import '../views/ranking/ranking_page.dart';
 
 class BottomNavigation extends StatefulWidget {
   int itemSelecionado;
-  Function trocaIndex;
 
   BottomNavigation({
     Key? key,
     required this.itemSelecionado,
-    required this.trocaIndex,
   }) : super(key: key);
 
   @override
@@ -49,13 +46,19 @@ class _BottomNavigationState extends State<BottomNavigation> {
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
         ...List.generate(
             itensButtons.length,
-            (index) => GestureDetector(
-                onTap: () => widget.trocaIndex,
-                child: ItemBottom(
-                  icon: itensButtons[index].icon,
-                  text: itensButtons[index].text,
-                  selecionado: widget.itemSelecionado == index,
-                )))
+            (index) => InkWell(
+              onTap: () {
+                print(index);
+                setState(() {
+                  widget.itemSelecionado = index;
+                });
+              },
+              child: ItemBottom(
+                icon: itensButtons[index].icon,
+                text: itensButtons[index].text,
+                selecionado: widget.itemSelecionado == index,
+              ),
+            ))
       ]),
     ));
   }

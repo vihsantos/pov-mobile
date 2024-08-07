@@ -56,7 +56,7 @@ class _PageTwoState extends State<PageTwo> {
                         },
                         enableSearch: true,
                         menuStyle: const MenuStyle(
-                          backgroundColor: MaterialStatePropertyAll<Color>(
+                          backgroundColor: WidgetStatePropertyAll<Color>(
                               ColorPallete.bgItemColor),
                         ),
                         inputDecorationTheme: const InputDecorationTheme(
@@ -94,7 +94,7 @@ class _PageTwoState extends State<PageTwo> {
                                       enableSearch: true,
                                       menuStyle: const MenuStyle(
                                         backgroundColor:
-                                            MaterialStatePropertyAll<Color>(
+                                            WidgetStatePropertyAll<Color>(
                                                 ColorPallete.bgItemColor),
                                       ),
                                       inputDecorationTheme:

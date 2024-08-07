@@ -8,6 +8,7 @@ import 'package:pov/presentation/views/profile/profile_page.dart';
 import 'package:pov/presentation/views/ranking/ranking_page.dart';
 import 'package:pov/presentation/widgets/bottom_navigation.dart';
 import 'package:pov/repository/login_repository.dart';
+import 'package:pov/services/core/colorpallete.dart';
 import 'package:pov/services/singleton/auth_singleton.dart';
 
 // ignore: must_be_immutable
@@ -62,18 +63,10 @@ class _InitPageState extends State<InitPage> {
           }
         },
         child: Scaffold(
-            bottomNavigationBar: BottomNavigation(
-              trocaIndex: (index) {
-                setState(() {
-                  _indiceAtual = index;
-                });
-              },
-              itemSelecionado: _indiceAtual!,
-            ),
+            bottomNavigationBar: bottomnavigation(),
             body: PageView(
               controller: pageController,
               onPageChanged: (index) {
-                // ignore: avoid_print
                 setState(() {
                   _indiceAtual = index;
                 });
@@ -89,5 +82,58 @@ class _InitPageState extends State<InitPage> {
             )),
       ),
     );
+  }
+
+  Widget bottomnavigation(){
+    Size size = MediaQuery.of(context).size;
+    return SafeArea(
+        child: Container(
+      width: size.width,
+      height: size.height * 0.085,
+      margin: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+          color: ColorPallete.bgItemColor,
+          borderRadius: BorderRadius.circular(10)),
+      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+        ...List.generate(
+            itensButtons.length,
+            (index) => InkWell(
+              onTap: () {
+                print(index);
+                setState(() {
+                   _indiceAtual = index;
+                   animatePage(_indiceAtual!);
+                });
+                
+              },
+              child: ItemBottom(
+                icon: itensButtons[index].icon,
+                text: itensButtons[index].text,
+                selecionado: _indiceAtual == index,
+              ),
+            ))
+      ]),
+    ));
+  }
+
+  List<ItemDataButton> itensButtons = [
+    ItemDataButton(
+      icon: Icons.dashboard,
+      text: 'Home',
+    ),
+    ItemDataButton(
+      icon: Icons.person_search,
+      text: 'Guias',
+    ),
+    ItemDataButton(icon: Icons.onetwothree, text: "Ranking"),
+    ItemDataButton(
+      icon: Icons.account_circle,
+      text: 'Perfil',
+    )
+  ];
+
+  void animatePage(int index) {
+    pageController!.animateToPage(index,
+        duration: Duration(milliseconds: 200), curve: Curves.bounceInOut);
   }
 }

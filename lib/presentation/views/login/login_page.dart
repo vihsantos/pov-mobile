@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pov/presentation/views/init_page.dart';
+import 'package:pov/presentation/views/register/components/button_next.dart';
+import 'package:pov/presentation/views/register/components/button_salvar.dart';
+import 'package:pov/services/core/colorpallete.dart';
 import 'package:pov/services/singleton/auth_singleton.dart';
 import '../../../repository/login_repository.dart';
 import '../../controllers/loginpage_controller.dart';
@@ -23,6 +26,8 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
+    PageController controllerEsqueciSenha = PageController(initialPage: 0);
 
     return SafeArea(
       child: Scaffold(
@@ -94,34 +99,175 @@ class _LoginPageState extends State<LoginPage> {
                           onPressed: () async {
                             return showDialog(
                                 context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    content: SizedBox(
-                                      height: size.height * .4,
-                                      child: const Column(
-                                        children: [
-                                          Text("Troque sua senha",
-                                              style: TextStyle(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold)),
-                                          InputField(
-                                              label: "Nome de usuário",
-                                              child: TextField(
-                                                  decoration: InputDecoration(
-                                                      hintStyle: TextStyle(
-                                                          fontStyle:
-                                                              FontStyle.italic),
-                                                      enabledBorder:
-                                                          InputBorder.none,
-                                                      focusedBorder:
-                                                          InputBorder.none,
-                                                      hintText:
-                                                          "Digite seu nome de usuário")))
-                                        ],
+                                builder: (context) => AlertDialog(
+                                      content: SizedBox(
+                                        height: size.height * .40,
+                                        child: Column(
+                                          children: [
+                                            Text("Troque sua senha",
+                                                style: TextStyle(
+                                                    fontSize: 19,
+                                                    fontWeight:
+                                                        FontWeight.bold)),
+                                            SizedBox(height: 30),
+                                            SizedBox(
+                                              height: size.height * .32,
+                                              width: size.width,
+                                              child: PageView(
+                                                physics: const NeverScrollableScrollPhysics(),
+                                                controller:
+                                                    controllerEsqueciSenha,
+                                                children: [
+                                                  Column(
+                                                    children: [
+                                                      InputField(
+                                                          label:
+                                                              "Nome de usuário",
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    left: 10),
+                                                            child: TextField(
+                                                                onChanged: (value) =>
+                                                                    controller
+                                                                        .username = value,
+                                                                decoration: InputDecoration(
+                                                                    hintStyle: TextStyle(
+                                                                        fontStyle:
+                                                                            FontStyle
+                                                                                .italic),
+                                                                    enabledBorder:
+                                                                        InputBorder
+                                                                            .none,
+                                                                    focusedBorder:
+                                                                        InputBorder
+                                                                            .none,
+                                                                    hintText:
+                                                                        "Digite seu nome de usuário...")),
+                                                          )),
+                                                      InputField(
+                                                          label: "Email",
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    left: 10),
+                                                            child: TextField(
+                                                                onChanged: (value) =>
+                                                                    controller
+                                                                        .email = value,
+                                                                decoration: InputDecoration(
+                                                                    hintStyle: TextStyle(
+                                                                        fontStyle:
+                                                                            FontStyle
+                                                                                .italic),
+                                                                    enabledBorder:
+                                                                        InputBorder
+                                                                            .none,
+                                                                    focusedBorder:
+                                                                        InputBorder
+                                                                            .none,
+                                                                    hintText:
+                                                                        "Digite seu email...")),
+                                                          )),
+                                                      ButtonNext(onTap: () {
+                                                        controller.trocarSenhaParteUm();
+
+                                                        if (controller.userId ==
+                                                            0) {
+                                                          showDialog(
+                                                              context: context,
+                                                              builder:
+                                                                  (context) {
+                                                                return const AlertDialog(
+                                                                  title: Text(
+                                                                    "Usuário não encontrado",
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            14,
+                                                                        color: ColorPallete
+                                                                            .labelColor,
+                                                                        fontWeight:
+                                                                            FontWeight.bold),
+                                                                  ),
+                                                                );
+                                                              });
+                                                          return;
+                                                        }
+
+                                                        controllerEsqueciSenha.jumpToPage(1);
+                                                      })
+                                                    ],
+                                                  ),
+                                                  Column(
+                                                    children: [
+                                                      InputField(
+                                                          label: "Senha",
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    left: 10),
+                                                            child: TextField(
+                                                              onChanged: (value) => controller.senha = value,
+                                                                obscureText:
+                                                                    isObscure,
+                                                                decoration: InputDecoration(
+                                                                    hintStyle: TextStyle(
+                                                                        fontStyle:
+                                                                            FontStyle
+                                                                                .italic),
+                                                                    enabledBorder:
+                                                                        InputBorder
+                                                                            .none,
+                                                                    focusedBorder:
+                                                                        InputBorder
+                                                                            .none,
+                                                                    hintText:
+                                                                        "Digite sua nova senha...")),
+                                                          )),
+                                                      ButtonSalvar(onTap: () async {
+                                                        bool mudou = await controller.trocarSenhaParteDois();
+
+                                                        if(!mudou){
+                                                          showDialog(
+                                                              context: context,
+                                                              builder:
+                                                                  (context) {
+                                                                return const AlertDialog(
+                                                                  title: Text(
+                                                                    "Não foi possível trocar a senha",
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            14,
+                                                                        color: ColorPallete
+                                                                            .labelColor,
+                                                                        fontWeight:
+                                                                            FontWeight.bold),
+                                                                  ),
+                                                                );
+                                                              });
+                                                          return;
+                                                        }
+
+                                                        controllerEsqueciSenha.jumpToPage(0);
+                                                        
+                                                        // ignore: use_build_context_synchronously
+                                                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                                            content: Text("Senha alterada com sucesso!")));
+                                                        // ignore: use_build_context_synchronously
+                                                        Navigator.of(context).pop();
+                                                      })
+                                                    ],
+                                                  )
+                                                ],
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                });
+                                    ));
                           },
                           child: const Text("Clique aqui!"))
                     ],

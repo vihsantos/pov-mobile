@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pov/presentation/controllers/registerpage_controller.dart';
+import 'package:pov/presentation/views/register/components/button_salvar.dart';
 import 'package:pov/presentation/widgets/input_field.dart';
 import 'package:pov/services/core/colorpallete.dart';
 
@@ -90,75 +91,45 @@ class _PageThreeState extends State<PageThree> {
                   ),
                 ),
               ),
-              InkWell(
-                onTap: () async {
-                  var dados = widget.controller.usuario;
+              ButtonSalvar(onTap: () async {
+                var dados = widget.controller.usuario;
 
-                        bool dadosNaoPreenchidos = dados.username == null ||
-                            dados.password == null;
+                bool dadosNaoPreenchidos =
+                    dados.username == null || dados.password == null;
 
-                        if (dadosNaoPreenchidos) {
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return const AlertDialog(
-                                  title: Text(
-                                    "Você precisa preencher todos os dados da tela para seguir para cadastrar o usuário.",
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        color: ColorPallete.labelColor,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                );
-                              });
-                          return;
-                        }
+                if (dadosNaoPreenchidos) {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return const AlertDialog(
+                          title: Text(
+                            "Você precisa preencher todos os dados da tela para seguir para cadastrar o usuário.",
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: ColorPallete.labelColor,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        );
+                      });
+                  return;
+                }
 
-                  bool cadastrado = await widget.controller.cadastrarUsuario();
+                bool cadastrado = await widget.controller.cadastrarUsuario();
 
-                  if(cadastrado){
-                    // ignore: use_build_context_synchronously
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text("Usuário cadastrado com sucesso!")));
-                    // ignore: use_build_context_synchronously
-                    Navigator.of(context).pop();
-                  } else {
-                    // ignore: use_build_context_synchronously
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text("Não foi possível cadastrar usuário!")));
-                    // ignore: use_build_context_synchronously
-                    Navigator.of(context).pop();
-                  }
-                },
-                child: Container(
-                  margin: const EdgeInsets.all(15),
-                  width: size.width,
-                  height: 60,
-                  decoration: const BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                            offset: Offset(0, 4),
-                            blurRadius: 4,
-                            color: Color.fromARGB(55, 116, 116, 116))
-                      ],
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomLeft,
-                          colors: [
-                            Color.fromARGB(255, 112, 232, 96),
-                            Color.fromARGB(255, 180, 232, 97)
-                          ])),
-                  child: const Center(
-                      child: Text(
-                    "Salvar",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600),
-                  )),
-                ),
-              )
+                if (cadastrado) {
+                  // ignore: use_build_context_synchronously
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text("Usuário cadastrado com sucesso!")));
+                  // ignore: use_build_context_synchronously
+                  Navigator.of(context).pop();
+                } else {
+                  // ignore: use_build_context_synchronously
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text("Não foi possível cadastrar usuário!")));
+                  // ignore: use_build_context_synchronously
+                  Navigator.of(context).pop();
+                }
+              })
             ],
           ),
         )

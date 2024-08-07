@@ -54,17 +54,15 @@ class _RegisterPageState extends State<RegisterPage> {
                     PageOne(
                       controller: registerController,
                       onTap: () {
+
                         var dados = registerController.usuario;
+
+                        
 
                         bool dadosNaoPreenchidos = dados.nome == null ||
                             dados.email == null ||
                             dados.data_nascimento == null ||
                             dados.guide == null;
-
-                        // bool dadosNaoPreenchidos = dados.estado == null ||
-                        //     dados.municipio == null ||
-                        //     dados.areatuacao == null ||
-                        //     dados.data_vencimento == null;
 
                         if (dadosNaoPreenchidos) {
                           showDialog(
@@ -73,6 +71,26 @@ class _RegisterPageState extends State<RegisterPage> {
                                 return const AlertDialog(
                                   title: Text(
                                     "Você precisa preencher todos os dados da tela para seguir para a próxima etapa.",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        color: ColorPallete.labelColor,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                );
+                              });
+                          return;
+                        }
+
+                        bool emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                          .hasMatch(dados.email!);
+
+                        if(!emailValid){
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return const AlertDialog(
+                                  title: Text(
+                                    "Informe um email válido.",
                                     style: TextStyle(
                                         fontSize: 16,
                                         color: ColorPallete.labelColor,
