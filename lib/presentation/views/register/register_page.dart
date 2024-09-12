@@ -45,7 +45,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 height: size.height * 0.69,
                 margin: const EdgeInsets.all(15),
                 decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 229, 229, 243),
+                    color: Color.fromARGB(255, 235, 235, 235),
                     borderRadius: BorderRadius.all(Radius.circular(10))),
                 child: PageView(
                   physics: const NeverScrollableScrollPhysics(),

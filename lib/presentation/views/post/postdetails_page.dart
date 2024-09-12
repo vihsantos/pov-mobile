@@ -31,6 +31,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
+    bool postJaCurtido = false;
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -155,7 +156,11 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                       color: ColorPallete.bgItemColor,
                                       borderRadius: BorderRadius.circular(10)),
                                   child: InkWell(
-                                    onTap: () {},
+                                    onTap: () {
+                                      setState(() {
+                                        postJaCurtido = !postJaCurtido;
+                                      });
+                                    },
                                     child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
@@ -165,7 +170,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                         SizedBox(
                                             height: 30,
                                             child: Image.asset(
-                                                Utils.voounselected)),
+                                                postJaCurtido? Utils.vooselected : Utils.voounselected)),
                                         Text(
                                           "${post.voos!.length}",
                                           style: const TextStyle(

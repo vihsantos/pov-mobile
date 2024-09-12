@@ -8,13 +8,15 @@ class InfoGuideDTO {
   String? areaatuacao;
   String? estado;
   String? municipio;
+  String? contato;
   
   InfoGuideDTO({
     this.cod_cadastur,
     this.data_vencimento,
     this.areaatuacao,
     this.estado,
-    this.municipio
+    this.municipio,
+    this.contato
   });
 
   Map<String, dynamic> toMap() {
@@ -23,7 +25,8 @@ class InfoGuideDTO {
       'data_vencimento': data_vencimento?.millisecondsSinceEpoch,
       'areaatuacao': areaatuacao,
       'estado': estado,
-      'municipio': municipio
+      'municipio': municipio,
+      'contato': contato
     };
   }
 
@@ -34,6 +37,7 @@ class InfoGuideDTO {
       areaatuacao: map['areaatuacao'] != null ? map['areaatuacao'] as String : null,
       estado: map['estado'] != null ? map['estado'] as String : null,
       municipio: map['municipio'] != null ? map['municipio'] as String : null,
+      contato: map['contato'] != null ? map['contato'] as String : null,
     );
   }
 

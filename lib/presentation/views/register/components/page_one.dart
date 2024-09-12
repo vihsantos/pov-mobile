@@ -99,7 +99,7 @@ class _PageOneState extends State<PageOne> {
         const Padding(
           padding: EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 10),
           child: Text(
-            "Você é guia turístico?",
+            "Você é guia de turismo?",
             style: TextStyle(
                 color: Color(0xFF393434),
                 fontSize: 18,

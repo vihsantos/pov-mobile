@@ -20,11 +20,16 @@ class _NewPostPageState extends State<NewPostPage> {
       NewPostPageController(repository: PostRepository());
   int value = 0;
 
+  @override
+  void initState() {
+    super.initState();
+  }
+
   List<File> files = [];
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
+    bool postEnviado = false;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -103,13 +108,13 @@ class _NewPostPageState extends State<NewPostPage> {
               ),
               controller.novoPost.localization != null
                   ? InputField(
-                    label: "Localização",
-                    child: Padding(
-                      padding: const EdgeInsets.all(15),
-                      child: Text(controller.novoPost.localization!.local!,
-                          maxLines: 2),
-                    ),
-                  )
+                      label: "Localização",
+                      child: Padding(
+                        padding: const EdgeInsets.all(15),
+                        child: Text(controller.novoPost.localization!.local!,
+                            maxLines: 2),
+                      ),
+                    )
                   : InputField(
                       label: 'Localização',
                       child: Padding(
@@ -123,7 +128,13 @@ class _NewPostPageState extends State<NewPostPage> {
                                           controller: controller,
                                         )));
                           },
-                          child: const Text("Search", style: TextStyle(color: ColorPallete.labelColor, fontSize: 16, fontWeight: FontWeight.w500),),
+                          child: const Text(
+                            "Search",
+                            style: TextStyle(
+                                color: ColorPallete.labelColor,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500),
+                          ),
                         ),
                       ),
                     ),
@@ -232,14 +243,23 @@ class _NewPostPageState extends State<NewPostPage> {
               InkWell(
                 onTap: () async {
                   controller.novoPost.stars = value;
-                  bool enviou = await controller.enviarImagem(files[0]) as bool;
-                  if (!mounted) return;
 
-                  if (enviou) {
-                    // ignore: use_build_context_synchronously
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text("Post salvo com sucesso!")));
-                    // ignore: use_build_context_synchronously
+                  if (!postEnviado) {
+                    bool enviou =
+                        await controller.enviarImagem(files[0]) as bool;
+                    if (!mounted) return;
+
+                    if (enviou) {
+                      // ignore: use_build_context_synchronously
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text("Post salvo com sucesso!")));
+                      // ignore: use_build_context_synchronously
+                      Navigator.of(context).pop();
+                      setState(() {
+                        postEnviado = true;
+                      });
+                    }
+                  } else {
                     Navigator.of(context).pop();
                   }
                 },

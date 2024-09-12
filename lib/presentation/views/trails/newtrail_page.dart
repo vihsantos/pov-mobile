@@ -21,8 +21,14 @@ class _NewTrailPageState extends State<NewTrailPage> {
   Set<AreaAtuacao> filters = <AreaAtuacao>{};
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    bool trilhaEnviada = false;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -201,13 +207,21 @@ class _NewTrailPageState extends State<NewTrailPage> {
 
                     controller.trailDTO.occupation = dados;
 
-                    bool enviou = await controller.enviarImagem();
+                    if(!trilhaEnviada){
+                      bool enviou = await controller.enviarImagem();
 
                     if (!mounted) return;
 
                     if (enviou) {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                           content: Text("Eba!! Trilha criada com sucesso!")));
+                      Navigator.of(context).pop();
+
+                      setState(() {
+                        trilhaEnviada = true;
+                      });
+                    }
+                    } else {
                       Navigator.of(context).pop();
                     }
                   }

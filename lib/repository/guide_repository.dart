@@ -64,4 +64,27 @@ class GuideRepository {
       throw ApplicationErrorImp(mensagem: e.toString(), statusCode: 500);
     }
   }
+
+  Future<bool> informarContato(String contato) async{
+    try{
+
+      String url = "${Routes.informarContato}"+contato;
+
+      String? token = AuthSingleton(LoginRepository()).getToken();
+
+      var response = await http.post(Uri.parse(url), headers: {
+        "content-type": "application/json",
+        "accept": "application/json",
+        'Authorization': 'Bearer $token',
+      });
+
+      if (response.statusCode == 200) {
+        return true;
+      }
+
+      return false;
+    }catch (e) {
+      throw ApplicationErrorImp(mensagem: e.toString(), statusCode: 500);
+    }
+  }
 }

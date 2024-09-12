@@ -6,6 +6,7 @@ import 'package:pov/dto/dadosperfil_dto.dart';
 import 'package:pov/dto/infoguide_dto.dart';
 import 'package:pov/models/post/postprofile_model.dart';
 import 'package:pov/repository/followers_repository.dart';
+import 'package:pov/repository/guide_repository.dart';
 import 'package:pov/repository/login_repository.dart';
 import 'package:pov/repository/post_repository.dart';
 import 'package:pov/repository/user_repository.dart';
@@ -46,6 +47,8 @@ class ProfilePageController {
   set _isFollower(bool? isFollower) => isFollowerApi.value = isFollower;
   bool? get isFollower => isFollowerApi.value;
   final isFollowerApi = ValueNotifier<bool?>(null);
+
+  String contato = "";
 
   Future<List<PostProfileModel>?> listarPosts(int id) async {
     _error = null;
@@ -127,5 +130,19 @@ class ProfilePageController {
     }
     return null;
   }
+
+
+  Future<bool> alterarContato() async{
+    _error = null;
+    try{
+      ;
+      return await GuideRepository().informarContato(contato);
+    } on ApplicationError catch (e) {
+      _error = e;
+    }
+    return false;
+  }
+
+
 
 }

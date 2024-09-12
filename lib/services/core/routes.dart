@@ -31,4 +31,5 @@ class Routes {
   static const String allPosts = "$urlPartial/allPosts";
   static const String buscarUser = "$urlPartial/findUser";
   static const String alterarSenha = "$urlPartial/alterarsenha";
+  static const String informarContato = "$urlPartial/alterarContato/";
 }

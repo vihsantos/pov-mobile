@@ -48,8 +48,18 @@ class _SearchState extends State<Search> {
 
         String pontoTuristico = "";
 
+        if(pickedData.address["amenity"] != null){
+          pontoTuristico = pickedData.address["amenity"] + ", ";
+        }
+
         if(pickedData.address["tourism"] != null){
-          pontoTuristico = pickedData.address["tourism"] + ", ";
+          
+
+          if(pontoTuristico.isEmpty){
+            pontoTuristico = pickedData.address["tourism"] + ", ";
+          } else{
+            pontoTuristico = pontoTuristico + pickedData.address["tourism"] + ", ";
+          }
         }
         
         String endereco = pickedData.address["road"] +", " + pickedData.address["city"] + ", " + pickedData.address["state"] + ", " + pickedData.address["postcode"];
