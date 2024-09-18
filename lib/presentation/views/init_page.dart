@@ -6,6 +6,7 @@ import 'package:pov/presentation/views/home/home_page.dart';
 import 'package:pov/presentation/views/introduction/introduction_page.dart';
 import 'package:pov/presentation/views/profile/profile_page.dart';
 import 'package:pov/presentation/views/ranking/ranking_page.dart';
+import 'package:pov/presentation/views/rede/rede_page.dart';
 import 'package:pov/presentation/widgets/bottom_navigation.dart';
 import 'package:pov/repository/login_repository.dart';
 import 'package:pov/services/core/colorpallete.dart';
@@ -73,6 +74,7 @@ class _InitPageState extends State<InitPage> {
               },
               children: [
                 const HomePage(),
+                const RedePage(),
                 const GuidesPage(),
                 const RankingPage(),
                 ProfilePage(
@@ -120,6 +122,10 @@ class _InitPageState extends State<InitPage> {
     ItemDataButton(
       icon: Icons.dashboard,
       text: 'Home',
+    ),
+    ItemDataButton(
+      icon: Icons.web_stories,
+      text: 'Minha Rede',
     ),
     ItemDataButton(
       icon: Icons.person_search,

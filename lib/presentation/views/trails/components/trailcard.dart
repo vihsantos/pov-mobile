@@ -52,7 +52,7 @@ class _TrailCardState extends State<TrailCard> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            const SizedBox(height: 12),
+            const SizedBox(height: 4),
             SizedBox(
               width: size.width * 0.87,
               height: 180,
@@ -61,7 +61,7 @@ class _TrailCardState extends State<TrailCard> {
                   SizedBox(
                     height: 165,
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(6),
                       child: PageView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount: urls.length,
