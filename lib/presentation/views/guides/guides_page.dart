@@ -28,6 +28,7 @@ class _GuidesPageState extends State<GuidesPage> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+          backgroundColor: ColorPallete.bgColor,
             appBar: AppBar(
               automaticallyImplyLeading: false,
               backgroundColor: Colors.transparent,

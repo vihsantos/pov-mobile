@@ -27,6 +27,7 @@ class _RankingPageState extends State<RankingPage> {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
+        backgroundColor: ColorPallete.bgColor,
         appBar: AppBar(
           scrolledUnderElevation: 0,
           automaticallyImplyLeading: false,

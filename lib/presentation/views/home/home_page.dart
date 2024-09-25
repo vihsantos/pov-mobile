@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> {
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
-                      height: 270,
+                      height: 220,
                       child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: FutureBuilder<List<PostDTO?>?>(
@@ -114,13 +114,14 @@ class _HomePageState extends State<HomePage> {
                                 return Container();
                               })),
                     ),
+                    SizedBox(height: 10),
                     const Text(
                       "Trilhas recentes",
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
-                      height: 320,
+                      height: 280,
                       child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: FutureBuilder<List<TrailDTO?>?>(

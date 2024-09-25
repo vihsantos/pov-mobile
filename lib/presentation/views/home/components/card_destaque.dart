@@ -26,7 +26,7 @@ class CardDestaque extends StatelessWidget {
         child: Stack(children: [
           Container(
             width: 180,
-            height: 260,
+            height: 220,
             decoration: BoxDecoration(
                 color: ColorPallete.bgItemColor,
                 borderRadius: BorderRadius.circular(10)),
@@ -79,16 +79,6 @@ class CardDestaque extends StatelessWidget {
                         ),
                       ),
                     ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10),
-                  child: Text(
-                    post.description!,
-                    maxLines: 1,
                   ),
                 )
               ],

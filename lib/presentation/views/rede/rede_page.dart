@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pov/presentation/controllers/redepage_controller.dart';
 import 'package:pov/presentation/widgets/card_post.dart';
 import 'package:pov/repository/post_repository.dart';
+import 'package:pov/services/core/colorpallete.dart';
 
 class RedePage extends StatefulWidget {
   const RedePage({super.key});
@@ -38,6 +39,7 @@ class _RedePageState extends State<RedePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: ColorPallete.bgColor,
         appBar: AppBar(
               scrolledUnderElevation: 0,
               automaticallyImplyLeading: false,
