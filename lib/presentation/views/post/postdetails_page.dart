@@ -23,15 +23,23 @@ class PostDetailsPage extends StatefulWidget {
 }
 
 class _PostDetailsPageState extends State<PostDetailsPage> {
+
   PostPageController controller =
       PostPageController(repository: PostRepository());
 
   CommentPageController commentController =
       CommentPageController(repository: CommentRepository());
+  
+  bool postJaCurtido = false;
+    
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    bool postJaCurtido = false;
+    
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -57,6 +65,8 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                       return const Text("Ocorreu um erro!");
                     }
 
+                    postJaCurtido = post!.voos!.any((v) => v.user_id == controller.usuarioLogado());
+
                     return Stack(
                       children: [
                         Column(
@@ -69,7 +79,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
                                 child: Image.network(
-                                  post!.image_url!,
+                                  post.image_url!,
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -156,10 +166,20 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                       color: ColorPallete.bgItemColor,
                                       borderRadius: BorderRadius.circular(10)),
                                   child: InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        postJaCurtido = !postJaCurtido;
+                                    onTap: () async {
+                                      setState((){
+                                        if(postJaCurtido) postJaCurtido = false;
+                                      else {
+                                        postJaCurtido = true;
+                                      }
                                       });
+
+                                      if(postJaCurtido){
+                                        await controller.curtirPost(widget.id);
+                                      } else{
+                                        int idVoo = post.voos!.where((v)=> v.user_id == controller.usuarioLogado()).first.id;
+                                        await controller.removerCurtidaPost(idVoo);
+                                      }
                                     },
                                     child: Column(
                                       mainAxisAlignment:
@@ -169,8 +189,9 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                       children: [
                                         SizedBox(
                                             height: 30,
-                                            child: Image.asset(
-                                                postJaCurtido? Utils.vooselected : Utils.voounselected)),
+                                            child: Image.asset(postJaCurtido
+                                                ? Utils.vooselected
+                                                : Utils.voounselected)),
                                         Text(
                                           "${post.voos!.length}",
                                           style: const TextStyle(

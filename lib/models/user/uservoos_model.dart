@@ -3,17 +3,16 @@ import 'dart:convert';
 
 class UserVoosModel {
   final int id;
-  // ignore: non_constant_identifier_names
   final int post_id;
-  final String username;
+  final int user_id;
 
-  UserVoosModel(this.id, this.post_id, this.username);
+  UserVoosModel(this.id, this.post_id, this.user_id);
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
       'post_id': post_id,
-      'username': username,
+      'user_id': user_id
     };
   }
 
@@ -21,7 +20,7 @@ class UserVoosModel {
     return UserVoosModel(
       map['id'] as int,
       map['post_id'] as int,
-      map['username'] as String,
+      map['user_id'] as int,
     );
   }
 

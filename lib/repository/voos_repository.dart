@@ -10,13 +10,29 @@ class VoosRepository{
     try {
       String? token = AuthSingleton(LoginRepository()).getToken();
 
-      var response = await http.get(Uri.parse("${Routes.following}/$postId"), headers: {
-        "content-type": "application/json",
-        "accept": "application/json",
+      var response = await http.post(Uri.parse("${Routes.addVooInPost}$postId"), headers: {
         'Authorization': 'Bearer $token',
       });
 
-      if (response.statusCode == 200) {}
+      if (response.statusCode == 200) return;
+
+      throw ApplicationErrorImp(
+          mensagem: response.reasonPhrase.toString(),
+          statusCode: response.statusCode);
+    } catch (e) {
+      throw ApplicationErrorImp(mensagem: e.toString(), statusCode: 500);
+    }
+  }
+
+  Future removeVooInPost(int postId) async {
+    try {
+      String? token = AuthSingleton(LoginRepository()).getToken();
+
+      var response = await http.delete(Uri.parse("${Routes.removeVooInPost}$postId"), headers: {
+        'Authorization': 'Bearer $token',
+      });
+
+      if (response.statusCode == 200) return;
 
       throw ApplicationErrorImp(
           mensagem: response.reasonPhrase.toString(),

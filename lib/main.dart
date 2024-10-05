@@ -17,7 +17,8 @@ class MyApp extends StatelessWidget {
       title: 'Para Onde Vou?',
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: [const Locale('pt', 'BR')],
       theme: ThemeData(
