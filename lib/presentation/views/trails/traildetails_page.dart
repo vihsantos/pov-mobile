@@ -216,89 +216,93 @@ class _TrailDetailsPageState extends State<TrailDetailsPage> {
                             ),
                             const SizedBox(width: 10),
                             Visibility(
-                                    visible: controller.isProfile(trail.user!.id!),
-                                    child: InkWell(
-                                      onTap: () async {
-                                        return showDialog(
-                                            context: context,
-                                            builder: (context) {
-                                              return AlertDialog(
-                                                content: SizedBox(
-                                                  height: 50,
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      InkWell(
-                                                        onTap: () async {
-                                                          bool excluido =
-                                                              await controller
-                                                                  .excluirTrilha(
-                                                                      widget
-                                                                          .id);
+                                visible: controller.isProfile(trail.user!.id!),
+                                child: InkWell(
+                                  onTap: () async {
+                                    return showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                            title: Text(
+                                              "Ajustes",
+                                              style: TextStyle(
+                                                  color:
+                                                      ColorPallete.labelColor,
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            content: SizedBox(
+                                              height: 50,
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  InkWell(
+                                                    onTap: () async {
+                                                      bool excluido =
+                                                          await controller
+                                                              .excluirTrilha(
+                                                                  widget.id);
 
-                                                          if (excluido) {
-                                                            ScaffoldMessenger
-                                                                    .of(context)
-                                                                .showSnackBar(
-                                                                    const SnackBar(
-                                                                        content:
-                                                                            Text("Trilha excluída com sucesso!")));
-                                                          }
+                                                      if (excluido) {
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(
+                                                                const SnackBar(
+                                                                    content: Text(
+                                                                        "Trilha excluída com sucesso!")));
+                                                      }
 
-                                                          Navigator
-                                                              .pushAndRemoveUntil(
-                                                                  context,
-                                                                  MaterialPageRoute(
-                                                                      builder:
-                                                                          (context) =>
-                                                                              InitPage()),
-                                                                  (Route<dynamic>
-                                                                          route) =>
-                                                                      false);
-                                                        },
-                                                        child: const Center(
-                                                          child:  Text(
-                                                            "Excluir",
-                                                            style: TextStyle(
-                                                                fontSize: 18,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                color: ColorPallete
-                                                                    .labelColor),
-                                                          ),
-                                                        ),
+                                                      Navigator.pushAndRemoveUntil(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder:
+                                                                  (context) =>
+                                                                      InitPage()),
+                                                          (Route<dynamic>
+                                                                  route) =>
+                                                              false);
+                                                    },
+                                                    child: const Center(
+                                                      child: Text(
+                                                        "Excluir",
+                                                        style: TextStyle(
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color: ColorPallete
+                                                                .primaryColor),
                                                       ),
-                                                    ],
+                                                    ),
                                                   ),
-                                                ),
-                                              );
-                                            });
-                                      },
-                                      child: Container(
-                                        width: 70,
-                                        height: 75,
-                                        decoration: BoxDecoration(
-                                            boxShadow: const [
-                                              BoxShadow(
-                                                  color: Color.fromARGB(
-                                                      47, 49, 49, 49),
-                                                  blurRadius: 5,
-                                                  offset: Offset(2, 2))
-                                            ],
-                                            color: ColorPallete.bgItemColor,
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        child: const Center(
-                                          child: Icon(Icons.more_vert_rounded,
-                                              color: ColorPallete.secondColor),
-                                        ),
-                                      ),
-                                    ))
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        });
+                                  },
+                                  child: Container(
+                                    width: 70,
+                                    height: 75,
+                                    decoration: BoxDecoration(
+                                        boxShadow: const [
+                                          BoxShadow(
+                                              color: Color.fromARGB(
+                                                  47, 49, 49, 49),
+                                              blurRadius: 5,
+                                              offset: Offset(2, 2))
+                                        ],
+                                        color: ColorPallete.bgItemColor,
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: const Center(
+                                      child: Icon(Icons.more_vert_rounded,
+                                          color: ColorPallete.secondColor),
+                                    ),
+                                  ),
+                                ))
                           ],
                         ),
                       ),

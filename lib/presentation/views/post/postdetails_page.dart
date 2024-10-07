@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pov/presentation/controllers/commentpage_controller.dart';
 import 'package:pov/presentation/controllers/postpage_controller.dart';
 import 'package:pov/presentation/views/init_page.dart';
+import 'package:pov/presentation/views/profile/profile_page.dart';
 import 'package:pov/repository/comment_repository.dart';
 import 'package:pov/repository/post_repository.dart';
 import 'package:pov/services/core/colorpallete.dart';
@@ -23,15 +24,14 @@ class PostDetailsPage extends StatefulWidget {
 }
 
 class _PostDetailsPageState extends State<PostDetailsPage> {
-
   PostPageController controller =
       PostPageController(repository: PostRepository());
 
   CommentPageController commentController =
       CommentPageController(repository: CommentRepository());
-  
+
   bool postJaCurtido = false;
-    
+
   @override
   void initState() {
     super.initState();
@@ -39,7 +39,6 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -65,7 +64,8 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                       return const Text("Ocorreu um erro!");
                     }
 
-                    postJaCurtido = post!.voos!.any((v) => v.user_id == controller.usuarioLogado());
+                    postJaCurtido = post!.voos!
+                        .any((v) => v.user_id == controller.usuarioLogado());
 
                     return Stack(
                       children: [
@@ -91,15 +91,28 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 post.user!.profile != null
-                                    ? ClipRRect(
-                                        borderRadius: BorderRadius.circular(40),
-                                        child: SizedBox(
-                                            width: size.width * 0.15,
-                                            height: size.height * 0.076,
-                                            child: Image.network(
-                                              post.user!.profile!,
-                                              fit: BoxFit.cover,
-                                            )),
+                                    ? InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ProfilePage(
+                                                          isGuide: controller
+                                                              .postUserIsGuide,
+                                                          id: post.user!.id!)));
+                                        },
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(40),
+                                          child: SizedBox(
+                                              width: size.width * 0.15,
+                                              height: size.height * 0.076,
+                                              child: Image.network(
+                                                post.user!.profile!,
+                                                fit: BoxFit.cover,
+                                              )),
+                                        ),
                                       )
                                     : Container(
                                         width: 80,
@@ -167,18 +180,25 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                       borderRadius: BorderRadius.circular(10)),
                                   child: InkWell(
                                     onTap: () async {
-                                      setState((){
-                                        if(postJaCurtido) postJaCurtido = false;
-                                      else {
-                                        postJaCurtido = true;
-                                      }
+                                      setState(() {
+                                        if (postJaCurtido)
+                                          postJaCurtido = false;
+                                        else {
+                                          postJaCurtido = true;
+                                        }
                                       });
 
-                                      if(postJaCurtido){
+                                      if (postJaCurtido) {
                                         await controller.curtirPost(widget.id);
-                                      } else{
-                                        int idVoo = post.voos!.where((v)=> v.user_id == controller.usuarioLogado()).first.id;
-                                        await controller.removerCurtidaPost(idVoo);
+                                      } else {
+                                        int idVoo = post.voos!
+                                            .where((v) =>
+                                                v.user_id ==
+                                                controller.usuarioLogado())
+                                            .first
+                                            .id;
+                                        await controller
+                                            .removerCurtidaPost(idVoo);
                                       }
                                     },
                                     child: Column(
@@ -267,6 +287,15 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                             context: context,
                                             builder: (context) {
                                               return AlertDialog(
+                                                title: Text(
+                                                  "Ajustes",
+                                                  style: TextStyle(
+                                                      color: ColorPallete
+                                                          .labelColor,
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
                                                 content: SizedBox(
                                                   height: 50,
                                                   child: Column(
@@ -303,17 +332,15 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                                                       route) =>
                                                                   false);
                                                         },
-                                                        child: const Center(
-                                                          child: Text(
-                                                            "Excluir",
-                                                            style: TextStyle(
-                                                                fontSize: 18,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                color: ColorPallete
-                                                                    .labelColor),
-                                                          ),
+                                                        child: Text(
+                                                          "Excluir",
+                                                          style: TextStyle(
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              color: ColorPallete
+                                                                  .primaryColor),
                                                         ),
                                                       ),
                                                     ],

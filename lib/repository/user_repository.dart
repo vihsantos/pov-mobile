@@ -98,4 +98,27 @@ class UserRepository {
     }
     return null;
   }
+
+  Future<bool?> isUserGuide(int user) async{
+    try{
+      String url = "${Routes.isGuide}/$user";
+
+      String? token = AuthSingleton(LoginRepository()).getToken();
+
+      var response = await http.get(Uri.parse(url), headers: {
+        "content-type": "application/json",
+        "accept": "application/json",
+        "Authorization": "Bearer $token",
+      });
+
+      if(response.statusCode == 200){
+        bool isGuide = bool.parse(response.body.trim());
+        return isGuide;
+      }
+
+    }catch (e) {
+      throw ApplicationErrorImp(mensagem: e.toString(), statusCode: 500);
+    }
+    return null;
+  }
 }

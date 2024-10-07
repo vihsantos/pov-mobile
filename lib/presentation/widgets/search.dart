@@ -62,7 +62,7 @@ class _SearchState extends State<Search> {
           }
         }
         
-        String endereco = pickedData.address["road"] +", " + pickedData.address["city"] + ", " + pickedData.address["state"] + ", " + pickedData.address["postcode"];
+        String endereco = pickedData.address["road"].toString() +", " + pickedData.address["city"].toString() + ", " + pickedData.address["state"].toString() + ", " + pickedData.address["postcode"].toString();
 
         if(pontoTuristico != ""){
           endereco = pontoTuristico + endereco;

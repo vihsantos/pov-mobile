@@ -34,4 +34,5 @@ class Routes {
   static const String alterarSenha = "$urlPartial/alterarsenha";
   static const String informarContato = "$urlPartial/alterarContato/";
   static const String getPostFolowing = "$urlPartial/getPostFollowing";
+  static const String isGuide = "$urlPartial/isGuide";
 }

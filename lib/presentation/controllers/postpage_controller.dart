@@ -2,6 +2,7 @@
 import 'package:pov/models/post/post_model.dart';
 import 'package:pov/repository/login_repository.dart';
 import 'package:pov/repository/post_repository.dart';
+import 'package:pov/repository/user_repository.dart';
 import 'package:pov/repository/voos_repository.dart';
 import 'package:pov/services/singleton/auth_singleton.dart';
 
@@ -12,9 +13,16 @@ class PostPageController {
     required this.repository,
   });
 
+  bool postUserIsGuide = false;
+
   Future<PostModel?> buscarPostPorID(int id) async {
     try{
-      return await repository.buscarPorID(id);
+      PostModel? post = await repository.buscarPorID(id);
+
+      if(post != null){
+        postUserIsGuide = (await UserRepository().isUserGuide(post.user!.id!))!;
+      }
+      return post;
     } catch (e){
       return null;
     }

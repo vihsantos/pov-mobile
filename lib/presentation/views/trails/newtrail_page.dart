@@ -20,6 +20,8 @@ class _NewTrailPageState extends State<NewTrailPage> {
 
   Set<AreaAtuacao> filters = <AreaAtuacao>{};
 
+  int qtdCliques = 0;
+
   @override
   void initState() {
     super.initState();
@@ -201,28 +203,39 @@ class _NewTrailPageState extends State<NewTrailPage> {
                   if (filters.isNotEmpty) {
                     String dados = "";
 
-                    for (var area in filters) {
-                      dados += "${area.id}; ";
-                    }
+                    qtdCliques++;
 
-                    controller.trailDTO.occupation = dados;
-
-                    if(!trilhaEnviada){
-                      bool enviou = await controller.enviarImagem();
-
-                    if (!mounted) return;
-
-                    if (enviou) {
+                    if (qtdCliques > 1) {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                           content: Text("Eba!! Trilha criada com sucesso!")));
-                      Navigator.of(context).pop();
 
-                      setState(() {
-                        trilhaEnviada = true;
-                      });
-                    }
-                    } else {
                       Navigator.of(context).pop();
+                    } else {
+                      for (var area in filters) {
+                        dados += "${area.id}; ";
+                      }
+
+                      controller.trailDTO.occupation = dados;
+
+                      if (!trilhaEnviada) {
+                        bool enviou = await controller.enviarImagem();
+
+                        if (!mounted) return;
+
+                        if (enviou) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text(
+                                      "Eba!! Trilha criada com sucesso!")));
+                          Navigator.of(context).pop();
+
+                          setState(() {
+                            trilhaEnviada = true;
+                          });
+                        }
+                      } else {
+                        Navigator.of(context).pop();
+                      }
                     }
                   }
                 },

@@ -20,6 +20,8 @@ class _NewPostPageState extends State<NewPostPage> {
       NewPostPageController(repository: PostRepository());
   int value = 0;
 
+  int qtdCliques = 0;
+
   @override
   void initState() {
     super.initState();
@@ -29,7 +31,6 @@ class _NewPostPageState extends State<NewPostPage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    bool postEnviado = false;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -242,26 +243,27 @@ class _NewPostPageState extends State<NewPostPage> {
               ),
               InkWell(
                 onTap: () async {
+                  qtdCliques++;
                   controller.novoPost.stars = value;
 
-                  if (!postEnviado) {
-                    bool enviou =
-                        await controller.enviarImagem(files[0]) as bool;
+                  if(qtdCliques > 1){
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text("Post salvo com sucesso!")));
+                    Navigator.of(context).pop();
+                  } else{
+                    bool enviou = await controller.enviarImagem(files[0]);
+                    
                     if (!mounted) return;
 
                     if (enviou) {
-                      // ignore: use_build_context_synchronously
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                           content: Text("Post salvo com sucesso!")));
-                      // ignore: use_build_context_synchronously
                       Navigator.of(context).pop();
-                      setState(() {
-                        postEnviado = true;
-                      });
+                      
                     }
-                  } else {
-                    Navigator.of(context).pop();
                   }
+
+                    
                 },
                 child: Container(
                   margin: const EdgeInsets.all(15),
