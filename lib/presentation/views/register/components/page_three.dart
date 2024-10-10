@@ -43,19 +43,23 @@ class _PageThreeState extends State<PageThree> {
             children: [
               InputField(
                 label: 'Nome de usuário',
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 15, right: 15, top: 10, bottom: 10),
-                  child: TextField(
-                    onChanged: (value) =>
-                        widget.controller.usuario.username = value,
-                    decoration: const InputDecoration(
-                        hintStyle: TextStyle(
-                            fontStyle: FontStyle.normal,
-                            color: ColorPallete.labelColor),
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        hintText: "Digite seu nome de usuário"),
+                child: SizedBox(
+                  height: size.height * .069,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 30, left: 15, right: 15),
+                    child: TextField(
+                      maxLength: 10,
+                      onChanged: (value) =>
+                          widget.controller.usuario.username = value,
+                      decoration: const InputDecoration(
+                        helperMaxLines: 1,
+                          hintStyle: TextStyle(
+                              fontStyle: FontStyle.normal,
+                              color: ColorPallete.labelColor),
+                          enabledBorder: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          hintText: "Digite seu nome de usuário"),
+                    ),
                   ),
                 ),
               ),
@@ -112,6 +116,23 @@ class _PageThreeState extends State<PageThree> {
                         );
                       });
                   return;
+                }
+
+                if(dados.username!.contains(' ')){
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return const AlertDialog(
+                          title: Text(
+                            "Atenção, seu nome de usuário não pode conter espaços. Corrija e tente salvar novamente!",
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: ColorPallete.labelColor,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        );
+                      });
+                      return;
                 }
 
                 bool cadastrado = await widget.controller.cadastrarUsuario();

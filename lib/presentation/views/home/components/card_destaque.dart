@@ -66,7 +66,7 @@ class CardDestaque extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text(post.user!.username!),
+                            Text(post.user!.username!, maxLines: 1,),
                             Text(
                               post.localization == null
                                   ? "oi"

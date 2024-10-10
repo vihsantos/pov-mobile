@@ -106,6 +106,7 @@ class CardPost extends StatelessWidget {
                         child: Text(
                           post.description!,
                           maxLines: 3,
+                          style: TextStyle(fontSize: 12),
                         ),
                       )
                     ],

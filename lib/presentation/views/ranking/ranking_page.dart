@@ -85,7 +85,7 @@ class _RankingPageState extends State<RankingPage> {
                       }
                 
                       if(controller.error != null){
-                        return Center(child: Text(controller.error!.mensagem));
+                        return Center(child: Text("Ops, algo de errado aconteceu, tente novamente mais tarde!"));
                       }
                 
                       if(controller.ranking!.isEmpty){
