@@ -28,7 +28,7 @@ class CardPost extends StatelessWidget {
         padding: const EdgeInsets.all(5),
         child: Container(
           width: size.width,
-          height: size.height * 0.55,
+          height: size.height * 0.7,
           decoration: BoxDecoration(
             color: ColorPallete.bgItemColor,
             borderRadius: BorderRadius.circular(10),
@@ -43,7 +43,7 @@ class CardPost extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                   child: SizedBox(
                       width: size.width,
-                      height: size.height * .37,
+                      height: size.height * .5,
                       child: Image.network(
                         post.image_url!,
                         fit: BoxFit.cover,
@@ -70,8 +70,8 @@ class CardPost extends StatelessWidget {
                                 color: ColorPallete.labelColor),
                           ) :
                           SizedBox(
-                            width: 60,
-                            height: 60,
+                            width: size.width * .12,
+                            height: size.width * .12,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(30),
                               child: Image.network(post.user!.profile!, fit: BoxFit.cover,),
@@ -100,13 +100,15 @@ class CardPost extends StatelessWidget {
                           )
                         ],
                       ),
-                      SizedBox(height: 10),
                       SizedBox(
-                        width: size.width,
+                        height: 10,
+                      ),
+                      SizedBox(
+                        height: size.height * .02,
                         child: Text(
                           post.description!,
-                          maxLines: 3,
-                          style: TextStyle(fontSize: 12),
+                          maxLines: 2,
+                          style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
                         ),
                       )
                     ],

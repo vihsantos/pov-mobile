@@ -110,10 +110,20 @@ class _NewPostPageState extends State<NewPostPage> {
               controller.novoPost.localization != null
                   ? InputField(
                       label: "Localização",
-                      child: Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: Text(controller.novoPost.localization!.local!,
-                            maxLines: 2),
+                      child: InkWell(
+                        onTap:() {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Search(
+                                          controller: controller,
+                                        )));
+                          },
+                        child: Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Text(controller.novoPost.localization!.local!,
+                              maxLines: 2),
+                        ),
                       ),
                     )
                   : InputField(

@@ -75,7 +75,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                           children: [
                             SizedBox(
                               width: size.width,
-                              height: size.height * 0.5,
+                              height: size.height * 0.55,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
                                 child: Image.network(
@@ -107,7 +107,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                               BorderRadius.circular(40),
                                           child: SizedBox(
                                               width: size.width * 0.15,
-                                              height: size.height * 0.076,
+                                              height: size.width * 0.15,
                                               child: Image.network(
                                                 post.user!.profile!,
                                                 fit: BoxFit.cover,
@@ -382,7 +382,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                             },
                             child: Container(
                               width: size.width * 0.13,
-                              height: size.height * 0.06,
+                              height: size.height * 0.08,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   color: Colors.white),
@@ -395,7 +395,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                           right: 5,
                           child: Container(
                             width: size.width * 0.20,
-                            height: size.height * 0.05,
+                            height: size.height * 0.08,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.white),

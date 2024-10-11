@@ -59,8 +59,8 @@ class _ProfileHeaderState extends State<ProfileHeader> {
               children: [
                 widget.dados.profileIcon != null
                     ? SizedBox(
-                        width: 130,
-                        height: 130,
+                        width: size.width * .3,
+                        height: size.width * .3,
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(100),
                             child: Image.network(
@@ -69,8 +69,8 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                             )),
                       )
                     : Container(
-                        width: 130,
-                        height: 130,
+                        width: size.width * .3,
+                        height: size.width * .3,
                         decoration: BoxDecoration(
                           color: Colors.black12,
                           borderRadius: BorderRadius.circular(75),

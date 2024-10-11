@@ -101,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                                 context: context,
                                 builder: (context) => AlertDialog(
                                       content: SizedBox(
-                                        height: size.height * .40,
+                                        height: size.height * .56,
                                         child: Column(
                                           children: [
                                             Text("Troque sua senha",
@@ -109,9 +109,9 @@ class _LoginPageState extends State<LoginPage> {
                                                     fontSize: 19,
                                                     fontWeight:
                                                         FontWeight.bold)),
-                                            SizedBox(height: 30),
+                                            SizedBox(height: 20),
                                             SizedBox(
-                                              height: size.height * .32,
+                                              height: size.height * .46,
                                               width: size.width,
                                               child: PageView(
                                                 physics: const NeverScrollableScrollPhysics(),
