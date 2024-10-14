@@ -28,7 +28,7 @@ class CardPost extends StatelessWidget {
         padding: const EdgeInsets.all(5),
         child: Container(
           width: size.width,
-          height: size.height * 0.7,
+          height: size.height * 0.68,
           decoration: BoxDecoration(
             color: ColorPallete.bgItemColor,
             borderRadius: BorderRadius.circular(10),
@@ -43,7 +43,7 @@ class CardPost extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                   child: SizedBox(
                       width: size.width,
-                      height: size.height * .5,
+                      height: size.height * .45,
                       child: Image.network(
                         post.image_url!,
                         fit: BoxFit.cover,
@@ -88,7 +88,7 @@ class CardPost extends StatelessWidget {
                                       fontWeight: FontWeight.w800,
                                       color: ColorPallete.labelColor)),
                               SizedBox(
-                                  width: size.width * .69,
+                                  width: size.width * .67,
                                   child: Text(
                                     post.localization!.local!,
                                     maxLines: 3,

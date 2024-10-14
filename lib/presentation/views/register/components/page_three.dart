@@ -48,7 +48,7 @@ class _PageThreeState extends State<PageThree> {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 30, left: 15, right: 15),
                     child: TextField(
-                      maxLength: 10,
+                      maxLength: 15,
                       onChanged: (value) =>
                           widget.controller.usuario.username = value,
                       decoration: const InputDecoration(

@@ -26,7 +26,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15),
                 child: Text(
-                  "Um lugar para você encontrar locais, compartilhar experiências e achar guias turísticos!",
+                  "Um lugar para você encontrar locais, compartilhar experiências e achar guias de turismo!",
                   style: TextStyle(fontSize: 22),
                   textAlign: TextAlign.start,
                 ),

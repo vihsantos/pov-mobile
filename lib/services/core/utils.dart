@@ -34,7 +34,7 @@ class Utils {
       String numero = area.trim();
 
       if (numero.isNotEmpty) {
-        AreaAtuacao a = AreaAtuacao.values.elementAt(int.parse(area.trim()));
+        AreaAtuacao a = AreaAtuacao.values.firstWhere((e) => e.id == int.parse(area.trim()));
         areaatuacao.add(a);
       }
     }

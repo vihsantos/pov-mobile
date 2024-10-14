@@ -114,21 +114,26 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                               )),
                                         ),
                                       )
-                                    : Container(
-                                        width: 80,
-                                        height: 80,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(40),
-                                            color: ColorPallete.bgItemColor),
-                                        child: const Center(
-                                            child: Icon(
-                                          Icons.person,
-                                          size: 38,
-                                          color: ColorPallete
-                                              .bottomUnselectedColor,
-                                        )),
-                                      ),
+                                    : InkWell(
+                                      onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ProfilePage(
+                                                          isGuide: controller
+                                                              .postUserIsGuide,
+                                                          id: post.user!.id!)));
+                                        },
+                                      child: Container(
+                                          width: 80,
+                                          height: 80,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(40),
+                                              color: ColorPallete.labelColor),
+                                        ),
+                                    ),
                                 const SizedBox(
                                   width: 10,
                                 ),
@@ -142,11 +147,11 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                           fontWeight: FontWeight.bold),
                                     ),
                                     SizedBox(
-                                        width: size.width * 0.718,
+                                        width: size.width * 0.7,
                                         child: Text(
                                           post.localization!.local!,
                                           maxLines: 2,
-                                          style: const TextStyle(fontSize: 13),
+                                          style: const TextStyle(fontSize: 12),
                                         ))
                                   ],
                                 )

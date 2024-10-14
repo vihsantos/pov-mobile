@@ -46,10 +46,10 @@ class _ProfileHeaderState extends State<ProfileHeader> {
             children: [
               Text(
                 widget.dados.following!.length.toString(),
-                style: const TextStyle(fontSize: 22),
+                style: const TextStyle(fontSize: 20),
               ),
               const Text("Seguindo",
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15))
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 13))
             ],
           ),
         ),
@@ -107,7 +107,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
               widget.dados.username!,
               style: const TextStyle(
                   color: Color(0xFF393434),
-                  fontSize: 20,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold),
             ),
             const SizedBox(
@@ -157,10 +157,10 @@ class _ProfileHeaderState extends State<ProfileHeader> {
             children: [
               Text(
                 widget.dados.followers!.length.toString(),
-                style: const TextStyle(fontSize: 22),
+                style: const TextStyle(fontSize: 20),
               ),
               const Text("Seguidores",
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15))
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 13))
             ],
           ),
         ),
